@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Games & NOA - Hex Agency</title>
+  <link rel="stylesheet" href="page.css">
+  <style>
+    :root {
+      --theme-color: #FF1744;
+      --theme-rgb: 255, 23, 68;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <div class="page-container">
+    <a href="index.html" class="back-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Voltar ao Painel
+    </a>
+    
+    <div class="page-header">
+      <span class="category-label">ÁREA VERMELHO</span>
+      <h1 class="page-title">Games & NOA</h1>
+      <p class="gatilho-mental">"Isso precisa ser um universo vivo e autoral."</p>
+    </div>
+
+    <div class="content-grid">
+      <div class="content-card">
+        <h2 class="card-title">
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+          Core Software
+        </h2>
+        <div class="card-body">
+          <p><strong>Blender</strong></p>
+          <p><strong>Unity 6:</strong> (foco em C#).</p>
+          <p><strong>Visual Studio</strong></p>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <h2 class="card-title">
+          <svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          IA de Construção de Mundo
+        </h2>
+        <div class="card-body">
+          <p><strong>Scenario.gg:</strong> Para treinar IAs que geram itens e assets exclusivos com o estilo do NOA.</p>
+          <p><strong>Promethean AI:</strong> Para ajudar na construção de cenários 3D complexos.</p>
+        </div>
+      </div>
+
+      <div class="content-card" style="grid-column: 1 / -1;">
+        <h2 class="card-title">
+          <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          Upgrade de Engine
+        </h2>
+        <div class="card-body">
+          <p><strong>Unreal Engine 5:</strong> Comece a namorar o Nanite e o Lumen para o futuro visual do projeto.</p>
+          <p><strong>C# Avançado:</strong> Foco em Design Patterns para games (Singletons, State Machines).</p>
+        </div>
+      </div>
+      
+      <div class="workflow-section">
+        <div class="workflow-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        </div>
+        <div class="workflow-text">
+          <h3>Workflow Oficial</h3>
+          <p>Mantenha a <strong>Wiki do projeto NOA</strong> atualizada com diagramas de evolução biológica e mapas estelares.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="bg-canvas.js"></script>
+</body>
+</html>
