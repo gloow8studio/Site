@@ -4,20 +4,26 @@
   Reset de CSS: Remove as margens e preenchimentos (padding) padrão do navegador.
   O "box-sizing: border-box" garante que a largura e altura dos elementos incluam a borda e o padding em sua caixa principal, evitando expansões inesperadas. 
 */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 /* 
   Variáveis globais do CSS: Define as cores principais vibrantes usadas no projeto, organizando em um só lugar.
   Facilita a manutenção, garantindo que o tema use as mesmas tonalidades consistentes.
 */
 :root {
-  --amber:    #FFB300;
-  --cobalt:   #1565C0;
-  --cyan:     #00E5FF;
-  --emerald:  #00C853;
-  --violet:   #AA00FF;
-  --copper:   #FF6D00;
-  --red:      #FF1744;
+  --amber: #FFB300;
+  --cobalt: #1565C0;
+  --cyan: #00E5FF;
+  --emerald: #00C853;
+  --violet: #AA00FF;
+  --copper: #FF6D00;
+  --red: #FF1744;
   --glow-size: 40px;
 }
 
@@ -41,14 +47,17 @@ body {
 /* ── Fundo interativo do espaço sideral (Canvas JS) ── */
 /* Fica permanentemente fixo cobrindo toda a tela por trás de todo o restante do conteúdo HTML ("z-index: 0") */
 #canvas {
-  position: fixed; inset: 0; z-index: 0;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
 }
 
 /* ── Container principal do painel ── */
 /* Segura os componentes hexagonais horizontalmente lado a lado com flexbox, 
    criando um espaçamento ("gap") exato de 18px entre cada uma das peças. */
 .panel {
-  position: relative; z-index: 2;
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: flex-start;
   gap: 18px;
@@ -60,8 +69,12 @@ body {
    mas usa "pointer-events: none" para não bloquear a interação do mouse dos ícones abaixo dela. */
 .neural-svg {
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  pointer-events: none; z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
   overflow: visible;
 }
 
@@ -69,7 +82,8 @@ body {
 /* Aplica o formato em coluna do item, com o hexágono no topo e textos embaixo,
    além da animação contínua "floatCard" que simula o movimento de levitação no espaço. */
 .hex-card {
-  position: relative; z-index: 2;
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -78,25 +92,50 @@ body {
 }
 
 /* Atrasos específicos (delays) na animação para criar um efeito ondulado (wave) suave e dessincronizado entre as cartas adjacentes. */
-.hex-card:nth-child(odd)  { animation-delay: 0s; }    /* Ímpares começam na hora */
-.hex-card:nth-child(even) { animation-delay: 0.6s; }  /* Pares demoram um pouco a subir */
-.hex-card:nth-child(3)    { animation-delay: 1.2s; }
-.hex-card:nth-child(5)    { animation-delay: 1.8s; }
-.hex-card:nth-child(7)    { animation-delay: 0.9s; }
+.hex-card:nth-child(odd) {
+  animation-delay: 0s;
+}
+
+/* Ímpares começam na hora */
+.hex-card:nth-child(even) {
+  animation-delay: 0.6s;
+}
+
+/* Pares demoram um pouco a subir */
+.hex-card:nth-child(3) {
+  animation-delay: 1.2s;
+}
+
+.hex-card:nth-child(5) {
+  animation-delay: 1.8s;
+}
+
+.hex-card:nth-child(7) {
+  animation-delay: 0.9s;
+}
 
 /* Keyframe de animação que faz os cartões levitarem suavemente em movimento de senoide de 0px para -8px em direção ao topo e retornando. */
 @keyframes floatCard {
-  0%,100% { transform: translateY(0); }
-  50%     { transform: translateY(-8px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 /* ── Embalagem da forma hexagonal (Caixa base limitadora do SVG) ── */
 /* Cria duas sombras simultâneas difusas com coloração interligada ("var(--c)") servindo de aura/brilho de fundo exterior ao cartao. */
 .hex-wrap {
   position: relative;
-  width: 140px; height: 161px;
+  width: 140px;
+  height: 161px;
   filter: drop-shadow(0 0 18px var(--c)) drop-shadow(0 0 40px var(--c));
-  transition: filter .3s; /* Transição de suavidade em 0.3s quando sofrer alguma interação (ex: hover do mouse) */
+  transition: filter .3s;
+  /* Transição de suavidade em 0.3s quando sofrer alguma interação (ex: hover do mouse) */
 }
 
 /* Intensifica drasticamente o nível e expansão de luminosidade/brilho do hexágono quando o ponteiro do mouse repousar em cima dele ("hover"). */
@@ -105,27 +144,67 @@ body {
 }
 
 /* Certifica-se que as matrizes SVG desenhadas contemplem a dimensão completa da caixa container e os gráficos possam extrapolar sutilmente a visibilidade caso precisem. */
-.hex-wrap svg { width: 100%; height: 100%; overflow: visible; }
+.hex-wrap svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
 
 /* ── Preenchimento estrutural e contornos do fundo do SVG hexágono ── */
-.hex-bg   { fill: rgba(0,0,0,0.72); } /* Fundo da estrutura do poligono principal de cor preta translúcida garantindo leitura acima do fundo espacial. */
-.hex-rim  { fill: none; stroke-width: 2.5; stroke: var(--c); opacity: .9; } /* Borda grossa principal externa de coloração neon do card. */
-.hex-rim2 { fill: none; stroke-width: .8; stroke: var(--c); opacity: .35; } /* Segunda linha de borda sutil, desenhada levemente mais para dentro do cartao criando detalhes sci-fi. */
-.hex-glow { fill: none; stroke-width: 8; stroke: var(--c); opacity: .08; filter: blur(4px); } /* Borra de propósito os pixels nas bordas provendo um efeito embaçado cintilante (glow blur) sob os contornos vetoriais principais. */
+.hex-bg {
+  fill: rgba(0, 0, 0, 0.72);
+}
+
+/* Fundo da estrutura do poligono principal de cor preta translúcida garantindo leitura acima do fundo espacial. */
+.hex-rim {
+  fill: none;
+  stroke-width: 2.5;
+  stroke: var(--c);
+  opacity: .9;
+}
+
+/* Borda grossa principal externa de coloração neon do card. */
+.hex-rim2 {
+  fill: none;
+  stroke-width: .8;
+  stroke: var(--c);
+  opacity: .35;
+}
+
+/* Segunda linha de borda sutil, desenhada levemente mais para dentro do cartao criando detalhes sci-fi. */
+.hex-glow {
+  fill: none;
+  stroke-width: 8;
+  stroke: var(--c);
+  opacity: .08;
+  filter: blur(4px);
+}
+
+/* Borra de propósito os pixels nas bordas provendo um efeito embaçado cintilante (glow blur) sob os contornos vetoriais principais. */
 
 /* Pontos acentuais decorativos desenhados localizados em específicos cantos do polígono simulando LEDs nos vértices */
-.corner-dot { fill: var(--c); r: 3; }
+.corner-dot {
+  fill: var(--c);
+  r: 3;
+}
 
 /* ── Ícone gráfico desenhado inteiramente interno ao hexágono de fundo ── */
 /* Realiza alinhamento absoluto perfeitamente matemático no meio exato horizontal (left 50%) e vertical (top 50%), 
    usando transform-translate para corrigir a referência de centro na própria div de 70x70. */
 .hex-icon {
   position: absolute;
-  top: 50%; left: 50%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -52%);
-  width: 70px; height: 70px;
+  width: 70px;
+  height: 70px;
 }
-.hex-icon svg { width: 100%; height: 100%; overflow: visible; }
+
+.hex-icon svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
 
 /* ── Rótulo de Textos (Label) posicionado no rodapé inferior do item ── */
 .hex-label {
@@ -154,28 +233,60 @@ body {
   font-weight: 500;
   font-size: 9.5px;
   letter-spacing: .28em;
-  color: rgba(255,255,255,.55);
+  color: rgba(255, 255, 255, .55);
   margin-top: 5px;
   text-transform: uppercase;
 }
 
 /* ── Mapeamento customizado de Variáveis Dinâmicas de Cores dos Cartões ── */
 /* A variável de ambiente local "--c" vai herdar uma cor única declarada globalmente e aplica nos filtros CSS dos elementos decendentes com base no identificador da classe, unificando inteligentemente o design do sistema. */
-.card-1 { --c: var(--amber); }   /* Cartão 1 assume temática Âmbar/Amarelo Ouro */
-.card-2 { --c: var(--cobalt); }  /* Cartão 2 assume temática Azul Cobalto */
-.card-3 { --c: var(--cyan); }    /* Cartão 3 assume temática Ciano Vivo */
-.card-4 { --c: var(--emerald); } /* Cartão 4 assume temática Esmeralda/Verde Brilhante */
-.card-5 { --c: var(--violet); }  /* Cartão 5 assume temática Roxa Intensa */
-.card-6 { --c: var(--copper); }  /* Cartão 6 assume temática Cobre/Laranja Fogo */
-.card-7 { --c: var(--red); }     /* Cartão 7 assume temática Vermelha Carmesim */
+.card-1 {
+  --c: var(--amber);
+}
+
+/* Cartão 1 assume temática Âmbar/Amarelo Ouro */
+.card-2 {
+  --c: var(--cobalt);
+}
+
+/* Cartão 2 assume temática Azul Cobalto */
+.card-3 {
+  --c: var(--cyan);
+}
+
+/* Cartão 3 assume temática Ciano Vivo */
+.card-4 {
+  --c: var(--emerald);
+}
+
+/* Cartão 4 assume temática Esmeralda/Verde Brilhante */
+.card-5 {
+  --c: var(--violet);
+}
+
+/* Cartão 5 assume temática Roxa Intensa */
+.card-6 {
+  --c: var(--copper);
+}
+
+/* Cartão 6 assume temática Cobre/Laranja Fogo */
+.card-7 {
+  --c: var(--red);
+}
+
+/* Cartão 7 assume temática Vermelha Carmesim */
 
 /* ── Scanner Horizontal/Holográfico que simula uma leitura laser ── */
 /* Aplica em tempo real um recorte exato de visibilidade de imagem da mesma base do desenho SVG (clip-path). */
 .hex-scan {
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  pointer-events: none; overflow: hidden;
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   animation: scanPulse 3s ease-in-out infinite;
   opacity: 0;
 }
@@ -184,50 +295,80 @@ body {
 .hex-scan::after {
   content: '';
   position: absolute;
-  top: -100%; left: 0; width: 100%; height: 60%;
-  background: linear-gradient(to bottom, transparent, rgba(255,255,255,.06), transparent);
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, .06), transparent);
   animation: scanMove 3s ease-in-out infinite;
 }
 
 /* Pulsos controlam a transparência revelando o leitor periodicamente. */
-@keyframes scanPulse { 0%,100%{opacity:0} 50%{opacity:1} }
+@keyframes scanPulse {
+
+  0%,
+  100% {
+    opacity: 0
+  }
+
+  50% {
+    opacity: 1
+  }
+}
+
 /* Move e desliza o elemento iluminado invisível acima e decendo até ultrapassar as bordas inferiores do componente */
-@keyframes scanMove  { 0%{top:-100%} 100%{top:200%} }
+@keyframes scanMove {
+  0% {
+    top: -100%
+  }
+
+  100% {
+    top: 200%
+  }
+}
 
 /* ── Textura de grade em blocos reticulados (Grid Dots Blueprint) aplicados por cima do fundo do elemento ── */
 /* Emula padrões quadriculados de 1 pixel entrecruzados na horizontal e na vertical criando um efeito visual transparente bem sci-fi / Blueprint UI. */
 .hex-grid {
-  position: absolute; inset: 0;
+  position: absolute;
+  inset: 0;
   background-image:
-    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, .03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .03) 1px, transparent 1px);
   background-size: 12px 12px;
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); /* Oculta as quinas da grade para dentro da própria silhueta principal hexagonal */
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  /* Oculta as quinas da grade para dentro da própria silhueta principal hexagonal */
   pointer-events: none;
 }
 
 /* ── Barra de Título Superior do site (Top Header HUD) ── */
 /* Fixo e cravado com 28px distantes do limite extremo superior, focado ao meio em relação ao alinhamento 50%. */
 .title-bar {
-  position: fixed; top: 28px; left: 50%;
+  position: fixed;
+  top: 28px;
+  left: 50%;
   transform: translateX(-50%);
   z-index: 10;
   text-align: center;
 }
+
 .title-bar span {
   font-family: 'Orbitron', monospace;
   font-size: 11px;
   letter-spacing: .6em;
-  color: rgba(255,255,255,.25);
+  color: rgba(255, 255, 255, .25);
   text-transform: uppercase;
 }
 
 /* ── Linha decorativa fina e difusa alocada no rodapé da página (Bottom Rule Element) ── */
 /* Renderiza um divisor gradual sumindo transparentemente entre a esquerda para as pontas retas da direita. */
 .bottom-rule {
-  position: fixed; bottom: 28px; left: 50%;
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
   transform: translateX(-50%);
   z-index: 10;
-  width: 600px; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent);
+  width: 600px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .12), transparent);
 }

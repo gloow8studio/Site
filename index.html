@@ -37,14 +37,12 @@
       overflow: hidden;
     }
 
-    /* ── Deep space canvas ── */
     #canvas {
       position: fixed;
       inset: 0;
       z-index: 0;
     }
 
-    /* ── Panel wrapper ── */
     .panel {
       position: relative;
       z-index: 2;
@@ -54,7 +52,6 @@
       padding: 60px 40px;
     }
 
-    /* ── Neural network SVG overlay ── */
     .neural-svg {
       position: absolute;
       top: 0;
@@ -66,7 +63,7 @@
       overflow: visible;
     }
 
-    /* ── Individual hex card ── */
+    /* Estilos dos Cards (Simplificado) */
     .hex-card {
       position: relative;
       z-index: 2;
@@ -75,26 +72,6 @@
       align-items: center;
       gap: 14px;
       animation: floatCard 4s ease-in-out infinite;
-    }
-
-    .hex-card:nth-child(odd) {
-      animation-delay: 0s;
-    }
-
-    .hex-card:nth-child(even) {
-      animation-delay: 0.6s;
-    }
-
-    .hex-card:nth-child(3) {
-      animation-delay: 1.2s;
-    }
-
-    .hex-card:nth-child(5) {
-      animation-delay: 1.8s;
-    }
-
-    .hex-card:nth-child(7) {
-      animation-delay: 0.9s;
     }
 
     @keyframes floatCard {
@@ -109,26 +86,18 @@
       }
     }
 
-    /* ── SVG hex container ── */
     .hex-wrap {
       position: relative;
       width: 140px;
       height: 161px;
-      filter: drop-shadow(0 0 18px var(--c)) drop-shadow(0 0 40px var(--c));
+      filter: drop-shadow(0 0 18px var(--c));
       transition: filter .3s;
     }
 
     .hex-wrap:hover {
-      filter: drop-shadow(0 0 30px var(--c)) drop-shadow(0 0 70px var(--c)) drop-shadow(0 0 100px var(--c));
+      filter: drop-shadow(0 0 30px var(--c)) drop-shadow(0 0 70px var(--c));
     }
 
-    .hex-wrap svg {
-      width: 100%;
-      height: 100%;
-      overflow: visible;
-    }
-
-    /* polygon fill */
     .hex-bg {
       fill: rgba(0, 0, 0, 0.72);
     }
@@ -140,28 +109,6 @@
       opacity: .9;
     }
 
-    .hex-rim2 {
-      fill: none;
-      stroke-width: .8;
-      stroke: var(--c);
-      opacity: .35;
-    }
-
-    .hex-glow {
-      fill: none;
-      stroke-width: 8;
-      stroke: var(--c);
-      opacity: .08;
-      filter: blur(4px);
-    }
-
-    /* corner accent dots */
-    .corner-dot {
-      fill: var(--c);
-      r: 3;
-    }
-
-    /* ── icon inside hex ── */
     .hex-icon {
       position: absolute;
       top: 50%;
@@ -171,41 +118,24 @@
       height: 70px;
     }
 
-    .hex-icon svg {
-      width: 100%;
-      height: 100%;
-      overflow: visible;
-    }
-
-    /* ── label below ── */
-    .hex-label {
-      text-align: center;
-      line-height: 1;
-      position: relative;
-    }
-
     .label-name {
       display: block;
-      font-family: 'Orbitron', monospace;
       font-weight: 900;
       font-size: 15px;
       letter-spacing: .22em;
       color: var(--c);
-      text-shadow: 0 0 10px var(--c), 0 0 22px var(--c);
+      text-shadow: 0 0 10px var(--c);
     }
 
     .label-sub {
       display: block;
       font-family: 'Rajdhani', sans-serif;
-      font-weight: 500;
       font-size: 9.5px;
-      letter-spacing: .28em;
       color: rgba(255, 255, 255, .55);
-      margin-top: 5px;
       text-transform: uppercase;
     }
 
-    /* ── per-card color vars ── */
+    /* Cores dos Cards */
     .card-1 {
       --c: var(--amber);
     }
@@ -234,66 +164,6 @@
       --c: var(--red);
     }
 
-    /* ── scan line pulse ── */
-    .hex-scan {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      overflow: hidden;
-      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-      animation: scanPulse 3s ease-in-out infinite;
-      opacity: 0;
-    }
-
-    .hex-scan::after {
-      content: '';
-      position: absolute;
-      top: -100%;
-      left: 0;
-      width: 100%;
-      height: 60%;
-      background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, .06), transparent);
-      animation: scanMove 3s ease-in-out infinite;
-    }
-
-    @keyframes scanPulse {
-
-      0%,
-      100% {
-        opacity: 0
-      }
-
-      50% {
-        opacity: 1
-      }
-    }
-
-    @keyframes scanMove {
-      0% {
-        top: -100%
-      }
-
-      100% {
-        top: 200%
-      }
-    }
-
-    /* ── grid overlay on hex ── */
-    .hex-grid {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255, 255, 255, .03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, .03) 1px, transparent 1px);
-      background-size: 12px 12px;
-      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-      pointer-events: none;
-    }
-
-    /* ── Title / header ── */
     .title-bar {
       position: fixed;
       top: 28px;
@@ -301,50 +171,37 @@
       transform: translateX(-50%);
       z-index: 10;
       text-align: center;
+      width: 100%;
     }
 
     .title-bar span {
-      font-family: 'Orbitron', monospace;
       font-size: 11px;
       letter-spacing: .6em;
       color: rgba(255, 255, 255, .25);
       text-transform: uppercase;
     }
 
-    /* ── bottom rule ── */
-    .bottom-rule {
-      position: fixed;
-      bottom: 28px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10;
-      width: 600px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .12), transparent);
-    }
-
+    /* AJUSTE MOBILE CORRIGIDO */
     @media (max-width: 768px) {
       body {
         overflow-y: auto;
         overflow-x: hidden;
         align-items: flex-start;
-        padding: 80px 0 60px 0;
+        padding-top: 100px;
       }
 
       .panel {
         flex-direction: column;
         align-items: center;
-        gap: 20px;
+        gap: 50px;
         padding: 0;
+        margin-top: 80px;
       }
 
+      /* MARGEM AQUI EVITA SOBREPOSIÇÃO */
       .title-bar {
         position: absolute;
-        top: 25px;
-      }
-
-      .bottom-rule {
-        display: none;
+        top: 30px;
       }
 
       .hex-card {
@@ -352,6 +209,8 @@
       }
     }
   </style>
+  </style>
+
 </head>
 
 <body>
