@@ -322,6 +322,35 @@
       height: 1px;
       background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .12), transparent);
     }
+
+    @media (max-width: 768px) {
+      body {
+        overflow-y: auto;
+        overflow-x: hidden;
+        align-items: flex-start;
+        padding: 80px 0 60px 0;
+      }
+
+      .panel {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 0;
+      }
+
+      .title-bar {
+        position: absolute;
+        top: 25px;
+      }
+
+      .bottom-rule {
+        display: none;
+      }
+
+      .hex-card {
+        animation: none;
+      }
+    }
   </style>
 </head>
 
@@ -701,59 +730,100 @@
           return { x: r.left - pr.left + r.width / 2, y: r.top - pr.top + 80 };
         });
 
-        // horizontal spine
-        const spineY = centers[0].y + 30;
-        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        line.setAttribute('x1', centers[0].x); line.setAttribute('y1', spineY);
-        line.setAttribute('x2', centers[6].x); line.setAttribute('y2', spineY);
-        line.setAttribute('stroke', 'rgba(255,255,255,.06)');
-        line.setAttribute('stroke-width', '1');
-        line.setAttribute('stroke-dasharray', '6 8');
-        svg.appendChild(line);
+        const isMobile = window.innerWidth <= 768;
 
-        centers.forEach((c, i) => {
-          // vertical drop to spine
-          const v = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-          v.setAttribute('x1', c.x); v.setAttribute('y1', c.y + 2);
-          v.setAttribute('x2', c.x); v.setAttribute('y2', spineY);
-          v.setAttribute('stroke', colors[i]);
-          v.setAttribute('stroke-width', '1');
-          v.setAttribute('opacity', '.18');
-          svg.appendChild(v);
+        if (isMobile) {
+          // vertical spine down the center
+          const spineX = centers[0].x;
+          const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          line.setAttribute('x1', spineX); line.setAttribute('y1', centers[0].y);
+          line.setAttribute('x2', spineX); line.setAttribute('y2', centers[centers.length - 1].y);
+          line.setAttribute('stroke', 'rgba(255,255,255,.06)');
+          line.setAttribute('stroke-width', '1');
+          line.setAttribute('stroke-dasharray', '6 8');
+          svg.appendChild(line);
 
-          // diagonal to neighbours
-          if (i < 6) {
-            const next = centers[i + 1];
-            const d = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-            d.setAttribute('x1', c.x); d.setAttribute('y1', c.y);
-            d.setAttribute('x2', next.x); d.setAttribute('y2', next.y);
-            d.setAttribute('stroke', `url(#lg${i})`);
-            d.setAttribute('stroke-width', '1');
-            d.setAttribute('stroke-dasharray', '3 5');
-            d.setAttribute('opacity', '.22');
-            // gradient def
-            const defs = svg.querySelector('defs') || svg.insertBefore(document.createElementNS('http://www.w3.org/2000/svg', 'defs'), svg.firstChild);
-            const lg = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
-            lg.setAttribute('id', `lg${i}`);
-            lg.setAttribute('gradientUnits', 'userSpaceOnUse');
-            lg.setAttribute('x1', c.x); lg.setAttribute('y1', c.y);
-            lg.setAttribute('x2', next.x); lg.setAttribute('y2', next.y);
-            const s1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
-            s1.setAttribute('offset', '0%'); s1.setAttribute('stop-color', colors[i]);
-            const s2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
-            s2.setAttribute('offset', '100%'); s2.setAttribute('stop-color', colors[i + 1]);
-            lg.appendChild(s1); lg.appendChild(s2); defs.appendChild(lg);
-            svg.appendChild(d);
-          }
+          centers.forEach((c, i) => {
+            // diagonal to neighbours
+            if (i < 6) {
+              const next = centers[i + 1];
+              const d = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+              d.setAttribute('x1', c.x); d.setAttribute('y1', c.y);
+              d.setAttribute('x2', next.x); d.setAttribute('y2', next.y);
+              d.setAttribute('stroke', `url(#lg${i})`);
+              d.setAttribute('stroke-width', '1.5');
+              d.setAttribute('stroke-dasharray', '3 5');
+              d.setAttribute('opacity', '.3');
+              // gradient def
+              const defs = svg.querySelector('defs') || svg.insertBefore(document.createElementNS('http://www.w3.org/2000/svg', 'defs'), svg.firstChild);
+              const lg = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+              lg.setAttribute('id', `lg${i}`);
+              lg.setAttribute('gradientUnits', 'userSpaceOnUse');
+              lg.setAttribute('x1', c.x); lg.setAttribute('y1', c.y);
+              lg.setAttribute('x2', next.x); lg.setAttribute('y2', next.y);
+              const s1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+              s1.setAttribute('offset', '0%'); s1.setAttribute('stop-color', colors[i]);
+              const s2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+              s2.setAttribute('offset', '100%'); s2.setAttribute('stop-color', colors[i + 1]);
+              lg.appendChild(s1); lg.appendChild(s2); defs.appendChild(lg);
+              svg.appendChild(d);
+            }
+          });
+        } else {
+          // horizontal spine
+          const spineY = centers[0].y + 30;
+          const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          line.setAttribute('x1', centers[0].x); line.setAttribute('y1', spineY);
+          line.setAttribute('x2', centers[6].x); line.setAttribute('y2', spineY);
+          line.setAttribute('stroke', 'rgba(255,255,255,.06)');
+          line.setAttribute('stroke-width', '1');
+          line.setAttribute('stroke-dasharray', '6 8');
+          svg.appendChild(line);
 
-          // node dot on spine
-          const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-          dot.setAttribute('cx', c.x); dot.setAttribute('cy', spineY);
-          dot.setAttribute('r', '2.5');
-          dot.setAttribute('fill', colors[i]);
-          dot.setAttribute('opacity', '.5');
-          svg.appendChild(dot);
-        });
+          centers.forEach((c, i) => {
+            // vertical drop to spine
+            const v = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            v.setAttribute('x1', c.x); v.setAttribute('y1', c.y + 2);
+            v.setAttribute('x2', c.x); v.setAttribute('y2', spineY);
+            v.setAttribute('stroke', colors[i]);
+            v.setAttribute('stroke-width', '1');
+            v.setAttribute('opacity', '.18');
+            svg.appendChild(v);
+
+            // diagonal to neighbours
+            if (i < 6) {
+              const next = centers[i + 1];
+              const d = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+              d.setAttribute('x1', c.x); d.setAttribute('y1', c.y);
+              d.setAttribute('x2', next.x); d.setAttribute('y2', next.y);
+              d.setAttribute('stroke', `url(#lg${i})`);
+              d.setAttribute('stroke-width', '1');
+              d.setAttribute('stroke-dasharray', '3 5');
+              d.setAttribute('opacity', '.22');
+              // gradient def
+              const defs = svg.querySelector('defs') || svg.insertBefore(document.createElementNS('http://www.w3.org/2000/svg', 'defs'), svg.firstChild);
+              const lg = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+              lg.setAttribute('id', `lg${i}`);
+              lg.setAttribute('gradientUnits', 'userSpaceOnUse');
+              lg.setAttribute('x1', c.x); lg.setAttribute('y1', c.y);
+              lg.setAttribute('x2', next.x); lg.setAttribute('y2', next.y);
+              const s1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+              s1.setAttribute('offset', '0%'); s1.setAttribute('stop-color', colors[i]);
+              const s2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+              s2.setAttribute('offset', '100%'); s2.setAttribute('stop-color', colors[i + 1]);
+              lg.appendChild(s1); lg.appendChild(s2); defs.appendChild(lg);
+              svg.appendChild(d);
+            }
+
+            // node dot on spine
+            const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            dot.setAttribute('cx', c.x); dot.setAttribute('cy', spineY);
+            dot.setAttribute('r', '2.5');
+            dot.setAttribute('fill', colors[i]);
+            dot.setAttribute('opacity', '.5');
+            svg.appendChild(dot);
+          });
+        }
       }
 
       setTimeout(buildNeural, 100);
