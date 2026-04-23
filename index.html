@@ -79,15 +79,18 @@
     }
 
     @keyframes floatCard {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
 
-      0%,
-      100% {
-        transform: translateY(0);
-      }
+    @keyframes breathe {
+      0%, 100% { transform: translate(-50%, -52%) scale(1); filter: drop-shadow(0 0 8px var(--c)) drop-shadow(0 0 16px var(--c)); }
+      50% { transform: translate(-50%, -52%) scale(1.06); filter: drop-shadow(0 0 14px var(--c)) drop-shadow(0 0 28px var(--c)); }
+    }
 
-      50% {
-        transform: translateY(-8px);
-      }
+    @keyframes neonPulse {
+      0%, 100% { filter: drop-shadow(0 0 18px var(--c)); }
+      50% { filter: drop-shadow(0 0 28px var(--c)) drop-shadow(0 0 50px var(--c)); }
     }
 
     .hex-wrap {
@@ -95,11 +98,13 @@
       width: 140px;
       height: 161px;
       filter: drop-shadow(0 0 18px var(--c));
-      transition: filter .3s;
+      transition: filter .4s ease;
+      animation: neonPulse 3s ease-in-out infinite;
     }
 
     .hex-wrap:hover {
-      filter: drop-shadow(0 0 30px var(--c)) drop-shadow(0 0 70px var(--c));
+      filter: drop-shadow(0 0 40px var(--c)) drop-shadow(0 0 90px var(--c)) drop-shadow(0 0 140px var(--c));
+      animation: none;
     }
 
     .hex-bg {
@@ -120,6 +125,36 @@
       transform: translate(-50%, -52%);
       width: 70px;
       height: 70px;
+      transition: transform 0.4s ease, filter 0.4s ease;
+      filter: drop-shadow(0 0 8px var(--c)) drop-shadow(0 0 16px var(--c));
+      animation: breathe 3s ease-in-out infinite;
+    }
+
+    .hex-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .hex-wrap:hover .hex-icon {
+      animation: none;
+      filter: drop-shadow(0 0 18px var(--c)) drop-shadow(0 0 36px var(--c)) drop-shadow(0 0 54px var(--c));
+      transform: translate(-50%, -52%) scale(1.12);
+    }
+
+    .hex-card {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      animation: floatCard 4s ease-in-out infinite;
+      cursor: pointer;
+    }
+
+    .hex-card:hover .label-name {
+      text-shadow: 0 0 18px var(--c), 0 0 40px var(--c);
     }
 
     .label-name {
@@ -129,6 +164,7 @@
       letter-spacing: .22em;
       color: var(--c);
       text-shadow: 0 0 10px var(--c);
+      transition: text-shadow 0.4s ease;
     }
 
     .label-sub {
@@ -140,33 +176,13 @@
     }
 
     /* Cores dos Cards */
-    .card-1 {
-      --c: var(--amber);
-    }
-
-    .card-2 {
-      --c: var(--cobalt);
-    }
-
-    .card-3 {
-      --c: var(--cyan);
-    }
-
-    .card-4 {
-      --c: var(--emerald);
-    }
-
-    .card-5 {
-      --c: var(--violet);
-    }
-
-    .card-6 {
-      --c: var(--copper);
-    }
-
-    .card-7 {
-      --c: var(--red);
-    }
+    .card-1 { --c: var(--amber); }
+    .card-2 { --c: var(--cobalt); }
+    .card-3 { --c: var(--cyan); }
+    .card-4 { --c: var(--emerald); }
+    .card-5 { --c: var(--violet); }
+    .card-6 { --c: var(--copper); }
+    .card-7 { --c: var(--red); }
 
     .title-bar {
       position: fixed;
@@ -258,18 +274,7 @@
           <circle class="corner-dot" style="fill:#FFB300" cx="4" cy="39" />
         </svg>
         <div class="hex-icon">
-          <svg viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Wing / brushstroke -->
-            <path d="M8 50 Q20 20 40 12 Q55 6 64 18" stroke="#FFB300" stroke-width="3.5" stroke-linecap="round"
-              fill="none" filter="url(#glow1)" />
-            <path d="M8 50 Q28 38 50 42 Q60 44 64 38" stroke="#FFB300" stroke-width="2" stroke-linecap="round"
-              fill="none" opacity=".6" />
-            <path d="M8 50 Q24 46 40 35" stroke="#FFB300" stroke-width="1.2" stroke-linecap="round" fill="none"
-              opacity=".35" />
-            <!-- speed lines -->
-            <line x1="10" y1="55" x2="28" y2="53" stroke="#FFB300" stroke-width="1" opacity=".4" />
-            <line x1="6" y1="59" x2="20" y2="57" stroke="#FFB300" stroke-width=".7" opacity=".25" />
-          </svg>
+          <img src="vyra.webp" alt="VYRA – Design Gráfico">
         </div>
         <div class="hex-scan"></div>
       </div>
@@ -303,18 +308,7 @@
           <circle class="corner-dot" style="fill:#1E88E5" cx="4" cy="39" />
         </svg>
         <div class="hex-icon">
-          <svg viewBox="0 0 70 70" fill="none">
-            <!-- Globe -->
-            <ellipse cx="35" cy="35" rx="26" ry="26" stroke="#1E88E5" stroke-width="2" opacity=".5" />
-            <ellipse cx="35" cy="35" rx="26" ry="10" stroke="#1E88E5" stroke-width="2" />
-            <ellipse cx="35" cy="35" rx="10" ry="26" stroke="#1E88E5" stroke-width="1.5" opacity=".7" />
-            <line x1="9" y1="35" x2="61" y2="35" stroke="#1E88E5" stroke-width="1.5" opacity=".5" />
-            <line x1="35" y1="9" x2="35" y2="61" stroke="#1E88E5" stroke-width="1.5" opacity=".5" />
-            <!-- orbit ring -->
-            <ellipse cx="35" cy="35" rx="30" ry="8" stroke="#1E88E5" stroke-width="1.5" stroke-dasharray="4 3"
-              transform="rotate(-30 35 35)" opacity=".8" />
-            <circle cx="35" cy="6" r="3" fill="#1E88E5" transform="rotate(-30 35 35)" />
-          </svg>
+          <img src="elon.webp" alt="ELON – Web Design">
         </div>
         <div class="hex-scan"></div>
       </div>
@@ -348,25 +342,7 @@
           <circle class="corner-dot" style="fill:#00E5FF" cx="4" cy="39" />
         </svg>
         <div class="hex-icon">
-          <svg viewBox="0 0 70 70" fill="none">
-            <!-- Crystal/gem -->
-            <polygon points="35,8 58,28 50,58 20,58 12,28" stroke="#00E5FF" stroke-width="2"
-              fill="rgba(0,229,255,.05)" />
-            <polygon points="35,8 58,28 35,38" stroke="#00E5FF" stroke-width="1.2" fill="rgba(0,229,255,.08)"
-              opacity=".7" />
-            <polygon points="35,8 12,28 35,38" stroke="#00E5FF" stroke-width="1.2" fill="rgba(0,229,255,.04)"
-              opacity=".7" />
-            <polygon points="12,28 20,58 35,38" stroke="#00E5FF" stroke-width="1" fill="rgba(0,229,255,.06)"
-              opacity=".6" />
-            <polygon points="58,28 50,58 35,38" stroke="#00E5FF" stroke-width="1" fill="rgba(0,229,255,.1)"
-              opacity=".6" />
-            <polygon points="20,58 50,58 35,38" stroke="#00E5FF" stroke-width="1" fill="rgba(0,229,255,.12)"
-              opacity=".5" />
-            <!-- inner shards -->
-            <line x1="35" y1="8" x2="35" y2="58" stroke="#00E5FF" stroke-width=".6" opacity=".3" />
-            <line x1="12" y1="28" x2="50" y2="58" stroke="#00E5FF" stroke-width=".6" opacity=".3" />
-            <line x1="58" y1="28" x2="20" y2="58" stroke="#00E5FF" stroke-width=".6" opacity=".3" />
-          </svg>
+          <img src="kryon.webp" alt="KRYON – A.I. Design">
         </div>
         <div class="hex-scan"></div>
       </div>
@@ -400,20 +376,7 @@
           <circle class="corner-dot" style="fill:#00C853" cx="4" cy="39" />
         </svg>
         <div class="hex-icon">
-          <svg viewBox="0 0 70 70" fill="none">
-            <!-- Bar chart -->
-            <rect x="10" y="42" width="8" height="18" fill="#00C853" opacity=".7" rx="1" />
-            <rect x="22" y="32" width="8" height="28" fill="#00C853" opacity=".8" rx="1" />
-            <rect x="34" y="22" width="8" height="38" fill="#00C853" rx="1" />
-            <rect x="46" y="30" width="8" height="30" fill="#00C853" opacity=".8" rx="1" />
-            <!-- Data wave line -->
-            <polyline points="10,38 18,28 28,32 38,18 50,24 60,14" stroke="#00C853" stroke-width="2" fill="none"
-              stroke-linecap="round" stroke-linejoin="round" />
-            <circle cx="60" cy="14" r="3" fill="#00C853" />
-            <circle cx="38" cy="18" r="2" fill="#00C853" opacity=".7" />
-            <!-- base line -->
-            <line x1="8" y1="61" x2="62" y2="61" stroke="#00C853" stroke-width="1" opacity=".4" />
-          </svg>
+          <img src="sylar.webp" alt="SYLAR – Analytics">
         </div>
         <div class="hex-scan"></div>
       </div>
@@ -447,21 +410,7 @@
           <circle class="corner-dot" style="fill:#AA00FF" cx="4" cy="39" />
         </svg>
         <div class="hex-icon">
-          <svg viewBox="0 0 70 70" fill="none">
-            <!-- Particle swooshes -->
-            <path d="M12,52 Q22,30 38,22 Q50,16 58,24" stroke="#AA00FF" stroke-width="2.5" stroke-linecap="round"
-              fill="none" />
-            <path d="M16,56 Q28,42 44,38 Q56,36 60,44" stroke="#AA00FF" stroke-width="1.8" stroke-linecap="round"
-              fill="none" opacity=".7" />
-            <path d="M10,44 Q18,24 30,18 Q42,12 52,18" stroke="#AA00FF" stroke-width="1.2" stroke-linecap="round"
-              fill="none" opacity=".45" />
-            <!-- particles -->
-            <circle cx="58" cy="24" r="3" fill="#AA00FF" />
-            <circle cx="60" cy="44" r="2" fill="#AA00FF" opacity=".7" />
-            <circle cx="52" cy="18" r="2" fill="#AA00FF" opacity=".5" />
-            <circle cx="24" cy="34" r="1.5" fill="#AA00FF" opacity=".4" />
-            <circle cx="40" cy="28" r="1.5" fill="#AA00FF" opacity=".3" />
-          </svg>
+          <img src="zynth.webp" alt="ZYNTH – Motion / VFX">
         </div>
         <div class="hex-scan"></div>
       </div>
@@ -495,21 +444,7 @@
           <circle class="corner-dot" style="fill:#FF6D00" cx="4" cy="39" />
         </svg>
         <div class="hex-icon">
-          <svg viewBox="0 0 70 70" fill="none">
-            <!-- Arch + perspective grid -->
-            <!-- perspective grid lines converging to center-top -->
-            <line x1="35" y1="14" x2="10" y2="60" stroke="#FF6D00" stroke-width=".8" opacity=".3" />
-            <line x1="35" y1="14" x2="60" y2="60" stroke="#FF6D00" stroke-width=".8" opacity=".3" />
-            <line x1="35" y1="14" x2="25" y2="60" stroke="#FF6D00" stroke-width=".6" opacity=".2" />
-            <line x1="35" y1="14" x2="45" y2="60" stroke="#FF6D00" stroke-width=".6" opacity=".2" />
-            <!-- horizontals -->
-            <line x1="15" y1="42" x2="55" y2="42" stroke="#FF6D00" stroke-width=".7" opacity=".3" />
-            <line x1="10" y1="55" x2="60" y2="55" stroke="#FF6D00" stroke-width=".7" opacity=".3" />
-            <!-- Arch -->
-            <path d="M16,58 L16,40 Q16,18 35,18 Q54,18 54,40 L54,58" stroke="#FF6D00" stroke-width="2.5"
-              stroke-linecap="round" fill="rgba(255,109,0,.06)" />
-            <line x1="16" y1="58" x2="54" y2="58" stroke="#FF6D00" stroke-width="2.5" stroke-linecap="round" />
-          </svg>
+          <img src="auron.webp" alt="AURON – Archviz 3D">
         </div>
         <div class="hex-scan"></div>
       </div>
@@ -543,23 +478,7 @@
           <circle class="corner-dot" style="fill:#FF1744" cx="4" cy="39" />
         </svg>
         <div class="hex-icon">
-          <svg viewBox="0 0 70 70" fill="none">
-            <!-- 4-point vibrating star -->
-            <polygon points="35,10 40,31 61,35 40,39 35,60 30,39 9,35 30,31" fill="rgba(255,23,68,.12)" stroke="#FF1744"
-              stroke-width="2" stroke-linejoin="round" />
-            <!-- inner star -->
-            <polygon points="35,21 38,31 48,35 38,39 35,49 32,39 22,35 32,31" fill="rgba(255,23,68,.08)"
-              stroke="#FF1744" stroke-width="1.2" stroke-linejoin="round" opacity=".7" />
-            <!-- motion lines -->
-            <line x1="35" y1="4" x2="35" y2="8" stroke="#FF1744" stroke-width="1.5" opacity=".5" />
-            <line x1="35" y1="62" x2="35" y2="66" stroke="#FF1744" stroke-width="1.5" opacity=".5" />
-            <line x1="3" y1="35" x2="7" y2="35" stroke="#FF1744" stroke-width="1.5" opacity=".5" />
-            <line x1="63" y1="35" x2="67" y2="35" stroke="#FF1744" stroke-width="1.5" opacity=".5" />
-            <line x1="10" y1="10" x2="13" y2="13" stroke="#FF1744" stroke-width="1.2" opacity=".35" />
-            <line x1="60" y1="10" x2="57" y2="13" stroke="#FF1744" stroke-width="1.2" opacity=".35" />
-            <line x1="10" y1="60" x2="13" y2="57" stroke="#FF1744" stroke-width="1.2" opacity=".35" />
-            <line x1="60" y1="60" x2="57" y2="57" stroke="#FF1744" stroke-width="1.2" opacity=".35" />
-          </svg>
+          <img src="nexar.webp" alt="NEXAR – Animação">
         </div>
         <div class="hex-scan"></div>
       </div>

@@ -238,6 +238,68 @@ body {
   line-height: 1.5;
 }
 
+/* ── PAGE ICON (ícone WebP de referência) ── */
+.page-icon-wrap {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 50px;
+}
+
+.page-icon {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px var(--theme-color)) drop-shadow(0 0 24px var(--theme-color));
+  animation: iconBreathe 3s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes iconBreathe {
+  0%, 100% {
+    filter: drop-shadow(0 0 10px var(--theme-color)) drop-shadow(0 0 24px var(--theme-color));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 18px var(--theme-color)) drop-shadow(0 0 44px var(--theme-color));
+    transform: scale(1.06);
+  }
+}
+
+/* ── HUD scanline top border ── */
+.page-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--theme-color), transparent);
+  opacity: 0.6;
+}
+
+/* ── Card stagger entrance ── */
+.content-card {
+  animation: cardIn 0.6s ease-out both;
+}
+
+.content-card:nth-child(1) { animation-delay: 0.1s; }
+.content-card:nth-child(2) { animation-delay: 0.2s; }
+.content-card:nth-child(3) { animation-delay: 0.3s; }
+.content-card:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Back btn respects theme color on hover ── */
+.back-btn:hover {
+  color: var(--theme-color);
+  border-color: rgba(var(--theme-rgb), 0.4);
+  background: rgba(var(--theme-rgb), 0.06);
+}
+
 @media (max-width: 768px) {
   .content-grid {
     grid-template-columns: 1fr;
@@ -248,5 +310,8 @@ body {
     margin-top: 20px;
   }
 
-  /* Adicionado margem */
+  .page-icon {
+    width: 60px;
+    height: 60px;
+  }
 }
