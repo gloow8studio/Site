@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArqVirtz & Realismo - Hex Agency</title>
+  <link rel="stylesheet" href="page.css">
+  <style>
+    :root {
+      --theme-color: #FF6D00;
+      --theme-rgb: 255, 109, 0;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <div class="page-container">
+    <a href="index.html" class="back-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Voltar ao Painel
+    </a>
+    
+    <div class="page-header">
+      <span class="category-label">ÁREA LARANJA</span>
+      <h1 class="page-title">ArqVirtz & Realismo</h1>
+      <p class="gatilho-mental">"Isso precisa parecer uma fotografia real."</p>
+    </div>
+
+    <div class="content-grid">
+      <div class="content-card">
+        <h2 class="card-title">
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+          Core Software
+        </h2>
+        <div class="card-body">
+          <p><strong>SketchUp, Revit.</strong></p>
+          <p><strong>D5 Render:</strong> (O sucessor do Lumion para sua RTX 4060).</p>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <h2 class="card-title">
+          <svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          IA de Render
+        </h2>
+        <div class="card-body">
+          <p><strong>Veras AI:</strong> Para renderização instantânea baseada em texto dentro do SketchUp.</p>
+          <p><strong>LookX AI:</strong> IA treinada especificamente para arquitetos e arquitetura.</p>
+        </div>
+      </div>
+
+      <div class="content-card" style="grid-column: 1 / -1;">
+        <h2 class="card-title">
+          <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          Upgrade Visual
+        </h2>
+        <div class="card-body">
+          <p><strong>Twinmotion:</strong> Para ambientes vivos (vegetação e pessoas que se movem).</p>
+          <p><strong>Quixel Megascans:</strong> Para texturas e objetos 3D de qualidade cinematográfica.</p>
+        </div>
+      </div>
+      
+      <div class="workflow-section">
+        <div class="workflow-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        </div>
+        <div class="workflow-text">
+          <h3>Workflow Oficial</h3>
+          <p>Use o <strong>Adobe Substance 3D</strong> para criar materiais de madeira e pedra ultra-realistas para as portas da Uniportas.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="bg-canvas.js"></script>
+</body>
+</html>

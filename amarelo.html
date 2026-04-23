@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design & Branding - Hex Agency</title>
+  <link rel="stylesheet" href="page.css">
+  <style>
+    :root {
+      --theme-color: #FFB300;
+      --theme-rgb: 255, 179, 0;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="canvas"></canvas>
+  <div class="page-container">
+    <a href="index.html" class="back-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5M12 19l-7-7 7-7" />
+      </svg>
+      Voltar ao Painel
+    </a>
+
+    <div class="page-header">
+      <span class="category-label">ÁREA AMARELO</span>
+      <h1 class="page-title">Design & Branding</h1>
+      <p class="gatilho-mental">"Isso precisa parecer caro e memorável."</p>
+    </div>
+
+    <div class="content-grid">
+      <div class="content-card">
+        <h2 class="card-title">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+            </path>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+          </svg>
+          Core Software
+        </h2>
+        <div class="card-body">
+          <p><strong>Obrigatório:</strong> Adobe Photoshop, Illustrator, InDesign.</p>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <h2 class="card-title">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+          IA de Geração & Refino
+        </h2>
+        <div class="card-body">
+          <p><strong>Nano Banana 2:</strong> Para assets rápidos.<br>
+            <strong>Midjourney v6, Leonardo AI, Adobe Firefly:</strong> Para arte de base.
+          </p>
+        </div>
+      </div>
+
+      <div class="content-card" style="grid-column: 1 / -1;">
+        <h2 class="card-title">
+          <svg viewBox="0 0 24 24">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          Upgrade de Elite (O Diferencial)
+        </h2>
+        <div class="card-body">
+          <p><strong>Krea AI & Magnific AI:</strong> Para upscales que revelam texturas impossíveis.</p>
+          <p><strong>Ideogram 2.0:</strong> Para tipografia perfeita dentro de imagens.</p>
+          <p><strong>Dzine.ai (antiga Alpaca):</strong> Para manter a consistência de personagens e objetos.</p>
+        </div>
+      </div>
+
+      <div class="workflow-section">
+        <div class="workflow-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+        </div>
+        <div class="workflow-text">
+          <h3>Workflow Oficial</h3>
+          <p>Use o <strong>Pippit.ai</strong> para referências de tendências e o <strong>Adobe Bridge</strong> para
+            organizar sua biblioteca de assets da Glow8.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="bg-canvas.js"></script>
+</body>
+
+</html>
