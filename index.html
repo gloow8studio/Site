@@ -31,10 +31,14 @@
       background: #000;
       min-height: 100vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       font-family: 'Orbitron', monospace;
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding-top: 120px;
+      padding-bottom: 60px;
     }
 
     #canvas {
@@ -184,9 +188,6 @@
     /* AJUSTE MOBILE CORRIGIDO */
     @media (max-width: 768px) {
       body {
-        overflow-y: auto;
-        overflow-x: hidden;
-        align-items: flex-start;
         padding-top: 100px;
       }
 
@@ -569,6 +570,10 @@
     </div>
 
   </div><!-- /panel -->
+
+  <div class="image-info-container" style="position: relative; z-index: 2; margin-top: 60px; max-width: 1200px; width: 90%; text-align: center; display: flex; flex-direction: column; align-items: center;">
+    <img src="7 icons AnimaMotion.png" alt="Informações Adicionais - 7 icons AnimaMotion" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 0 30px rgba(0, 229, 255, 0.15);">
+  </div>
 
   <div class="bottom-rule"></div>
 
