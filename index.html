@@ -107,20 +107,20 @@
       animation: none;
     }
 
-    /* HUD frame SVG – fica atrás do ícone WebP */
+    /* HUD frame SVG – fica sobre a imagem */
     .hex-wrap > svg {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 1;
+      z-index: 2;
       pointer-events: none;
     }
 
-    /* Fundo escuro dentro do hexágono */
+    /* hex-bg transparente para revelar o WebP */
     .hex-bg {
-      fill: rgba(0, 0, 0, 0.72);
+      fill: transparent;
     }
 
     /* Sem preenchimento nos polígonos HUD – só as bordas são visíveis */
@@ -139,31 +139,29 @@
       opacity: .9;
     }
 
-    /* Ícone WebP na frente do hexágono */
+    /* Imagem WebP como camada de fundo do hexágono */
     .hex-icon {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -52%);
-      width: 75px;
-      height: 75px;
-      z-index: 2;
-      transition: transform 0.4s ease, filter 0.4s ease;
-      filter: drop-shadow(0 0 8px var(--c)) drop-shadow(0 0 16px var(--c));
-      animation: breathe 3s ease-in-out infinite;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      clip-path: polygon(50% 2.5%, 97.1% 24.2%, 97.1% 75.8%, 50% 97.5%, 2.9% 75.8%, 2.9% 24.2%);
+      transition: filter 0.4s ease, transform 0.4s ease;
+      filter: brightness(0.9) saturate(1.1);
     }
 
     .hex-icon img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
       display: block;
     }
 
     .hex-wrap:hover .hex-icon {
-      animation: none;
-      filter: drop-shadow(0 0 20px var(--c)) drop-shadow(0 0 40px var(--c)) drop-shadow(0 0 60px var(--c));
-      transform: translate(-50%, -52%) scale(1.15);
+      filter: brightness(1.15) saturate(1.3) drop-shadow(0 0 12px var(--c));
+      transform: scale(1.04);
     }
 
     .hex-card {
