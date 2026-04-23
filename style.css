@@ -41,7 +41,8 @@ body {
   align-items: center;
   justify-content: center;
   font-family: 'Orbitron', monospace;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 /* ── Fundo interativo do espaço sideral (Canvas JS) ── */
