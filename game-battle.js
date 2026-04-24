@@ -89,7 +89,15 @@ function initTanks(){
 
 /* ── WIND ── */
 function newWind(){
-  wind=(Math.random()*12-6);
+  // 50% chance: vento zero; 40%: vento fraco (±0.5–1.5); 10%: vento moderado (±1.5–3)
+  const r=Math.random();
+  if(r<0.50){
+    wind=0;
+  } else if(r<0.90){
+    wind=(Math.random()*1.0+0.5)*(Math.random()<0.5?1:-1);
+  } else {
+    wind=(Math.random()*1.5+1.5)*(Math.random()<0.5?1:-1);
+  }
   const lbl=document.getElementById('gb-wind-lbl');
   if(lbl)lbl.textContent='VENTO '+(wind>0.3?'->':wind<-0.3?'<-':'.')+'  '+Math.abs(wind).toFixed(1);
   flagAnim();

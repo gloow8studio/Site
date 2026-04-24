@@ -881,14 +881,13 @@
 
     /* Joystick */
     .gb-joy {
-      display: grid;
-      grid-template-columns: 44px 44px 44px;
-      grid-template-rows: 44px 44px 44px;
-      gap: 4px;
+      display: flex;
+      gap: 8px;
       background: rgba(0, 0, 0, .6);
       border: 1px solid rgba(0, 229, 255, .2);
-      padding: 8px;
+      padding: 10px 12px;
       border-radius: 8px;
+      align-items: center;
     }
 
     .gb-joy-btn {
@@ -898,22 +897,21 @@
       background: rgba(0, 229, 255, .08);
       border: 1px solid rgba(0, 229, 255, .3);
       color: #00E5FF;
-      font-size: 20px;
+      font-family: 'Orbitron', monospace;
+      font-size: 9px;
+      letter-spacing: .12em;
+      font-weight: 700;
       cursor: pointer;
       border-radius: 4px;
       user-select: none;
       transition: background .15s;
+      padding: 10px 14px;
+      white-space: nowrap;
     }
 
     .gb-joy-btn:active,
     .gb-joy-btn.pressed {
       background: rgba(0, 229, 255, .28);
-    }
-
-    .gb-joy-center {
-      background: rgba(255, 255, 255, .04);
-      border: 1px solid rgba(255, 255, 255, .08);
-      border-radius: 4px;
     }
 
     /* Power */
@@ -1050,17 +1048,10 @@
         <div class="gb-power-lbl">MIRA</div>
         <div id="gb-angle-val">45Â°</div>
         <div class="gb-joy">
-          <div></div>
-          <div></div>
-          <div></div>
           <div class="gb-joy-btn" id="jl" onmousedown="gbAngleStart(-1)" onmouseup="gbAngleStop()"
-            onmouseleave="gbAngleStop()" ontouchstart="gbAngleStart(-1)" ontouchend="gbAngleStop()">â—„</div>
-          <div class="gb-joy-center"></div>
+            onmouseleave="gbAngleStop()" ontouchstart="gbAngleStart(-1)" ontouchend="gbAngleStop()">ESQUERDA</div>
           <div class="gb-joy-btn" id="jr" onmousedown="gbAngleStart(1)" onmouseup="gbAngleStop()"
-            onmouseleave="gbAngleStop()" ontouchstart="gbAngleStart(1)" ontouchend="gbAngleStop()">â–º</div>
-          <div></div>
-          <div></div>
-          <div></div>
+            onmouseleave="gbAngleStop()" ontouchstart="gbAngleStart(1)" ontouchend="gbAngleStop()">DIREITA</div>
         </div>
       </div>
       <!-- POWER -->
@@ -1074,7 +1065,7 @@
       <!-- FIRE -->
       <button id="gb-fire-btn" onclick="gbFire()">FIRE<br>ðŸ”¥</button>
     </div>
-    <div id="gb-msg">ðŸŽ® Use â—„ â–º para mirar, arraste a barra de potÃªncia e pressione FIRE</div>
+    <div id="gb-msg">ðŸŽ® Use ESQUERDA / DIREITA para mirar, arraste a barra de potÃªncia e pressione FIRE</div>
     <button id="gb-restart" onclick="initGame()">â†º NOVA PARTIDA</button>
   </section>
 
