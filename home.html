@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Glow8 | Ecossistema de Marcas que Vão Além</title>
-<meta name="description" content="Glow8 Studio – Ecossistema vivo de criatividade, tecnologia e resultados.">
+<title>Glow8 | Ecossistema de Marcas que VÃ£o AlÃ©m</title>
+<meta name="description" content="Glow8 Studio â€“ Ecossistema vivo de criatividade, tecnologia e resultados.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -14,14 +14,20 @@
   --emerald:#00C853;--violet:#AA00FF;--copper:#FF6D00;
   --red:#FF1744;
 }
-html,body{width:100%;height:100%;overflow:hidden}
+html{width:100%;}
 body{
+  width:100%;min-height:100vh;overflow-x:hidden;overflow-y:auto;
   background:#000;
   font-family:'Orbitron',monospace;
-  display:flex;align-items:center;justify-content:center;
+  display:flex;flex-direction:column;align-items:center;
   position:relative;
 }
-/* ── PARALLAX BG ── */
+#hero-wrap{
+  width:100%;min-height:100vh;
+  display:flex;align-items:center;justify-content:flex-end;
+  position:relative;
+}
+/* â”€â”€ PARALLAX BG â”€â”€ */
 #bg{
   position:fixed;inset:0;z-index:0;
   background:radial-gradient(ellipse at 60% 40%,#0a0020 0%,#000005 40%,#000 100%);
@@ -37,10 +43,10 @@ body{
 /* Stars */
 #stars{position:fixed;inset:0;z-index:0;pointer-events:none}
 
-/* ── LEFT PANEL ── */
+/* â”€â”€ LEFT PANEL â”€â”€ */
 #left-panel{
-  position:fixed;left:5vw;top:50%;transform:translateY(-50%);
-  z-index:10;max-width:340px;
+  position:relative;left:auto;top:auto;transform:none;
+  z-index:10;max-width:340px;padding:40px;
 }
 .eco-tag{
   font-family:'Rajdhani',sans-serif;font-size:11px;letter-spacing:.5em;
@@ -70,7 +76,7 @@ body{
 #btn-explore .arrow{font-size:18px;transition:transform .3s;}
 #btn-explore:hover .arrow{transform:translateX(4px);}
 
-/* ── ORBITAL STAGE ── */
+/* â”€â”€ ORBITAL STAGE â”€â”€ */
 #stage{
   position:relative;z-index:5;
   width:min(700px,90vw);height:min(700px,90vw);
@@ -79,7 +85,7 @@ body{
 }
 #orbit-canvas{position:absolute;inset:0;pointer-events:none;}
 
-/* ── NUCLEUS ── */
+/* â”€â”€ NUCLEUS â”€â”€ */
 #nucleus{
   position:absolute;
   left:50%;top:50%;transform:translate(-50%,-50%);
@@ -114,10 +120,10 @@ body{
   padding:8px;
 }
 
-/* ── LIGHTNING CANVAS ── */
+/* â”€â”€ LIGHTNING CANVAS â”€â”€ */
 #lightning-canvas{position:absolute;inset:-100px;z-index:6;pointer-events:none;width:calc(100% + 200px);height:calc(100% + 200px);}
 
-/* ── HEX NODES ── */
+/* â”€â”€ HEX NODES â”€â”€ */
 .hex-node{
   position:absolute;width:110px;height:127px;
   transform:translate(-50%,-50%);
@@ -148,11 +154,11 @@ body{
   color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.1em;
 }
 
-/* ── VFX OVERLAY ── */
+/* â”€â”€ VFX OVERLAY â”€â”€ */
 #vfx-layer{position:fixed;inset:0;z-index:50;pointer-events:none;}
 .vfx-particle{position:absolute;border-radius:50%;pointer-events:none;}
 
-/* ── TRANSITION OVERLAY ── */
+/* â”€â”€ TRANSITION OVERLAY â”€â”€ */
 #transition-overlay{
   position:fixed;inset:0;z-index:100;
   background:radial-gradient(circle,rgba(0,229,255,.2) 0%,rgba(0,0,0,0) 70%);
@@ -160,13 +166,13 @@ body{
   transition:opacity .5s ease;
 }
 
-/* ── RESPONSIVE ── */
+/* â”€â”€ RESPONSIVE â”€â”€ */
 @media(max-width:900px){
-  #left-panel{position:fixed;left:50%;top:auto;bottom:24px;
-    transform:translateX(-50%);text-align:center;max-width:90vw;}
+  #left-panel{max-width:90vw;padding:20px;text-align:center;}
   .eco-tag{justify-content:center;}
   .hero-title{font-size:22px;}
   .hero-sub{display:none;}
+  #hero-wrap{flex-direction:column;justify-content:center;padding-top:60px;}
   #stage{margin:0 auto;width:min(480px,95vw);height:min(480px,95vw);}
   #nucleus{width:100px;height:100px;}
   .nucleus-core{width:76px;height:76px;}
@@ -175,7 +181,7 @@ body{
   .hex-node .hex-label .nm{font-size:8px;}
 }
 
-/* ── BACK BUTTON ── */
+/* â”€â”€ BACK BUTTON â”€â”€ */
 #btn-back{
   position:fixed;
   top:22px;
@@ -209,7 +215,7 @@ body{
 </head>
 <body>
 <a id="btn-back" href="index.html">
-  <span class="bk-arrow">←</span> &nbsp; VOLTAR
+  <span class="bk-arrow">â†</span> &nbsp; VOLTAR
 </a>
 <div id="bg"></div>
 <canvas id="stars"></canvas>
@@ -217,12 +223,13 @@ body{
 <div id="vfx-layer"></div>
 <div id="transition-overlay"></div>
 
+<div id="hero-wrap">
 <div id="left-panel">
   <div class="eco-tag">Ecossistema de Marcas</div>
   <h1 class="hero-title">GLOW8<br><span class="accent">STUDIO</span></h1>
-  <p class="hero-sub">Marcas que vão além — criatividade, tecnologia e resultados em um ecossistema vivo.</p>
+  <p class="hero-sub">Marcas que vÃ£o alÃ©m â€” criatividade, tecnologia e resultados em um ecossistema vivo.</p>
   <button id="btn-explore" onclick="document.getElementById('stage').scrollIntoView({behavior:'smooth'})">
-    EXPLORAR SOLUÇÕES <span class="arrow">→</span>
+    EXPLORAR SOLUÃ‡Ã•ES <span class="arrow">â†’</span>
   </button>
 </div>
 
@@ -237,11 +244,12 @@ body{
     </div>
   </div>
 </div>
+</div><!-- /hero-wrap -->
 
 <audio id="snd-base" loop preload="none"></audio>
 
 <script>
-// ── STARS ──
+// â”€â”€ STARS â”€â”€
 (function(){
   const c=document.getElementById('stars'),ctx=c.getContext('2d');
   function resize(){c.width=innerWidth;c.height=innerHeight;}
@@ -262,25 +270,25 @@ body{
   draw();
 })();
 
-// ── PARALLAX BG ──
+// â”€â”€ PARALLAX BG â”€â”€
 window.addEventListener('mousemove',e=>{
   const x=(e.clientX/innerWidth-.5)*18;
   const y=(e.clientY/innerHeight-.5)*18;
   document.getElementById('bg').style.transform=`translate(${x}px,${y}px) scale(1.04)`;
 });
 
-// ── HEX DATA ──
+// â”€â”€ HEX DATA â”€â”€
 const HEXES=[
-  {id:'vyra', name:'VYRA', sub:'Design Gráfico', img:'vyra.webp', color:'#FFB300', url:'amarelo.html'},
+  {id:'vyra', name:'VYRA', sub:'Design GrÃ¡fico', img:'vyra.webp', color:'#FFB300', url:'amarelo.html'},
   {id:'elon', name:'ELON', sub:'Web Design',     img:'elon.webp',  color:'#1E88E5', url:'azul.html'},
   {id:'kryon',name:'KRYON',sub:'A.I. Design',    img:'kryon.webp', color:'#00E5FF', url:'ciano.html'},
   {id:'sylar',name:'SYLAR',sub:'Analytics',      img:'sylar.webp', color:'#00C853', url:'verde.html'},
   {id:'zynth',name:'ZYNTH',sub:'Motion / VFX',   img:'zynth.webp', color:'#AA00FF', url:'roxo.html'},
   {id:'auron',name:'AURON',sub:'Archviz 3D',     img:'auron.webp', color:'#FF6D00', url:'laranja.html'},
-  {id:'nexar',name:'NEXAR',sub:'Animação/Games', img:'nexar.webp', color:'#FF1744', url:'vermelho.html'}
+  {id:'nexar',name:'NEXAR',sub:'AnimaÃ§Ã£o/Games', img:'nexar.webp', color:'#FF1744', url:'vermelho.html'}
 ];
 
-// ── ORBIT SYSTEM ──
+// â”€â”€ ORBIT SYSTEM â”€â”€
 const stage=document.getElementById('stage');
 let orbitPaused=false,orbitAngle=0,orbitSpeed=.008;
 const ORBIT_R=()=>stage.offsetWidth*.38;
@@ -336,7 +344,7 @@ function updateOrbit(){
 }
 updateOrbit();
 
-// ── LIGHTNING ──
+// â”€â”€ LIGHTNING â”€â”€
 const LC=document.getElementById('lightning-canvas');
 const lctx=LC.getContext('2d');
 function resizeLC(){
@@ -377,7 +385,7 @@ function drawLightning(){
 }
 drawLightning();
 
-// ── NUCLEUS MOUSE PROXIMITY SOUND ──
+// â”€â”€ NUCLEUS MOUSE PROXIMITY SOUND â”€â”€
 const AudioCtx=window.AudioContext||window.webkitAudioContext;
 let actx=null,staticNode=null,gainNode=null,filterNode=null;
 function initAudio(){
@@ -399,7 +407,7 @@ document.getElementById('nucleus').addEventListener('mouseleave',()=>{
   if(gainNode) gainNode.gain.linearRampToValueAtTime(0,actx.currentTime+.5);
 });
 
-// ── VFX SYSTEM ──
+// â”€â”€ VFX SYSTEM â”€â”€
 const vfxLayer=document.getElementById('vfx-layer');
 function spawnParticle(x,y,color,size,life,vx,vy){
   const p=document.createElement('div');
@@ -500,7 +508,7 @@ function playTone(freq,vol,type,dur){
   }catch(e){}
 }
 
-// ── ENTER HEX TRANSITION ──
+// â”€â”€ ENTER HEX TRANSITION â”€â”€
 function enterHex(h,el){
   initAudio();
   // burst VFX
@@ -520,8 +528,132 @@ function enterHex(h,el){
   setTimeout(()=>{ window.location.href=h.url; },900);
 }
 
-// ── ALSO LINK INDEX HEXAGONS TO home.html ──
+// â”€â”€ ALSO LINK INDEX HEXAGONS TO home.html â”€â”€
 // (handled from index.html onclick)
 </script>
+
+<!-- â•â•â•â•â•â• GLOW8 BATTLE â•â•â•â•â•â• -->
+<style>
+#game-section{
+  position:relative;z-index:2;width:100%;max-width:940px;
+  padding:60px 20px 80px;
+  display:flex;flex-direction:column;align-items:center;
+}
+#game-section h2{
+  font-family:'Orbitron',monospace;font-size:clamp(18px,2.5vw,32px);
+  font-weight:900;letter-spacing:.35em;color:#fff;text-align:center;margin-bottom:8px;
+}
+#game-section h2 span{color:#00E5FF;text-shadow:0 0 20px #00E5FF;}
+.gb-divider{width:220px;height:1px;background:linear-gradient(90deg,transparent,#00E5FF,transparent);margin:0 auto 24px;}
+#gb-canvas{border:1px solid rgba(0,229,255,.25);box-shadow:0 0 40px rgba(0,229,255,.12);display:block;max-width:100%;cursor:default;}
+#gb-hud{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;
+  margin-bottom:14px;font-family:'Rajdhani',sans-serif;
+}
+#gb-turn{font-family:'Orbitron',monospace;font-size:12px;letter-spacing:.18em;padding:7px 16px;border:1px solid currentColor;background:rgba(0,0,0,.6);}
+#gb-wind-box{display:flex;align-items:center;gap:8px;padding:7px 14px;border:1px solid rgba(255,255,255,.15);background:rgba(0,0,0,.6);}
+#gb-flag{width:60px;height:44px;}
+#gb-wind-lbl{font-family:'Orbitron',monospace;font-size:11px;letter-spacing:.1em;color:#00E5FF;}
+#gb-controls{
+  display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center;
+  margin-top:14px;
+}
+/* Joystick */
+.gb-joy{
+  display:grid;grid-template-columns:44px 44px 44px;grid-template-rows:44px 44px 44px;
+  gap:4px;background:rgba(0,0,0,.6);border:1px solid rgba(0,229,255,.2);padding:8px;border-radius:8px;
+}
+.gb-joy-btn{
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.3);
+  color:#00E5FF;font-size:20px;cursor:pointer;border-radius:4px;
+  user-select:none;transition:background .15s;
+}
+.gb-joy-btn:active,.gb-joy-btn.pressed{background:rgba(0,229,255,.28);}
+.gb-joy-center{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:4px;}
+/* Power */
+.gb-power-wrap{
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  background:rgba(0,0,0,.6);border:1px solid rgba(255,179,0,.25);padding:12px 16px;border-radius:8px;
+  min-width:160px;
+}
+.gb-power-lbl{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:.2em;color:#FFB300;}
+#gb-power-track{
+  width:140px;height:18px;background:rgba(255,255,255,.08);border-radius:9px;
+  cursor:pointer;position:relative;border:1px solid rgba(255,179,0,.3);
+}
+#gb-power-fill{
+  height:100%;border-radius:9px;
+  background:linear-gradient(90deg,#00C853,#FFB300,#FF1744);
+  pointer-events:none;transition:width .04s;
+}
+.gb-power-vals{display:flex;justify-content:space-between;width:140px;font-family:'Rajdhani',sans-serif;font-size:10px;color:rgba(255,255,255,.4);}
+#gb-angle-val{font-family:'Orbitron',monospace;font-size:11px;color:#FFB300;letter-spacing:.1em;}
+/* Fire button */
+#gb-fire-btn{
+  width:90px;height:90px;border-radius:50%;
+  background:radial-gradient(circle,#ff4444 0%,#cc0000 60%,#880000 100%);
+  border:3px solid #ff6666;color:#fff;
+  font-family:'Orbitron',monospace;font-size:11px;letter-spacing:.1em;font-weight:900;
+  cursor:pointer;box-shadow:0 0 24px rgba(255,0,0,.5),inset 0 2px 4px rgba(255,255,255,.2);
+  transition:transform .1s,box-shadow .1s;user-select:none;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+}
+#gb-fire-btn:hover{box-shadow:0 0 40px rgba(255,0,0,.8),inset 0 2px 4px rgba(255,255,255,.2);}
+#gb-fire-btn:active{transform:scale(.93);box-shadow:0 0 14px rgba(255,0,0,.4);}
+#gb-msg{min-height:26px;margin-top:10px;font-family:'Orbitron',monospace;font-size:11px;letter-spacing:.15em;color:#00E5FF;text-shadow:0 0 10px #00E5FF;text-align:center;}
+#gb-restart{margin-top:14px;display:none;padding:12px 32px;border:1px solid #00E5FF;background:rgba(0,229,255,.08);color:#00E5FF;font-family:'Orbitron',monospace;font-size:11px;letter-spacing:.2em;cursor:pointer;text-transform:uppercase;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));transition:background .3s;}
+#gb-restart:hover{background:rgba(0,229,255,.2);}
+</style>
+
+<section id="game-section">
+  <h2>GLOW8 <span>BATTLE</span></h2>
+  <div class="gb-divider"></div>
+  <div id="gb-hud">
+    <div id="gb-turn" style="color:#00E5FF">AGUARDANDO...</div>
+    <div id="gb-wind-box">
+      <canvas id="gb-flag" width="60" height="44"></canvas>
+      <div id="gb-wind-lbl">VENTO Â·</div>
+    </div>
+  </div>
+  <canvas id="gb-canvas" width="900" height="420"></canvas>
+  <div id="gb-controls">
+    <!-- JOYSTICK -->
+    <div class="gb-power-wrap" style="min-width:auto;padding:8px;">
+      <div class="gb-power-lbl">MIRA</div>
+      <div id="gb-angle-val">45Â°</div>
+      <div class="gb-joy">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div class="gb-joy-btn" id="jl"
+          onmousedown="gbAngleStart(-1)" onmouseup="gbAngleStop()" onmouseleave="gbAngleStop()"
+          ontouchstart="gbAngleStart(-1)" ontouchend="gbAngleStop()">â—„</div>
+        <div class="gb-joy-center"></div>
+        <div class="gb-joy-btn" id="jr"
+          onmousedown="gbAngleStart(1)" onmouseup="gbAngleStop()" onmouseleave="gbAngleStop()"
+          ontouchstart="gbAngleStart(1)" ontouchend="gbAngleStop()">â–º</div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <!-- POWER -->
+    <div class="gb-power-wrap">
+      <div class="gb-power-lbl">POTÃŠNCIA</div>
+      <div id="gb-power-track"><div id="gb-power-fill" style="width:50%"></div></div>
+      <div class="gb-power-vals"><span>0%</span><span id="gb-power-val">50%</span><span>100%</span></div>
+    </div>
+    <!-- FIRE -->
+    <button id="gb-fire-btn" onclick="gbFire()">FIRE<br>ðŸ”¥</button>
+  </div>
+  <div id="gb-msg">ðŸŽ® Use â—„ â–º para mirar, arraste a barra de potÃªncia e pressione FIRE</div>
+  <button id="gb-restart" onclick="initGame()">â†º NOVA PARTIDA</button>
+</section>
+
+<script src="game-battle.js" defer></script>
+
 </body>
 </html>
+
+
