@@ -1,101 +1,117 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dados & Inteligência - Hex Agency</title>
+  <title>SYLAR — Dados & Inteligência · Hex Agency</title>
   <link rel="stylesheet" href="page.css">
-  <style>
-    :root {
-      --theme-color: #00C853;
-      --theme-rgb: 0, 200, 83;
-    }
-  </style>
+  <style>:root{--theme-color:#00C853;--theme-rgb:0,200,83;}</style>
 </head>
-
 <body>
   <canvas id="canvas"></canvas>
   <div class="page-container">
     <a href="index.html" class="back-btn">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round">
-        <path d="M19 12H5M12 19l-7-7 7-7" />
-      </svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       Voltar ao Painel
     </a>
 
     <div class="page-icon-wrap">
       <img src="sylar.webp" alt="SYLAR" class="page-icon">
-      <div class="page-header" style="margin-bottom:0; border-left: 4px solid #00C853; padding-left: 20px;">
-        <span class="category-label">ÁREA VERDE</span>
+      <div class="page-header" style="margin-bottom:0;border-left:4px solid #00C853;padding-left:20px;">
+        <span class="category-label">📊 SYLAR — DADOS & BI</span>
         <h1 class="page-title">Dados & Inteligência</h1>
-        <p class="gatilho-mental">"O que os números estão tentando me dizer?"</p>
+        <p class="gatilho-mental">"Sem dados = achismo. Os números dizem a verdade."</p>
       </div>
     </div>
 
     <div class="content-grid">
       <div class="content-card">
         <h2 class="card-title">
-          <svg viewBox="0 0 24 24">
-            <path
-              d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
-            </path>
-            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-            <line x1="12" y1="22.08" x2="12" y2="12"></line>
-          </svg>
-          Core Software
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+          Ferramentas Core
         </h2>
         <div class="card-body">
-          <p><strong>Excel:</strong> (VBA/Power Query).</p>
-          <p><strong>Python:</strong> (Pandas/NumPy).</p>
+          <p><strong>PostgreSQL:</strong> Banco de dados relacional robusto para produção.</p>
+          <p><strong>MongoDB:</strong> Banco NoSQL para dados flexíveis e não-estruturados.</p>
+          <p><strong>Power BI:</strong> Dashboards interativos e relatórios executivos.</p>
+          <p><strong>Excel (VBA/Power Query):</strong> Automação de relatórios e ETL.</p>
+          <p><strong>Python (Pandas/NumPy):</strong> Análise e transformação de dados.</p>
         </div>
       </div>
 
       <div class="content-card">
         <h2 class="card-title">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-          </svg>
-          BI & Dashboards
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          IAs & Big Data
         </h2>
         <div class="card-body">
-          <p><strong>Power BI, Google Looker Studio.</strong></p>
-          <p><strong>Metabase:</strong> Para dashboards profissionais no servidor.</p>
+          <p><strong>Google BigQuery ML:</strong> Machine learning direto no data warehouse.</p>
+          <p><strong>DuckDB:</strong> Processar milhões de linhas localmente com velocidade absurda.</p>
+          <p><strong>Jupyter Notebook:</strong> Testar scripts Python de forma organizada.</p>
+          <p><strong>ChatGPT Plus (Code Interpreter):</strong> Análises estatísticas complexas em segundos.</p>
         </div>
       </div>
 
-      <div class="content-card" style="grid-column: 1 / -1;">
+      <div class="content-card" style="grid-column:1/-1;">
         <h2 class="card-title">
-          <svg viewBox="0 0 24 24">
-            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-          </svg>
-          Upgrade Analítico & IA de Apoio
+          <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          Mentalidade Data-Driven
         </h2>
         <div class="card-body">
-          <p><strong>DuckDB:</strong> Para processar milhões de linhas de frete/venda localmente com velocidade absurda.
-          </p>
-          <p><strong>Jupyter Notebook:</strong> Para testar seus scripts de Python de forma organizada.</p>
-          <p><strong>ChatGPT Plus (Code Interpreter):</strong> Para análises estatísticas complexas em segundos.</p>
+          <p><strong>💡 DICA:</strong> Sempre responda: <strong>"isso aumentou vendas ou não?"</strong></p>
+          <p>👉 Sequência: <strong>Coleta → Limpeza → Análise → Visualização → Decisão</strong></p>
+          <p><strong>Google Looker Studio:</strong> Dashboards gratuitos e colaborativos na nuvem.</p>
+          <p><strong>Metabase:</strong> Dashboards profissionais no servidor para clientes.</p>
         </div>
       </div>
 
       <div class="workflow-section">
         <div class="workflow-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-            <polyline points="22 4 12 14.01 9 11.01"></polyline>
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
         </div>
         <div class="workflow-text">
           <h3>Workflow Oficial</h3>
-          <p>Use o <strong>Python</strong> para "limpar" os relatórios sujos do ERP UNO antes de levar para o Excel.</p>
+          <p>Use o <strong>Python</strong> para "limpar" relatórios sujos de ERP antes de levar para o Power BI. Dado limpo = insight real.</p>
         </div>
+      </div>
+    </div>
+
+    <div class="portfolio-section">
+      <div class="portfolio-header">
+        <span class="portfolio-label">PORTFÓLIO</span>
+        <h2 class="portfolio-title">Dashboards & Análises</h2>
+        <p class="portfolio-subtitle">Visualizações de dados, relatórios executivos e projetos de Business Intelligence.</p>
+      </div>
+      <div class="portfolio-tabs" id="sylar-tabs">
+        <button class="tab-btn active" data-tab="sylar-dash">Dashboards</button>
+        <button class="tab-btn" data-tab="sylar-anal">Análises</button>
+        <button class="tab-btn" data-tab="sylar-auto">Scripts Python</button>
+      </div>
+      <div class="portfolio-grid tab-content active" id="sylar-dash">
+        <div class="portfolio-card placeholder-card"><div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg><span>Dashboard Power BI</span><small>Adicione screenshot aqui</small></div></div>
+        <div class="portfolio-card placeholder-card"><div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg><span>Dashboard Looker Studio</span><small>Adicione screenshot aqui</small></div></div>
+        <div class="portfolio-card placeholder-card"><div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg><span>Dashboard Metabase</span><small>Adicione screenshot aqui</small></div></div>
+      </div>
+      <div class="portfolio-grid tab-content" id="sylar-anal" style="display:none;">
+        <div class="portfolio-card placeholder-card"><div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg><span>Análise de Vendas</span><small>Adicione gráfico ou relatório</small></div></div>
+        <div class="portfolio-card placeholder-card"><div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg><span>Relatório Executivo</span><small>Adicione imagem aqui</small></div></div>
+      </div>
+      <div class="portfolio-grid tab-content" id="sylar-auto" style="display:none;">
+        <div class="portfolio-card placeholder-card"><div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg><span>Script Python / Jupyter</span><small>Adicione screenshot ou código</small></div></div>
       </div>
     </div>
   </div>
 
   <script src="bg-canvas.js"></script>
+  <script>
+    document.querySelectorAll('#sylar-tabs .tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#sylar-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+        document.getElementById(btn.dataset.tab).style.display = 'grid';
+      });
+    });
+  </script>
 </body>
-
 </html>

@@ -1,102 +1,115 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IA Engineering & Automação - Hex Agency</title>
+  <title>KRYON — DevOps & Infra · Hex Agency</title>
   <link rel="stylesheet" href="page.css">
-  <style>
-    :root {
-      --theme-color: #00E5FF;
-      --theme-rgb: 0, 229, 255;
-    }
-  </style>
+  <style>:root{--theme-color:#00E5FF;--theme-rgb:0,229,255;}</style>
 </head>
-
 <body>
   <canvas id="canvas"></canvas>
   <div class="page-container">
     <a href="index.html" class="back-btn">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round">
-        <path d="M19 12H5M12 19l-7-7 7-7" />
-      </svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       Voltar ao Painel
     </a>
 
     <div class="page-icon-wrap">
       <img src="kryon.webp" alt="KRYON" class="page-icon">
-      <div class="page-header" style="margin-bottom:0; border-left: 4px solid #00E5FF; padding-left: 20px;">
-        <span class="category-label">ÁREA CIANO</span>
-        <h1 class="page-title">IA Engineering & Automação</h1>
-        <p class="gatilho-mental">"Isso precisa rodar sozinho enquanto eu durmo."</p>
+      <div class="page-header" style="margin-bottom:0;border-left:4px solid #00E5FF;padding-left:20px;">
+        <span class="category-label">⚙️ KRYON — DEVOPS & INFRA</span>
+        <h1 class="page-title">DevOps & Infra</h1>
+        <p class="gatilho-mental">"Se não escala — não serve."</p>
       </div>
     </div>
 
     <div class="content-grid">
       <div class="content-card">
         <h2 class="card-title">
-          <svg viewBox="0 0 24 24">
-            <path
-              d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
-            </path>
-            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-            <line x1="12" y1="22.08" x2="12" y2="12"></line>
-          </svg>
-          Core Software
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+          Ferramentas Core
         </h2>
         <div class="card-body">
-          <p><strong>ComfyUI, Ollama (LLMs Locais).</strong></p>
-          <p><strong>n8n:</strong> Mais potente que o Make para seu perfil dev.</p>
+          <p><strong>Docker:</strong> Containerização de aplicações e ambientes isolados.</p>
+          <p><strong>Terraform:</strong> Infraestrutura como código — provisionamento na nuvem.</p>
+          <p><strong>NGINX:</strong> Proxy reverso, load balancer e servidor web de alta performance.</p>
         </div>
       </div>
 
       <div class="content-card">
         <h2 class="card-title">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-          </svg>
-          IA Avançada & Nodes
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          Monitoramento & IAs
         </h2>
         <div class="card-body">
-          <p><strong>Stable Diffusion (Local):</strong> Rodar no seu Helios via ComfyUI usando ControlNet (para pose e
-            estrutura).</p>
-          <p><strong>LangChain & Flowise:</strong> Para criar seus próprios "chatbots" que consultam seus arquivos da
-            Uniportas.</p>
+          <p><strong>Datadog:</strong> Observabilidade completa — logs, métricas e traces.</p>
+          <p><strong>New Relic:</strong> APM e análise de performance em produção.</p>
+          <p><strong>GitHub Actions:</strong> CI/CD pipelines automatizados.</p>
         </div>
       </div>
 
-      <div class="content-card" style="grid-column: 1 / -1;">
+      <div class="content-card" style="grid-column:1/-1;">
         <h2 class="card-title">
-          <svg viewBox="0 0 24 24">
-            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-          </svg>
-          Automações de Business
+          <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          Mentalidade DevOps
         </h2>
         <div class="card-body">
-          <p><strong>API REST:</strong> Conectar Bling, Mercado Livre e MadeiraMadeira sem intermediários.</p>
-          <p><strong>CrewAI / AutoGen:</strong> Para criar "agentes" que trabalham em equipe (um pesquisa, outro
-            escreve, outro posta).</p>
+          <p><strong>💡 DICA:</strong> Aprenda isso cedo: deploy manual em VPS. Depois automatiza.</p>
+          <p>👉 Sequência: <strong>VPS manual → Docker Compose → CI/CD → Kubernetes</strong></p>
+          <p><strong>ComfyUI / Ollama:</strong> LLMs locais para automação com IA sem depender de APIs externas.</p>
+          <p><strong>n8n:</strong> Mais potente que o Make para automações com perfil dev.</p>
+          <p><strong>CrewAI / AutoGen:</strong> Agentes que trabalham em equipe (pesquisa, escreve, posta).</p>
         </div>
       </div>
 
       <div class="workflow-section">
         <div class="workflow-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-            <polyline points="22 4 12 14.01 9 11.01"></polyline>
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
         </div>
         <div class="workflow-text">
           <h3>Workflow Oficial</h3>
-          <p>Documente todos os seus prompts e fluxos no <strong>Notion</strong> ou <strong>Obsidian</strong>.</p>
+          <p>Documente todos os seus prompts e fluxos no <strong>Notion</strong> ou <strong>Obsidian</strong>. Use <strong>API REST</strong> para conectar sistemas sem intermediários.</p>
         </div>
+      </div>
+    </div>
+
+    <div class="portfolio-section">
+      <div class="portfolio-header">
+        <span class="portfolio-label">PORTFÓLIO</span>
+        <h2 class="portfolio-title">Documentação & Estruturas</h2>
+        <p class="portfolio-subtitle">Diagramas de arquitetura, pipelines CI/CD, configurações de infra e automações.</p>
+      </div>
+      <div class="portfolio-tabs" id="kryon-tabs">
+        <button class="tab-btn active" data-tab="kryon-arch">Arquitetura</button>
+        <button class="tab-btn" data-tab="kryon-ci">CI/CD & Pipelines</button>
+        <button class="tab-btn" data-tab="kryon-auto">Automações</button>
+      </div>
+      <div class="portfolio-grid tab-content active" id="kryon-arch">
+        <div class="portfolio-card placeholder-card"><div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg><span>Diagrama de Arquitetura</span><small>Adicione imagem ou PDF</small></div></div>
+        <div class="portfolio-card placeholder-card"><div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg><span>Setup Docker / VPS</span><small>Adicione documentação</small></div></div>
+        <div class="portfolio-card placeholder-card"><div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg><span>Infraestrutura Cloud</span><small>Adicione diagrama aqui</small></div></div>
+      </div>
+      <div class="portfolio-grid tab-content" id="kryon-ci" style="display:none;">
+        <div class="portfolio-card placeholder-card"><div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg><span>GitHub Actions Pipeline</span><small>Adicione screenshot</small></div></div>
+        <div class="portfolio-card placeholder-card"><div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg><span>Deploy Automatizado</span><small>Adicione documentação</small></div></div>
+      </div>
+      <div class="portfolio-grid tab-content" id="kryon-auto" style="display:none;">
+        <div class="portfolio-card placeholder-card"><div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg><span>Fluxo n8n / Automação</span><small>Adicione screenshot do fluxo</small></div></div>
       </div>
     </div>
   </div>
 
   <script src="bg-canvas.js"></script>
+  <script>
+    document.querySelectorAll('#kryon-tabs .tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#kryon-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+        document.getElementById(btn.dataset.tab).style.display = 'grid';
+      });
+    });
+  </script>
 </body>
-
 </html>

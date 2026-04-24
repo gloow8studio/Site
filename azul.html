@@ -1,102 +1,117 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UI/UX & Web - Hex Agency</title>
+  <title>ELON — Desenvolvedor Web · Hex Agency</title>
   <link rel="stylesheet" href="page.css">
-  <style>
-    :root {
-      --theme-color: #1E88E5;
-      --theme-rgb: 30, 136, 229;
-    }
-  </style>
+  <style>:root{--theme-color:#1E88E5;--theme-rgb:30,136,229;}</style>
 </head>
-
 <body>
   <canvas id="canvas"></canvas>
   <div class="page-container">
     <a href="index.html" class="back-btn">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round">
-        <path d="M19 12H5M12 19l-7-7 7-7" />
-      </svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       Voltar ao Painel
     </a>
 
     <div class="page-icon-wrap">
       <img src="elon.webp" alt="ELON" class="page-icon">
-      <div class="page-header" style="margin-bottom:0; border-left: 4px solid #1E88E5; padding-left: 20px;">
-        <span class="category-label">ÁREA AZUL</span>
-        <h1 class="page-title">UI/UX & Web</h1>
-        <p class="gatilho-mental">"Isso precisa funcionar sem esforço e converter."</p>
+      <div class="page-header" style="margin-bottom:0;border-left:4px solid #1E88E5;padding-left:20px;">
+        <span class="category-label">💻 ELON — DESENVOLVEDOR</span>
+        <h1 class="page-title">UI/UX & Web Dev</h1>
+        <p class="gatilho-mental">"Código não é objetivo — produto funcionando é."</p>
       </div>
     </div>
 
     <div class="content-grid">
       <div class="content-card">
         <h2 class="card-title">
-          <svg viewBox="0 0 24 24">
-            <path
-              d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
-            </path>
-            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-            <line x1="12" y1="22.08" x2="12" y2="12"></line>
-          </svg>
-          Core Software
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+          Ferramentas Core
         </h2>
         <div class="card-body">
-          <p><strong>Figma:</strong> (O coração da operação).<br>
-            <strong>VS Code & Antigravity:</strong> Para código e agentes.
-          </p>
+          <p><strong>Figma:</strong> O coração da operação — design e prototipagem.</p>
+          <p><strong>Visual Studio Code:</strong> Para código e desenvolvimento web.</p>
+          <p><strong>Node.js:</strong> Runtime para backends e automação.</p>
+          <p><strong>WordPress:</strong> Sites e e-commerces para clientes.</p>
         </div>
       </div>
 
       <div class="content-card">
         <h2 class="card-title">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-          </svg>
-          IA + Low Code
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          IAs de Desenvolvimento
         </h2>
         <div class="card-body">
-          <p><strong>v0.dev:</strong> Para gerar componentes de interface com IA.</p>
-          <p><strong>Framer / Webflow:</strong> Transformar design em site sem bater cabeça com backend.</p>
-          <p><strong>Locofy.ai:</strong> Exportar Figma direto para React/HTML de alta qualidade.</p>
+          <p><strong>GitHub Copilot:</strong> Para escrever código limpo e aprender padrões.</p>
+          <p><strong>ChatGPT:</strong> Pair programming e resolução de problemas.</p>
+          <p><strong>v0.dev:</strong> Geração de componentes de interface com IA.</p>
+          <p><strong>Locofy.ai:</strong> Exportar Figma direto para React/HTML.</p>
         </div>
       </div>
 
-      <div class="content-card" style="grid-column: 1 / -1;">
+      <div class="content-card" style="grid-column:1/-1;">
         <h2 class="card-title">
-          <svg viewBox="0 0 24 24">
-            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-          </svg>
-          Upgrade de Desenvolvimento
+          <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          Mentalidade do Desenvolvedor
         </h2>
         <div class="card-body">
-          <p><strong>Cursor IDE:</strong> Essencial. É o VS Code com IA integrada que "entende" todo o seu projeto.</p>
-          <p><strong>GitHub Copilot:</strong> (Grátis via Student Pack) Para te ensinar a escrever código limpo.</p>
+          <p><strong>💡 DICA:</strong> Se não tiver cliente, construa projetos reais simulados.</p>
+          <p>👉 Exemplos práticos: <strong>landing page · e-commerce · dashboard</strong></p>
+          <p><strong>Cursor IDE:</strong> VS Code com IA integrada que entende todo o projeto.</p>
+          <p><strong>Framer / Webflow:</strong> Design em site sem bater cabeça com backend.</p>
+          <p><strong>Relume:</strong> Sitemaps e wireframes em segundos antes do visual.</p>
         </div>
       </div>
 
       <div class="workflow-section">
         <div class="workflow-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-            <polyline points="22 4 12 14.01 9 11.01"></polyline>
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
         </div>
         <div class="workflow-text">
           <h3>Workflow Oficial</h3>
-          <p>Use o <strong>Relume</strong> para criar sitemaps e wireframes em segundos antes de começar o visual no
-            Figma.</p>
+          <p>Figma → <strong>Relume</strong> (wireframe) → <strong>v0.dev</strong> (componentes) → <strong>VS Code + Copilot</strong> (refinamento) → Deploy. Entregue produto, não código.</p>
         </div>
+      </div>
+    </div>
+
+    <div class="portfolio-section">
+      <div class="portfolio-header">
+        <span class="portfolio-label">PORTFÓLIO</span>
+        <h2 class="portfolio-title">Projetos Web & Figma</h2>
+        <p class="portfolio-subtitle">Landing pages, e-commerces, dashboards e protótipos de UI/UX.</p>
+      </div>
+      <div class="portfolio-tabs" id="elon-tabs">
+        <button class="tab-btn active" data-tab="elon-figma">Figma / UI</button>
+        <button class="tab-btn" data-tab="elon-web">Sites & Apps</button>
+        <button class="tab-btn" data-tab="elon-dash">Dashboards</button>
+      </div>
+      <div class="portfolio-grid tab-content active" id="elon-figma">
+        <div class="portfolio-card placeholder-card"><div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg><span>Protótipo Figma</span><small>Adicione screenshot ou link</small></div></div>
+        <div class="portfolio-card placeholder-card"><div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg><span>UI Kit / Design System</span><small>Adicione imagem aqui</small></div></div>
+        <div class="portfolio-card placeholder-card"><div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg><span>Wireframe / Fluxo</span><small>Adicione imagem aqui</small></div></div>
+      </div>
+      <div class="portfolio-grid tab-content" id="elon-web" style="display:none;">
+        <div class="portfolio-card placeholder-card"><div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg><span>Landing Page</span><small>Adicione screenshot aqui</small></div></div>
+        <div class="portfolio-card placeholder-card"><div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg><span>E-commerce</span><small>Adicione screenshot aqui</small></div></div>
+      </div>
+      <div class="portfolio-grid tab-content" id="elon-dash" style="display:none;">
+        <div class="portfolio-card placeholder-card"><div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg><span>Dashboard Admin</span><small>Adicione screenshot aqui</small></div></div>
       </div>
     </div>
   </div>
 
   <script src="bg-canvas.js"></script>
+  <script>
+    document.querySelectorAll('#elon-tabs .tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#elon-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+        document.getElementById(btn.dataset.tab).style.display = 'grid';
+      });
+    });
+  </script>
 </body>
-
 </html>
