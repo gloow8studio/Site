@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Glow8 | Ecossistema de Marcas que VÃ£o AlÃ©m</title>
-  <meta name="description" content="Glow8 Studio â€“ Ecossistema vivo de criatividade, tecnologia e resultados.">
+  <title>Glow8 | Ecossistema de Marcas que Vao Alem</title>
+  <meta name="description" content="Glow8 Studio - Ecossistema vivo de criatividade, tecnologia e resultados.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
     href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;700&display=swap"
@@ -55,7 +55,7 @@
       position: relative;
     }
 
-    /* â”€â”€ PARALLAX BG â”€â”€ */
+    /* a-a- PARALLAX BG a-a- */
     #bg {
       position: fixed;
       inset: 0;
@@ -82,7 +82,7 @@
       pointer-events: none
     }
 
-    /* â”€â”€ LEFT PANEL â”€â”€ */
+    /* a-a- LEFT PANEL a-a- */
     #left-panel {
       position: relative;
       left: auto;
@@ -169,7 +169,7 @@
       transform: translateX(4px);
     }
 
-    /* â”€â”€ ORBITAL STAGE â”€â”€ */
+    /* a-a- ORBITAL STAGE a-a- */
     #stage {
       position: relative;
       z-index: 5;
@@ -186,7 +186,7 @@
       pointer-events: none;
     }
 
-    /* â”€â”€ NUCLEUS â”€â”€ */
+    /* a-a- NUCLEUS a-a- */
     #nucleus {
       position: absolute;
       left: 50%;
@@ -272,7 +272,7 @@
       padding: 8px;
     }
 
-    /* â”€â”€ LIGHTNING CANVAS â”€â”€ */
+    /* a-a- LIGHTNING CANVAS a-a- */
     #lightning-canvas {
       position: absolute;
       inset: -100px;
@@ -282,7 +282,7 @@
       height: calc(100% + 200px);
     }
 
-    /* â”€â”€ HEX NODES â”€â”€ */
+    /* a-a- HEX NODES a-a- */
     .hex-node {
       position: absolute;
       width: 110px;
@@ -346,7 +346,7 @@
       letter-spacing: .1em;
     }
 
-    /* â”€â”€ VFX OVERLAY â”€â”€ */
+    /* a-a- VFX OVERLAY a-a- */
     #vfx-layer {
       position: fixed;
       inset: 0;
@@ -360,7 +360,7 @@
       pointer-events: none;
     }
 
-    /* â”€â”€ TRANSITION OVERLAY â”€â”€ */
+    /* a-a- TRANSITION OVERLAY a-a- */
     #transition-overlay {
       position: fixed;
       inset: 0;
@@ -371,7 +371,7 @@
       transition: opacity .5s ease;
     }
 
-    /* â”€â”€ RESPONSIVE â”€â”€ */
+    /* a-a- RESPONSIVE a-a- */
     @media(max-width:900px) {
       #left-panel {
         max-width: 90vw;
@@ -427,7 +427,7 @@
       }
     }
 
-    /* â”€â”€ BACK BUTTON â”€â”€ */
+    /* a-a- BACK BUTTON a-a- */
     #btn-back {
       position: fixed;
       top: 22px;
@@ -470,7 +470,7 @@
 
 <body>
   <a id="btn-back" href="index.html">
-    <span class="bk-arrow">â†</span> &nbsp; VOLTAR
+    <span class="bk-arrow">a</span> &nbsp; VOLTAR
   </a>
   <div id="bg"></div>
   <canvas id="stars"></canvas>
@@ -482,9 +482,9 @@
     <div id="left-panel">
       <div class="eco-tag">Ecossistema de Marcas</div>
       <h1 class="hero-title">GLOW8<br><span class="accent">STUDIO</span></h1>
-      <p class="hero-sub">Marcas que vÃ£o alÃ©m â€” criatividade, tecnologia e resultados em um ecossistema vivo.</p>
+      <p class="hero-sub">Marcas que vao alem a- criatividade, tecnologia e resultados em um ecossistema vivo.</p>
       <button id="btn-explore" onclick="document.getElementById('stage').scrollIntoView({behavior:'smooth'})">
-        EXPLORAR SOLUÃ‡Ã•ES <span class="arrow">â†’</span>
+        EXPLORAR SOLUAA-ES <span class="arrow">a'</span>
       </button>
     </div>
 
@@ -504,7 +504,7 @@
   <audio id="snd-base" loop preload="none"></audio>
 
   <script>
-    // â”€â”€ STARS â”€â”€
+    // a-a- STARS a-a-
     (function () {
       const c = document.getElementById('stars'), ctx = c.getContext('2d');
       function resize() { c.width = innerWidth; c.height = innerHeight; }
@@ -525,25 +525,25 @@
       draw();
     })();
 
-    // â”€â”€ PARALLAX BG â”€â”€
+    // a-a- PARALLAX BG a-a-
     window.addEventListener('mousemove', e => {
       const x = (e.clientX / innerWidth - .5) * 18;
       const y = (e.clientY / innerHeight - .5) * 18;
       document.getElementById('bg').style.transform = `translate(${x}px,${y}px) scale(1.04)`;
     });
 
-    // â”€â”€ HEX DATA â”€â”€
+    // a-a- HEX DATA a-a-
     const HEXES = [
-      { id: 'vyra', name: 'VYRA', sub: 'Design GrÃ¡fico', img: 'vyra.webp', color: '#FFB300', url: 'amarelo.html' },
+      { id: 'vyra', name: 'VYRA', sub: 'Design Grafico', img: 'vyra.webp', color: '#FFB300', url: 'amarelo.html' },
       { id: 'elon', name: 'ELON', sub: 'Web Design', img: 'elon.webp', color: '#1E88E5', url: 'azul.html' },
       { id: 'kryon', name: 'KRYON', sub: 'A.I. Design', img: 'kryon.webp', color: '#00E5FF', url: 'ciano.html' },
       { id: 'sylar', name: 'SYLAR', sub: 'Analytics', img: 'sylar.webp', color: '#00C853', url: 'verde.html' },
       { id: 'zynth', name: 'ZYNTH', sub: 'Motion / VFX', img: 'zynth.webp', color: '#AA00FF', url: 'roxo.html' },
       { id: 'auron', name: 'AURON', sub: 'Archviz 3D', img: 'auron.webp', color: '#FF6D00', url: 'laranja.html' },
-      { id: 'nexar', name: 'NEXAR', sub: 'AnimaÃ§Ã£o/Games', img: 'nexar.webp', color: '#FF1744', url: 'vermelho.html' }
+      { id: 'nexar', name: 'NEXAR', sub: 'Animacao/Games', img: 'nexar.webp', color: '#FF1744', url: 'vermelho.html' }
     ];
 
-    // â”€â”€ ORBIT SYSTEM â”€â”€
+    // a-a- ORBIT SYSTEM a-a-
     const stage = document.getElementById('stage');
     let orbitPaused = false, orbitAngle = 0, orbitSpeed = .008;
     const ORBIT_R = () => stage.offsetWidth * .38;
@@ -599,7 +599,7 @@
     }
     updateOrbit();
 
-    // â”€â”€ LIGHTNING â”€â”€
+    // a-a- LIGHTNING a-a-
     const LC = document.getElementById('lightning-canvas');
     const lctx = LC.getContext('2d');
     function resizeLC() {
@@ -640,7 +640,7 @@
     }
     drawLightning();
 
-    // â”€â”€ NUCLEUS MOUSE PROXIMITY SOUND â”€â”€
+    // a-a- NUCLEUS MOUSE PROXIMITY SOUND a-a-
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
     let actx = null, staticNode = null, gainNode = null, filterNode = null;
     function initAudio() {
@@ -662,7 +662,7 @@
       if (gainNode) gainNode.gain.linearRampToValueAtTime(0, actx.currentTime + .5);
     });
 
-    // â”€â”€ VFX SYSTEM â”€â”€
+    // a-a- VFX SYSTEM a-a-
     const vfxLayer = document.getElementById('vfx-layer');
     function spawnParticle(x, y, color, size, life, vx, vy) {
       const p = document.createElement('div');
@@ -763,7 +763,7 @@
       } catch (e) { }
     }
 
-    // â”€â”€ ENTER HEX TRANSITION â”€â”€
+    // a-a- ENTER HEX TRANSITION a-a-
     function enterHex(h, el) {
       initAudio();
       // burst VFX
@@ -783,11 +783,11 @@
       setTimeout(() => { window.location.href = h.url; }, 900);
     }
 
-    // â”€â”€ ALSO LINK INDEX HEXAGONS TO home.html â”€â”€
+    // a-a- ALSO LINK INDEX HEXAGONS TO home.html a-a-
     // (handled from index.html onclick)
   </script>
 
-  <!-- â•â•â•â•â•â• GLOW8 BATTLE â•â•â•â•â•â• -->
+  <!-- a-a-a-a-a-a- GLOW8 BATTLE a-a-a-a-a-a- -->
   <style>
     #game-section {
       position: relative;
@@ -1038,7 +1038,7 @@
       <div id="gb-turn" style="color:#00E5FF">AGUARDANDO...</div>
       <div id="gb-wind-box">
         <canvas id="gb-flag" width="60" height="44"></canvas>
-        <div id="gb-wind-lbl">VENTO Â·</div>
+        <div id="gb-wind-lbl">VENTO -</div>
       </div>
     </div>
     <canvas id="gb-canvas" width="900" height="420"></canvas>
@@ -1046,7 +1046,7 @@
       <!-- JOYSTICK -->
       <div class="gb-power-wrap" style="min-width:auto;padding:8px;">
         <div class="gb-power-lbl">MIRA</div>
-        <div id="gb-angle-val">45Â°</div>
+        <div id="gb-angle-val">45deg</div>
         <div class="gb-joy">
           <div class="gb-joy-btn" id="jl" onmousedown="gbAngleStart(-1)" onmouseup="gbAngleStop()"
             onmouseleave="gbAngleStop()" ontouchstart="gbAngleStart(-1)" ontouchend="gbAngleStop()">ESQUERDA</div>
@@ -1056,17 +1056,17 @@
       </div>
       <!-- POWER -->
       <div class="gb-power-wrap">
-        <div class="gb-power-lbl">POTÃŠNCIA</div>
+        <div class="gb-power-lbl">POTASNCIA</div>
         <div id="gb-power-track">
           <div id="gb-power-fill" style="width:50%"></div>
         </div>
         <div class="gb-power-vals"><span>0%</span><span id="gb-power-val">50%</span><span>100%</span></div>
       </div>
       <!-- FIRE -->
-      <button id="gb-fire-btn" onclick="gbFire()">FIRE<br>ðŸ”¥</button>
+      <button id="gb-fire-btn" onclick="gbFire()">FIRE<br>dY-</button>
     </div>
-    <div id="gb-msg">ðŸŽ® Use ESQUERDA / DIREITA para mirar, arraste a barra de potÃªncia e pressione FIRE</div>
-    <button id="gb-restart" onclick="initGame()">â†º NOVA PARTIDA</button>
+    <div id="gb-msg">dYZ Use ESQUERDA / DIREITA para mirar, arraste a barra de potencia e pressione FIRE</div>
+    <button id="gb-restart" onclick="initGame()">a NOVA PARTIDA</button>
   </section>
 
   <script src="game-battle.js" defer></script>
