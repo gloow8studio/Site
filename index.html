@@ -216,6 +216,40 @@
       width: 100%;
     }
 
+    /* Botão Ecossistema */
+    .btn-ecosystem {
+      position: relative;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 40px;
+      margin: 60px auto 0;
+      border: 1px solid #00E5FF;
+      background: rgba(0,229,255,.07);
+      color: #00E5FF;
+      font-family: 'Orbitron', monospace;
+      font-size: 12px;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      clip-path: polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px));
+      transition: background .3s, box-shadow .3s;
+      animation: btnPulse 3s ease-in-out infinite;
+    }
+    .btn-ecosystem:hover {
+      background: rgba(0,229,255,.18);
+      box-shadow: 0 0 40px rgba(0,229,255,.4), 0 0 80px rgba(0,229,255,.15);
+      animation: none;
+    }
+    @keyframes btnPulse {
+      0%,100% { box-shadow: 0 0 10px rgba(0,229,255,.2); }
+      50%      { box-shadow: 0 0 30px rgba(0,229,255,.5), 0 0 60px rgba(0,229,255,.2); }
+    }
+    .btn-ecosystem .arrow { font-size: 20px; transition: transform .3s; }
+    .btn-ecosystem:hover .arrow { transform: translateX(5px); }
+
     .title-bar span {
       font-size: 11px;
       letter-spacing: .6em;
@@ -511,6 +545,13 @@
     </div>
 
   </div><!-- /panel -->
+
+  <!-- BOTÃO → HOME -->
+  <div style="position:relative;z-index:2;display:flex;justify-content:center;margin-top:50px;">
+    <a href="home.html" class="btn-ecosystem">
+      ◈ &nbsp; ENTRAR NO ECOSSISTEMA &nbsp; <span class="arrow">→</span>
+    </a>
+  </div>
 
   <div class="image-info-container" style="position: relative; z-index: 2; margin-top: 60px; max-width: 1200px; width: 90%; text-align: center; display: flex; flex-direction: column; align-items: center;">
     <img src="7 icons AnimaMotion.png" alt="Informações Adicionais - 7 icons AnimaMotion" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 0 30px rgba(0, 229, 255, 0.15);">
