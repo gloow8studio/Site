@@ -5,7 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NEXAR — 3D Avançado & Games · Hex Agency</title>
   <link rel="stylesheet" href="page.css">
-  <style>:root{--theme-color:#FF1744;--theme-rgb:255,23,68;}</style>
+  <style>
+    :root{--theme-color:#FF1744;--theme-rgb:255,23,68;}
+    /* Override body flex to column so game section appears BELOW page content */
+    body {
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-bottom: 80px;
+    }
+  </style>
 </head>
 <body>
   <canvas id="canvas"></canvas>
@@ -118,7 +127,7 @@
       z-index: 2;
       width: 100%;
       max-width: 900px;
-      margin: 60px auto 0;
+      margin: 60px 0 0;
       font-family: 'Rajdhani', sans-serif;
     }
 
