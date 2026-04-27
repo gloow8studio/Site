@@ -537,7 +537,7 @@
     ctx.globalCompositeOperation = 'screen';
     bgNebulas.forEach(n => {
         const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r);
-        grd.addColorStop(0, \`hsla(\${n.hue}, 80%, 40%, 0.15)\`);
+        grd.addColorStop(0, `hsla(${n.hue}, 80%, 40%, 0.15)`);
         grd.addColorStop(1, 'transparent');
         ctx.fillStyle = grd;
         ctx.beginPath();
