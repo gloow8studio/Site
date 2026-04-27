@@ -651,7 +651,7 @@
       ctx.stroke();
       ctx.shadowBlur = 0;
       // label
-      ctx.font = '16px serif';
+      ctx.font = '16px Orbitron, Arial, sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(b.label, 0, 0);
