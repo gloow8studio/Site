@@ -501,14 +501,17 @@
     gameOver = true;
     running  = false;
     overlay.innerHTML = `
-      <div class="go-inner">
-        <div class="go-title" style="text-shadow: 0 0 40px #FF1744; font-size: 52px; margin-bottom: 20px;">GAME OVER</div>
-        <div class="go-score" style="font-size: 24px;">SCORE FINAL: <span style="color:#FFF;">${score.toString().padStart(6,'0')}</span></div>
-        <div class="go-wave" style="font-size: 24px; margin-bottom: 30px;">WAVE ATINGIDA: <span style="color:#FFF;">${wave}</span></div>
-        <button id="btn-restart" class="game-btn primary" style="font-size: 16px; padding: 12px 30px;">↺ TENTAR NOVAMENTE</button>
+      <div class="go-inner" style="background: rgba(10,0,20,0.95); padding: 50px; border-radius: 16px; border: 2px solid #FF1744; text-align: center; box-shadow: 0 0 50px rgba(255,23,68,0.5);">
+        <div class="go-title" style="font-family: 'Arial', sans-serif; font-weight: bold; color: #FF1744; font-size: 48px; letter-spacing: 6px; margin-bottom: 20px; text-shadow: 0 0 20px #FF1744;">GAME OVER</div>
+        <div class="go-score" style="font-family: 'Arial', sans-serif; font-weight: bold; font-size: 24px; color: #FFD700; margin-bottom: 10px; letter-spacing: 2px;">SCORE FINAL: <span style="color:#FFF;">${score.toString().padStart(6,'0')}</span></div>
+        <div class="go-wave" style="font-family: 'Arial', sans-serif; font-weight: bold; font-size: 24px; color: #FFD700; margin-bottom: 40px; letter-spacing: 2px;">WAVE ATINGIDA: <span style="color:#FFF;">${wave}</span></div>
+        <button id="btn-restart" class="game-btn primary" style="font-size: 18px; padding: 15px 40px; font-family: 'Arial', sans-serif; font-weight: bold; letter-spacing: 2px; cursor: pointer; border: 2px solid #FF1744; background: rgba(255,23,68,0.2); color: #FFF; border-radius: 8px;">↺ TENTAR NOVAMENTE</button>
       </div>`;
     overlay.style.display = 'flex';
-    document.getElementById('btn-restart').addEventListener('click', initGame);
+    document.getElementById('btn-restart').addEventListener('click', () => {
+        ctx.clearRect(0, 0, W, H);
+        initGame();
+    });
   }
 
   // ── Draw ─────────────────────────────────────────
@@ -650,14 +653,21 @@
       ctx.fillStyle = b.color + '33';
       ctx.fill();
       ctx.strokeStyle = b.color;
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 3;
       ctx.stroke();
       ctx.shadowBlur = 0;
       // label
-      ctx.font = '16px Orbitron, Arial, sans-serif';
+      ctx.font = 'bold 22px Arial, sans-serif';
+      if (ctx.letterSpacing !== undefined) ctx.letterSpacing = '2px';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
+      
+      // High contrast text setup
+      ctx.shadowColor = '#000000';
+      ctx.shadowBlur = 6;
+      ctx.fillStyle = '#FFFFFF';
       ctx.fillText(b.label, 0, 0);
+      
       ctx.restore();
     });
 
@@ -869,10 +879,14 @@
     ship.invincible = 0; ship.trail = [];
     bossBar.style.display = 'none';
     overlay.style.display = 'none';
-    running = true;
-    lastTime = performance.now();
+    
     updateHUD();
-    requestAnimationFrame(loop);
+    
+    if (!running) {
+        running = true;
+        lastTime = performance.now();
+        requestAnimationFrame(loop);
+    }
   }
 
   // ── Controls ─────────────────────────────────────
