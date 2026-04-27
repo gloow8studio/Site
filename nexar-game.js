@@ -478,33 +478,35 @@
           font-family: 'Orbitron', 'Arial Black', Arial, sans-serif;
           font-weight: 900;
           color: #FF1744;
-          font-size: 48px;
-          letter-spacing: 8px;
-          margin-bottom: 24px;
+          font-size: 56px;
+          letter-spacing: 16px;
+          margin-bottom: 30px;
+          line-height: 1.2;
+          white-space: nowrap;
           text-shadow: 0 0 20px #FF1744, 0 0 40px rgba(255,23,68,0.5);
         ">GAME OVER</div>
         <div style="
-          font-family: 'Arial', sans-serif;
+          font-family: 'Orbitron', 'Arial', sans-serif;
           font-weight: bold;
-          font-size: 20px;
+          font-size: 22px;
           color: #FFD700;
-          margin-bottom: 8px;
-          letter-spacing: 3px;
+          margin-bottom: 12px;
+          letter-spacing: 5px;
         ">SCORE FINAL: <span style="color:#FFFFFF;">${score.toString().padStart(6, '0')}</span></div>
         <div style="
-          font-family: 'Arial', sans-serif;
+          font-family: 'Orbitron', 'Arial', sans-serif;
           font-weight: bold;
-          font-size: 20px;
+          font-size: 22px;
           color: #FFD700;
-          margin-bottom: 40px;
-          letter-spacing: 3px;
+          margin-bottom: 45px;
+          letter-spacing: 5px;
         ">WAVE ATINGIDA: <span style="color:#FFFFFF;">${wave}</span></div>
         <button id="btn-restart" style="
-          font-size: 17px;
-          padding: 14px 44px;
-          font-family: 'Arial', sans-serif;
+          font-size: 18px;
+          padding: 16px 50px;
+          font-family: 'Orbitron', 'Arial', sans-serif;
           font-weight: bold;
-          letter-spacing: 3px;
+          letter-spacing: 6px;
           cursor: pointer;
           border: 2px solid #FF1744;
           background: rgba(255,23,68,0.15);
