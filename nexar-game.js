@@ -60,7 +60,7 @@
 
   // ── Ship ─────────────────────────────────────────
   const ship = {
-    x: 0, y: 0, w: 70, h: 70,
+    x: 0, y: 0, w: 140, h: 140,
     speed: 6, invincible: 0,
     trail: []
   };
@@ -68,10 +68,12 @@
   // ── Resize ───────────────────────────────────────
   function resize() {
     const rect = canvas.parentElement.getBoundingClientRect();
-    W = canvas.width  = Math.min(rect.width, 900);
-    H = canvas.height = 520;
+    W = canvas.width  = Math.min(rect.width, 900) * 2;
+    H = canvas.height = 520 * 2;
+    canvas.style.width = Math.min(rect.width, 900) + 'px';
+    canvas.style.height = '520px';
     ship.x = W / 2;
-    ship.y = H - 100;
+    ship.y = H - 180;
     initBackground();
   }
 
@@ -113,8 +115,8 @@
 
   // ── Spawn asteroid ───────────────────────────────
   function spawnAsteroid() {
-    const sz = rnd(20, 65);
-    const speed = rnd(1.5, 3.5 + wave * 0.4);
+    const sz = rnd(40, 130);
+    const speed = rnd(3, 7 + wave * 0.8);
     
     // Generate random irregular polygon points for clipping the texture
     const points = [];
@@ -135,8 +137,8 @@
       hp: Math.ceil(sz / 12), // Tougher asteroids based on size
       maxHp: Math.ceil(sz / 12),
       vx: rnd(-0.8, 0.8),
-      color: `hsl(${rndInt(15, 45)}, ${rndInt(20, 40)}%, ${rndInt(30, 50)}%)`,
-      points: points
+      points: points,
+      color: `hsl(${rndInt(10, 30)},${rndInt(40, 70)}%,${rndInt(25, 45)}%)`
     });
   }
 
@@ -164,21 +166,21 @@
 
   // ── Shoot ────────────────────────────────────────
   function shoot() {
-    const bx = ship.x, by = ship.y - ship.h / 2 + 10;
-    const base = { x: bx, y: by, speed: 15, w: 4, h: 20, dmg: 1, laser: false };
+    const bx = ship.x, by = ship.y - ship.h / 2 + 20;
+    const base = { x: bx, y: by, speed: 30, w: 8, h: 40, dmg: 1, laser: false };
     if (powerMode === 'SINGLE') {
       bullets.push({ ...base, color: '#00CFFF' });
     } else if (powerMode === 'DOUBLE') {
-      bullets.push({ ...base, x: bx - 16, color: '#00CFFF' });
-      bullets.push({ ...base, x: bx + 16, color: '#00CFFF' });
+      bullets.push({ ...base, x: bx - 32, color: '#00CFFF' });
+      bullets.push({ ...base, x: bx + 32, color: '#00CFFF' });
     } else if (powerMode === 'TRIPLE') {
-      bullets.push({ ...base, x: bx - 20, vx: -2, color: '#AA44FF' });
+      bullets.push({ ...base, x: bx - 40, vx: -4, color: '#AA44FF' });
       bullets.push({ ...base, color: '#AA44FF' });
-      bullets.push({ ...base, x: bx + 20, vx: 2, color: '#AA44FF' });
+      bullets.push({ ...base, x: bx + 40, vx: 4, color: '#AA44FF' });
     } else if (powerMode === 'LASER') {
-      bullets.push({ ...base, w: 8, h: 40, dmg: 2.5, laser: true, color: '#FF6600', speed: 20 });
+      bullets.push({ ...base, w: 16, h: 80, dmg: 2.5, laser: true, color: '#FF6600', speed: 40 });
     } else if (powerMode === 'MISSILE') {
-      bullets.push({ ...base, w: 10, h: 25, dmg: 4, color: '#44FF88', missile: true, speed: 12 });
+      bullets.push({ ...base, w: 20, h: 50, dmg: 4, color: '#44FF88', missile: true, speed: 24 });
       // Add missile smoke VFX immediately
       addMissileSmoke(bx, by);
     }
@@ -195,7 +197,7 @@
 
   // ── Enemy bullet ─────────────────────────────────
   function spawnEnemyBullet(x, y) {
-    enemyBullets.push({ x, y, speed: 4.5 + wave * 0.3, r: 6 });
+    enemyBullets.push({ x, y, speed: 9 + wave * 0.6, r: 12 });
   }
 
   // ── Boss ─────────────────────────────────────────
@@ -203,8 +205,8 @@
     bossActive = true;
     bossMaxHp = 60 + wave * 25;
     boss = {
-      x: W / 2, y: 100, w: 140, h: 90,
-      hp: bossMaxHp, speed: 1.8 + wave * 0.2,
+      x: W / 2, y: 200, w: 280, h: 180,
+      hp: bossMaxHp, speed: 3.6 + wave * 0.4,
       dir: 1, shootTimer: 0,
       phase: 0
     };
@@ -863,7 +865,7 @@
     bossActive = false;
     shakeMag = 0; shakeTime = 0;
     gameOver = false; paused = false;
-    ship.x = W / 2; ship.y = H - 100;
+    ship.x = W / 2; ship.y = H - 180;
     ship.invincible = 0; ship.trail = [];
     bossBar.style.display = 'none';
     overlay.style.display = 'none';
@@ -891,16 +893,20 @@
   canvas.addEventListener('mousemove', e => {
     if (!mouseControl) return;
     const rect = canvas.getBoundingClientRect();
-    mx = e.clientX - rect.left;
-    my = e.clientY - rect.top;
+    const scaleX = W / rect.width;
+    const scaleY = H / rect.height;
+    mx = (e.clientX - rect.left) * scaleX;
+    my = (e.clientY - rect.top) * scaleY;
   });
 
   canvas.addEventListener('touchmove', e => {
     if (!mouseControl) return;
     e.preventDefault();
     const rect = canvas.getBoundingClientRect();
-    mx = e.touches[0].clientX - rect.left;
-    my = e.touches[0].clientY - rect.top;
+    const scaleX = W / rect.width;
+    const scaleY = H / rect.height;
+    mx = (e.touches[0].clientX - rect.left) * scaleX;
+    my = (e.touches[0].clientY - rect.top) * scaleY;
   }, { passive: false });
 
   window.addEventListener('resize', resize);
