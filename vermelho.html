@@ -108,6 +108,350 @@
     </div>
   </div>
 
+  <!-- ══════════════════════════════════════════════
+       NEXAR WING FIGHTER — Game Section
+  ══════════════════════════════════════════════ -->
+  <style>
+    /* ── Game Section ─────────────────────────── */
+    #nexar-game-section {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 900px;
+      margin: 60px auto 0;
+      font-family: 'Rajdhani', sans-serif;
+    }
+
+    .game-section-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .game-section-header .game-label {
+      font-family: 'Orbitron', monospace;
+      font-size: 11px;
+      letter-spacing: 0.5em;
+      color: #FF1744;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 8px;
+      opacity: 0.85;
+    }
+    .game-section-header h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: 28px;
+      font-weight: 900;
+      color: #fff;
+      text-shadow: 0 0 24px #FF174488;
+      margin-bottom: 8px;
+    }
+    .game-section-header p {
+      color: rgba(255,255,255,0.5);
+      font-size: 15px;
+    }
+
+    /* ── Game wrapper ─────────────────────────── */
+    .game-wrapper {
+      background: rgba(5,0,10,0.85);
+      border: 1px solid rgba(255,23,68,0.25);
+      border-top: 2px solid #FF1744;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 0 60px rgba(255,23,68,0.15), 0 20px 60px rgba(0,0,0,0.6);
+    }
+
+    /* ── HUD bar ──────────────────────────────── */
+    .game-hud {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 10px 20px;
+      background: rgba(255,23,68,0.07);
+      border-bottom: 1px solid rgba(255,23,68,0.2);
+      flex-wrap: wrap;
+    }
+    .hud-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Orbitron', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.6);
+    }
+    .hud-item span { color: #fff; font-weight: 700; }
+    #hud-score { font-size: 15px; color: #FFD700; letter-spacing: 0.2em; }
+    .hud-energy-bar {
+      width: 80px; height: 8px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    #hud-energy {
+      height: 100%;
+      width: 100%;
+      background: #00CFFF;
+      border-radius: 4px;
+      transition: width 0.2s, background 0.3s;
+    }
+    #hud-power {
+      color: #FF6600;
+      font-family: 'Orbitron', monospace;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+    }
+    /* boss bar */
+    #boss-bar {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 20px;
+      background: rgba(255,0,68,0.08);
+      border-bottom: 1px solid rgba(255,0,68,0.2);
+    }
+    #boss-bar span {
+      font-family: 'Orbitron', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: #FF1744;
+    }
+    .boss-hp-track {
+      flex: 1;
+      height: 8px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    #boss-hp {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #FF1744, #FF6600);
+      border-radius: 4px;
+      transition: width 0.15s;
+    }
+
+    /* ── Canvas area ──────────────────────────── */
+    .canvas-wrap {
+      position: relative;
+      width: 100%;
+      background: #000;
+      line-height: 0;
+    }
+    #game-canvas {
+      display: block;
+      width: 100%;
+      max-width: 900px;
+      height: 520px;
+      cursor: crosshair;
+      image-rendering: auto;
+    }
+
+    /* ── Overlay ──────────────────────────────── */
+    #game-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.82);
+      backdrop-filter: blur(6px);
+      z-index: 10;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .go-inner { text-align: center; }
+    .go-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 42px;
+      font-weight: 900;
+      color: #FF1744;
+      text-shadow: 0 0 30px #FF174488;
+      margin-bottom: 12px;
+      letter-spacing: 0.1em;
+    }
+    .go-score, .go-wave {
+      font-family: 'Orbitron', monospace;
+      font-size: 18px;
+      color: #FFD700;
+      margin-bottom: 6px;
+      letter-spacing: 0.15em;
+    }
+    .start-content {
+      text-align: center;
+      max-width: 420px;
+    }
+    .start-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 32px;
+      font-weight: 900;
+      color: #FF1744;
+      text-shadow: 0 0 30px #FF174499;
+      margin-bottom: 10px;
+      letter-spacing: 0.08em;
+    }
+    .start-sub {
+      font-size: 15px;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    .start-bonuses {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+    .bonus-pill {
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-family: 'Orbitron', monospace;
+      letter-spacing: 0.08em;
+      border: 1px solid;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* ── Buttons ──────────────────────────────── */
+    .game-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      background: rgba(0,0,0,0.4);
+      border-top: 1px solid rgba(255,23,68,0.15);
+      flex-wrap: wrap;
+    }
+    .game-btn {
+      font-family: 'Orbitron', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 9px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.25s;
+      border: 1px solid;
+    }
+    .game-btn.primary {
+      background: rgba(255,23,68,0.15);
+      border-color: #FF1744;
+      color: #FF1744;
+      margin-top: 14px;
+    }
+    .game-btn.primary:hover {
+      background: rgba(255,23,68,0.3);
+      box-shadow: 0 0 20px rgba(255,23,68,0.4);
+      transform: translateY(-2px);
+    }
+    #btn-nave-control {
+      background: rgba(0,207,255,0.08);
+      border-color: rgba(0,207,255,0.35);
+      color: rgba(0,207,255,0.7);
+    }
+    #btn-nave-control:hover,
+    #btn-nave-control.active {
+      background: rgba(0,207,255,0.2);
+      border-color: #00CFFF;
+      color: #00CFFF;
+      box-shadow: 0 0 16px rgba(0,207,255,0.35);
+    }
+    #btn-nave-control.active {
+      animation: ctrlPulse 1.5s ease-in-out infinite;
+    }
+    @keyframes ctrlPulse {
+      0%,100% { box-shadow: 0 0 12px rgba(0,207,255,0.3); }
+      50%      { box-shadow: 0 0 28px rgba(0,207,255,0.7); }
+    }
+    .ctrl-hint {
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+      font-family: 'Rajdhani', sans-serif;
+      margin-left: auto;
+    }
+
+    /* ── In-game message ─────────────────────── */
+    #game-msg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Orbitron', monospace;
+      font-size: 20px;
+      font-weight: 700;
+      color: #FFD700;
+      text-shadow: 0 0 20px #FFD70099;
+      letter-spacing: 0.15em;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s;
+      white-space: nowrap;
+      z-index: 9;
+    }
+  </style>
+
+  <section id="nexar-game-section">
+    <div class="game-section-header">
+      <span class="game-label">🕹️ Experiência Interativa</span>
+      <h2>NEXAR WING FIGHTER</h2>
+      <p>Controle a nave NEXAR diretamente no browser — destrua asteroides, colete bônus e enfrente o boss!</p>
+    </div>
+
+    <div class="game-wrapper">
+      <!-- HUD -->
+      <div class="game-hud">
+        <div class="hud-item">⭐ SCORE <span id="hud-score">000000</span></div>
+        <div class="hud-item">WAVE <span id="hud-wave">1</span></div>
+        <div class="hud-item" id="hud-lives">❤️❤️❤️</div>
+        <div class="hud-item">
+          ⚡
+          <div class="hud-energy-bar"><div id="hud-energy"></div></div>
+        </div>
+        <div class="hud-item">TIRO <span id="hud-power">SINGLE</span></div>
+      </div>
+
+      <!-- Boss HP -->
+      <div id="boss-bar">
+        <span>⚠️ BOSS</span>
+        <div class="boss-hp-track"><div id="boss-hp"></div></div>
+      </div>
+
+      <!-- Canvas -->
+      <div class="canvas-wrap">
+        <canvas id="game-canvas"></canvas>
+        <div id="game-msg"></div>
+
+        <!-- Start overlay -->
+        <div id="game-overlay">
+          <div class="start-content">
+            <div class="start-title">🚀 NEXAR WING FIGHTER</div>
+            <p class="start-sub">
+              Pilote a nave NEXAR através de asteroides inimigos.<br>
+              Colete bônus para potencializar seus tiros e sobreviva ao BOSS!
+            </p>
+            <div class="start-bonuses">
+              <div class="bonus-pill" style="color:#FF4466;border-color:#FF4466;background:rgba(255,68,102,0.1)">❤️ Vida Extra</div>
+              <div class="bonus-pill" style="color:#FFD700;border-color:#FFD700;background:rgba(255,215,0,0.1)">⚡ Energia</div>
+              <div class="bonus-pill" style="color:#00CFFF;border-color:#00CFFF;background:rgba(0,207,255,0.1)">💥 Tiro Duplo</div>
+              <div class="bonus-pill" style="color:#AA44FF;border-color:#AA44FF;background:rgba(170,68,255,0.1)">🔱 Tiro Triplo</div>
+              <div class="bonus-pill" style="color:#FF6600;border-color:#FF6600;background:rgba(255,102,0,0.1)">🔆 Laser</div>
+              <div class="bonus-pill" style="color:#44FF88;border-color:#44FF88;background:rgba(68,255,136,0.1)">🚀 Míssil</div>
+              <div class="bonus-pill" style="color:#88AAFF;border-color:#88AAFF;background:rgba(136,170,255,0.1)">🛡️ Escudo 5s</div>
+            </div>
+            <button id="btn-start-game" class="game-btn primary">▶ INICIAR MISSÃO</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls bar -->
+      <div class="game-controls">
+        <button id="btn-nave-control" class="game-btn">🎮 Nave Control</button>
+        <span class="ctrl-hint">Ative "Nave Control" e mova o mouse para pilotar · Tiro automático ativo</span>
+      </div>
+    </div>
+  </section>
+
   <script src="bg-canvas.js"></script>
   <script>
     document.querySelectorAll('#nexar-tabs .tab-btn').forEach(btn => {
@@ -119,5 +463,6 @@
       });
     });
   </script>
+  <script src="nexar-game.js"></script>
 </body>
 </html>
