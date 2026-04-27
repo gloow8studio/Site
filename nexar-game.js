@@ -135,6 +135,7 @@
       hp: Math.ceil(sz / 12), // Tougher asteroids based on size
       maxHp: Math.ceil(sz / 12),
       vx: rnd(-0.8, 0.8),
+      color: `hsl(${rndInt(15, 45)}, ${rndInt(20, 40)}%, ${rndInt(30, 50)}%)`,
       points: points
     });
   }
