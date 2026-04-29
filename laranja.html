@@ -100,7 +100,8 @@
           <h3>Workflow Oficial</h3>
           <p><strong>Revit/SketchUp</strong> (modelagem) → <strong>D5 Render</strong> (iluminação e ambiente) →
             <strong>Substance 3D</strong> (materiais) → <strong>Photoshop</strong> (pós-produção) → Entrega. Luz
-            primeiro, sempre.</p>
+            primeiro, sempre.
+          </p>
         </div>
       </div>
     </div>
@@ -183,79 +184,79 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- 3D VIEWER SECTION -->
-  <div class="viewer-section" style="margin-top: 60px; padding: 20px 0; border-top: 1px solid rgba(255, 109, 0, 0.2);">
-    <div class="viewer-header"
-      style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px; flex-wrap:wrap; gap:15px;">
-      <h2 class="portfolio-title"
-        style="margin:0; font-family:'Orbitron', sans-serif; display:flex; align-items:center; color:#FF6D00;">
-        <svg viewBox="0 0 24 24" style="width:24px; height:24px; fill:#FF6D00; margin-right:10px;">
-          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-          <polyline points="2 17 12 22 22 17"></polyline>
-          <polyline points="2 12 12 17 22 12"></polyline>
-        </svg>
-        Visualizador 3D Interativo
-      </h2>
-      <button id="fullscreen-btn"
-        style="background: linear-gradient(135deg, #FF6D00, #FF3D00); border:none; padding:10px 20px; color:#fff; font-family:'Orbitron', sans-serif; cursor:pointer; border-radius:5px; font-weight:bold; transition:0.3s;">
-        <i class="fas fa-expand"></i> TELA CHEIA
-      </button>
-    </div>
-
-    <div class="viewer-layout" style="display:flex; gap:20px; flex-direction:column;">
-      <!-- 3D Container -->
-      <div id="visualizador-3d-container"
-        style="width: 100%; height: 70vh; position: relative; background: #0f0f0f; border: 1px solid #FF6D00; border-radius: 10px; overflow: hidden; box-shadow: 0 0 20px rgba(255, 109, 0, 0.2);">
-        <div id="hud-overlay"
-          style="position: absolute; top: 20px; left: 20px; z-index: 10; color: #FF6D00; font-family: 'Orbitron', sans-serif; pointer-events: none; text-shadow: 0 0 5px rgba(0,0,0,1);">
-          <h2 style="margin: 0; text-shadow: 0 0 10px #FF6D00;">AURON VIEWER 3D</h2>
-          <p style="font-size: 0.9rem; opacity: 0.8; color:#fff;">[CLIQUE NA TELA PARA INICIAR EXPLORAÇÃO]</p>
-          <ul
-            style="list-style: none; padding: 0; font-size: 0.8rem; margin-top: 10px; background: rgba(0,0,0,0.7); padding: 15px; border-left: 3px solid #FF6D00; color:#fff;">
-            <li><strong>W, A, S, D</strong> : Mover-se</li>
-            <li><strong>MOUSE</strong> : Olhar ao redor</li>
-            <li><strong>ESC</strong> : Pausar / Sair</li>
-          </ul>
-        </div>
-        <div id="loading-msg"
-          style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-family: 'Rajdhani', sans-serif; font-size: 1.5rem; text-align:center;">
-          <div style="font-size:3rem; color:#FF6D00; margin-bottom:10px;"><i class="fas fa-cube fa-spin"></i></div>
-          Carregando estrutura neural...<br><span id="loading-percent"
-            style="color:#FF6D00; font-family:'Orbitron';">0%</span>
-        </div>
-        <div id="canvas-container" style="width: 100%; height: 100%; outline: none; cursor: crosshair;"></div>
+    <!-- 3D VIEWER SECTION -->
+    <div class="viewer-section"
+      style="margin-top: 60px; padding: 20px 0; border-top: 1px solid rgba(255, 109, 0, 0.2);">
+      <div class="viewer-header"
+        style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px; flex-wrap:wrap; gap:15px;">
+        <h2 class="portfolio-title"
+          style="margin:0; font-family:'Orbitron', sans-serif; display:flex; align-items:center; color:#FF6D00;">
+          <svg viewBox="0 0 24 24" style="width:24px; height:24px; fill:#FF6D00; margin-right:10px;">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+          Visualizador 3D Interativo
+        </h2>
+        <button id="fullscreen-btn"
+          style="background: linear-gradient(135deg, #FF6D00, #FF3D00); border:none; padding:10px 20px; color:#fff; font-family:'Orbitron', sans-serif; cursor:pointer; border-radius:5px; font-weight:bold; transition:0.3s;">
+          <i class="fas fa-expand"></i> TELA CHEIA
+        </button>
       </div>
 
-      <!-- Gallery -->
-      <div class="models-gallery" style="display:flex; gap:15px; overflow-x:auto; padding-bottom:10px;">
-        <div class="model-card active" data-model="modelos/projeto_arquitetura.glb"
-          style="min-width: 150px; background: rgba(255, 109, 0, 0.1); border: 1px solid #FF6D00; padding: 15px; border-radius: 5px; cursor: pointer; text-align:center; transition:0.3s;">
-          <i class="fas fa-building" style="font-size:2rem; color:#FF6D00; margin-bottom:10px;"></i>
-          <div style="font-family:'Orbitron', sans-serif; font-size:0.9rem; color:#fff;">Galpão Industrial</div>
-        </div>
-        <div class="model-card" data-model="modelos/casa_moderna.glb"
-          style="min-width: 150px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 109, 0, 0.3); padding: 15px; border-radius: 5px; cursor: pointer; text-align:center; transition:0.3s;">
-          <i class="fas fa-home" style="font-size:2rem; color:#FF6D00; margin-bottom:10px;"></i>
-          <div style="font-family:'Orbitron', sans-serif; font-size:0.9rem; color:#fff;">Casa Moderna</div>
-        </div>
-        <div class="model-card" data-model="modelos/escritorio.glb"
-          style="min-width: 150px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 109, 0, 0.3); padding: 15px; border-radius: 5px; cursor: pointer; text-align:center; transition:0.3s;">
-          <i class="fas fa-city" style="font-size:2rem; color:#FF6D00; margin-bottom:10px;"></i>
-          <div style="font-family:'Orbitron', sans-serif; font-size:0.9rem; color:#fff;">Edifício Comercial</div>
+      <div class="viewer-layout" style="display:flex; gap:20px; flex-direction:column;">
+        <!-- 3D Container -->
+        <div id="visualizador-3d-container"
+          style="width: 100%; height: 70vh; position: relative; background: #0f0f0f; border: 1px solid #FF6D00; border-radius: 10px; overflow: hidden; box-shadow: 0 0 20px rgba(255, 109, 0, 0.2);">
+          <div id="hud-overlay"
+            style="position: absolute; top: 20px; left: 20px; z-index: 10; color: #FF6D00; font-family: 'Orbitron', sans-serif; pointer-events: none; text-shadow: 0 0 5px rgba(0,0,0,1);">
+            <h2 style="margin: 0; text-shadow: 0 0 10px #FF6D00;">AURON VIEWER 3D</h2>
+            <p style="font-size: 0.9rem; opacity: 0.8; color:#fff;">[CLIQUE NA TELA PARA INICIAR EXPLORAÇÃO]</p>
+            <ul
+              style="list-style: none; padding: 0; font-size: 0.8rem; margin-top: 10px; background: rgba(0,0,0,0.7); padding: 15px; border-left: 3px solid #FF6D00; color:#fff;">
+              <li><strong>W, A, S, D</strong> : Mover-se</li>
+              <li><strong>MOUSE</strong> : Olhar ao redor</li>
+              <li><strong>ESC</strong> : Pausar / Sair</li>
+            </ul>
+          </div>
+          <div id="loading-msg"
+            style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-family: 'Rajdhani', sans-serif; font-size: 1.5rem; text-align:center;">
+            <div style="font-size:3rem; color:#FF6D00; margin-bottom:10px;"><i class="fas fa-cube fa-spin"></i></div>
+            Carregando estrutura neural...<br><span id="loading-percent"
+              style="color:#FF6D00; font-family:'Orbitron';">0%</span>
+          </div>
+          <div id="canvas-container" style="width: 100%; height: 100%; outline: none; cursor: crosshair;"></div>
         </div>
 
-        <!-- Upload Local -->
-        <label for="modelUpload"
-          style="min-width: 150px; background: rgba(255, 255, 255, 0.02); border: 1px dashed #FF6D00; padding: 15px; border-radius: 5px; cursor: pointer; text-align:center; transition:0.3s; display:flex; flex-direction:column; justify-content:center; align-items:center;">
-          <i class="fas fa-upload" style="font-size:2rem; color:#FF6D00; margin-bottom:10px;"></i>
-          <div style="font-family:'Orbitron', sans-serif; font-size:0.9rem; color:#fff;">Upload .GLB</div>
-          <input type="file" id="modelUpload" accept=".glb,.gltf" style="display:none;">
-        </label>
+        <!-- Gallery -->
+        <div class="models-gallery" style="display:flex; gap:15px; overflow-x:auto; padding-bottom:10px;">
+          <div class="model-card active" data-model="modelos/projeto_arquitetura.glb"
+            style="min-width: 150px; background: rgba(255, 109, 0, 0.1); border: 1px solid #FF6D00; padding: 15px; border-radius: 5px; cursor: pointer; text-align:center; transition:0.3s;">
+            <i class="fas fa-building" style="font-size:2rem; color:#FF6D00; margin-bottom:10px;"></i>
+            <div style="font-family:'Orbitron', sans-serif; font-size:0.9rem; color:#fff;">Galpão Industrial</div>
+          </div>
+          <div class="model-card" data-model="modelos/casa_moderna.glb"
+            style="min-width: 150px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 109, 0, 0.3); padding: 15px; border-radius: 5px; cursor: pointer; text-align:center; transition:0.3s;">
+            <i class="fas fa-home" style="font-size:2rem; color:#FF6D00; margin-bottom:10px;"></i>
+            <div style="font-family:'Orbitron', sans-serif; font-size:0.9rem; color:#fff;">Casa Moderna</div>
+          </div>
+          <div class="model-card" data-model="modelos/escritorio.glb"
+            style="min-width: 150px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 109, 0, 0.3); padding: 15px; border-radius: 5px; cursor: pointer; text-align:center; transition:0.3s;">
+            <i class="fas fa-city" style="font-size:2rem; color:#FF6D00; margin-bottom:10px;"></i>
+            <div style="font-family:'Orbitron', sans-serif; font-size:0.9rem; color:#fff;">Edifício Comercial</div>
+          </div>
+
+          <!-- Upload Local -->
+          <label for="modelUpload"
+            style="min-width: 150px; background: rgba(255, 255, 255, 0.02); border: 1px dashed #FF6D00; padding: 15px; border-radius: 5px; cursor: pointer; text-align:center; transition:0.3s; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+            <i class="fas fa-upload" style="font-size:2rem; color:#FF6D00; margin-bottom:10px;"></i>
+            <div style="font-family:'Orbitron', sans-serif; font-size:0.9rem; color:#fff;">Upload .GLB</div>
+            <input type="file" id="modelUpload" accept=".glb,.gltf" style="display:none;">
+          </label>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 
   <script src="bg-canvas.js"></script>
