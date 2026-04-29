@@ -710,604 +710,6 @@
             <button id="ctrl-btn">🎮 NAVE CONTROL</button>
             <span>Ative "Nave Control" · Tiro automático ativo</span>
             <span id="diff-label" style="font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;"></span>
-            <!-- ========================================== -->
-            <!-- SEÇÃO DE PORTFÓLIO VYRA - GALERIA IMPACTO -->
-            <!-- ========================================== -->
-            <section id="vyra-portfolio" class="vyra-gallery-section"
-              style="margin-top: 40px; border-radius: 10px; border: 1px solid rgba(255, 179, 0, 0.2);">
-              <div class="vyra-container">
-
-                <!-- Cabeçalho da Galeria -->
-                <div class="gallery-header">
-                  <h2 class="section-title"><span class="neon-text-amber">VYRA ARCHIVES</span></h2>
-                  <p class="section-subtitle">Visual Design | Photography | Illustration</p>
-
-                  <!-- Filtros de Categoria -->
-                  <div class="filter-buttons">
-                    <button class="filter-btn active" data-filter="all">TODOS</button>
-                    <button class="filter-btn" data-filter="photo">FOTOGRAFIA</button>
-                    <button class="filter-btn" data-filter="illustration">ILUSTRAÇÃO</button>
-                    <button class="filter-btn" data-filter="edit">EDIÇÃO & VFX</button>
-                    <button class="filter-btn" data-filter="concept">CONCEPT ART</button>
-                  </div>
-
-                  <!-- Botão de Upload Simulado -->
-                  <div class="upload-trigger-box">
-                    <label for="vyra-upload-input" class="custom-upload-btn">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="17 8 12 3 7 8"></polyline>
-                        <line x1="12" y1="3" x2="12" y2="15"></line>
-                      </svg>
-                      UPLOAD PROJETO (SIMULADO)
-                    </label>
-                    <input type="file" id="vyra-upload-input" accept="image/*" multiple style="display: none;">
-                    <span class="upload-hint">*Arquivos temporários (Demo)</span>
-                  </div>
-                </div>
-
-                <!-- Grid de Imagens (Masonry Layout) -->
-                <div class="gallery-grid" id="vyra-gallery-grid">
-                  <!-- As imagens serão inseridas aqui via JavaScript ou manualmente -->
-
-                  <!-- Exemplo de Item 1 (Fotografia) -->
-                  <div class="gallery-item" data-category="photo">
-                    <div class="img-wrapper">
-                      <img
-                        src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
-                        alt="Paisagem Montanha">
-                      <div class="overlay">
-                        <div class="info">
-                          <h3>Expedição Andes</h3>
-                          <p>Fotografia de Paisagem</p>
-                        </div>
-                        <button class="view-btn"><i class="fas fa-expand"></i></button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Exemplo de Item 2 (Ilustração) -->
-                  <div class="gallery-item" data-category="illustration">
-                    <div class="img-wrapper">
-                      <img
-                        src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                        alt="Arte Abstrata">
-                      <div class="overlay">
-                        <div class="info">
-                          <h3>Cyber Soul</h3>
-                          <p>Ilustração Digital</p>
-                        </div>
-                        <button class="view-btn"><i class="fas fa-expand"></i></button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Exemplo de Item 3 (Edição) -->
-                  <div class="gallery-item" data-category="edit">
-                    <div class="img-wrapper">
-                      <img
-                        src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
-                        alt="Neon City">
-                      <div class="overlay">
-                        <div class="info">
-                          <h3>Neon Nights</h3>
-                          <p>Color Grading & VFX</p>
-                        </div>
-                        <button class="view-btn"><i class="fas fa-expand"></i></button>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Exemplo de Item 4 (Concept) -->
-                  <div class="gallery-item" data-category="concept">
-                    <div class="img-wrapper">
-                      <img
-                        src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=80"
-                        alt="Concept Art">
-                      <div class="overlay">
-                        <div class="info">
-                          <h3>Mecha Unit 01</h3>
-                          <p>Concept Design</p>
-                        </div>
-                        <button class="view-btn"><i class="fas fa-expand"></i></button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            <!-- Modal Lightbox (Visualizador de Tela Cheia) -->
-            <div id="vyra-lightbox" class="lightbox-modal">
-              <span class="lightbox-close">&times;</span>
-              <div class="lightbox-content">
-                <img class="lightbox-image" src="" alt="">
-                <div class="lightbox-details">
-                  <h3 id="lb-title">Título do Projeto</h3>
-                  <p id="lb-desc">Descrição</p>
-                  <div class="lightbox-controls">
-                    <button id="lb-zoom-in">+</button>
-                    <button id="lb-zoom-out">-</button>
-                    <button id="lb-reset">Reset</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <style>
-              /* --- ESTILOS VYRA (IDENTIDADE AMBAR/DOURADO) --- */
-              :root {
-                --vyra-primary: #FFB300;
-                /* Âmbar VYRA */
-                --vyra-glow: rgba(255, 179, 0, 0.6);
-                --vyra-dark: #0a0a0a;
-                --vyra-card-bg: #111;
-                --font-main: 'Rajdhani', sans-serif;
-                --font-display: 'Orbitron', sans-serif;
-              }
-
-              .vyra-gallery-section {
-                padding: 40px 20px;
-                background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
-                font-family: var(--font-main);
-                color: #fff;
-                overflow: hidden;
-                position: relative;
-              }
-
-              .vyra-container {
-                max-width: 1400px;
-                margin: 0 auto;
-              }
-
-              /* Header */
-              .gallery-header {
-                text-align: center;
-                margin-bottom: 60px;
-              }
-
-              .section-title {
-                font-family: var(--font-display);
-                font-size: 3rem;
-                letter-spacing: 4px;
-                margin-bottom: 10px;
-                text-transform: uppercase;
-              }
-
-              .neon-text-amber {
-                color: #fff;
-                text-shadow: 0 0 10px var(--vyra-primary), 0 0 20px var(--vyra-primary), 0 0 40px var(--vyra-glow);
-              }
-
-              .section-subtitle {
-                color: #aaa;
-                font-size: 1.2rem;
-                letter-spacing: 2px;
-                margin-bottom: 30px;
-              }
-
-              /* Filtros */
-              .filter-buttons {
-                display: flex;
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 15px;
-                margin-bottom: 30px;
-              }
-
-              .filter-btn {
-                background: transparent;
-                border: 1px solid #333;
-                color: #888;
-                padding: 10px 25px;
-                font-family: var(--font-display);
-                font-size: 0.9rem;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
-              }
-
-              .filter-btn:hover,
-              .filter-btn.active {
-                background: var(--vyra-primary);
-                color: #000;
-                border-color: var(--vyra-primary);
-                box-shadow: 0 0 15px var(--vyra-glow);
-                font-weight: bold;
-              }
-
-              /* Upload Box */
-              .upload-trigger-box {
-                margin-top: 20px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
-              }
-
-              .custom-upload-btn {
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                background: rgba(255, 179, 0, 0.1);
-                border: 1px dashed var(--vyra-primary);
-                color: var(--vyra-primary);
-                padding: 12px 30px;
-                cursor: pointer;
-                font-family: var(--font-display);
-                font-size: 0.9rem;
-                transition: all 0.3s;
-              }
-
-              .custom-upload-btn:hover {
-                background: rgba(255, 179, 0, 0.2);
-                box-shadow: 0 0 10px var(--vyra-glow);
-              }
-
-              .upload-hint {
-                font-size: 0.8rem;
-                color: #666;
-                font-style: italic;
-              }
-
-              /* Grid Masonry */
-              .gallery-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-                grid-auto-rows: 10px;
-                /* Base para masonry */
-                gap: 20px;
-              }
-
-              .gallery-item {
-                break-inside: avoid;
-                margin-bottom: 20px;
-                position: relative;
-                background: var(--vyra-card-bg);
-                border: 1px solid #222;
-                overflow: hidden;
-                transition: transform 0.3s, box-shadow 0.3s;
-                cursor: pointer;
-              }
-
-              .gallery-item:hover {
-                transform: translateY(-5px);
-                border-color: var(--vyra-primary);
-                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 179, 0, 0.2);
-              }
-
-              .img-wrapper {
-                position: relative;
-                width: 100%;
-                height: 100%;
-                overflow: hidden;
-              }
-
-              .img-wrapper img {
-                width: 100%;
-                height: auto;
-                display: block;
-                transition: transform 0.5s ease;
-              }
-
-              .gallery-item:hover .img-wrapper img {
-                transform: scale(1.1);
-              }
-
-              /* Overlay */
-              .overlay {
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-end;
-                padding: 20px;
-                opacity: 0;
-                transition: opacity 0.3s;
-              }
-
-              .gallery-item:hover .overlay {
-                opacity: 1;
-              }
-
-              .info h3 {
-                font-family: var(--font-display);
-                color: var(--vyra-primary);
-                margin: 0 0 5px 0;
-                font-size: 1.2rem;
-                text-transform: uppercase;
-              }
-
-              .info p {
-                margin: 0;
-                font-size: 0.9rem;
-                color: #ddd;
-              }
-
-              .view-btn {
-                position: absolute;
-                top: 20px;
-                right: 20px;
-                background: var(--vyra-primary);
-                border: none;
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                color: #000;
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 1.2rem;
-                transition: transform 0.2s;
-              }
-
-              .view-btn:hover {
-                transform: scale(1.1);
-                box-shadow: 0 0 15px var(--vyra-primary);
-              }
-
-              /* Lightbox Modal */
-              .lightbox-modal {
-                display: none;
-                position: fixed;
-                z-index: 9999;
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.95);
-                backdrop-filter: blur(10px);
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-              }
-
-              .lightbox-content {
-                position: relative;
-                max-width: 90%;
-                max-height: 80vh;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-              }
-
-              .lightbox-image {
-                max-width: 100%;
-                max-height: 70vh;
-                object-fit: contain;
-                border: 2px solid var(--vyra-primary);
-                box-shadow: 0 0 30px rgba(255, 179, 0, 0.3);
-                transition: transform 0.2s;
-              }
-
-              .lightbox-details {
-                margin-top: 20px;
-                text-align: center;
-                color: #fff;
-              }
-
-              .lightbox-details h3 {
-                font-family: var(--font-display);
-                color: var(--vyra-primary);
-                font-size: 1.5rem;
-                margin-bottom: 5px;
-              }
-
-              .lightbox-controls {
-                margin-top: 15px;
-                display: flex;
-                gap: 10px;
-                justify-content: center;
-              }
-
-              .lightbox-controls button {
-                background: #222;
-                border: 1px solid var(--vyra-primary);
-                color: var(--vyra-primary);
-                padding: 5px 15px;
-                cursor: pointer;
-                font-family: var(--font-display);
-                transition: all 0.2s;
-              }
-
-              .lightbox-controls button:hover {
-                background: var(--vyra-primary);
-                color: #000;
-              }
-
-              .lightbox-close {
-                position: absolute;
-                top: 20px;
-                right: 40px;
-                color: #fff;
-                font-size: 40px;
-                font-weight: bold;
-                cursor: pointer;
-                transition: color 0.3s;
-              }
-
-              .lightbox-close:hover {
-                color: var(--vyra-primary);
-              }
-
-              /* Responsividade */
-              @media (max-width: 768px) {
-                .section-title {
-                  font-size: 2rem;
-                }
-
-                .gallery-grid {
-                  grid-template-columns: 1fr;
-                }
-
-                .filter-buttons {
-                  gap: 10px;
-                }
-
-                .filter-btn {
-                  padding: 8px 15px;
-                  font-size: 0.8rem;
-                }
-              }
-            </style>
-
-            <script>
-              document.addEventListener('DOMContentLoaded', () => {
-                // --- 1. SISTEMA DE FILTROS ---
-                const filterBtns = document.querySelectorAll('.filter-btn');
-                const galleryItems = document.querySelectorAll('.gallery-item');
-
-                filterBtns.forEach(btn => {
-                  btn.addEventListener('click', () => {
-                    // Remove active de todos
-                    filterBtns.forEach(b => b.classList.remove('active'));
-                    // Adiciona active no clicado
-                    btn.classList.add('active');
-
-                    const filterValue = btn.getAttribute('data-filter');
-
-                    galleryItems.forEach(item => {
-                      if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
-                        item.style.display = 'block';
-                        // Pequena animação de entrada
-                        setTimeout(() => {
-                          item.style.opacity = '1';
-                          item.style.transform = 'scale(1)';
-                        }, 50);
-                      } else {
-                        item.style.display = 'none';
-                        item.style.opacity = '0';
-                        item.style.transform = 'scale(0.8)';
-                      }
-                    });
-                  });
-                });
-
-                // --- 2. LIGHTBOX (MODAL) ---
-                const lightbox = document.getElementById('vyra-lightbox');
-                const lightboxImg = document.querySelector('.lightbox-image');
-                const lbTitle = document.getElementById('lb-title');
-                const lbDesc = document.getElementById('lb-desc');
-                const closeBtn = document.querySelector('.lightbox-close');
-                let currentScale = 1;
-
-                // Abrir Lightbox
-                galleryItems.forEach(item => {
-                  item.addEventListener('click', (e) => {
-                    // Evita abrir se clicar no botão de upload ou filtros
-                    if (e.target.closest('.view-btn') || e.target.closest('.filter-btn')) return;
-
-                    const img = item.querySelector('img');
-                    const title = item.querySelector('h3').innerText;
-                    const desc = item.querySelector('p').innerText;
-
-                    lightboxImg.src = img.src;
-                    lbTitle.innerText = title;
-                    lbDesc.innerText = desc;
-
-                    lightbox.style.display = 'flex';
-                    currentScale = 1;
-                    lightboxImg.style.transform = `scale(${currentScale})`;
-                  });
-                });
-
-                // Fechar Lightbox
-                closeBtn.addEventListener('click', () => {
-                  lightbox.style.display = 'none';
-                });
-
-                // Fechar ao clicar fora
-                lightbox.addEventListener('click', (e) => {
-                  if (e.target === lightbox) {
-                    lightbox.style.display = 'none';
-                  }
-                });
-
-                // Controles de Zoom
-                document.getElementById('lb-zoom-in').addEventListener('click', () => {
-                  currentScale += 0.2;
-                  lightboxImg.style.transform = `scale(${currentScale})`;
-                });
-
-                document.getElementById('lb-zoom-out').addEventListener('click', () => {
-                  if (currentScale > 0.4) currentScale -= 0.2;
-                  lightboxImg.style.transform = `scale(${currentScale})`;
-                });
-
-                document.getElementById('lb-reset').addEventListener('click', () => {
-                  currentScale = 1;
-                  lightboxImg.style.transform = `scale(${currentScale})`;
-                });
-
-                // --- 3. UPLOAD SIMULADO (BACKEND FUTURO) ---
-                const uploadInput = document.getElementById('vyra-upload-input');
-                const galleryGrid = document.getElementById('vyra-gallery-grid');
-
-                uploadInput.addEventListener('change', (e) => {
-                  const files = e.target.files;
-                  if (files.length > 0) {
-                    Array.from(files).forEach(file => {
-                      const reader = new FileReader();
-
-                      reader.onload = function (event) {
-                        // Cria o elemento HTML dinamicamente
-                        const newItem = document.createElement('div');
-                        newItem.className = 'gallery-item';
-                        newItem.setAttribute('data-category', 'photo'); // Default category
-
-                        // HTML interno do novo item
-                        newItem.innerHTML = `
-                            <div class="img-wrapper">
-                                <img src="${event.target.result}" alt="${file.name}">
-                                <div class="overlay">
-                                    <div class="info">
-                                        <h3>${file.name.split('.')[0]}</h3>
-                                        <p>Upload Recente (Temp)</p>
-                                    </div>
-                                    <button class="view-btn"><i class="fas fa-expand"></i></button>
-                                </div>
-                            </div>
-                        `;
-
-                        // Adiciona ao grid com animação
-                        newItem.style.opacity = '0';
-                        newItem.style.transform = 'scale(0.8)';
-                        galleryGrid.prepend(newItem); // Adiciona no início
-
-                        setTimeout(() => {
-                          newItem.style.transition = 'all 0.5s';
-                          newItem.style.opacity = '1';
-                          newItem.style.transform = 'scale(1)';
-                        }, 50);
-
-                        // Re-anexar evento de click para o novo item (necessário pois foi criado dinamicamente)
-                        newItem.addEventListener('click', (e) => {
-                          if (e.target.closest('.view-btn')) return;
-                          const img = newItem.querySelector('img');
-                          lightboxImg.src = img.src;
-                          lbTitle.innerText = file.name.split('.')[0];
-                          lbDesc.innerText = "Upload Recente (Sessão Atual)";
-                          lightbox.style.display = 'flex';
-                          currentScale = 1;
-                          lightboxImg.style.transform = `scale(${currentScale})`;
-                        });
-
-                        alert(`✅ Imagem "${file.name}" carregada com sucesso na sessão!\n(Lembre-se: para salvar permanentemente, será necessário integrar com Backend/Banco de Dados no futuro).`);
-                      };
-
-                      reader.readAsDataURL(file);
-                    });
-                  }
-                  // Limpa o input para permitir re-upload do mesmo arquivo se necessário
-                  uploadInput.value = '';
-                });
-              });
-            </script>
 
           </div>
         </div>
@@ -2097,6 +1499,603 @@
         })();
       </script>
 
+      <!-- ========================================== -->
+      <!-- SEÇÃO DE PORTFÓLIO VYRA - GALERIA IMPACTO -->
+      <!-- ========================================== -->
+      <section id="vyra-portfolio" class="vyra-gallery-section"
+        style="margin-top: 40px; border-radius: 10px; border: 1px solid rgba(255, 179, 0, 0.2);">
+        <div class="vyra-container">
+
+          <!-- Cabeçalho da Galeria -->
+          <div class="gallery-header">
+            <h2 class="section-title"><span class="neon-text-amber">VYRA ARCHIVES</span></h2>
+            <p class="section-subtitle">Visual Design | Photography | Illustration</p>
+
+            <!-- Filtros de Categoria -->
+            <div class="filter-buttons">
+              <button class="filter-btn active" data-filter="all">TODOS</button>
+              <button class="filter-btn" data-filter="photo">FOTOGRAFIA</button>
+              <button class="filter-btn" data-filter="illustration">ILUSTRAÇÃO</button>
+              <button class="filter-btn" data-filter="edit">EDIÇÃO & VFX</button>
+              <button class="filter-btn" data-filter="concept">CONCEPT ART</button>
+            </div>
+
+            <!-- Botão de Upload Simulado -->
+            <div class="upload-trigger-box">
+              <label for="vyra-upload-input" class="custom-upload-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="17 8 12 3 7 8"></polyline>
+                  <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+                UPLOAD PROJETO (SIMULADO)
+              </label>
+              <input type="file" id="vyra-upload-input" accept="image/*" multiple style="display: none;">
+              <span class="upload-hint">*Arquivos temporários (Demo)</span>
+            </div>
+          </div>
+
+          <!-- Grid de Imagens (Masonry Layout) -->
+          <div class="gallery-grid" id="vyra-gallery-grid">
+            <!-- As imagens serão inseridas aqui via JavaScript ou manualmente -->
+
+            <!-- Exemplo de Item 1 (Fotografia) -->
+            <div class="gallery-item" data-category="photo">
+              <div class="img-wrapper">
+                <img
+                  src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                  alt="Paisagem Montanha">
+                <div class="overlay">
+                  <div class="info">
+                    <h3>Expedição Andes</h3>
+                    <p>Fotografia de Paisagem</p>
+                  </div>
+                  <button class="view-btn"><i class="fas fa-expand"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Exemplo de Item 2 (Ilustração) -->
+            <div class="gallery-item" data-category="illustration">
+              <div class="img-wrapper">
+                <img
+                  src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                  alt="Arte Abstrata">
+                <div class="overlay">
+                  <div class="info">
+                    <h3>Cyber Soul</h3>
+                    <p>Ilustração Digital</p>
+                  </div>
+                  <button class="view-btn"><i class="fas fa-expand"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Exemplo de Item 3 (Edição) -->
+            <div class="gallery-item" data-category="edit">
+              <div class="img-wrapper">
+                <img
+                  src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                  alt="Neon City">
+                <div class="overlay">
+                  <div class="info">
+                    <h3>Neon Nights</h3>
+                    <p>Color Grading & VFX</p>
+                  </div>
+                  <button class="view-btn"><i class="fas fa-expand"></i></button>
+                </div>
+              </div>
+            </div>
+            <!-- Exemplo de Item 4 (Concept) -->
+            <div class="gallery-item" data-category="concept">
+              <div class="img-wrapper">
+                <img
+                  src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=80"
+                  alt="Concept Art">
+                <div class="overlay">
+                  <div class="info">
+                    <h3>Mecha Unit 01</h3>
+                    <p>Concept Design</p>
+                  </div>
+                  <button class="view-btn"><i class="fas fa-expand"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Modal Lightbox (Visualizador de Tela Cheia) -->
+      <div id="vyra-lightbox" class="lightbox-modal">
+        <span class="lightbox-close">&times;</span>
+        <div class="lightbox-content">
+          <img class="lightbox-image" src="" alt="">
+          <div class="lightbox-details">
+            <h3 id="lb-title">Título do Projeto</h3>
+            <p id="lb-desc">Descrição</p>
+            <div class="lightbox-controls">
+              <button id="lb-zoom-in">+</button>
+              <button id="lb-zoom-out">-</button>
+              <button id="lb-reset">Reset</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style>
+        /* --- ESTILOS VYRA (IDENTIDADE AMBAR/DOURADO) --- */
+        :root {
+          --vyra-primary: #FFB300;
+          /* Âmbar VYRA */
+          --vyra-glow: rgba(255, 179, 0, 0.6);
+          --vyra-dark: #0a0a0a;
+          --vyra-card-bg: #111;
+          --font-main: 'Rajdhani', sans-serif;
+          --font-display: 'Orbitron', sans-serif;
+        }
+
+        .vyra-gallery-section {
+          padding: 40px 20px;
+          background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+          font-family: var(--font-main);
+          color: #fff;
+          overflow: hidden;
+          position: relative;
+        }
+
+        .vyra-container {
+          max-width: 1400px;
+          margin: 0 auto;
+        }
+
+        /* Header */
+        .gallery-header {
+          text-align: center;
+          margin-bottom: 60px;
+        }
+
+        .section-title {
+          font-family: var(--font-display);
+          font-size: 3rem;
+          letter-spacing: 4px;
+          margin-bottom: 10px;
+          text-transform: uppercase;
+        }
+
+        .neon-text-amber {
+          color: #fff;
+          text-shadow: 0 0 10px var(--vyra-primary), 0 0 20px var(--vyra-primary), 0 0 40px var(--vyra-glow);
+        }
+
+        .section-subtitle {
+          color: #aaa;
+          font-size: 1.2rem;
+          letter-spacing: 2px;
+          margin-bottom: 30px;
+        }
+
+        /* Filtros */
+        .filter-buttons {
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 15px;
+          margin-bottom: 30px;
+        }
+
+        .filter-btn {
+          background: transparent;
+          border: 1px solid #333;
+          color: #888;
+          padding: 10px 25px;
+          font-family: var(--font-display);
+          font-size: 0.9rem;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+          background: var(--vyra-primary);
+          color: #000;
+          border-color: var(--vyra-primary);
+          box-shadow: 0 0 15px var(--vyra-glow);
+          font-weight: bold;
+        }
+
+        /* Upload Box */
+        .upload-trigger-box {
+          margin-top: 20px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .custom-upload-btn {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          background: rgba(255, 179, 0, 0.1);
+          border: 1px dashed var(--vyra-primary);
+          color: var(--vyra-primary);
+          padding: 12px 30px;
+          cursor: pointer;
+          font-family: var(--font-display);
+          font-size: 0.9rem;
+          transition: all 0.3s;
+        }
+
+        .custom-upload-btn:hover {
+          background: rgba(255, 179, 0, 0.2);
+          box-shadow: 0 0 10px var(--vyra-glow);
+        }
+
+        .upload-hint {
+          font-size: 0.8rem;
+          color: #666;
+          font-style: italic;
+        }
+
+        /* Grid Masonry */
+        .gallery-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+          grid-auto-rows: 10px;
+          /* Base para masonry */
+          gap: 20px;
+        }
+
+        .gallery-item {
+          break-inside: avoid;
+          margin-bottom: 20px;
+          position: relative;
+          background: var(--vyra-card-bg);
+          border: 1px solid #222;
+          overflow: hidden;
+          transition: transform 0.3s, box-shadow 0.3s;
+          cursor: pointer;
+        }
+
+        .gallery-item:hover {
+          transform: translateY(-5px);
+          border-color: var(--vyra-primary);
+          box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 179, 0, 0.2);
+        }
+
+        .img-wrapper {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+        }
+
+        .img-wrapper img {
+          width: 100%;
+          height: auto;
+          display: block;
+          transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover .img-wrapper img {
+          transform: scale(1.1);
+        }
+
+        /* Overlay */
+        .overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          padding: 20px;
+          opacity: 0;
+          transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover .overlay {
+          opacity: 1;
+        }
+
+        .info h3 {
+          font-family: var(--font-display);
+          color: var(--vyra-primary);
+          margin: 0 0 5px 0;
+          font-size: 1.2rem;
+          text-transform: uppercase;
+        }
+
+        .info p {
+          margin: 0;
+          font-size: 0.9rem;
+          color: #ddd;
+        }
+
+        .view-btn {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          background: var(--vyra-primary);
+          border: none;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          color: #000;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.2rem;
+          transition: transform 0.2s;
+        }
+
+        .view-btn:hover {
+          transform: scale(1.1);
+          box-shadow: 0 0 15px var(--vyra-primary);
+        }
+
+        /* Lightbox Modal */
+        .lightbox-modal {
+          display: none;
+          position: fixed;
+          z-index: 9999;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.95);
+          backdrop-filter: blur(10px);
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+        }
+
+        .lightbox-content {
+          position: relative;
+          max-width: 90%;
+          max-height: 80vh;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .lightbox-image {
+          max-width: 100%;
+          max-height: 70vh;
+          object-fit: contain;
+          border: 2px solid var(--vyra-primary);
+          box-shadow: 0 0 30px rgba(255, 179, 0, 0.3);
+          transition: transform 0.2s;
+        }
+
+        .lightbox-details {
+          margin-top: 20px;
+          text-align: center;
+          color: #fff;
+        }
+
+        .lightbox-details h3 {
+          font-family: var(--font-display);
+          color: var(--vyra-primary);
+          font-size: 1.5rem;
+          margin-bottom: 5px;
+        }
+
+        .lightbox-controls {
+          margin-top: 15px;
+          display: flex;
+          gap: 10px;
+          justify-content: center;
+        }
+
+        .lightbox-controls button {
+          background: #222;
+          border: 1px solid var(--vyra-primary);
+          color: var(--vyra-primary);
+          padding: 5px 15px;
+          cursor: pointer;
+          font-family: var(--font-display);
+          transition: all 0.2s;
+        }
+
+        .lightbox-controls button:hover {
+          background: var(--vyra-primary);
+          color: #000;
+        }
+
+        .lightbox-close {
+          position: absolute;
+          top: 20px;
+          right: 40px;
+          color: #fff;
+          font-size: 40px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: color 0.3s;
+        }
+
+        .lightbox-close:hover {
+          color: var(--vyra-primary);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+          .section-title {
+            font-size: 2rem;
+          }
+
+          .gallery-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .filter-buttons {
+            gap: 10px;
+          }
+
+          .filter-btn {
+            padding: 8px 15px;
+            font-size: 0.8rem;
+          }
+        }
+      </style>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          // --- 1. SISTEMA DE FILTROS ---
+          const filterBtns = document.querySelectorAll('.filter-btn');
+          const galleryItems = document.querySelectorAll('.gallery-item');
+
+          filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+              // Remove active de todos
+              filterBtns.forEach(b => b.classList.remove('active'));
+              // Adiciona active no clicado
+              btn.classList.add('active');
+
+              const filterValue = btn.getAttribute('data-filter');
+
+              galleryItems.forEach(item => {
+                if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                  item.style.display = 'block';
+                  // Pequena animação de entrada
+                  setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'scale(1)';
+                  }, 50);
+                } else {
+                  item.style.display = 'none';
+                  item.style.opacity = '0';
+                  item.style.transform = 'scale(0.8)';
+                }
+              });
+            });
+          });
+
+          // --- 2. LIGHTBOX (MODAL) ---
+          const lightbox = document.getElementById('vyra-lightbox');
+          const lightboxImg = document.querySelector('.lightbox-image');
+          const lbTitle = document.getElementById('lb-title');
+          const lbDesc = document.getElementById('lb-desc');
+          const closeBtn = document.querySelector('.lightbox-close');
+          let currentScale = 1;
+
+          // Abrir Lightbox
+          galleryItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+              // Evita abrir se clicar no botão de upload ou filtros
+              if (e.target.closest('.view-btn') || e.target.closest('.filter-btn')) return;
+
+              const img = item.querySelector('img');
+              const title = item.querySelector('h3').innerText;
+              const desc = item.querySelector('p').innerText;
+
+              lightboxImg.src = img.src;
+              lbTitle.innerText = title;
+              lbDesc.innerText = desc;
+
+              lightbox.style.display = 'flex';
+              currentScale = 1;
+              lightboxImg.style.transform = `scale(${currentScale})`;
+            });
+          });
+
+          // Fechar Lightbox
+          closeBtn.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+          });
+
+          // Fechar ao clicar fora
+          lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+              lightbox.style.display = 'none';
+            }
+          });
+
+          // Controles de Zoom
+          document.getElementById('lb-zoom-in').addEventListener('click', () => {
+            currentScale += 0.2;
+            lightboxImg.style.transform = `scale(${currentScale})`;
+          });
+
+          document.getElementById('lb-zoom-out').addEventListener('click', () => {
+            if (currentScale > 0.4) currentScale -= 0.2;
+            lightboxImg.style.transform = `scale(${currentScale})`;
+          });
+
+          document.getElementById('lb-reset').addEventListener('click', () => {
+            currentScale = 1;
+            lightboxImg.style.transform = `scale(${currentScale})`;
+          });
+
+          // --- 3. UPLOAD SIMULADO (BACKEND FUTURO) ---
+          const uploadInput = document.getElementById('vyra-upload-input');
+          const galleryGrid = document.getElementById('vyra-gallery-grid');
+
+          uploadInput.addEventListener('change', (e) => {
+            const files = e.target.files;
+            if (files.length > 0) {
+              Array.from(files).forEach(file => {
+                const reader = new FileReader();
+
+                reader.onload = function (event) {
+                  // Cria o elemento HTML dinamicamente
+                  const newItem = document.createElement('div');
+                  newItem.className = 'gallery-item';
+                  newItem.setAttribute('data-category', 'photo'); // Default category
+
+                  // HTML interno do novo item
+                  newItem.innerHTML = `
+                            <div class="img-wrapper">
+                                <img src="${event.target.result}" alt="${file.name}">
+                                <div class="overlay">
+                                    <div class="info">
+                                        <h3>${file.name.split('.')[0]}</h3>
+                                        <p>Upload Recente (Temp)</p>
+                                    </div>
+                                    <button class="view-btn"><i class="fas fa-expand"></i></button>
+                                </div>
+                            </div>
+                        `;
+
+                  // Adiciona ao grid com animação
+                  newItem.style.opacity = '0';
+                  newItem.style.transform = 'scale(0.8)';
+                  galleryGrid.prepend(newItem); // Adiciona no início
+
+                  setTimeout(() => {
+                    newItem.style.transition = 'all 0.5s';
+                    newItem.style.opacity = '1';
+                    newItem.style.transform = 'scale(1)';
+                  }, 50);
+
+                  // Re-anexar evento de click para o novo item (necessário pois foi criado dinamicamente)
+                  newItem.addEventListener('click', (e) => {
+                    if (e.target.closest('.view-btn')) return;
+                    const img = newItem.querySelector('img');
+                    lightboxImg.src = img.src;
+                    lbTitle.innerText = file.name.split('.')[0];
+                    lbDesc.innerText = "Upload Recente (Sessão Atual)";
+                    lightbox.style.display = 'flex';
+                    currentScale = 1;
+                    lightboxImg.style.transform = `scale(${currentScale})`;
+                  });
+
+                  alert(`✅ Imagem "${file.name}" carregada com sucesso na sessão!\n(Lembre-se: para salvar permanentemente, será necessário integrar com Backend/Banco de Dados no futuro).`);
+                };
+
+                reader.readAsDataURL(file);
+              });
+            }
+            // Limpa o input para permitir re-upload do mesmo arquivo se necessário
+            uploadInput.value = '';
+          });
+        });
+      </script>
     </div>
   </div>
   <script src="bg-canvas.js"></script>
