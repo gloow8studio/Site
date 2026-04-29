@@ -231,7 +231,7 @@
 
         <!-- Gallery -->
         <div class="models-gallery" style="display:flex; gap:15px; overflow-x:auto; padding-bottom:10px;">
-          <div class="model-card active" data-model="modelos/projeto_arquitetura.glb"
+          <div class="model-card active" data-model="modelos/projeto.glb"
             style="min-width: 150px; background: rgba(255, 109, 0, 0.1); border: 1px solid #FF6D00; padding: 15px; border-radius: 5px; cursor: pointer; text-align:center; transition:0.3s;">
             <i class="fas fa-building" style="font-size:2rem; color:#FF6D00; margin-bottom:10px;"></i>
             <div style="font-family:'Orbitron', sans-serif; font-size:0.9rem; color:#fff;">Galpão Industrial</div>
@@ -257,6 +257,31 @@
         </div>
       </div>
     </div>
+
+    <!-- ALTERNATIVA LOW-CODE (GOOGLE MODEL-VIEWER) -->
+    <div class="viewer-section model-viewer-alt" style="margin-top: 40px; padding: 20px 0; border-top: 1px dashed rgba(255, 109, 0, 0.2);">
+      <h3 style="font-family:'Orbitron', sans-serif; color:#FF6D00; margin-bottom: 15px; font-size:1.3rem;">
+        <i class="fas fa-vr-cardboard"></i> Visualizador Simplificado (Model-Viewer)
+      </h3>
+      <div style="width: 100%; height: 50vh; background: #111; border: 1px solid #FF6D00; border-radius: 10px; overflow: hidden; position: relative;">
+        <!-- Importação do web component -->
+        <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
+        
+        <model-viewer 
+          id="simple-viewer"
+          src="modelos/projeto.glb" 
+          camera-controls 
+          auto-rotate
+          shadow-intensity="1"
+          style="width: 100%; height: 100%; outline: none;"
+          environment-image="neutral">
+        </model-viewer>
+      </div>
+      <p style="font-family:'Rajdhani', sans-serif; color:#aaa; font-size:0.9rem; margin-top:10px;">
+        <i class="fas fa-info-circle"></i> Arraste para rotacionar. Use o scroll para zoom. Alternativa leve usando componente nativo.
+      </p>
+    </div>
+
   </div>
 
   <script src="bg-canvas.js"></script>
@@ -391,7 +416,7 @@
     }
 
     // Inicializar modelo padrão
-    loadModel('modelos/projeto_arquitetura.glb');
+    loadModel('modelos/projeto.glb');
 
     // Galeria de Projetos
     const modelCards = document.querySelectorAll('.model-card');
