@@ -2177,10 +2177,10 @@
           style="display: flex; height: 100%; width: 100%; max-width: 1600px; margin: 0 auto; padding: 20px; box-sizing: border-box;">
 
           <!-- Área da Imagem -->
-          <div class="lb-image-container"
-            style="flex: 2; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+          <div class="lb-image-container" id="vyra-img-container"
+            style="flex: 2; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; border-radius: 8px;">
             <img id="lb-img-2" src="" alt="Full View"
-              style="max-width: 100%; max-height: 85vh; object-fit: contain; transition: transform 0.2s ease; cursor: zoom-in; box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);" />
+              style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transition: transform 0.2s ease; cursor: zoom-in; box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);" />
 
             <!-- Controles Flutuantes da Imagem -->
             <div class="lb-controls"
@@ -2331,6 +2331,17 @@
           font-size: 0.9rem;
           text-transform: uppercase;
           letter-spacing: 1px;
+        }
+
+        /* Fullscreen adjustments */
+        .lb-image-container:fullscreen {
+          background-color: #000 !important;
+          border-radius: 0 !important;
+        }
+
+        .lb-image-container:-webkit-full-screen {
+          background-color: #000 !important;
+          border-radius: 0 !important;
         }
 
         /* Botões de Filtro Ativos */
@@ -2788,12 +2799,21 @@
 
         // Fullscreen
         document.getElementById('lb-fullscreen-2').onclick = () => {
+          const imgContainer = document.getElementById('vyra-img-container');
           if (!document.fullscreenElement) {
-            lightbox2.requestFullscreen().catch(err => {
-              alert(`Erro ao tentar tela cheia: ${err.message}`);
-            });
+            if (imgContainer.requestFullscreen) {
+              imgContainer.requestFullscreen().catch(err => {
+                console.error(`Erro ao tentar tela cheia: ${err.message}`);
+              });
+            } else if (imgContainer.webkitRequestFullscreen) { /* Safari */
+              imgContainer.webkitRequestFullscreen();
+            }
           } else {
-            document.exitFullscreen();
+            if (document.exitFullscreen) {
+              document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+              document.webkitExitFullscreen();
+            }
           }
         };
 
