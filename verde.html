@@ -160,6 +160,77 @@
       font-weight: bold;
       font-family: 'Orbitron';
     }
+
+    /* SPREADSHEET TABLE STYLES */
+    .sheet-table-wrap {
+      overflow: auto;
+      max-height: 70vh;
+      width: 100%;
+    }
+
+    .sheet-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Rajdhani', monospace;
+      font-size: 0.85rem;
+    }
+
+    .sheet-table th {
+      position: sticky;
+      top: 0;
+      background: #00C853;
+      color: #000;
+      padding: 8px 12px;
+      text-align: left;
+      font-family: 'Orbitron';
+      font-size: 0.75rem;
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    .sheet-table td {
+      padding: 6px 12px;
+      border-bottom: 1px solid rgba(0, 200, 83, 0.15);
+      color: #ccc;
+      white-space: nowrap;
+    }
+
+    .sheet-table tr:hover td {
+      background: rgba(0, 200, 83, 0.08);
+    }
+
+    .sheet-tabs {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .sheet-tab-btn {
+      background: rgba(0, 200, 83, 0.1);
+      border: 1px solid #333;
+      color: #aaa;
+      padding: 6px 16px;
+      cursor: pointer;
+      font-family: 'Rajdhani';
+      font-size: 0.85rem;
+      border-radius: 4px;
+      transition: 0.3s;
+    }
+
+    .sheet-tab-btn.active,
+    .sheet-tab-btn:hover {
+      background: #00C853;
+      color: #000;
+      border-color: #00C853;
+    }
+
+    .sheet-loading {
+      text-align: center;
+      padding: 60px;
+      color: #00C853;
+      font-family: 'Orbitron';
+    }
   </style>
 </head>
 
@@ -346,16 +417,23 @@
       <div class="lightbox-content"
         style="display: flex; height: 100%; width: 100%; max-width: 1600px; margin: 0 auto; padding: 20px; box-sizing: border-box;">
         <div class="lb-image-container" id="sylar-img-container"
-          style="flex: 2; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; border-radius: 8px; background: rgba(0,200,83,0.05); border: 1px solid rgba(0,200,83,0.2);">
-          <div id="lb-doc-preview" style="text-align: center; color: #00C853;">
-            <i class="fas fa-file-excel" style="font-size: 8rem; margin-bottom: 20px;"></i>
-            <h2 id="lb-doc-name" style="font-family: 'Orbitron';">Nome da Planilha</h2>
+          style="flex: 2; display: flex; flex-direction: column; position: relative; overflow: hidden; border-radius: 8px; background: rgba(0,200,83,0.05); border: 1px solid rgba(0,200,83,0.2); padding: 15px;">
+          <div id="lb-doc-preview" style="text-align: center; color: #00C853; padding: 40px;">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#00C853" stroke-width="1.5">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+              <polyline points="10 9 9 9 8 9" />
+            </svg>
+            <h2 id="lb-doc-name" style="font-family: 'Orbitron'; margin-top: 15px;">Carregando...</h2>
           </div>
-          <div class="lb-controls"
-            style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 15px; background: rgba(0,0,0,0.8); padding: 8px 25px; border-radius: 30px; border: 1px solid #00C853;">
+          <div id="lb-sheet-content" style="flex: 1; overflow: auto; display: none;"></div>
+          <div
+            style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 15px; background: rgba(0,0,0,0.85); padding: 8px 25px; border-radius: 30px; border: 1px solid #00C853; z-index: 5;">
             <button id="lb-download-sylar" title="Baixar Arquivo"
-              style="background: none; border: none; color: #fff; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; gap: 10px; font-family: 'Rajdhani';">
-              <i class="fas fa-download"></i> DOWNLOAD
+              style="background: none; border: none; color: #fff; font-size: 1rem; cursor: pointer; display: flex; align-items: center; gap: 8px; font-family: 'Rajdhani';">
+              ⬇ DOWNLOAD
             </button>
           </div>
         </div>
@@ -445,8 +523,9 @@
     });
   </script>
 
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
   <script>
     (function () {
       const sylarProjects = [
@@ -456,48 +535,6 @@
         { id: 4, file: "Validação EAN_Uniportas_V14_Macro_at_06_02_26.xlsm", title: "Validação EAN_Uniportas_V14_Macro_at_06_02_26", category: "spreadsheet", desc: "Relatório técnico e base de dados processada. Clique para ver detalhes ou baixar.", tech: ["Excel", "VBA", "BI"] },
       ];
 
-
-      const dashboards = [
-        {
-          id: 'vendas_2024',
-          title: 'Projeção de Vendas 2024',
-          desc: 'Simulador de crescimento baseado em investimento em mídia e conversão.',
-          data: {
-            labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
-            baseSales: [12000, 15000, 13500, 18000, 21000, 24000],
-            controls: [
-              { id: 'investimento', label: 'Investimento Mídia (R$)', min: 1000, max: 50000, step: 1000, value: 10000 },
-              { id: 'conversao', label: 'Taxa Conversão (%)', min: 1, max: 10, step: 0.1, value: 3.5 }
-            ]
-          }
-        },
-        {
-          id: 'marketing_roi',
-          title: 'ROI Campanhas Digitais',
-          desc: 'Análise de retorno sobre investimento por canal (Social, Search, Display).',
-          data: {
-            labels: ['Social', 'Search', 'Display', 'Email', 'Orgânico'],
-            costs: [5000, 8000, 3000, 500, 0],
-            revenue: [12000, 25000, 6000, 4000, 8000],
-            controls: [
-              { id: 'multiplier', label: 'Fator Sazonalidade', min: 0.5, max: 2.0, step: 0.1, value: 1.0 }
-            ]
-          }
-        },
-        {
-          id: 'financeiro',
-          title: 'Fluxo de Caixa Projetado',
-          desc: 'Demonstrativo de entradas e saídas com ajuste de custos operacionais.',
-          data: {
-            labels: ['Q1', 'Q2', 'Q3', 'Q4'],
-            fixedCosts: [45000, 45000, 48000, 50000],
-            controls: [
-              { id: 'receita_base', label: 'Receita Base Trimestral', min: 5000, max: 200000, step: 5000, value: 80000 },
-              { id: 'custo_var', label: 'Custo Variável (%)', min: 10, max: 60, step: 1, value: 30 }
-            ]
-          }
-        }
-      ];
 
       const galleryGrid = document.getElementById('sylar-gallery-grid');
       const lb = document.getElementById('sylar-lightbox');
@@ -515,20 +552,27 @@
           const item = document.createElement('div');
           item.className = 'gallery-item-2';
           item.onclick = () => openLightbox(p);
+          const ext = p.file.split('.').pop().toLowerCase();
+          const icon = ext === 'xlsx' ? 'fa-file-excel' : 'fa-file-alt';
           item.innerHTML = `
-                    <i class="fas fa-file-excel"></i>
-                    <h3>${p.title}</h3>
-                    <span>${p.category}</span>
-                `;
+            <i class="fas ${icon}"></i>
+            <h3>${p.title}</h3>
+            <span>${ext.toUpperCase()} · ${p.category}</span>
+          `;
           galleryGrid.appendChild(item);
         });
       }
 
-      function openLightbox(p) {
+      async function openLightbox(p) {
         lbTitle.innerText = p.title;
-        lbCat.innerText = p.category;
+        lbCat.innerText = p.file.split('.').pop().toUpperCase();
         lbDesc.innerText = p.desc;
-        lbDocName.innerText = p.file;
+        lbDocName.innerText = 'Carregando planilha...';
+        const sheetContent = document.getElementById('lb-sheet-content');
+        const docPreview = document.getElementById('lb-doc-preview');
+        sheetContent.style.display = 'none';
+        sheetContent.innerHTML = '';
+        docPreview.style.display = 'block';
         lbDownload.onclick = () => {
           const a = document.createElement('a');
           a.href = 'planilhas silar/' + p.file;
@@ -543,6 +587,59 @@
         });
         lb.style.display = 'flex';
         document.body.style.overflow = 'hidden';
+
+        // Load spreadsheet with SheetJS
+        try {
+          const url = 'planilhas silar/' + p.file;
+          const resp = await fetch(url);
+          if (!resp.ok) throw new Error('Arquivo não encontrado');
+          const buf = await resp.arrayBuffer();
+          const wb = XLSX.read(buf, { type: 'array' });
+          lbDocName.innerText = p.file;
+
+          // Build sheet tabs
+          let tabsHtml = '<div class="sheet-tabs">';
+          wb.SheetNames.forEach((name, i) => {
+            tabsHtml += `<button class="sheet-tab-btn ${i === 0 ? 'active' : ''}" data-sheet="${name}">${name}</button>`;
+          });
+          tabsHtml += '</div><div id="sheet-table-area"></div>';
+          sheetContent.innerHTML = tabsHtml;
+
+          function showSheet(name) {
+            const ws = wb.Sheets[name];
+            const json = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
+            if (!json.length) { document.getElementById('sheet-table-area').innerHTML = '<p style="color:#888;padding:20px;">Aba vazia</p>'; return; }
+            const maxRows = Math.min(json.length, 200);
+            const maxCols = Math.min(json[0].length || 10, 30);
+            let html = '<div class="sheet-table-wrap"><table class="sheet-table"><thead><tr>';
+            const headers = json[0];
+            for (let c = 0; c < maxCols; c++) html += `<th>${headers[c] !== undefined ? headers[c] : 'Col ' + c}</th>`;
+            html += '</tr></thead><tbody>';
+            for (let r = 1; r < maxRows; r++) {
+              html += '<tr>';
+              for (let c = 0; c < maxCols; c++) html += `<td>${json[r] && json[r][c] !== undefined ? json[r][c] : ''}</td>`;
+              html += '</tr>';
+            }
+            html += '</tbody></table></div>';
+            if (json.length > 200) html += `<p style="color:#666;text-align:center;padding:10px;">Mostrando 200 de ${json.length} linhas</p>`;
+            document.getElementById('sheet-table-area').innerHTML = html;
+          }
+
+          showSheet(wb.SheetNames[0]);
+          sheetContent.querySelectorAll('.sheet-tab-btn').forEach(btn => {
+            btn.onclick = () => {
+              sheetContent.querySelectorAll('.sheet-tab-btn').forEach(b => b.classList.remove('active'));
+              btn.classList.add('active');
+              showSheet(btn.dataset.sheet);
+            };
+          });
+
+          docPreview.style.display = 'none';
+          sheetContent.style.display = 'block';
+        } catch (err) {
+          lbDocName.innerText = p.file + ' (Download disponível)';
+          console.warn('Erro ao ler planilha:', err);
+        }
       }
 
       document.getElementById('lb-close-sylar').onclick = () => {
@@ -553,117 +650,108 @@
       const analyticsGrid = document.getElementById('analytics-grid');
       let mainChartInstance = null;
       let secChartInstance = null;
-      let currentDashData = null;
 
       function renderAnalytics() {
         if (!analyticsGrid) return;
         analyticsGrid.innerHTML = '';
-        dashboards.forEach(dash => {
+        sylarProjects.forEach(p => {
           const card = document.createElement('div');
           card.className = 'dash-card';
-          card.onclick = () => openDash(dash.id);
+          card.onclick = () => openDash(p);
           card.innerHTML = `
-                    <div class="dash-thumb">${dash.title}</div>
-                    <div class="dash-info">
-                        <h3 class="dash-title">${dash.title}</h3>
-                        <p class="dash-desc">${dash.desc}</p>
-                        <button class="btn-open">Interagir com Dados</button>
-                    </div>
-                `;
+            <div class="dash-thumb"><i class="fas fa-chart-line" style="font-size:2rem;margin-right:10px;"></i> ${p.title}</div>
+            <div class="dash-info">
+              <h3 class="dash-title">${p.title}</h3>
+              <p class="dash-desc">${p.desc}</p>
+              <button class="btn-open"><i class="fas fa-table"></i> Visualizar Planilha</button>
+            </div>
+          `;
           analyticsGrid.appendChild(card);
         });
       }
 
-      window.openDash = function (id) {
-        const dash = dashboards.find(d => d.id === id);
-        if (!dash) return;
-        currentDashData = dash.data;
-        document.getElementById('modal-title').innerText = dash.title;
+      window.openDash = async function (p) {
+        if (typeof p === 'string') p = sylarProjects.find(x => x.file === p);
+        if (!p) return;
+        document.getElementById('modal-title').innerText = p.title;
         const modal = document.getElementById('dash-modal');
         modal.style.display = 'flex';
         modal.style.opacity = '1';
         document.body.style.overflow = 'hidden';
-        renderControls(dash.data.controls);
-        updateCharts(dash);
+        const controlsArea = document.getElementById('controls-area');
+        controlsArea.innerHTML = '<div style="text-align:center;padding:60px;color:#00C853;"><p>Carregando planilha...</p></div>';
+
+        try {
+          const resp = await fetch('planilhas silar/' + p.file);
+          if (!resp.ok) throw new Error('Arquivo não encontrado');
+          const buf = await resp.arrayBuffer();
+          const wb = XLSX.read(buf, { type: 'array' });
+          window._currentWB = wb;
+
+          let html = '<h3 style="color:#fff;margin-bottom:10px;font-family:Orbitron;font-size:0.9rem;">Abas</h3><div class="sheet-tabs">';
+          wb.SheetNames.forEach((name, i) => {
+            html += '<button class="sheet-tab-btn ' + (i === 0 ? 'active' : '') + '" onclick="switchSheet(\'' + name.replace(/'/g, "\\'") + '\',this)">' + name + '</button>';
+          });
+          html += '</div><div id="analytics-table-area" class="sheet-table-wrap" style="max-height:55vh;"></div>';
+          controlsArea.innerHTML = html;
+          switchSheet(wb.SheetNames[0], null);
+        } catch (err) {
+          controlsArea.innerHTML = '<div style="text-align:center;padding:40px;color:#ff5252;"><p>Erro: ' + err.message + '</p></div>';
+        }
+      };
+
+      window.switchSheet = function (name, btnEl) {
+        const wb = window._currentWB;
+        if (!wb) return;
+        if (btnEl) {
+          document.querySelectorAll('#controls-area .sheet-tab-btn').forEach(b => b.classList.remove('active'));
+          btnEl.classList.add('active');
+        }
+        const ws = wb.Sheets[name];
+        const json = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
+        const area = document.getElementById('analytics-table-area');
+        if (!json.length) { area.innerHTML = '<p style="color:#888;padding:20px;">Aba vazia</p>'; return; }
+        const maxR = Math.min(json.length, 100), maxC = Math.min(json[0].length || 5, 20);
+        let t = '<table class="sheet-table"><thead><tr>';
+        for (let c = 0; c < maxC; c++) t += '<th>' + (json[0][c] || 'Col ' + (c + 1)) + '</th>';
+        t += '</tr></thead><tbody>';
+        for (let r = 1; r < maxR; r++) { t += '<tr>'; for (let c = 0; c < maxC; c++) t += '<td>' + (json[r] && json[r][c] !== undefined ? json[r][c] : '') + '</td>'; t += '</tr>'; }
+        t += '</tbody></table>';
+        area.innerHTML = t;
+
+        // Auto-chart
+        try {
+          let numCol = -1;
+          for (let c = 0; c < maxC; c++) { if (json.length > 1 && typeof json[1][c] === 'number') { numCol = c; break; } }
+          const ctx1 = document.getElementById('mainChart');
+          if (mainChartInstance) mainChartInstance.destroy();
+          if (numCol >= 0) {
+            const labs = [], vals = [];
+            for (let r = 1; r < Math.min(maxR, 50); r++) { labs.push(String(json[r][0] || r)); vals.push(Number(json[r][numCol]) || 0); }
+            mainChartInstance = new Chart(ctx1, { type: 'line', data: { labels: labs, datasets: [{ label: json[0][numCol] || 'Dados', data: vals, borderColor: '#00C853', backgroundColor: 'rgba(0,200,83,0.15)', fill: true, tension: 0.3 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#fff' } } }, scales: { y: { ticks: { color: '#aaa' } }, x: { ticks: { color: '#aaa', maxTicksLimit: 12 } } } } });
+          }
+          let numCol2 = -1;
+          for (let c = numCol + 1; c < maxC; c++) { if (json.length > 1 && typeof json[1][c] === 'number') { numCol2 = c; break; } }
+          const ctx2 = document.getElementById('secondaryChart');
+          if (secChartInstance) secChartInstance.destroy();
+          if (numCol2 >= 0) {
+            const v2 = [], l2 = [];
+            for (let r = 1; r < Math.min(maxR, 25); r++) { l2.push(String(json[r][0] || r)); v2.push(Number(json[r][numCol2]) || 0); }
+            secChartInstance = new Chart(ctx2, { type: 'bar', data: { labels: l2, datasets: [{ label: json[0][numCol2] || 'Dados 2', data: v2, backgroundColor: 'rgba(0,200,83,0.5)', borderColor: '#00C853', borderWidth: 1 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { ticks: { color: '#aaa' } }, x: { ticks: { color: '#aaa', maxTicksLimit: 12 } } } } });
+          }
+        } catch (e) { console.warn('Chart:', e); }
       };
 
       window.closeDashModal = function () {
-        const modal = document.getElementById('dash-modal');
-        modal.style.display = 'none';
-        modal.style.opacity = '0';
+        document.getElementById('dash-modal').style.display = 'none';
+        document.getElementById('dash-modal').style.opacity = '0';
         document.body.style.overflow = 'auto';
         if (mainChartInstance) mainChartInstance.destroy();
         if (secChartInstance) secChartInstance.destroy();
+        window._currentWB = null;
       };
 
-      function renderControls(controls) {
-        const container = document.getElementById('controls-area');
-        container.innerHTML = '<h3 style="color:#fff; margin-bottom:15px; font-family:\'Orbitron\'">Variáveis de Entrada</h3>';
-        controls.forEach(ctrl => {
-          const group = document.createElement('div');
-          group.className = 'control-group';
-          group.innerHTML = `
-                    <label>${ctrl.label} <span class="value-display" id="val-${ctrl.id}">${ctrl.value}</span></label>
-                    <input type="range" id="input-${ctrl.id}" min="${ctrl.min}" max="${ctrl.max}" step="${ctrl.step}" value="${ctrl.value}" oninput="updateValue('${ctrl.id}', this.value)">
-                `;
-          container.appendChild(group);
-        });
-      }
-
-      window.updateValue = function (id, newValue) {
-        document.getElementById(`val-${id}`).innerText = newValue;
-        const ctrl = currentDashData.controls.find(c => c.id === id);
-        ctrl.value = parseFloat(newValue);
-        updateCharts({ id: document.getElementById('modal-title').innerText, data: currentDashData });
-      };
-
-      function updateCharts(dash) {
-        const data = dash.data;
-        let c1Data = [];
-        let c2Data = [];
-        let c2Labels = data.labels;
-
-        if (dash.id === 'vendas_2024' || dash.title.includes('Vendas')) {
-          const invest = data.controls.find(c => c.id === 'investimento').value;
-          const conv = data.controls.find(c => c.id === 'conversao').value;
-          const f = (invest / 10000) * (conv / 3.5);
-          c1Data = data.baseSales.map(v => Math.round(v * f));
-          c2Labels = ['Meta', 'Realizado'];
-          c2Data = [25000 * f, c1Data.reduce((a, b) => a + b, 0) / 6];
-        } else if (dash.id === 'marketing_roi' || dash.title.includes('ROI')) {
-          const season = data.controls.find(c => c.id === 'multiplier').value;
-          c1Data = data.revenue.map((r, i) => (r - data.costs[i]) * season);
-          c2Data = data.revenue.map(r => r * season);
-        } else {
-          const recBase = data.controls.find(c => c.id === 'receita_base').value;
-          const costVarPerc = data.controls.find(c => c.id === 'custo_var').value / 100;
-          c1Data = data.labels.map((_, i) => recBase - (recBase * costVarPerc) - data.fixedCosts[i]);
-          c2Data = [recBase * costVarPerc, data.fixedCosts.reduce((a, b) => a + b, 0) / 4];
-          c2Labels = ['Var', 'Fixo'];
-        }
-
-        const ctx1 = document.getElementById('mainChart').getContext('2d');
-        if (mainChartInstance) mainChartInstance.destroy();
-        mainChartInstance = new Chart(ctx1, {
-          type: 'line',
-          data: {
-            labels: data.labels,
-            datasets: [{ label: 'Principal', data: c1Data, borderColor: '#00C853', backgroundColor: 'rgba(0, 200, 83, 0.2)', fill: true, tension: 0.4 }]
-          },
-          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#fff' } } }, scales: { y: { ticks: { color: '#aaa' } }, x: { ticks: { color: '#aaa' } } } }
-        });
-
-        const ctx2 = document.getElementById('secondaryChart').getContext('2d');
-        if (secChartInstance) secChartInstance.destroy();
-        secChartInstance = new Chart(ctx2, {
-          type: 'bar',
-          data: {
-            labels: c2Labels,
-            datasets: [{ label: 'Secundário', data: c2Data, backgroundColor: ['#FFB300', '#AA00FF'] }]
-          },
-          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { ticks: { color: '#fff' } } } }
-        });
-      }
+      document.getElementById('dash-modal').addEventListener('click', e => { if (e.target.id === 'dash-modal') closeDashModal(); });
 
       document.addEventListener('DOMContentLoaded', () => {
         renderGallery();
