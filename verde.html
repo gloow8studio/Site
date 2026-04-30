@@ -460,19 +460,19 @@
     <div id="sylar-lightbox" class="lightbox-overlay"
       style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; backdrop-filter: blur(10px); transition: opacity 0.3s;">
       <button id="lb-close-sylar"
-        style="position: absolute; top: 20px; right: 40px; background: none; border: none; color: #00C853; font-size: 5rem; cursor: pointer; z-index: 999999;">&times;</button>
+        style="position: absolute; top: 20px; right: 40px; background: none; border: none; color: #00C853; font-size: 5rem; cursor: pointer; z-index: 999999; transition: color 0.3s; text-shadow: 0 0 20px rgba(0,0,0,0.8);">&times;</button>
       <div class="lightbox-content"
         style="display: flex; height: 100%; width: 100%; max-width: 1600px; margin: 0 auto; padding: 20px; box-sizing: border-box;">
         <!-- Área da Imagem -->
         <div class="lb-image-container" id="sylar-img-container" style="flex: 2; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; border-radius: 8px;">
           <img id="lb-img-sylar" src="" alt="Full View" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transition: transform 0.2s ease; cursor: zoom-in; box-shadow: 0 0 30px rgba(0, 200, 83, 0.2);" />
-          <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 15px; background: rgba(0,0,0,0.8); padding: 8px 25px; border-radius: 30px; border: 1px solid #00C853;">
-            <button id="lb-zoom-in-sylar" title="Zoom In" style="background: none; border: none; color: #00C853; font-size: 1.8rem; cursor: pointer;">+</button>
-            <button id="lb-zoom-out-sylar" title="Zoom Out" style="background: none; border: none; color: #00C853; font-size: 1.8rem; cursor: pointer;">-</button>
-            <button id="lb-reset-sylar" title="Reset" style="background: none; border: none; color: #fff; font-size: 0.9rem; cursor: pointer; font-family: 'Rajdhani';">RESET</button>
-            <div style="width: 1px; height: 16px; background: #555;"></div>
-            <button id="lb-download-sylar" title="Download" style="background: none; border: none; color: #fff; font-size: 1.2rem; cursor: pointer;">⬇</button>
-            <button id="lb-fullscreen-sylar" title="Fullscreen" style="background: none; border: none; color: #fff; font-size: 1.2rem; cursor: pointer;">⛶</button>
+          <div class="lb-controls" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 15px; background: rgba(0,0,0,0.8); padding: 8px 25px; border-radius: 30px; border: 1px solid #00C853;">
+            <button id="lb-zoom-in-sylar" title="Zoom In" style="background: none; border: none; color: #00C853; font-size: 1.8rem; cursor: pointer; display: flex; align-items: center; padding: 0;">+</button>
+            <button id="lb-zoom-out-sylar" title="Zoom Out" style="background: none; border: none; color: #00C853; font-size: 1.8rem; cursor: pointer; display: flex; align-items: center; padding: 0; margin-top: -3px;">-</button>
+            <button id="lb-reset-sylar" title="Reset Zoom" style="background: none; border: none; color: #fff; font-size: 0.9rem; cursor: pointer; font-family: 'Rajdhani'; display: flex; align-items: center; padding: 0;">RESET</button>
+            <div style="width: 1px; height: 16px; background: #555; margin: 0 5px;"></div>
+            <button id="lb-download-sylar" title="Download" style="background: none; border: none; color: #fff; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; padding: 0;">⬇</button>
+            <button id="lb-fullscreen-sylar" title="Fullscreen" style="background: none; border: none; color: #fff; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; padding: 0;">⛶</button>
           </div>
         </div>
         <!-- Painel de Informações -->
@@ -564,14 +564,14 @@
   <script>
     (function () {
       const sylarProjects = [
-        { id: 1, file: "WhatsApp Image 2026-04-30 at 16.02.26.jpeg", title: "Dashboard Analytics 01", category: "dashboard", desc: "Captura de tela do dashboard de análise de dados em tempo real.", tech: ["Power BI", "Excel", "BI"] },
-        { id: 2, file: "WhatsApp Image 2026-04-30 at 16.03.11.jpeg", title: "Dashboard Analytics 02", category: "dashboard", desc: "Painel de controle para monitoramento de KPIs.", tech: ["Power BI", "Data Studio"] },
-        { id: 3, file: "WhatsApp Image 2026-04-30 at 16.04.17.jpeg", title: "Relatório de Produção", category: "report", desc: "Relatório visual de produção e indicadores de performance.", tech: ["Excel", "VBA", "Python"] },
-        { id: 4, file: "WhatsApp Image 2026-04-30 at 16.04.44.jpeg", title: "Análise de Vendas", category: "report", desc: "Análise comparativa de vendas por período.", tech: ["Excel", "Power Query"] },
-        { id: 5, file: "WhatsApp Image 2026-04-30 at 16.05.18.jpeg", title: "Fluxo de Dados ETL", category: "automation", desc: "Processo automatizado de extração, transformação e carga de dados.", tech: ["Python", "Pandas", "SQL"] },
-        { id: 6, file: "WhatsApp Image 2026-04-30 at 16.11.07.jpeg", title: "Métricas Operacionais", category: "dashboard", desc: "Métricas operacionais consolidadas do trimestre.", tech: ["Metabase", "PostgreSQL"] },
-        { id: 7, file: "WhatsApp Image 2026-04-30 at 16.12.36.jpeg", title: "Data Intelligence Report", category: "report", desc: "Relatório de inteligência de dados com insights estratégicos.", tech: ["Looker Studio", "BigQuery"] },
-        { id: 8, file: "WhatsApp Image 2026-04-30 at 16.13.26.jpeg", title: "Sistema de Validação", category: "automation", desc: "Sistema automatizado para validação e cruzamento de bases.", tech: ["Excel", "VBA", "Macro"] },
+        { id: 1, file: "WhatsApp Image 2026-04-30 at 16.02.26.jpeg", title: "Dashboard de Produção", category: "dashboard", desc: "Dashboard interativo de monitoramento da produção industrial. KPIs em tempo real com gauge de desempenho, barra de produtividade e comparação mensal. Desenvolvido para gestão de chão de fábrica.", tech: ["Power BI", "Excel VBA", "ETL"] },
+        { id: 2, file: "WhatsApp Image 2026-04-30 at 16.03.11.jpeg", title: "Painel de KPIs Executivo", category: "dashboard", desc: "Painel executivo consolidado com indicadores de performance, metas e gauges. Interface escura com visualização rápida para tomada de decisão em reuniões estratégicas.", tech: ["Power BI", "DAX", "Data Studio"] },
+        { id: 3, file: "WhatsApp Image 2026-04-30 at 16.04.17.jpeg", title: "Análise de Tendências", category: "report", desc: "Relatório visual de análise de tendências de produção ao longo do tempo. Gráficos de linha com projeções e identificação de padrões sazonais para planejamento estratégico.", tech: ["Excel", "VBA", "Python"] },
+        { id: 4, file: "WhatsApp Image 2026-04-30 at 16.04.44.jpeg", title: "Monitor de Performance", category: "dashboard", desc: "Sistema de monitoramento contínuo com gauges, gráficos de barras e indicadores de status. Visão 360° das operações com atualização automática via macro.", tech: ["Excel", "Power Query", "VBA"] },
+        { id: 5, file: "WhatsApp Image 2026-04-30 at 16.05.18.jpeg", title: "Fluxo de Dados ETL", category: "automation", desc: "Processo automatizado de Extração, Transformação e Carga de dados. Pipeline visual mostrando a arquitetura de integração entre fontes de dados e dashboards finais.", tech: ["Python", "Pandas", "SQL"] },
+        { id: 6, file: "WhatsApp Image 2026-04-30 at 16.11.07.jpeg", title: "Base de Dados Operacional", category: "report", desc: "Planilha mestre com base de dados operacional formatada. Tabela com validações, formatação condicional e campos calculados para controle de qualidade.", tech: ["Excel", "Formatação Condicional", "Validação"] },
+        { id: 7, file: "WhatsApp Image 2026-04-30 at 16.12.36.jpeg", title: "Relatório Consolidado", category: "report", desc: "Relatório gerencial consolidado com formatação profissional. Dados organizados com destaque visual em cores para identificação rápida de desvios e alertas.", tech: ["Excel", "Power Query", "VBA"] },
+        { id: 8, file: "WhatsApp Image 2026-04-30 at 16.13.26.jpeg", title: "Sistema de Validação EAN", category: "automation", desc: "Sistema automatizado para validação e cruzamento de códigos EAN. Interface com botões macro para processamento em lote e geração automática de relatórios de consistência.", tech: ["Excel", "VBA Macro", "Validação"] },
       ];
 
       const galleryGrid = document.getElementById('sylar-gallery-grid');
@@ -635,9 +635,20 @@
       };
 
       // Zoom Controls
-      document.getElementById('lb-zoom-in-sylar').onclick = () => { if (currentZoom < 3) { currentZoom += 0.5; lbImg.style.transform = `scale(${currentZoom})`; } };
-      document.getElementById('lb-zoom-out-sylar').onclick = () => { if (currentZoom > 0.5) { currentZoom -= 0.5; lbImg.style.transform = `scale(${currentZoom})`; } };
-      document.getElementById('lb-reset-sylar').onclick = () => { currentZoom = 1; lbImg.style.transform = `scale(1)`; };
+      document.getElementById('lb-zoom-in-sylar').onclick = () => {
+        if (currentZoom < 3) { currentZoom += 0.5; updateZoomSylar(); }
+      };
+      document.getElementById('lb-zoom-out-sylar').onclick = () => {
+        if (currentZoom > 0.5) { currentZoom -= 0.5; updateZoomSylar(); }
+      };
+      document.getElementById('lb-reset-sylar').onclick = () => {
+        currentZoom = 1; updateZoomSylar();
+      };
+
+      function updateZoomSylar() {
+        lbImg.style.transform = `scale(${currentZoom})`;
+        lbImg.style.cursor = currentZoom > 1 ? 'grab' : 'zoom-in';
+      }
 
       // Download
       document.getElementById('lb-download-sylar').onclick = () => {
@@ -653,8 +664,13 @@
       document.getElementById('lb-fullscreen-sylar').onclick = () => {
         const imgContainer = document.getElementById('sylar-img-container');
         if (!document.fullscreenElement) {
-          if (imgContainer.requestFullscreen) imgContainer.requestFullscreen();
-          else if (imgContainer.webkitRequestFullscreen) imgContainer.webkitRequestFullscreen();
+          if (imgContainer.requestFullscreen) {
+            imgContainer.requestFullscreen().catch(err => {
+              console.error(`Erro ao tentar tela cheia: ${err.message}`);
+            });
+          } else if (imgContainer.webkitRequestFullscreen) {
+            imgContainer.webkitRequestFullscreen();
+          }
         } else {
           if (document.exitFullscreen) document.exitFullscreen();
           else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
