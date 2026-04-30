@@ -12,6 +12,12 @@
       --theme-rgb: 0, 200, 83;
     }
 
+    /* Expansão para Galeria de Alta Performance */
+    .page-container {
+      max-width: 1300px !important;
+      padding: 40px 50px;
+    }
+
     /* SYLAR ARCHIVES STYLES */
     .gallery-masonry {
       column-count: 3;
@@ -364,97 +370,35 @@
 
     <div class="portfolio-section">
       <div class="portfolio-header">
-        <span class="portfolio-label">PORTFÓLIO</span>
-        <h2 class="portfolio-title">Dashboards & Análises</h2>
-        <p class="portfolio-subtitle">Visualizações de dados, relatórios executivos e projetos de Business Intelligence.
-        </p>
+        <span class="portfolio-label">SYLAR ARCHIVES</span>
+        <h2 class="portfolio-title">Inteligência de Dados</h2>
+        <p class="portfolio-subtitle">Repositório de Dashboards, Relatórios e Automações SYLAR.</p>
       </div>
-      <div class="portfolio-tabs" id="sylar-tabs">
-        <button class="tab-btn active" data-tab="sylar-dash">Dashboards</button>
-        <button class="tab-btn" data-tab="sylar-anal">Análises</button>
-        <button class="tab-btn" data-tab="sylar-auto">Scripts Python</button>
+
+      <!-- Filtros de Categoria -->
+      <div class="gallery-filters" style="margin-bottom: 40px; display: flex; justify-content: flex-start; gap: 10px; flex-wrap: wrap;">
+        <button class="filter-btn active" data-filter="all">TODOS</button>
+        <button class="filter-btn" data-filter="dashboard">DASHBOARDS</button>
+        <button class="filter-btn" data-filter="report">RELATÓRIOS</button>
+        <button class="filter-btn" data-filter="automation">AUTOMAÇÃO</button>
       </div>
-      <div class="portfolio-grid tab-content active" id="sylar-dash">
-        <div class="portfolio-card placeholder-card">
-          <div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon">
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-              <circle cx="8.5" cy="8.5" r="1.5"></circle>
-              <polyline points="21 15 16 10 5 21"></polyline>
-            </svg><span>Dashboard Power BI</span><small>Adicione screenshot aqui</small></div>
-        </div>
-        <div class="portfolio-card placeholder-card">
-          <div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon">
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-              <circle cx="8.5" cy="8.5" r="1.5"></circle>
-              <polyline points="21 15 16 10 5 21"></polyline>
-            </svg><span>Dashboard Looker Studio</span><small>Adicione screenshot aqui</small></div>
-        </div>
-        <div class="portfolio-card placeholder-card">
-          <div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon">
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-              <circle cx="8.5" cy="8.5" r="1.5"></circle>
-              <polyline points="21 15 16 10 5 21"></polyline>
-            </svg><span>Dashboard Metabase</span><small>Adicione screenshot aqui</small></div>
-        </div>
+
+      <!-- Grid de Imagens (Masonry) -->
+      <div id="sylar-gallery-grid" class="gallery-masonry">
+        <!-- Injetado via JS -->
       </div>
-      <div class="portfolio-grid tab-content" id="sylar-anal" style="display:none;">
-        <div class="portfolio-card placeholder-card">
-          <div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon">
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-              <circle cx="8.5" cy="8.5" r="1.5"></circle>
-              <polyline points="21 15 16 10 5 21"></polyline>
-            </svg><span>Análise de Vendas</span><small>Adicione gráfico ou relatório</small></div>
-        </div>
-        <div class="portfolio-card placeholder-card">
-          <div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon">
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-              <circle cx="8.5" cy="8.5" r="1.5"></circle>
-              <polyline points="21 15 16 10 5 21"></polyline>
-            </svg><span>Relatório Executivo</span><small>Adicione imagem aqui</small></div>
-        </div>
-      </div>
-      <div class="portfolio-grid tab-content" id="sylar-auto" style="display:none;">
-        <div class="portfolio-card placeholder-card">
-          <div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon">
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-              <circle cx="8.5" cy="8.5" r="1.5"></circle>
-              <polyline points="21 15 16 10 5 21"></polyline>
-            </svg><span>Script Python / Jupyter</span><small>Adicione screenshot ou código</small></div>
-        </div>
+
+      <!-- Botão de Upload Simulado -->
+      <div style="text-align: center; margin-top: 60px;">
+        <label for="sylar-upload" class="upload-btn-wrapper" style="cursor: pointer;">
+          <button style="background: linear-gradient(45deg, #00C853, #00E676); border: none; padding: 15px 40px; color: #000; font-family: 'Orbitron'; font-weight: bold; font-size: 1rem; clip-path: polygon(5% 0, 100% 0, 95% 100%, 0% 100%); box-shadow: 0 0 15px rgba(0, 200, 83, 0.4); transition: transform 0.2s;" onclick="document.getElementById('sylar-upload').click()">
+            + ENVIAR ARQUIVO (SIMULADO)
+          </button>
+          <input type="file" id="sylar-upload" name="myfile" style="display:none;" accept="image/*" onchange="simulateUploadSylar(this)" />
+        </label>
+        <p style="color: #666; font-size: 0.8rem; margin-top: 10px; font-family: 'Rajdhani'">O upload é apenas visual no frontend.</p>
       </div>
     </div>
-
-
-    <!-- ========================================== -->
-    <!-- SEÇÃO GALERIA SYLAR - DATA ARCHIVES       -->
-    <!-- ========================================== -->
-    <section id="sylar-gallery-section"
-      style="padding: 80px 20px; background: radial-gradient(circle at center, #0a1116 0%, #050a10 100%); position: relative; overflow: visible; border-top: 1px solid rgba(0, 200, 83, 0.2);">
-      <div class="container" style="max-width: 1400px; margin: 0 auto; position: relative; z-index: 2;">
-        <div class="section-header" style="text-align: center; margin-bottom: 60px;">
-          <h2
-            style="font-family: 'Orbitron', sans-serif; font-size: 3rem; color: #00C853; text-shadow: 0 0 20px rgba(0, 200, 83, 0.6); margin-bottom: 10px;">
-            SYLAR <span style="color: #fff;">ARCHIVES</span>
-          </h2>
-          <p
-            style="font-family: 'Rajdhani', sans-serif; font-size: 1.2rem; color: #ccc; max-width: 700px; margin: 0 auto;">
-            Repositório de Inteligência. Planilhas, Bases de Dados e Automações SYLAR.
-          </p>
-        </div>
-
-        <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 40px; flex-wrap: wrap;">
-          <button class="filter-btn active" data-filter="all" style="background: #00C853; color: #000; border: 1px solid #00C853; padding: 8px 22px; border-radius: 20px; cursor: pointer; font-family: 'Rajdhani'; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;">Todos</button>
-          <button class="filter-btn" data-filter="dashboard" style="background: transparent; color: #aaa; border: 1px solid #444; padding: 8px 22px; border-radius: 20px; cursor: pointer; font-family: 'Rajdhani'; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;">Dashboard</button>
-          <button class="filter-btn" data-filter="report" style="background: transparent; color: #aaa; border: 1px solid #444; padding: 8px 22px; border-radius: 20px; cursor: pointer; font-family: 'Rajdhani'; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;">Relatórios</button>
-          <button class="filter-btn" data-filter="automation" style="background: transparent; color: #aaa; border: 1px solid #444; padding: 8px 22px; border-radius: 20px; cursor: pointer; font-family: 'Rajdhani'; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;">Automação</button>
-        </div>
-
-        <div id="sylar-gallery-grid" class="gallery-masonry"
-          style="column-count: 3; column-gap: 20px; position: relative;">
-          <!-- Injetado via JS -->
-        </div>
-      </div>
-    </section>
 
     <!-- LIGHTBOX MODAL (VISUALIZADOR DE DOCUMENTOS) -->
     <div id="sylar-lightbox" class="lightbox-overlay"
@@ -466,33 +410,114 @@
         <!-- Área da Imagem -->
         <div class="lb-image-container" id="sylar-img-container" style="flex: 2; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; border-radius: 8px;">
           <img id="lb-img-sylar" src="" alt="Full View" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transition: transform 0.2s ease; cursor: zoom-in; box-shadow: 0 0 30px rgba(0, 200, 83, 0.2);" />
-          <div class="lb-controls" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 15px; background: rgba(0,0,0,0.8); padding: 8px 25px; border-radius: 30px; border: 1px solid #00C853;">
-            <button id="lb-zoom-in-sylar" title="Zoom In" style="background: none; border: none; color: #00C853; font-size: 1.8rem; cursor: pointer; display: flex; align-items: center; padding: 0;">+</button>
-            <button id="lb-zoom-out-sylar" title="Zoom Out" style="background: none; border: none; color: #00C853; font-size: 1.8rem; cursor: pointer; display: flex; align-items: center; padding: 0; margin-top: -3px;">-</button>
-            <button id="lb-reset-sylar" title="Reset Zoom" style="background: none; border: none; color: #fff; font-size: 0.9rem; cursor: pointer; font-family: 'Rajdhani'; display: flex; align-items: center; padding: 0;">RESET</button>
-            <div style="width: 1px; height: 16px; background: #555; margin: 0 5px;"></div>
-            <button id="lb-download-sylar" title="Download" style="background: none; border: none; color: #fff; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; padding: 0;">⬇</button>
-            <button id="lb-fullscreen-sylar" title="Fullscreen" style="background: none; border: none; color: #fff; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; padding: 0;">⛶</button>
+          <div class="lb-controls">
+            <button id="lb-zoom-in-sylar" title="Zoom In">+</button>
+            <button id="lb-zoom-out-sylar" title="Zoom Out">-</button>
+            <button id="lb-reset-sylar" title="Reset Zoom">RESET</button>
+            <div style="width: 1px; height: 16px; background: rgba(255,255,255,0.2); margin: 0 5px;"></div>
+            <button id="lb-download-sylar" title="Download"><i class="fas fa-download"></i></button>
+            <button id="lb-fullscreen-sylar" title="Fullscreen"><i class="fas fa-expand"></i></button>
           </div>
         </div>
         <!-- Painel de Informações -->
-        <div class="lb-info-panel" style="flex: 1; background: rgba(10, 15, 20, 0.9); border-left: 2px solid #00C853; padding: 40px; display: flex; flex-direction: column; color: #fff; overflow-y: auto; min-width: 300px;">
-          <h3 id="lb-title-sylar" style="font-family: 'Orbitron'; color: #00C853; font-size: 2rem; margin-bottom: 10px; text-transform: uppercase; word-break: break-word; line-height: 1.2;">Título</h3>
-          <span id="lb-category-sylar" style="color: #888; font-family: 'Rajdhani'; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 30px; display: block;">Categoria</span>
-          <div style="margin-bottom: 25px;">
-            <h4 style="color: #fff; font-family: 'Rajdhani'; border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 10px;">CONCEITO & DESIGN</h4>
-            <p id="lb-desc-sylar" style="font-family: 'Rajdhani'; color: #ddd; line-height: 1.6;">Descrição...</p>
+        <div class="lb-info-panel">
+          <h3 id="lb-title-sylar">Título do Projeto</h3>
+          <span id="lb-category-sylar">Categoria</span>
+          
+          <div class="info-block">
+            <h4>CONCEITO & INSIGHTS</h4>
+            <p id="lb-desc-sylar">Descrição detalhada do projeto...</p>
           </div>
-          <div style="margin-bottom: 25px;">
-            <h4 style="color: #fff; font-family: 'Rajdhani'; border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 10px;">DETALHES TÉCNICOS</h4>
-            <ul id="lb-tech-sylar" style="font-family: 'Rajdhani'; color: #aaa; list-style: none; padding: 0;"></ul>
+
+          <div class="info-block">
+            <h4>STACK TECNOLÓGICA</h4>
+            <ul id="lb-tech-sylar">
+              <!-- Injetado via JS -->
+            </ul>
           </div>
-          <div style="margin-top: auto; padding-top: 20px; border-top: 1px solid #333;">
-            <p style="font-family: 'Orbitron'; font-size: 0.8rem; color: #00C853;">SYLAR DATA SYSTEM</p>
+
+          <div class="lb-footer">
+            <p>SYLAR DATA INTELLIGENCE SYSTEM</p>
           </div>
         </div>
       </div>
     </div>
+
+    <style>
+      .lb-controls {
+        position: absolute;
+        bottom: 25px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: rgba(0, 15, 10, 0.9);
+        padding: 10px 25px;
+        border-radius: 40px;
+        border: 1px solid #00C853;
+        box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+        z-index: 10;
+      }
+      .lb-controls button {
+        background: none;
+        border: none;
+        color: #00C853;
+        font-family: 'Orbitron';
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: 0.3s;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+      }
+      .lb-controls button:hover {
+        color: #fff;
+        text-shadow: 0 0 10px #00C853;
+      }
+      .lb-info-panel {
+        flex: 1;
+        background: rgba(5, 12, 15, 0.95);
+        border-left: 2px solid #00C853;
+        padding: 45px;
+        display: flex;
+        flex-direction: column;
+        color: #fff;
+        overflow-y: auto;
+        min-width: 340px;
+      }
+      .lb-info-panel h3 {
+        font-family: 'Orbitron';
+        color: #00C853;
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        line-height: 1.1;
+      }
+      .lb-info-panel span {
+        color: #888;
+        font-family: 'Rajdhani';
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 35px;
+        font-size: 0.85rem;
+      }
+      .info-block { margin-bottom: 30px; }
+      .info-block h4 {
+        color: #fff;
+        font-family: 'Orbitron';
+        font-size: 0.9rem;
+        border-bottom: 1px solid rgba(0, 200, 83, 0.3);
+        padding-bottom: 8px;
+        margin-bottom: 15px;
+        letter-spacing: 1px;
+      }
+      .info-block p { font-family: 'Rajdhani'; color: #ccc; line-height: 1.6; font-size: 1.05rem; }
+      .info-block ul { padding: 0; list-style: none; }
+      .info-block li { color: #888; font-family: 'Rajdhani'; margin-bottom: 5px; font-size: 0.95rem; }
+      .lb-footer { margin-top: auto; padding-top: 25px; border-top: 1px solid #1a2a2a; }
+      .lb-footer p { font-family: 'Orbitron'; font-size: 0.75rem; color: #00C853; opacity: 0.7; letter-spacing: 2px; }
+    </style>
 
     <!-- ========================================== -->
     <!-- SEÇÃO SYLAR ANALYTICS - DASHBOARD INTERATIVO -->
@@ -547,17 +572,6 @@
   </div>
 
   <script src="bg-canvas.js"></script>
-  <script>
-    document.querySelectorAll('#sylar-tabs .tab-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('#sylar-tabs .tab-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
-        document.getElementById(btn.dataset.tab).style.display = 'grid';
-      });
-    });
-  </script>
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
@@ -791,6 +805,38 @@
       };
 
       document.getElementById('dash-modal').addEventListener('click', e => { if (e.target.id === 'dash-modal') closeDashModal(); });
+
+      // Simulação de Upload
+      window.simulateUploadSylar = function(input) {
+        if (input.files && input.files[0]) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            alert("✅ Arquivo recebido pelo sistema SYLAR! (Simulação visual apenas)");
+            const newProject = { 
+              id: Date.now(), 
+              file: e.target.result, 
+              title: input.files[0].name, 
+              category: "dashboard", 
+              desc: "Arquivo enviado pelo usuário para análise.", 
+              tech: ["Upload Local"] 
+            };
+            
+            const item = document.createElement('div');
+            item.className = 'gallery-item-2';
+            item.onclick = () => openLightbox(newProject);
+            
+            item.innerHTML = `
+              <img src="${e.target.result}" alt="${newProject.title}">
+              <div class="item-overlay-2">
+                <h3 class="item-title-2">${newProject.title}</h3>
+                <span class="item-cat-2">${newProject.category}</span>
+              </div>
+            `;
+            galleryGrid.prepend(item);
+          }
+          reader.readAsDataURL(input.files[0]);
+        }
+      };
 
       document.addEventListener('DOMContentLoaded', () => {
         renderGallery();
