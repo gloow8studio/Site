@@ -1,0 +1,401 @@
+import os
+
+base_dir = r"c:\Users\luisc\Downloads\Site3D AnimaMotion"
+verde_path = os.path.join(base_dir, "verde.html")
+planilhas_dir = os.path.join(base_dir, "planilhas silar")
+
+# 1. Scan spreadsheets
+planilhas = []
+if os.path.exists(planilhas_dir):
+    for f in os.listdir(planilhas_dir):
+        if f.endswith((".xlsx", ".xlsm", ".xls")) and not f.startswith("~$"):
+            planilhas.append(f)
+
+# 2. Generate JS arrays
+sylar_projects_js = "    const sylarProjects = [\n"
+for i, f in enumerate(planilhas):
+    title = f.replace(".xlsx", "").replace(".xlsm", "").replace(".xls", "")
+    sylar_projects_js += f'        {{ id: {i+1}, file: "{f}", title: "{title}", category: "spreadsheet", desc: "Relatório técnico e base de dados processada. Clique para ver detalhes ou baixar.", tech: ["Excel", "VBA", "BI"] }},\n'
+sylar_projects_js += "    ];\n"
+
+# 3. HTML Content
+html_to_inject = """
+    <!-- ========================================== -->
+    <!-- SEÇÃO GALERIA SYLAR - DATA ARCHIVES       -->
+    <!-- ========================================== -->
+    <section id="sylar-gallery-section" style="padding: 80px 20px; background: radial-gradient(circle at center, #0a1116 0%, #050a10 100%); position: relative; overflow: visible; border-top: 1px solid rgba(0, 200, 83, 0.2);">
+        <div class="container" style="max-width: 1400px; margin: 0 auto; position: relative; z-index: 2;">
+            <div class="section-header" style="text-align: center; margin-bottom: 60px;">
+                <h2 style="font-family: 'Orbitron', sans-serif; font-size: 3rem; color: #00C853; text-shadow: 0 0 20px rgba(0, 200, 83, 0.6); margin-bottom: 10px;">
+                    SYLAR <span style="color: #fff;">ARCHIVES</span>
+                </h2>
+                <p style="font-family: 'Rajdhani', sans-serif; font-size: 1.2rem; color: #ccc; max-width: 700px; margin: 0 auto;">
+                    Repositório de Inteligência. Planilhas, Bases de Dados e Automações SYLAR.
+                </p>
+            </div>
+
+            <div id="sylar-gallery-grid" class="gallery-masonry" style="column-count: 3; column-gap: 20px; position: relative;">
+                <!-- Injetado via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- LIGHTBOX MODAL (VISUALIZADOR DE DOCUMENTOS) -->
+    <div id="sylar-lightbox" class="lightbox-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; backdrop-filter: blur(10px); transition: opacity 0.3s;">
+        <button id="lb-close-sylar" style="position: absolute; top: 20px; right: 40px; background: none; border: none; color: #00C853; font-size: 5rem; cursor: pointer; z-index: 999999;">&times;</button>
+        <div class="lightbox-content" style="display: flex; height: 100%; width: 100%; max-width: 1600px; margin: 0 auto; padding: 20px; box-sizing: border-box;">
+            <div class="lb-image-container" id="sylar-img-container" style="flex: 2; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; border-radius: 8px; background: rgba(0,200,83,0.05); border: 1px solid rgba(0,200,83,0.2);">
+                <div id="lb-doc-preview" style="text-align: center; color: #00C853;">
+                    <i class="fas fa-file-excel" style="font-size: 8rem; margin-bottom: 20px;"></i>
+                    <h2 id="lb-doc-name" style="font-family: 'Orbitron';">Nome da Planilha</h2>
+                </div>
+                <div class="lb-controls" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 15px; background: rgba(0,0,0,0.8); padding: 8px 25px; border-radius: 30px; border: 1px solid #00C853;">
+                    <button id="lb-download-sylar" title="Baixar Arquivo" style="background: none; border: none; color: #fff; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; gap: 10px; font-family: 'Rajdhani';">
+                        <i class="fas fa-download"></i> DOWNLOAD
+                    </button>
+                </div>
+            </div>
+            <div class="lb-info-panel" style="flex: 1; background: rgba(10, 15, 20, 0.9); border-left: 2px solid #00C853; padding: 40px; display: flex; flex-direction: column; color: #fff; overflow-y: auto; min-width: 300px;">
+                <h3 id="lb-title-sylar" style="font-family: 'Orbitron'; color: #00C853; font-size: 2rem; margin-bottom: 10px;">Título</h3>
+                <span id="lb-category-sylar" style="color: #888; font-family: 'Rajdhani'; text-transform: uppercase; margin-bottom: 30px;">DATABASE</span>
+                <div class="info-block" style="margin-bottom: 25px;">
+                    <h4 style="border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 10px;">DESCRIÇÃO DOS DADOS</h4>
+                    <p id="lb-desc-sylar" style="color: #ddd;">Detalhes...</p>
+                </div>
+                <div class="info-block">
+                    <h4 style="border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 10px;">TECNOLOGIAS ETL</h4>
+                    <ul id="lb-tech-sylar" style="color: #aaa; list-style: none; padding: 0;"></ul>
+                </div>
+                <div style="margin-top: auto; padding-top: 20px; border-top: 1px solid #333;">
+                    <p style="font-family: 'Orbitron'; font-size: 0.8rem; color: #00C853;">SYLAR DATA SYSTEM</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SEÇÃO SYLAR ANALYTICS - DASHBOARD INTERATIVO -->
+    <!-- ========================================== -->
+    <section id="sylar-analytics-section" style="padding: 80px 20px; border-top: 1px solid rgba(0, 200, 83, 0.2);">
+        <div class="container" style="max-width: 1200px; margin: 0 auto;">
+            <div class="section-header" style="text-align: center; margin-bottom: 60px;">
+                <h2 style="font-family: 'Orbitron', sans-serif; font-size: 2.5rem; color: #fff;">SYLAR <span style="color: #00C853;">ANALYTICS</span></h2>
+                <p style="color: #aaa;">Data Visualization & Interactive Business Intelligence</p>
+            </div>
+            
+            <div class="dashboard-grid" id="analytics-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <!-- Injetado via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Player de Planilha (Analytics) -->
+    <div class="modal-overlay" id="dash-modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(5px); z-index: 10000; display: none; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s;">
+        <div class="modal-content" style="width: 90%; max-width: 1200px; height: 85vh; background: #050a10; border: 2px solid #00C853; border-radius: 15px; display: flex; flex-direction: column; position: relative; overflow: hidden;">
+            <div class="modal-header" style="padding: 15px 25px; background: rgba(0, 200, 83, 0.1); border-bottom: 1px solid #00C853; display: flex; justify-content: space-between; align-items: center;">
+                <h2 class="modal-title" id="modal-title" style="font-family: 'Orbitron'; color: #00C853;">Dashboard Title</h2>
+                <button class="close-btn" onclick="closeDashModal()" style="background:none; border:none; color:#fff; font-size:2.5rem; cursor:pointer;">&times;</button>
+            </div>
+            <div class="modal-body" style="flex: 1; display: flex; flex-wrap: wrap; padding: 20px; gap: 20px; overflow-y: auto;">
+                <div class="controls-panel" id="controls-area" style="flex: 1; min-width: 300px; background: rgba(255,255,255,0.03); padding: 20px; border-radius: 8px; border: 1px solid rgba(0, 200, 83, 0.2);">
+                    <h3 style="color:#fff; margin-bottom:15px; font-family:'Orbitron'">Variáveis de Entrada</h3>
+                </div>
+                <div class="charts-panel" id="charts-area" style="flex: 2; min-width: 350px; display: flex; flex-direction: column; gap: 20px;">
+                    <div class="chart-container" style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); flex: 1; position: relative; min-height: 250px;">
+                        <canvas id="mainChart"></canvas>
+                    </div>
+                    <div class="chart-container" style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); flex: 1; position: relative; min-height: 200px;">
+                        <canvas id="secondaryChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+"""
+
+css_to_inject = """
+    /* SYLAR ARCHIVES STYLES */
+    .gallery-masonry { column-count: 3; column-gap: 20px; }
+    @media (max-width: 1024px) { .gallery-masonry { column-count: 2; } }
+    @media (max-width: 600px) { .gallery-masonry { column-count: 1; } }
+
+    .gallery-item-2 {
+        break-inside: avoid; margin-bottom: 20px; position: relative;
+        background: #111; border: 1px solid #333; transition: 0.4s;
+        cursor: pointer; overflow: hidden; display: block;
+        padding: 40px 20px; text-align: center; border-radius: 8px;
+    }
+    .gallery-item-2:hover {
+        border-color: #00C853; box-shadow: 0 0 20px rgba(0, 200, 83, 0.3); transform: translateY(-5px);
+    }
+    .gallery-item-2 i { font-size: 4rem; color: #00C853; margin-bottom: 15px; display: block; }
+    .gallery-item-2 h3 { font-family: 'Orbitron'; font-size: 1.1rem; color: #fff; margin-bottom: 5px; }
+    .gallery-item-2 span { color: #00C853; font-family: 'Rajdhani'; font-size: 0.8rem; text-transform: uppercase; }
+
+    /* DASHBOARD CARDS */
+    .dash-card {
+        background: rgba(0, 20, 30, 0.85); border: 1px solid #00C853;
+        border-radius: 10px; overflow: hidden; transition: 0.4s;
+        cursor: pointer; position: relative;
+    }
+    .dash-card:hover { transform: translateY(-10px); box-shadow: 0 0 20px rgba(0, 200, 83, 0.3); }
+    .dash-thumb {
+        width: 100%; height: 180px; background: linear-gradient(45deg, #004d40, #00251a);
+        display: flex; align-items: center; justify-content: center;
+        color: #00C853; font-family: 'Orbitron'; font-size: 1.2rem; text-align: center; padding: 20px;
+    }
+    .dash-info { padding: 20px; }
+    .dash-title { font-family: 'Orbitron'; font-size: 1.3rem; color: #fff; margin-bottom: 10px; }
+    .dash-desc { font-size: 0.9rem; color: #ccc; line-height: 1.4; }
+    .btn-open {
+        margin-top: 15px; padding: 8px 20px; background: transparent;
+        border: 1px solid #00C853; color: #00C853; font-family: 'Orbitron';
+        font-size: 0.7rem; text-transform: uppercase; cursor: pointer; transition: 0.3s;
+    }
+    .dash-card:hover .btn-open { background: #00C853; color: #000; box-shadow: 0 0 15px #00C853; }
+
+    .control-group { margin-bottom: 20px; }
+    .control-group label { display: block; color: #aaa; margin-bottom: 5px; font-size: 0.9rem; }
+    .control-group input[type="range"] { width: 100%; accent-color: #00C853; }
+    .value-display { float: right; color: #00C853; font-weight: bold; font-family: 'Orbitron'; }
+"""
+
+js_to_inject = """
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    (function() {
+        REPLACE_PROJECTS_JS
+
+        const dashboards = [
+            {
+                id: 'vendas_2024',
+                title: 'Projeção de Vendas 2024',
+                desc: 'Simulador de crescimento baseado em investimento em mídia e conversão.',
+                data: {
+                    labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                    baseSales: [12000, 15000, 13500, 18000, 21000, 24000],
+                    controls: [
+                        { id: 'investimento', label: 'Investimento Mídia (R$)', min: 1000, max: 50000, step: 1000, value: 10000 },
+                        { id: 'conversao', label: 'Taxa Conversão (%)', min: 1, max: 10, step: 0.1, value: 3.5 }
+                    ]
+                }
+            },
+            {
+                id: 'marketing_roi',
+                title: 'ROI Campanhas Digitais',
+                desc: 'Análise de retorno sobre investimento por canal (Social, Search, Display).',
+                data: {
+                    labels: ['Social', 'Search', 'Display', 'Email', 'Orgânico'],
+                    costs: [5000, 8000, 3000, 500, 0],
+                    revenue: [12000, 25000, 6000, 4000, 8000],
+                    controls: [
+                        { id: 'multiplier', label: 'Fator Sazonalidade', min: 0.5, max: 2.0, step: 0.1, value: 1.0 }
+                    ]
+                }
+            },
+            {
+                id: 'financeiro',
+                title: 'Fluxo de Caixa Projetado',
+                desc: 'Demonstrativo de entradas e saídas com ajuste de custos operacionais.',
+                data: {
+                    labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                    fixedCosts: [45000, 45000, 48000, 50000],
+                    controls: [
+                        { id: 'receita_base', label: 'Receita Base Trimestral', min: 5000, max: 200000, step: 5000, value: 80000 },
+                        { id: 'custo_var', label: 'Custo Variável (%)', min: 10, max: 60, step: 1, value: 30 }
+                    ]
+                }
+            }
+        ];
+
+        const galleryGrid = document.getElementById('sylar-gallery-grid');
+        const lb = document.getElementById('sylar-lightbox');
+        const lbTitle = document.getElementById('lb-title-sylar');
+        const lbCat = document.getElementById('lb-category-sylar');
+        const lbDesc = document.getElementById('lb-desc-sylar');
+        const lbTech = document.getElementById('lb-tech-sylar');
+        const lbDocName = document.getElementById('lb-doc-name');
+        const lbDownload = document.getElementById('lb-download-sylar');
+
+        function renderGallery() {
+            if (!galleryGrid) return;
+            galleryGrid.innerHTML = '';
+            sylarProjects.forEach(p => {
+                const item = document.createElement('div');
+                item.className = 'gallery-item-2';
+                item.onclick = () => openLightbox(p);
+                item.innerHTML = `
+                    <i class="fas fa-file-excel"></i>
+                    <h3>${p.title}</h3>
+                    <span>${p.category}</span>
+                `;
+                galleryGrid.appendChild(item);
+            });
+        }
+
+        function openLightbox(p) {
+            lbTitle.innerText = p.title;
+            lbCat.innerText = p.category;
+            lbDesc.innerText = p.desc;
+            lbDocName.innerText = p.file;
+            lbDownload.onclick = () => {
+                const a = document.createElement('a');
+                a.href = 'planilhas silar/' + p.file;
+                a.download = p.file;
+                a.click();
+            };
+            lbTech.innerHTML = '';
+            p.tech.forEach(t => {
+                const li = document.createElement('li');
+                li.innerText = '• ' + t;
+                lbTech.appendChild(li);
+            });
+            lb.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        document.getElementById('lb-close-sylar').onclick = () => {
+            lb.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        };
+
+        const analyticsGrid = document.getElementById('analytics-grid');
+        let mainChartInstance = null;
+        let secChartInstance = null;
+        let currentDashData = null;
+
+        function renderAnalytics() {
+            if (!analyticsGrid) return;
+            analyticsGrid.innerHTML = '';
+            dashboards.forEach(dash => {
+                const card = document.createElement('div');
+                card.className = 'dash-card';
+                card.onclick = () => openDash(dash.id);
+                card.innerHTML = `
+                    <div class="dash-thumb">${dash.title}</div>
+                    <div class="dash-info">
+                        <h3 class="dash-title">${dash.title}</h3>
+                        <p class="dash-desc">${dash.desc}</p>
+                        <button class="btn-open">Interagir com Dados</button>
+                    </div>
+                `;
+                analyticsGrid.appendChild(card);
+            });
+        }
+
+        window.openDash = function(id) {
+            const dash = dashboards.find(d => d.id === id);
+            if (!dash) return;
+            currentDashData = dash.data;
+            document.getElementById('modal-title').innerText = dash.title;
+            const modal = document.getElementById('dash-modal');
+            modal.style.display = 'flex';
+            modal.style.opacity = '1';
+            document.body.style.overflow = 'hidden';
+            renderControls(dash.data.controls);
+            updateCharts(dash);
+        };
+
+        window.closeDashModal = function() {
+            const modal = document.getElementById('dash-modal');
+            modal.style.display = 'none';
+            modal.style.opacity = '0';
+            document.body.style.overflow = 'auto';
+            if(mainChartInstance) mainChartInstance.destroy();
+            if(secChartInstance) secChartInstance.destroy();
+        };
+
+        function renderControls(controls) {
+            const container = document.getElementById('controls-area');
+            container.innerHTML = '<h3 style="color:#fff; margin-bottom:15px; font-family:\\'Orbitron\\'">Variáveis de Entrada</h3>';
+            controls.forEach(ctrl => {
+                const group = document.createElement('div');
+                group.className = 'control-group';
+                group.innerHTML = `
+                    <label>${ctrl.label} <span class="value-display" id="val-${ctrl.id}">${ctrl.value}</span></label>
+                    <input type="range" id="input-${ctrl.id}" min="${ctrl.min}" max="${ctrl.max}" step="${ctrl.step}" value="${ctrl.value}" oninput="updateValue('${ctrl.id}', this.value)">
+                `;
+                container.appendChild(group);
+            });
+        }
+
+        window.updateValue = function(id, newValue) {
+            document.getElementById(`val-${id}`).innerText = newValue;
+            const ctrl = currentDashData.controls.find(c => c.id === id);
+            ctrl.value = parseFloat(newValue);
+            updateCharts({id: document.getElementById('modal-title').innerText, data: currentDashData});
+        };
+
+        function updateCharts(dash) {
+            const data = dash.data;
+            let c1Data = [];
+            let c2Data = [];
+            let c2Labels = data.labels;
+
+            if (dash.id === 'vendas_2024' || dash.title.includes('Vendas')) {
+                const invest = data.controls.find(c => c.id === 'investimento').value;
+                const conv = data.controls.find(c => c.id === 'conversao').value;
+                const f = (invest / 10000) * (conv / 3.5);
+                c1Data = data.baseSales.map(v => Math.round(v * f));
+                c2Labels = ['Meta', 'Realizado'];
+                c2Data = [25000 * f, c1Data.reduce((a,b)=>a+b,0)/6];
+            } else if (dash.id === 'marketing_roi' || dash.title.includes('ROI')) {
+                const season = data.controls.find(c => c.id === 'multiplier').value;
+                c1Data = data.revenue.map((r, i) => (r - data.costs[i]) * season);
+                c2Data = data.revenue.map(r => r * season);
+            } else {
+                const recBase = data.controls.find(c => c.id === 'receita_base').value;
+                const costVarPerc = data.controls.find(c => c.id === 'custo_var').value / 100;
+                c1Data = data.labels.map((_, i) => recBase - (recBase * costVarPerc) - data.fixedCosts[i]);
+                c2Data = [recBase * costVarPerc, data.fixedCosts.reduce((a,b)=>a+b,0)/4];
+                c2Labels = ['Var', 'Fixo'];
+            }
+
+            const ctx1 = document.getElementById('mainChart').getContext('2d');
+            if (mainChartInstance) mainChartInstance.destroy();
+            mainChartInstance = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: data.labels,
+                    datasets: [{ label: 'Principal', data: c1Data, borderColor: '#00C853', backgroundColor: 'rgba(0, 200, 83, 0.2)', fill: true, tension: 0.4 }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#fff' } } }, scales: { y: { ticks: { color: '#aaa' } }, x: { ticks: { color: '#aaa' } } } }
+            });
+
+            const ctx2 = document.getElementById('secondaryChart').getContext('2d');
+            if (secChartInstance) secChartInstance.destroy();
+            secChartInstance = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: c2Labels,
+                    datasets: [{ label: 'Secundário', data: c2Data, backgroundColor: ['#FFB300', '#AA00FF'] }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display: false }, x: { ticks: { color: '#fff' } } } }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderGallery();
+            renderAnalytics();
+        });
+    })();
+</script>
+"""
+
+# Replace the placeholder in JS
+js_to_inject = js_to_inject.replace("REPLACE_PROJECTS_JS", sylar_projects_js)
+
+# 6. Inject into verde.html
+with open(verde_path, 'r', encoding='utf-8') as f:
+    content = f.read()
+
+content = content.replace("</style>", css_to_inject + "\n    </style>")
+insertion_point = content.rfind("  </div>")
+content = content[:insertion_point] + "\n" + html_to_inject + "\n" + content[insertion_point:]
+content = content.replace("</body>", js_to_inject + "\n</body>")
+
+with open(verde_path, 'w', encoding='utf-8') as f:
+    f.write(content)
+
+print("Success! Sylar page expanded.")
