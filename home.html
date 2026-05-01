@@ -55,7 +55,7 @@
       position: relative;
     }
 
-    /* a-a- PARALLAX BG a-a- */
+    /* ── PARALLAX BG ── */
     #bg {
       position: fixed;
       inset: 0;
@@ -82,7 +82,7 @@
       pointer-events: none
     }
 
-    /* a-a- LEFT PANEL a-a- */
+    /* ── LEFT PANEL ── */
     #left-panel {
       position: relative;
       left: auto;
@@ -169,7 +169,7 @@
       transform: translateX(4px);
     }
 
-    /* a-a- ORBITAL STAGE a-a- */
+    /* ── ORBITAL STAGE ── */
     #stage {
       position: relative;
       z-index: 5;
@@ -186,7 +186,7 @@
       pointer-events: none;
     }
 
-    /* a-a- NUCLEUS a-a- */
+    /* ── NUCLEUS ── */
     #nucleus {
       position: absolute;
       left: 50%;
@@ -272,7 +272,7 @@
       padding: 8px;
     }
 
-    /* a-a- LIGHTNING CANVAS a-a- */
+    /* ── LIGHTNING CANVAS ── */
     #lightning-canvas {
       position: absolute;
       inset: -100px;
@@ -282,7 +282,7 @@
       height: calc(100% + 200px);
     }
 
-    /* a-a- HEX NODES a-a- */
+    /* ── HEX NODES ── */
     .hex-node {
       position: absolute;
       width: 110px;
@@ -346,7 +346,7 @@
       letter-spacing: .1em;
     }
 
-    /* a-a- VFX OVERLAY a-a- */
+    /* ── VFX OVERLAY ── */
     #vfx-layer {
       position: fixed;
       inset: 0;
@@ -360,7 +360,7 @@
       pointer-events: none;
     }
 
-    /* a-a- TRANSITION OVERLAY a-a- */
+    /* ── TRANSITION OVERLAY ── */
     #transition-overlay {
       position: fixed;
       inset: 0;
@@ -371,7 +371,7 @@
       transition: opacity .5s ease;
     }
 
-    /* a-a- RESPONSIVE a-a- */
+    /* ── RESPONSIVE ── */
     @media(max-width:900px) {
       #left-panel {
         max-width: 90vw;
@@ -427,7 +427,7 @@
       }
     }
 
-    /* a-a- BACK BUTTON a-a- */
+    /* ── BACK BUTTON ── */
     #btn-back {
       position: fixed;
       top: 22px;
@@ -470,7 +470,7 @@
 
 <body>
   <a id="btn-back" href="index.html">
-    <span class="bk-arrow">a</span> &nbsp; VOLTAR
+    <span class="bk-arrow">←</span> &nbsp; VOLTAR
   </a>
   <div id="bg"></div>
   <canvas id="stars"></canvas>
@@ -482,9 +482,9 @@
     <div id="left-panel">
       <div class="eco-tag">Ecossistema de Marcas</div>
       <h1 class="hero-title">GLOW8<br><span class="accent">STUDIO</span></h1>
-      <p class="hero-sub">Marcas que vao alem a- criatividade, tecnologia e resultados em um ecossistema vivo.</p>
+      <p class="hero-sub">Marcas que vão além — criatividade, tecnologia e resultados em um ecossistema vivo.</p>
       <button id="btn-explore" onclick="document.getElementById('stage').scrollIntoView({behavior:'smooth'})">
-        EXPLORAR SOLUAA-ES <span class="arrow">a'</span>
+        EXPLORAR SOLUÇÕES <span class="arrow">→</span>
       </button>
     </div>
 
@@ -504,7 +504,7 @@
   <audio id="snd-base" loop preload="none"></audio>
 
   <script>
-    // a-a- STARS a-a-
+    // ── STARS ──
     (function () {
       const c = document.getElementById('stars'), ctx = c.getContext('2d');
       function resize() { c.width = innerWidth; c.height = innerHeight; }
@@ -525,14 +525,14 @@
       draw();
     })();
 
-    // a-a- PARALLAX BG a-a-
+    // ── PARALLAX BG ──
     window.addEventListener('mousemove', e => {
       const x = (e.clientX / innerWidth - .5) * 18;
       const y = (e.clientY / innerHeight - .5) * 18;
       document.getElementById('bg').style.transform = `translate(${x}px,${y}px) scale(1.04)`;
     });
 
-    // a-a- HEX DATA a-a-
+    // ── HEX DATA ──
     const HEXES = [
       { id: 'vyra', name: 'VYRA', sub: 'Design Grafico', img: 'vyra.webp', color: '#FFB300', url: 'amarelo.html' },
       { id: 'elon', name: 'ELON', sub: 'Web Design', img: 'elon.webp', color: '#1E88E5', url: 'azul.html' },
@@ -543,7 +543,7 @@
       { id: 'nexar', name: 'NEXAR', sub: 'Animacao/Games', img: 'nexar.webp', color: '#FF1744', url: 'vermelho.html' }
     ];
 
-    // a-a- ORBIT SYSTEM a-a-
+    // ── ORBIT SYSTEM ──
     const stage = document.getElementById('stage');
     let orbitPaused = false, orbitAngle = 0, orbitSpeed = .008;
     const ORBIT_R = () => stage.offsetWidth * .38;
@@ -599,7 +599,7 @@
     }
     updateOrbit();
 
-    // a-a- LIGHTNING a-a-
+    // ── LIGHTNING ──
     const LC = document.getElementById('lightning-canvas');
     const lctx = LC.getContext('2d');
     function resizeLC() {
@@ -640,7 +640,7 @@
     }
     drawLightning();
 
-    // a-a- NUCLEUS MOUSE PROXIMITY SOUND a-a-
+    // ── NUCLEUS MOUSE PROXIMITY SOUND ──
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
     let actx = null, staticNode = null, gainNode = null, filterNode = null;
     function initAudio() {
@@ -662,7 +662,7 @@
       if (gainNode) gainNode.gain.linearRampToValueAtTime(0, actx.currentTime + .5);
     });
 
-    // a-a- VFX SYSTEM a-a-
+    // ── VFX SYSTEM ──
     const vfxLayer = document.getElementById('vfx-layer');
     function spawnParticle(x, y, color, size, life, vx, vy) {
       const p = document.createElement('div');
@@ -763,7 +763,7 @@
       } catch (e) { }
     }
 
-    // a-a- ENTER HEX TRANSITION a-a-
+    // ── ENTER HEX TRANSITION ──
     function enterHex(h, el) {
       initAudio();
       // burst VFX
@@ -783,11 +783,11 @@
       setTimeout(() => { window.location.href = h.url; }, 900);
     }
 
-    // a-a- ALSO LINK INDEX HEXAGONS TO home.html a-a-
+    // ── ALSO LINK INDEX HEXAGONS TO home.html ──
     // (handled from index.html onclick)
   </script>
 
-  <!-- a-a-a-a-a-a- GLOW8 BATTLE a-a-a-a-a-a- -->
+  <!-- ══════════ GLOW8 BATTLE ══════════ -->
   <style>
     #game-section {
       position: relative;
@@ -1056,17 +1056,17 @@
       </div>
       <!-- POWER -->
       <div class="gb-power-wrap">
-        <div class="gb-power-lbl">POTASNCIA</div>
+        <div class="gb-power-lbl">POTÊNCIA</div>
         <div id="gb-power-track">
           <div id="gb-power-fill" style="width:50%"></div>
         </div>
         <div class="gb-power-vals"><span>0%</span><span id="gb-power-val">50%</span><span>100%</span></div>
       </div>
       <!-- FIRE -->
-      <button id="gb-fire-btn" onclick="gbFire()">FIRE<br>dY-</button>
+      <button id="gb-fire-btn" onclick="gbFire()">FIRE<br>🔥</button>
     </div>
-    <div id="gb-msg">dYZ Use ESQUERDA / DIREITA para mirar, arraste a barra de potencia e pressione FIRE</div>
-    <button id="gb-restart" onclick="initGame()">a NOVA PARTIDA</button>
+    <div id="gb-msg">🎯 Use ESQUERDA / DIREITA para mirar, arraste a barra de potência e pressione FIRE</div>
+    <button id="gb-restart" onclick="initGame()">↻ NOVA PARTIDA</button>
   </section>
 
   <script src="game-battle.js" defer></script>

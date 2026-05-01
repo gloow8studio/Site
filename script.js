@@ -150,9 +150,10 @@
   Esta segunda função independente automatiza as leituras vetoriais conectivas para traçar organicamente as "teias" na página.
 */
 (function(){
-  const cards  = document.querySelectorAll('.hex-card'); // Pesquisa os cartões flutuantes (DOM Nodes) e extrai tudo listando para o leitor em cache
-  const svg    = document.getElementById('neural');      // Acessa o canvas da área "invisível" que aceitará conexões SVG desenhadas livremente.
-  const panel  = document.getElementById('panel');       // Acessa a div wrapper matriz. 
+  const cards  = document.querySelectorAll('.hex-card');
+  const svg    = document.getElementById('neural');
+  const panel  = document.getElementById('panel');
+  if (!svg || !panel || cards.length === 0) return;
   const colors = ['#FFB300','#1E88E5','#00E5FF','#00C853','#AA00FF','#FF6D00','#FF1744']; // Repositório indexado restrito que mapeia na ordem sequencial fiel exatamente as cores aplicadas pelo arquivo CSS de modo unificado e espelhado para desenhar corretamente cada conexão sem destoamento da cor base dos logotipos SVG originais inseridos pelo design
 
   // Analisa iterativamente as posições no layout de todos elementos

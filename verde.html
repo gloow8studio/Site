@@ -4,12 +4,278 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dados & Inteligência - Hex Agency</title>
+  <title>SYLAR — Dados & Inteligência · Hex Agency</title>
   <link rel="stylesheet" href="page.css">
   <style>
     :root {
       --theme-color: #00C853;
       --theme-rgb: 0, 200, 83;
+    }
+
+    /* Expansão para Galeria de Alta Performance */
+    .page-container {
+      max-width: 1300px !important;
+      padding: 40px 50px;
+    }
+
+    /* SYLAR ARCHIVES STYLES */
+    .gallery-masonry {
+      column-count: 3;
+      column-gap: 20px;
+    }
+
+    @media (max-width: 1024px) {
+      .gallery-masonry {
+        column-count: 2;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .gallery-masonry {
+        column-count: 1;
+      }
+    }
+
+    .gallery-item-2 {
+      break-inside: avoid;
+      margin-bottom: 20px;
+      position: relative;
+      background: #111;
+      border: 1px solid #333;
+      transition: 0.4s;
+      cursor: pointer;
+      overflow: hidden;
+      display: block;
+    }
+
+    .gallery-item-2:hover {
+      border-color: #00C853;
+      box-shadow: 0 0 20px rgba(0, 200, 83, 0.3);
+      transform: translateY(-5px);
+    }
+
+    .gallery-item-2 img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-item-2:hover img {
+      transform: scale(1.05);
+    }
+
+    .item-overlay-2 {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+      padding: 20px;
+      box-sizing: border-box;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .gallery-item-2:hover .item-overlay-2 {
+      opacity: 1;
+    }
+
+    .item-title-2 {
+      color: #00C853;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      margin: 0;
+    }
+
+    .item-cat-2 {
+      color: #fff;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .lb-image-container:fullscreen { background-color: #000 !important; border-radius: 0 !important; }
+    .lb-image-container:-webkit-full-screen { background-color: #000 !important; border-radius: 0 !important; }
+
+    #sylar-gallery-section .filter-btn.active {
+      background: #00C853 !important;
+      color: #000 !important;
+      box-shadow: 0 0 15px rgba(0, 200, 83, 0.5);
+    }
+    #sylar-gallery-section .filter-btn:hover:not(.active) {
+      border-color: #00C853 !important;
+      color: #00C853 !important;
+    }
+
+    @media (max-width: 1024px) {
+      .lightbox-content { flex-direction: column; overflow-y: scroll; }
+      .lb-image-container { flex: none; height: 50vh; }
+      .lb-info-panel { flex: none; height: auto; border-left: none; border-top: 2px solid #00C853; }
+    }
+    @media (max-width: 600px) {
+      .lb-info-panel { padding: 20px; }
+    }
+
+    /* DASHBOARD CARDS */
+    .dash-card {
+      background: rgba(0, 20, 30, 0.85);
+      border: 1px solid #00C853;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: 0.4s;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .dash-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 20px rgba(0, 200, 83, 0.3);
+    }
+
+    .dash-thumb {
+      width: 100%;
+      height: 180px;
+      background: linear-gradient(45deg, #004d40, #00251a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #00C853;
+      font-family: 'Orbitron';
+      font-size: 1.2rem;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .dash-info {
+      padding: 20px;
+    }
+
+    .dash-title {
+      font-family: 'Orbitron';
+      font-size: 1.3rem;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .dash-desc {
+      font-size: 0.9rem;
+      color: #ccc;
+      line-height: 1.4;
+    }
+
+    .btn-open {
+      margin-top: 15px;
+      padding: 8px 20px;
+      background: transparent;
+      border: 1px solid #00C853;
+      color: #00C853;
+      font-family: 'Orbitron';
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .dash-card:hover .btn-open {
+      background: #00C853;
+      color: #000;
+      box-shadow: 0 0 15px #00C853;
+    }
+
+    .control-group {
+      margin-bottom: 20px;
+    }
+
+    .control-group label {
+      display: block;
+      color: #aaa;
+      margin-bottom: 5px;
+      font-size: 0.9rem;
+    }
+
+    .control-group input[type="range"] {
+      width: 100%;
+      accent-color: #00C853;
+    }
+
+    .value-display {
+      float: right;
+      color: #00C853;
+      font-weight: bold;
+      font-family: 'Orbitron';
+    }
+
+    /* SPREADSHEET TABLE STYLES */
+    .sheet-table-wrap {
+      overflow: auto;
+      max-height: 70vh;
+      width: 100%;
+    }
+
+    .sheet-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Rajdhani', monospace;
+      font-size: 0.85rem;
+    }
+
+    .sheet-table th {
+      position: sticky;
+      top: 0;
+      background: #00C853;
+      color: #000;
+      padding: 8px 12px;
+      text-align: left;
+      font-family: 'Orbitron';
+      font-size: 0.75rem;
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    .sheet-table td {
+      padding: 6px 12px;
+      border-bottom: 1px solid rgba(0, 200, 83, 0.15);
+      color: #ccc;
+      white-space: nowrap;
+    }
+
+    .sheet-table tr:hover td {
+      background: rgba(0, 200, 83, 0.08);
+    }
+
+    .sheet-tabs {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .sheet-tab-btn {
+      background: rgba(0, 200, 83, 0.1);
+      border: 1px solid #333;
+      color: #aaa;
+      padding: 6px 16px;
+      cursor: pointer;
+      font-family: 'Rajdhani';
+      font-size: 0.85rem;
+      border-radius: 4px;
+      transition: 0.3s;
+    }
+
+    .sheet-tab-btn.active,
+    .sheet-tab-btn:hover {
+      background: #00C853;
+      color: #000;
+      border-color: #00C853;
+    }
+
+    .sheet-loading {
+      text-align: center;
+      padding: 60px;
+      color: #00C853;
+      font-family: 'Orbitron';
     }
   </style>
 </head>
@@ -27,10 +293,10 @@
 
     <div class="page-icon-wrap">
       <img src="sylar.webp" alt="SYLAR" class="page-icon">
-      <div class="page-header" style="margin-bottom:0; border-left: 4px solid #00C853; padding-left: 20px;">
-        <span class="category-label">ÁREA VERDE</span>
+      <div class="page-header" style="margin-bottom:0;border-left:4px solid #00C853;padding-left:20px;">
+        <span class="category-label">📊 SYLAR — DADOS & BI</span>
         <h1 class="page-title">Dados & Inteligência</h1>
-        <p class="gatilho-mental">"O que os números estão tentando me dizer?"</p>
+        <p class="gatilho-mental">"Sem dados = achismo. Os números dizem a verdade."</p>
       </div>
     </div>
 
@@ -44,39 +310,46 @@
             <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
             <line x1="12" y1="22.08" x2="12" y2="12"></line>
           </svg>
-          Core Software
+          Ferramentas Core
         </h2>
         <div class="card-body">
-          <p><strong>Excel:</strong> (VBA/Power Query).</p>
-          <p><strong>Python:</strong> (Pandas/NumPy).</p>
+          <p><strong>PostgreSQL:</strong> Banco de dados relacional robusto para produção.</p>
+          <p><strong>MongoDB:</strong> Banco NoSQL para dados flexíveis e não-estruturados.</p>
+          <p><strong>Power BI:</strong> Dashboards interativos e relatórios executivos.</p>
+          <p><strong>Excel (VBA/Power Query):</strong> Automação de relatórios e ETL.</p>
+          <p><strong>Python (Pandas/NumPy):</strong> Análise e transformação de dados.</p>
         </div>
       </div>
 
       <div class="content-card">
         <h2 class="card-title">
           <svg viewBox="0 0 24 24">
-            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
           </svg>
-          BI & Dashboards
+          IAs & Big Data
         </h2>
         <div class="card-body">
-          <p><strong>Power BI, Google Looker Studio.</strong></p>
-          <p><strong>Metabase:</strong> Para dashboards profissionais no servidor.</p>
+          <p><strong>Google BigQuery ML:</strong> Machine learning direto no data warehouse.</p>
+          <p><strong>DuckDB:</strong> Processar milhões de linhas localmente com velocidade absurda.</p>
+          <p><strong>Jupyter Notebook:</strong> Testar scripts Python de forma organizada.</p>
+          <p><strong>ChatGPT Plus (Code Interpreter):</strong> Análises estatísticas complexas em segundos.</p>
         </div>
       </div>
 
-      <div class="content-card" style="grid-column: 1 / -1;">
+      <div class="content-card" style="grid-column:1/-1;">
         <h2 class="card-title">
           <svg viewBox="0 0 24 24">
             <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
           </svg>
-          Upgrade Analítico & IA de Apoio
+          Mentalidade Data-Driven
         </h2>
         <div class="card-body">
-          <p><strong>DuckDB:</strong> Para processar milhões de linhas de frete/venda localmente com velocidade absurda.
-          </p>
-          <p><strong>Jupyter Notebook:</strong> Para testar seus scripts de Python de forma organizada.</p>
-          <p><strong>ChatGPT Plus (Code Interpreter):</strong> Para análises estatísticas complexas em segundos.</p>
+          <p><strong>💡 DICA:</strong> Sempre responda: <strong>"isso aumentou vendas ou não?"</strong></p>
+          <p>👉 Sequência: <strong>Coleta → Limpeza → Análise → Visualização → Decisão</strong></p>
+          <p><strong>Google Looker Studio:</strong> Dashboards gratuitos e colaborativos na nuvem.</p>
+          <p><strong>Metabase:</strong> Dashboards profissionais no servidor para clientes.</p>
         </div>
       </div>
 
@@ -89,13 +362,489 @@
         </div>
         <div class="workflow-text">
           <h3>Workflow Oficial</h3>
-          <p>Use o <strong>Python</strong> para "limpar" os relatórios sujos do ERP UNO antes de levar para o Excel.</p>
+          <p>Use o <strong>Python</strong> para "limpar" relatórios sujos de ERP antes de levar para o Power BI. Dado
+            limpo = insight real.</p>
         </div>
       </div>
     </div>
+
+    <div class="portfolio-section">
+      <div class="portfolio-header">
+        <span class="portfolio-label">SYLAR ARCHIVES</span>
+        <h2 class="portfolio-title">Inteligência de Dados</h2>
+        <p class="portfolio-subtitle">Repositório de Dashboards, Relatórios e Automações SYLAR.</p>
+      </div>
+
+      <!-- Filtros de Categoria -->
+      <div class="gallery-filters" style="margin-bottom: 40px; display: flex; justify-content: flex-start; gap: 10px; flex-wrap: wrap;">
+        <button class="filter-btn active" data-filter="all">TODOS</button>
+        <button class="filter-btn" data-filter="dashboard">DASHBOARDS</button>
+        <button class="filter-btn" data-filter="report">RELATÓRIOS</button>
+        <button class="filter-btn" data-filter="automation">AUTOMAÇÃO</button>
+      </div>
+
+      <!-- Grid de Imagens (Masonry) -->
+      <div id="sylar-gallery-grid" class="gallery-masonry">
+        <!-- Injetado via JS -->
+      </div>
+
+      <!-- Botão de Upload Simulado -->
+      <div style="text-align: center; margin-top: 60px;">
+        <label for="sylar-upload" class="upload-btn-wrapper" style="cursor: pointer;">
+          <button style="background: linear-gradient(45deg, #00C853, #00E676); border: none; padding: 15px 40px; color: #000; font-family: 'Orbitron'; font-weight: bold; font-size: 1rem; clip-path: polygon(5% 0, 100% 0, 95% 100%, 0% 100%); box-shadow: 0 0 15px rgba(0, 200, 83, 0.4); transition: transform 0.2s;" onclick="document.getElementById('sylar-upload').click()">
+            + ENVIAR ARQUIVO (SIMULADO)
+          </button>
+          <input type="file" id="sylar-upload" name="myfile" style="display:none;" accept="image/*" onchange="simulateUploadSylar(this)" />
+        </label>
+        <p style="color: #666; font-size: 0.8rem; margin-top: 10px; font-family: 'Rajdhani'">O upload é apenas visual no frontend.</p>
+      </div>
+    </div>
+
+    <!-- LIGHTBOX MODAL (VISUALIZADOR DE DOCUMENTOS) -->
+    <div id="sylar-lightbox" class="lightbox-overlay"
+      style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; backdrop-filter: blur(10px); transition: opacity 0.3s;">
+      <button id="lb-close-sylar"
+        style="position: absolute; top: 20px; right: 40px; background: none; border: none; color: #00C853; font-size: 5rem; cursor: pointer; z-index: 999999; transition: color 0.3s; text-shadow: 0 0 20px rgba(0,0,0,0.8);">&times;</button>
+      <div class="lightbox-content"
+        style="display: flex; height: 100%; width: 100%; max-width: 1600px; margin: 0 auto; padding: 20px; box-sizing: border-box;">
+        <!-- Área da Imagem -->
+        <div class="lb-image-container" id="sylar-img-container" style="flex: 2; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; border-radius: 8px;">
+          <img id="lb-img-sylar" src="" alt="Full View" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transition: transform 0.2s ease; cursor: zoom-in; box-shadow: 0 0 30px rgba(0, 200, 83, 0.2);" />
+          <div class="lb-controls">
+            <button id="lb-zoom-in-sylar" title="Zoom In">+</button>
+            <button id="lb-zoom-out-sylar" title="Zoom Out">-</button>
+            <button id="lb-reset-sylar" title="Reset Zoom">RESET</button>
+            <div style="width: 1px; height: 16px; background: rgba(255,255,255,0.2); margin: 0 5px;"></div>
+            <button id="lb-download-sylar" title="Download"><i class="fas fa-download"></i></button>
+            <button id="lb-fullscreen-sylar" title="Fullscreen"><i class="fas fa-expand"></i></button>
+          </div>
+        </div>
+        <!-- Painel de Informações -->
+        <div class="lb-info-panel">
+          <h3 id="lb-title-sylar">Título do Projeto</h3>
+          <span id="lb-category-sylar">Categoria</span>
+          
+          <div class="info-block">
+            <h4>CONCEITO & INSIGHTS</h4>
+            <p id="lb-desc-sylar">Descrição detalhada do projeto...</p>
+          </div>
+
+          <div class="info-block">
+            <h4>STACK TECNOLÓGICA</h4>
+            <ul id="lb-tech-sylar">
+              <!-- Injetado via JS -->
+            </ul>
+          </div>
+
+          <div class="lb-footer">
+            <p>SYLAR DATA INTELLIGENCE SYSTEM</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .lb-controls {
+        position: absolute;
+        bottom: 25px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: rgba(0, 15, 10, 0.9);
+        padding: 10px 25px;
+        border-radius: 40px;
+        border: 1px solid #00C853;
+        box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+        z-index: 10;
+      }
+      .lb-controls button {
+        background: none;
+        border: none;
+        color: #00C853;
+        font-family: 'Orbitron';
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: 0.3s;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+      }
+      .lb-controls button:hover {
+        color: #fff;
+        text-shadow: 0 0 10px #00C853;
+      }
+      .lb-info-panel {
+        flex: 1;
+        background: rgba(5, 12, 15, 0.95);
+        border-left: 2px solid #00C853;
+        padding: 45px;
+        display: flex;
+        flex-direction: column;
+        color: #fff;
+        overflow-y: auto;
+        min-width: 340px;
+      }
+      .lb-info-panel h3 {
+        font-family: 'Orbitron';
+        color: #00C853;
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        line-height: 1.1;
+      }
+      .lb-info-panel span {
+        color: #888;
+        font-family: 'Rajdhani';
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 35px;
+        font-size: 0.85rem;
+      }
+      .info-block { margin-bottom: 30px; }
+      .info-block h4 {
+        color: #fff;
+        font-family: 'Orbitron';
+        font-size: 0.9rem;
+        border-bottom: 1px solid rgba(0, 200, 83, 0.3);
+        padding-bottom: 8px;
+        margin-bottom: 15px;
+        letter-spacing: 1px;
+      }
+      .info-block p { font-family: 'Rajdhani'; color: #ccc; line-height: 1.6; font-size: 1.05rem; }
+      .info-block ul { padding: 0; list-style: none; }
+      .info-block li { color: #888; font-family: 'Rajdhani'; margin-bottom: 5px; font-size: 0.95rem; }
+      .lb-footer { margin-top: auto; padding-top: 25px; border-top: 1px solid #1a2a2a; }
+      .lb-footer p { font-family: 'Orbitron'; font-size: 0.75rem; color: #00C853; opacity: 0.7; letter-spacing: 2px; }
+    </style>
+
+    <!-- ========================================== -->
+    <!-- SEÇÃO SYLAR ANALYTICS - DASHBOARD INTERATIVO -->
+    <!-- ========================================== -->
+    <section id="sylar-analytics-section" style="padding: 80px 20px; border-top: 1px solid rgba(0, 200, 83, 0.2);">
+      <div class="container" style="max-width: 1200px; margin: 0 auto;">
+        <div class="section-header" style="text-align: center; margin-bottom: 60px;">
+          <h2 style="font-family: 'Orbitron', sans-serif; font-size: 2.5rem; color: #fff;">SYLAR <span
+              style="color: #00C853;">ANALYTICS</span></h2>
+          <p style="color: #aaa;">Data Visualization & Interactive Business Intelligence</p>
+        </div>
+
+        <div class="dashboard-grid" id="analytics-grid"
+          style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+          <!-- Injetado via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal Player de Planilha (Analytics) -->
+    <div class="modal-overlay" id="dash-modal"
+      style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(5px); z-index: 10000; display: none; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s;">
+      <div class="modal-content"
+        style="width: 90%; max-width: 1200px; height: 85vh; background: #050a10; border: 2px solid #00C853; border-radius: 15px; display: flex; flex-direction: column; position: relative; overflow: hidden;">
+        <div class="modal-header"
+          style="padding: 15px 25px; background: rgba(0, 200, 83, 0.1); border-bottom: 1px solid #00C853; display: flex; justify-content: space-between; align-items: center;">
+          <h2 class="modal-title" id="modal-title" style="font-family: 'Orbitron'; color: #00C853;">Dashboard Title</h2>
+          <button class="close-btn" onclick="closeDashModal()"
+            style="background:none; border:none; color:#fff; font-size:2.5rem; cursor:pointer;">&times;</button>
+        </div>
+        <div class="modal-body"
+          style="flex: 1; display: flex; flex-wrap: wrap; padding: 20px; gap: 20px; overflow-y: auto;">
+          <div class="controls-panel" id="controls-area"
+            style="flex: 1; min-width: 300px; background: rgba(255,255,255,0.03); padding: 20px; border-radius: 8px; border: 1px solid rgba(0, 200, 83, 0.2);">
+            <h3 style="color:#fff; margin-bottom:15px; font-family:'Orbitron'">Variáveis de Entrada</h3>
+          </div>
+          <div class="charts-panel" id="charts-area"
+            style="flex: 2; min-width: 350px; display: flex; flex-direction: column; gap: 20px;">
+            <div class="chart-container"
+              style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); flex: 1; position: relative; min-height: 250px;">
+              <canvas id="mainChart"></canvas>
+            </div>
+            <div class="chart-container"
+              style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); flex: 1; position: relative; min-height: 200px;">
+              <canvas id="secondaryChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <script src="bg-canvas.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+  <script>
+    (function () {
+      const sylarProjects = [
+        { id: 1, file: "WhatsApp Image 2026-04-30 at 16.02.26.jpeg", title: "Dashboard de Produção", category: "dashboard", desc: "Dashboard interativo de monitoramento da produção industrial. KPIs em tempo real com gauge de desempenho, barra de produtividade e comparação mensal. Desenvolvido para gestão de chão de fábrica.", tech: ["Power BI", "Excel VBA", "ETL"] },
+        { id: 2, file: "WhatsApp Image 2026-04-30 at 16.03.11.jpeg", title: "Painel de KPIs Executivo", category: "dashboard", desc: "Painel executivo consolidado com indicadores de performance, metas e gauges. Interface escura com visualização rápida para tomada de decisão em reuniões estratégicas.", tech: ["Power BI", "DAX", "Data Studio"] },
+        { id: 3, file: "WhatsApp Image 2026-04-30 at 16.04.17.jpeg", title: "Análise de Tendências", category: "report", desc: "Relatório visual de análise de tendências de produção ao longo do tempo. Gráficos de linha com projeções e identificação de padrões sazonais para planejamento estratégico.", tech: ["Excel", "VBA", "Python"] },
+        { id: 4, file: "WhatsApp Image 2026-04-30 at 16.04.44.jpeg", title: "Monitor de Performance", category: "dashboard", desc: "Sistema de monitoramento contínuo com gauges, gráficos de barras e indicadores de status. Visão 360° das operações com atualização automática via macro.", tech: ["Excel", "Power Query", "VBA"] },
+        { id: 5, file: "WhatsApp Image 2026-04-30 at 16.05.18.jpeg", title: "Fluxo de Dados ETL", category: "automation", desc: "Processo automatizado de Extração, Transformação e Carga de dados. Pipeline visual mostrando a arquitetura de integração entre fontes de dados e dashboards finais.", tech: ["Python", "Pandas", "SQL"] },
+        { id: 6, file: "WhatsApp Image 2026-04-30 at 16.11.07.jpeg", title: "Base de Dados Operacional", category: "report", desc: "Planilha mestre com base de dados operacional formatada. Tabela com validações, formatação condicional e campos calculados para controle de qualidade.", tech: ["Excel", "Formatação Condicional", "Validação"] },
+        { id: 7, file: "WhatsApp Image 2026-04-30 at 16.12.36.jpeg", title: "Relatório Consolidado", category: "report", desc: "Relatório gerencial consolidado com formatação profissional. Dados organizados com destaque visual em cores para identificação rápida de desvios e alertas.", tech: ["Excel", "Power Query", "VBA"] },
+        { id: 8, file: "WhatsApp Image 2026-04-30 at 16.13.26.jpeg", title: "Sistema de Validação EAN", category: "automation", desc: "Sistema automatizado para validação e cruzamento de códigos EAN. Interface com botões macro para processamento em lote e geração automática de relatórios de consistência.", tech: ["Excel", "VBA Macro", "Validação"] },
+      ];
+
+      const galleryGrid = document.getElementById('sylar-gallery-grid');
+      const lb = document.getElementById('sylar-lightbox');
+      const lbTitle = document.getElementById('lb-title-sylar');
+      const lbCat = document.getElementById('lb-category-sylar');
+      const lbDesc = document.getElementById('lb-desc-sylar');
+      const lbTech = document.getElementById('lb-tech-sylar');
+      const lbImg = document.getElementById('lb-img-sylar');
+      let currentZoom = 1;
+
+      function renderGallery(filter = 'all') {
+        if (!galleryGrid) return;
+        galleryGrid.innerHTML = '';
+        const filtered = filter === 'all' ? sylarProjects : sylarProjects.filter(p => p.category === filter);
+        filtered.forEach(p => {
+          const item = document.createElement('div');
+          item.className = 'gallery-item-2';
+          item.onclick = () => openLightbox(p);
+          const imgPath = `planilhas silar/${p.file}`;
+          item.innerHTML = `
+            <img src="${imgPath}" alt="${p.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300/111/00C853?text=Not+Found'">
+            <div class="item-overlay-2">
+              <h3 class="item-title-2">${p.title}</h3>
+              <span class="item-cat-2">${p.category}</span>
+            </div>
+          `;
+          galleryGrid.appendChild(item);
+        });
+      }
+
+      function openLightbox(p) {
+        lbImg.src = `planilhas silar/${p.file}`;
+        lbTitle.innerText = p.title;
+        lbCat.innerText = p.category;
+        lbDesc.innerText = p.desc;
+        lbTech.innerHTML = '';
+        p.tech.forEach(t => {
+          const li = document.createElement('li');
+          li.innerText = '• ' + t;
+          lbTech.appendChild(li);
+        });
+        lb.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        currentZoom = 1;
+        lbImg.style.transform = `scale(${currentZoom})`;
+      }
+
+      document.getElementById('lb-close-sylar').onclick = () => {
+        lb.style.display = 'none';
+        document.body.style.overflow = 'auto';
+        lbImg.src = '';
+      };
+
+      lb.onclick = (e) => {
+        if (e.target === lb || e.target.classList.contains('lb-image-container')) {
+          lb.style.display = 'none';
+          document.body.style.overflow = 'auto';
+          lbImg.src = '';
+        }
+      };
+
+      // Zoom Controls
+      document.getElementById('lb-zoom-in-sylar').onclick = () => {
+        if (currentZoom < 3) { currentZoom += 0.5; updateZoomSylar(); }
+      };
+      document.getElementById('lb-zoom-out-sylar').onclick = () => {
+        if (currentZoom > 0.5) { currentZoom -= 0.5; updateZoomSylar(); }
+      };
+      document.getElementById('lb-reset-sylar').onclick = () => {
+        currentZoom = 1; updateZoomSylar();
+      };
+
+      function updateZoomSylar() {
+        lbImg.style.transform = `scale(${currentZoom})`;
+        lbImg.style.cursor = currentZoom > 1 ? 'grab' : 'zoom-in';
+      }
+
+      // Download
+      document.getElementById('lb-download-sylar').onclick = () => {
+        const link = document.createElement('a');
+        link.href = lbImg.src;
+        link.download = lbTitle.innerText.replace(/\s+/g, '_') + '.jpg';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      };
+
+      // Fullscreen
+      document.getElementById('lb-fullscreen-sylar').onclick = () => {
+        const imgContainer = document.getElementById('sylar-img-container');
+        if (!document.fullscreenElement) {
+          if (imgContainer.requestFullscreen) {
+            imgContainer.requestFullscreen().catch(err => {
+              console.error(`Erro ao tentar tela cheia: ${err.message}`);
+            });
+          } else if (imgContainer.webkitRequestFullscreen) {
+            imgContainer.webkitRequestFullscreen();
+          }
+        } else {
+          if (document.exitFullscreen) document.exitFullscreen();
+          else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+        }
+      };
+
+      // Filters
+      document.querySelectorAll('#sylar-gallery-section .filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('#sylar-gallery-section .filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          renderGallery(btn.dataset.filter);
+        });
+      });
+
+      const analyticsGrid = document.getElementById('analytics-grid');
+      let mainChartInstance = null;
+      let secChartInstance = null;
+
+      function renderAnalytics() {
+        if (!analyticsGrid) return;
+        analyticsGrid.innerHTML = '';
+        sylarProjects.forEach(p => {
+          const card = document.createElement('div');
+          card.className = 'dash-card';
+          card.onclick = () => openDash(p);
+          card.innerHTML = `
+            <div class="dash-thumb"><i class="fas fa-chart-line" style="font-size:2rem;margin-right:10px;"></i> ${p.title}</div>
+            <div class="dash-info">
+              <h3 class="dash-title">${p.title}</h3>
+              <p class="dash-desc">${p.desc}</p>
+              <button class="btn-open"><i class="fas fa-table"></i> Visualizar Planilha</button>
+            </div>
+          `;
+          analyticsGrid.appendChild(card);
+        });
+      }
+
+      window.openDash = async function (p) {
+        if (typeof p === 'string') p = sylarProjects.find(x => x.file === p);
+        if (!p) return;
+        document.getElementById('modal-title').innerText = p.title;
+        const modal = document.getElementById('dash-modal');
+        modal.style.display = 'flex';
+        modal.style.opacity = '1';
+        document.body.style.overflow = 'hidden';
+        const controlsArea = document.getElementById('controls-area');
+        controlsArea.innerHTML = '<div style="text-align:center;padding:60px;color:#00C853;"><p>Carregando planilha...</p></div>';
+
+        try {
+          const resp = await fetch('planilhas silar/' + p.file);
+          if (!resp.ok) throw new Error('Arquivo não encontrado');
+          const buf = await resp.arrayBuffer();
+          const wb = XLSX.read(buf, { type: 'array' });
+          window._currentWB = wb;
+
+          let html = '<h3 style="color:#fff;margin-bottom:10px;font-family:Orbitron;font-size:0.9rem;">Abas</h3><div class="sheet-tabs">';
+          wb.SheetNames.forEach((name, i) => {
+            html += '<button class="sheet-tab-btn ' + (i === 0 ? 'active' : '') + '" onclick="switchSheet(\'' + name.replace(/'/g, "\\'") + '\',this)">' + name + '</button>';
+          });
+          html += '</div><div id="analytics-table-area" class="sheet-table-wrap" style="max-height:55vh;"></div>';
+          controlsArea.innerHTML = html;
+          switchSheet(wb.SheetNames[0], null);
+        } catch (err) {
+          controlsArea.innerHTML = '<div style="text-align:center;padding:40px;color:#ff5252;"><p>Erro: ' + err.message + '</p></div>';
+        }
+      };
+
+      window.switchSheet = function (name, btnEl) {
+        const wb = window._currentWB;
+        if (!wb) return;
+        if (btnEl) {
+          document.querySelectorAll('#controls-area .sheet-tab-btn').forEach(b => b.classList.remove('active'));
+          btnEl.classList.add('active');
+        }
+        const ws = wb.Sheets[name];
+        const json = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
+        const area = document.getElementById('analytics-table-area');
+        if (!json.length) { area.innerHTML = '<p style="color:#888;padding:20px;">Aba vazia</p>'; return; }
+        const maxR = Math.min(json.length, 100), maxC = Math.min(json[0].length || 5, 20);
+        let t = '<table class="sheet-table"><thead><tr>';
+        for (let c = 0; c < maxC; c++) t += '<th>' + (json[0][c] || 'Col ' + (c + 1)) + '</th>';
+        t += '</tr></thead><tbody>';
+        for (let r = 1; r < maxR; r++) { t += '<tr>'; for (let c = 0; c < maxC; c++) t += '<td>' + (json[r] && json[r][c] !== undefined ? json[r][c] : '') + '</td>'; t += '</tr>'; }
+        t += '</tbody></table>';
+        area.innerHTML = t;
+
+        // Auto-chart
+        try {
+          let numCol = -1;
+          for (let c = 0; c < maxC; c++) { if (json.length > 1 && typeof json[1][c] === 'number') { numCol = c; break; } }
+          const ctx1 = document.getElementById('mainChart');
+          if (mainChartInstance) mainChartInstance.destroy();
+          if (numCol >= 0) {
+            const labs = [], vals = [];
+            for (let r = 1; r < Math.min(maxR, 50); r++) { labs.push(String(json[r][0] || r)); vals.push(Number(json[r][numCol]) || 0); }
+            mainChartInstance = new Chart(ctx1, { type: 'line', data: { labels: labs, datasets: [{ label: json[0][numCol] || 'Dados', data: vals, borderColor: '#00C853', backgroundColor: 'rgba(0,200,83,0.15)', fill: true, tension: 0.3 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#fff' } } }, scales: { y: { ticks: { color: '#aaa' } }, x: { ticks: { color: '#aaa', maxTicksLimit: 12 } } } } });
+          }
+          let numCol2 = -1;
+          for (let c = numCol + 1; c < maxC; c++) { if (json.length > 1 && typeof json[1][c] === 'number') { numCol2 = c; break; } }
+          const ctx2 = document.getElementById('secondaryChart');
+          if (secChartInstance) secChartInstance.destroy();
+          if (numCol2 >= 0) {
+            const v2 = [], l2 = [];
+            for (let r = 1; r < Math.min(maxR, 25); r++) { l2.push(String(json[r][0] || r)); v2.push(Number(json[r][numCol2]) || 0); }
+            secChartInstance = new Chart(ctx2, { type: 'bar', data: { labels: l2, datasets: [{ label: json[0][numCol2] || 'Dados 2', data: v2, backgroundColor: 'rgba(0,200,83,0.5)', borderColor: '#00C853', borderWidth: 1 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { ticks: { color: '#aaa' } }, x: { ticks: { color: '#aaa', maxTicksLimit: 12 } } } } });
+          }
+        } catch (e) { console.warn('Chart:', e); }
+      };
+
+      window.closeDashModal = function () {
+        document.getElementById('dash-modal').style.display = 'none';
+        document.getElementById('dash-modal').style.opacity = '0';
+        document.body.style.overflow = 'auto';
+        if (mainChartInstance) mainChartInstance.destroy();
+        if (secChartInstance) secChartInstance.destroy();
+        window._currentWB = null;
+      };
+
+      document.getElementById('dash-modal').addEventListener('click', e => { if (e.target.id === 'dash-modal') closeDashModal(); });
+
+      // Simulação de Upload
+      window.simulateUploadSylar = function(input) {
+        if (input.files && input.files[0]) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            alert("✅ Arquivo recebido pelo sistema SYLAR! (Simulação visual apenas)");
+            const newProject = { 
+              id: Date.now(), 
+              file: e.target.result, 
+              title: input.files[0].name, 
+              category: "dashboard", 
+              desc: "Arquivo enviado pelo usuário para análise.", 
+              tech: ["Upload Local"] 
+            };
+            
+            const item = document.createElement('div');
+            item.className = 'gallery-item-2';
+            item.onclick = () => openLightbox(newProject);
+            
+            item.innerHTML = `
+              <img src="${e.target.result}" alt="${newProject.title}">
+              <div class="item-overlay-2">
+                <h3 class="item-title-2">${newProject.title}</h3>
+                <span class="item-cat-2">${newProject.category}</span>
+              </div>
+            `;
+            galleryGrid.prepend(item);
+          }
+          reader.readAsDataURL(input.files[0]);
+        }
+      };
+
+      document.addEventListener('DOMContentLoaded', () => {
+        renderGallery();
+        renderAnalytics();
+      });
+    })();
+  </script>
+
 </body>
 
 </html>

@@ -1,102 +1,596 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Motion & Conteúdo - Hex Agency</title>
+  <title>ZYNTH — Motion & Vídeo · Hex Agency</title>
   <link rel="stylesheet" href="page.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    :root {
-      --theme-color: #AA00FF;
-      --theme-rgb: 170, 0, 255;
+    :root{--theme-color:#AA00FF;--theme-rgb:170,0,255;}
+    
+    /* --- Video Grid (Netflix Style) --- */
+    .netflix-section {
+        padding: 40px 0;
+        margin-top: 40px;
+        border-top: 1px solid rgba(170, 0, 255, 0.2);
     }
+    .netflix-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    .section-title {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.8rem;
+        border-left: 5px solid var(--theme-color);
+        padding-left: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #fff;
+        margin-bottom: 0;
+    }
+    .upload-btn {
+        background: transparent;
+        border: 2px solid var(--theme-color);
+        color: var(--theme-color);
+        padding: 10px 20px;
+        font-family: 'Orbitron', sans-serif;
+        cursor: pointer;
+        transition: 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+    .upload-btn:hover {
+        background: var(--theme-color);
+        color: white;
+        box-shadow: 0 0 20px rgba(170, 0, 255, 0.6);
+    }
+    #fileInput { display: none; }
+    .video-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 25px;
+    }
+    .video-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+        cursor: pointer;
+        position: relative;
+        border: 1px solid rgba(170, 0, 255, 0.1);
+    }
+    .video-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(170, 0, 255, 0.6);
+        border-color: var(--theme-color);
+        z-index: 10;
+    }
+    .thumbnail-container {
+        width: 100%;
+        height: 160px;
+        background: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+    .thumbnail-container video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .play-overlay {
+        position: absolute;
+        font-size: 3rem;
+        color: rgba(255,255,255,0.8);
+        opacity: 0;
+        transition: 0.3s;
+    }
+    .video-card:hover .play-overlay {
+        opacity: 1;
+        transform: scale(1.2);
+        color: var(--theme-color);
+        text-shadow: 0 0 10px white;
+    }
+    .card-info { padding: 15px; }
+    .card-title {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #fff;
+    }
+    .card-meta {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+        display: flex;
+        justify-content: space-between;
+    }
+
+    /* --- Custom Video Player Modal --- */
+    .player-modal {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.95);
+        z-index: 1000;
+        display: none; 
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        backdrop-filter: blur(5px);
+    }
+    .player-container {
+        width: 90%;
+        max-width: 1200px;
+        position: relative;
+        background: #000;
+        box-shadow: 0 0 50px rgba(170, 0, 255, 0.2);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    video#mainPlayer {
+        width: 100%; display: block; max-height: 80vh;
+    }
+    .custom-controls {
+        position: absolute;
+        bottom: 0; left: 0; width: 100%;
+        background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+        padding: 20px;
+        display: flex; flex-direction: column; gap: 10px;
+        opacity: 0; transition: opacity 0.3s;
+    }
+    .player-container:hover .custom-controls { opacity: 1; }
+    .progress-bar-container {
+        width: 100%; height: 5px;
+        background: rgba(255,255,255,0.3);
+        cursor: pointer; border-radius: 5px; position: relative;
+    }
+    .progress-bar {
+        height: 100%;
+        background: var(--theme-color);
+        width: 0%; border-radius: 5px;
+        box-shadow: 0 0 10px var(--theme-color);
+        position: relative;
+    }
+    .progress-bar::after {
+        content: ''; position: absolute;
+        right: -6px; top: -3px;
+        width: 12px; height: 12px;
+        background: #fff; border-radius: 50%;
+        opacity: 0; transition: 0.2s;
+    }
+    .progress-bar-container:hover .progress-bar::after { opacity: 1; }
+    .controls-row {
+        display: flex; justify-content: space-between; align-items: center;
+    }
+    .btn-group {
+        display: flex; gap: 15px; align-items: center;
+    }
+    .ctrl-btn {
+        background: none; border: none; color: #fff; font-size: 1.2rem;
+        cursor: pointer; transition: 0.2s;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .ctrl-btn:hover { color: var(--theme-color); transform: scale(1.1); }
+    .time-display {
+        font-family: 'Orbitron', monospace; font-size: 0.9rem; color: #ddd;
+    }
+    .close-player {
+        position: absolute;
+        top: 20px; right: 30px;
+        color: #fff; font-size: 2.5rem;
+        cursor: pointer; background: none; border: none; z-index: 1001;
+    }
+    .close-player:hover { color: var(--theme-color); }
+    .toast {
+        position: fixed; bottom: 20px; right: 20px;
+        background: var(--theme-color); color: white;
+        padding: 15px 25px; border-radius: 5px;
+        box-shadow: 0 0 20px rgba(170,0,255,0.5);
+        transform: translateY(100px); transition: 0.3s;
+        z-index: 2000; font-family: 'Orbitron';
+    }
+    .toast.show { transform: translateY(0); }
   </style>
 </head>
-
 <body>
   <canvas id="canvas"></canvas>
   <div class="page-container">
     <a href="index.html" class="back-btn">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round">
-        <path d="M19 12H5M12 19l-7-7 7-7" />
-      </svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       Voltar ao Painel
     </a>
 
     <div class="page-icon-wrap">
       <img src="zynth.webp" alt="ZYNTH" class="page-icon">
-      <div class="page-header" style="margin-bottom:0; border-left: 4px solid #AA00FF; padding-left: 20px;">
-        <span class="category-label">ÁREA ROXO</span>
-        <h1 class="page-title">Motion & Conteúdo</h1>
-        <p class="gatilho-mental">"Isso precisa parar o scroll e emocionar."</p>
+      <div class="page-header" style="margin-bottom:0;border-left:4px solid #AA00FF;padding-left:20px;">
+        <span class="category-label">📽️ ZYNTH — MOTION & VÍDEO</span>
+        <h1 class="page-title">Motion que Vende</h1>
+        <p class="gatilho-mental">"Vídeo não é arte — é conversão."</p>
       </div>
     </div>
 
     <div class="content-grid">
       <div class="content-card">
         <h2 class="card-title">
-          <svg viewBox="0 0 24 24">
-            <path
-              d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
-            </path>
-            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-            <line x1="12" y1="22.08" x2="12" y2="12"></line>
-          </svg>
-          Core Software
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+          Ferramentas Core
         </h2>
         <div class="card-body">
-          <p><strong>After Effects</strong></p>
-          <p><strong>Premiere Pro</strong></p>
-          <p><strong>CapCut Desktop</strong></p>
+          <p><strong>Adobe After Effects:</strong> Motion graphics, efeitos visuais e composição.</p>
+          <p><strong>Adobe Premiere Pro:</strong> Edição profissional de vídeo, corte e finalização.</p>
+          <p><strong>CapCut Desktop:</strong> Edição ágil para conteúdo de redes sociais.</p>
         </div>
       </div>
 
       <div class="content-card">
         <h2 class="card-title">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-          </svg>
-          IA de Vídeo & Áudio
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          IAs de Vídeo & Áudio
         </h2>
         <div class="card-body">
-          <p><strong>Runway Gen-3 / Luma Dream Machine:</strong> Para geração de clipes cinematográficos.</p>
-          <p><strong>Lyria 3 / Suno v4:</strong> Para trilhas sonoras exclusivas e profissionais.</p>
-          <p><strong>ElevenLabs:</strong> Para narrações com vozes humanas perfeitas.</p>
+          <p><strong>Runway ML:</strong> Geração e edição de vídeo com IA generativa.</p>
+          <p><strong>Pika Labs:</strong> Animação de imagens e criação de clipes criativos.</p>
+          <p><strong>Luma Dream Machine:</strong> Clipes cinematográficos de alta qualidade.</p>
+          <p><strong>ElevenLabs:</strong> Narrações com vozes humanas perfeitas.</p>
+          <p><strong>Suno v4:</strong> Trilhas sonoras exclusivas e profissionais.</p>
         </div>
       </div>
 
-      <div class="content-card" style="grid-column: 1 / -1;">
+      <div class="content-card" style="grid-column:1/-1;">
         <h2 class="card-title">
-          <svg viewBox="0 0 24 24">
-            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-          </svg>
-          Upgrade de Produção
+          <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          Mentalidade Motion
         </h2>
         <div class="card-body">
-          <p><strong>EbSynth:</strong> Para transformar seus vídeos em animações com o estilo de suas
-            pinturas/ilustrações.</p>
-          <p><strong>Descript:</strong> Para editar vídeo via texto (apaga a frase, apaga o vídeo).</p>
+          <p><strong>💡 DICA:</strong> Os <strong>3 primeiros segundos</strong> definem tudo. Se não prender, não converte.</p>
+          <p>👉 Estrutura vencedora: <strong>Hook → Problema → Solução → CTA</strong></p>
+          <p><strong>EbSynth:</strong> Transformar vídeos em animações com estilo de pintura/ilustração.</p>
+          <p><strong>Descript:</strong> Editar vídeo via texto — apaga a frase, apaga o vídeo.</p>
+          <p><strong>Anubis (Add-on AE):</strong> Exportações rápidas de MP4/GIF direto do After Effects.</p>
         </div>
       </div>
 
       <div class="workflow-section">
         <div class="workflow-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-            <polyline points="22 4 12 14.01 9 11.01"></polyline>
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
         </div>
         <div class="workflow-text">
           <h3>Workflow Oficial</h3>
-          <p>Utilize o <strong>Anubis</strong> (Add-on AE) para exportações rápidas de MP4/GIF.</p>
+          <p>Script → <strong>Runway/Pika</strong> (geração de clipes) → <strong>Premiere</strong> (edição) → <strong>After Effects</strong> (efeitos) → <strong>ElevenLabs</strong> (narração) → <strong>Suno</strong> (trilha) → Export.</p>
         </div>
+      </div>
+    </div>
+
+    <div class="portfolio-section">
+      <div class="portfolio-header">
+        <span class="portfolio-label">PORTFÓLIO</span>
+        <h2 class="portfolio-title">Vídeos & Motion Graphics</h2>
+        <p class="portfolio-subtitle">Vídeos editados com efeitos visuais, motion graphics e peças audiovisuais.</p>
+      </div>
+      <div class="portfolio-tabs" id="zynth-tabs">
+        <button class="tab-btn active" data-tab="zynth-motion">Motion Graphics</button>
+        <button class="tab-btn" data-tab="zynth-edit">Edições de Vídeo</button>
+        <button class="tab-btn" data-tab="zynth-reel">Reels & Social</button>
+      </div>
+      <div class="portfolio-grid tab-content active" id="zynth-motion">
+        <div class="portfolio-card placeholder-card video-placeholder">
+          <div class="placeholder-inner">
+            <svg viewBox="0 0 24 24" class="placeholder-icon"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+            <span>Motion Graphic / Intro</span>
+            <small>Adicione vídeo ou GIF aqui</small>
+          </div>
+        </div>
+        <div class="portfolio-card placeholder-card video-placeholder">
+          <div class="placeholder-inner">
+            <svg viewBox="0 0 24 24" class="placeholder-icon"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+            <span>Animação de Logo</span>
+            <small>Adicione vídeo ou GIF aqui</small>
+          </div>
+        </div>
+        <div class="portfolio-card placeholder-card video-placeholder">
+          <div class="placeholder-inner">
+            <svg viewBox="0 0 24 24" class="placeholder-icon"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+            <span>Efeitos Visuais (VFX)</span>
+            <small>Adicione vídeo aqui</small>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-grid tab-content" id="zynth-edit" style="display:none;">
+        <div class="portfolio-card placeholder-card video-placeholder">
+          <div class="placeholder-inner">
+            <svg viewBox="0 0 24 24" class="placeholder-icon"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+            <span>Edição Comercial</span>
+            <small>Adicione thumbnail + link</small>
+          </div>
+        </div>
+        <div class="portfolio-card placeholder-card video-placeholder">
+          <div class="placeholder-inner">
+            <svg viewBox="0 0 24 24" class="placeholder-icon"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+            <span>Edição Institucional</span>
+            <small>Adicione thumbnail + link</small>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-grid tab-content" id="zynth-reel" style="display:none;">
+        <div class="portfolio-card placeholder-card video-placeholder">
+          <div class="placeholder-inner">
+            <svg viewBox="0 0 24 24" class="placeholder-icon"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+            <span>Reel / Short-form</span>
+            <small>Adicione vídeo vertical aqui</small>
+          </div>
+        </div>
+        <div class="portfolio-card placeholder-card video-placeholder">
+          <div class="placeholder-inner">
+            <svg viewBox="0 0 24 24" class="placeholder-icon"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+            <span>Conteúdo Social Media</span>
+            <small>Adicione vídeo ou thumbnail</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Netflix Style Section -->
+    <div class="netflix-section">
+      <div class="netflix-header">
+        <h2 class="section-title"><i class="fas fa-film"></i> Acervo de Produções ZYNTH</h2>
+        <div>
+          <label for="fileInput" class="upload-btn">
+              <i class="fas fa-cloud-upload-alt"></i> UPLOAD VIDEO
+          </label>
+          <input type="file" id="fileInput" accept="video/mp4,video/webm">
+        </div>
+      </div>
+      
+      <div class="video-grid" id="videoGrid">
+        <!-- Os cards serão gerados via JavaScript -->
       </div>
     </div>
   </div>
 
-  <script src="bg-canvas.js"></script>
-</body>
+  <!-- Player Modal -->
+  <div class="player-modal" id="playerModal">
+      <button class="close-player" onclick="closePlayer()">&times;</button>
+      <div class="player-container">
+          <video id="mainPlayer" playsinline>
+              Seu navegador não suporta a tag de vídeo.
+          </video>
+          
+          <div class="custom-controls">
+              <div class="progress-bar-container" id="progressContainer">
+                  <div class="progress-bar" id="progressBar"></div>
+              </div>
+              
+              <div class="controls-row">
+                  <div class="btn-group">
+                      <button class="ctrl-btn" onclick="skip(-10)" title="Voltar 10s"><i class="fas fa-backward"></i></button>
+                      <button class="ctrl-btn" id="playPauseBtn" onclick="togglePlay()"><i class="fas fa-play"></i></button>
+                      <button class="ctrl-btn" onclick="stopVideo()" title="Parar"><i class="fas fa-stop"></i></button>
+                      <button class="ctrl-btn" onclick="skip(10)" title="Avançar 10s"><i class="fas fa-forward"></i></button>
+                      <span class="time-display" id="timeDisplay">00:00 / 00:00</span>
+                  </div>
+                  
+                  <div class="btn-group">
+                      <button class="ctrl-btn" onclick="toggleMute()" title="Mudo"><i class="fas fa-volume-up" id="volIcon"></i></button>
+                      <button class="ctrl-btn" onclick="toggleFullscreen()" title="Tela Cheia"><i class="fas fa-expand"></i></button>
+                      <button class="ctrl-btn" onclick="downloadCurrent()" title="Baixar Vídeo"><i class="fas fa-download"></i></button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
 
+  <div class="toast" id="toast">Vídeo carregado localmente!</div>
+
+  <script src="bg-canvas.js"></script>
+  <script>
+    document.querySelectorAll('#zynth-tabs .tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#zynth-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+        document.getElementById(btn.dataset.tab).style.display = 'grid';
+      });
+    });
+
+    // --- NETFLIX STYLE VIDEO PLAYER LOGIC ---
+    (function() {
+        const videoGrid = document.getElementById('videoGrid');
+        const fileInput = document.getElementById('fileInput');
+        const playerModal = document.getElementById('playerModal');
+        const mainPlayer = document.getElementById('mainPlayer');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const progressBar = document.getElementById('progressBar');
+        const progressContainer = document.getElementById('progressContainer');
+        const timeDisplay = document.getElementById('timeDisplay');
+        const volIcon = document.getElementById('volIcon');
+
+        let currentVideoUrl = '';
+        let currentVideoName = '';
+
+        const demoVideos = [
+            { title: "Catálogo 2026", src: "videos/catalago26.mp4", duration: "Vídeo HQ" },
+            { title: "Porta Branca Modular", src: "videos/Porta_Branca_MOdular.mp4", duration: "Vídeo HQ" },
+            { title: "Porta Cristal Amescla", src: "videos/Porta_Cristal_Amescla.mp4", duration: "Vídeo HQ" },
+            { title: "Porta Cristal Primer", src: "videos/Porta_Cristal_Primer.mp4", duration: "Vídeo HQ" }
+        ];
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadVideos();
+        });
+
+        function loadVideos() {
+            videoGrid.innerHTML = '';
+            demoVideos.forEach(vid => createVideoCard(vid.title, vid.src, vid.duration));
+        }
+
+        window.createVideoCard = function(title, src, duration) {
+            const card = document.createElement('div');
+            card.className = 'video-card';
+            card.onclick = () => openPlayer(src, title);
+
+            card.innerHTML = `
+                <div class="thumbnail-container">
+                    <video src="${src}" muted loop onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;"></video>
+                    <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
+                </div>
+                <div class="card-info">
+                    <div class="card-title">${title}</div>
+                    <div class="card-meta">
+                        <span>Motion VFX</span>
+                        <span>${duration}</span>
+                    </div>
+                </div>
+            `;
+            videoGrid.appendChild(card);
+        }
+
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                if (file.type.startsWith('video/')) {
+                    const url = URL.createObjectURL(file);
+                    const duration = "Novo Upload";
+                    
+                    createVideoCard(file.name, url, duration);
+                    videoGrid.lastElementChild.scrollIntoView({ behavior: 'smooth' });
+                    showToast(`"${file.name}" adicionado à sessão!`);
+                    fileInput.value = '';
+                } else {
+                    alert('Por favor, selecione apenas arquivos de vídeo (MP4, WebM).');
+                }
+            }
+        });
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        window.openPlayer = function(src, title) {
+            currentVideoUrl = src;
+            currentVideoName = title;
+            mainPlayer.src = src;
+            playerModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            mainPlayer.play().then(() => {
+                updatePlayIcon();
+            }).catch(e => console.log("Autoplay bloqueado pelo navegador"));
+        }
+
+        window.closePlayer = function() {
+            mainPlayer.pause();
+            mainPlayer.src = "";
+            playerModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        window.togglePlay = function() {
+            if (mainPlayer.paused) {
+                mainPlayer.play();
+            } else {
+                mainPlayer.pause();
+            }
+            updatePlayIcon();
+        }
+
+        window.stopVideo = function() {
+            mainPlayer.pause();
+            mainPlayer.currentTime = 0;
+            updatePlayIcon();
+        }
+
+        window.skip = function(seconds) {
+            mainPlayer.currentTime += seconds;
+        }
+
+        function updatePlayIcon() {
+            if (mainPlayer.paused) {
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            } else {
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            }
+        }
+
+        window.toggleMute = function() {
+            mainPlayer.muted = !mainPlayer.muted;
+            volIcon.className = mainPlayer.muted ? 'fas fa-volume-mute' : 'fas fa-volume-up';
+        }
+
+        window.toggleFullscreen = function() {
+            const container = document.querySelector('.player-container');
+            if (!document.fullscreenElement) {
+                container.requestFullscreen().catch(err => {
+                    alert(`Erro ao tentar tela cheia: ${err.message}`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        window.downloadCurrent = function() {
+            if(currentVideoUrl) {
+                const a = document.createElement('a');
+                a.href = currentVideoUrl;
+                a.download = currentVideoName || 'video_zynth.mp4';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }
+        }
+
+        mainPlayer.addEventListener('timeupdate', () => {
+            if (!mainPlayer.duration) return;
+            const percent = (mainPlayer.currentTime / mainPlayer.duration) * 100;
+            progressBar.style.width = `${percent}%`;
+            timeDisplay.textContent = `${formatTime(mainPlayer.currentTime)} / ${formatTime(mainPlayer.duration)}`;
+        });
+
+        mainPlayer.addEventListener('ended', () => {
+            updatePlayIcon();
+            progressBar.style.width = '0%';
+        });
+
+        progressContainer.addEventListener('click', (e) => {
+            const width = progressContainer.clientWidth;
+            const clickX = e.offsetX;
+            const duration = mainPlayer.duration;
+            if(duration) {
+                mainPlayer.currentTime = (clickX / width) * duration;
+            }
+        });
+
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "00:00";
+            const min = Math.floor(seconds / 60);
+            const sec = Math.floor(seconds % 60);
+            return `${min < 10 ? '0'+min : min}:${sec < 10 ? '0'+sec : sec}`;
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (playerModal.style.display === 'flex') {
+                if (e.code === 'Space') { e.preventDefault(); togglePlay(); }
+                if (e.code === 'ArrowRight') skip(5);
+                if (e.code === 'ArrowLeft') skip(-5);
+                if (e.code === 'Escape') closePlayer();
+                if (e.code === 'KeyF') toggleFullscreen();
+            }
+        });
+    })();
+  </script>
+</body>
 </html>
