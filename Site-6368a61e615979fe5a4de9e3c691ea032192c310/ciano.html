@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KRYON — DevOps & Infra · Hex Agency</title>
+  <link rel="stylesheet" href="page.css">
+  <style>
+    :root{--theme-color:#00E5FF;--theme-rgb:0,229,255;}
+    
+    /* 🎮 GAME STYLES */
+    .game-section {
+      margin-top: 60px;
+      padding: 40px;
+      background: rgba(0, 229, 255, 0.03);
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      border-radius: 20px;
+    }
+    .game-header { text-align: center; margin-bottom: 30px; }
+    .game-label {
+      display: inline-block;
+      padding: 8px 16px;
+      background: linear-gradient(135deg, #00E5FF, #00B8D4);
+      color: #000;
+      font-weight: bold;
+      border-radius: 20px;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+    .game-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 32px;
+      color: #00E5FF;
+      text-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
+      margin: 10px 0;
+    }
+    .game-subtitle {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 16px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .game-container { position: relative; max-width: 800px; margin: 0 auto; }
+    #raceCanvas {
+      width: 100%;
+      height: 500px;
+      background: linear-gradient(180deg, #0a0a1a 0%, #1a1a3a 50%, #0a0a2a 100%);
+      border: 2px solid #00E5FF;
+      border-radius: 10px;
+      box-shadow: 0 0 30px rgba(0, 229, 255, 0.3), inset 0 0 50px rgba(0, 229, 255, 0.1);
+      display: block;
+    }
+    .game-ui { margin-top: 20px; }
+    .score-panel { display: flex; justify-content: space-around; gap: 20px; margin-bottom: 20px; }
+    .score-item {
+      background: rgba(0, 229, 255, 0.1);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      padding: 15px 25px;
+      border-radius: 10px;
+      text-align: center;
+      flex: 1;
+    }
+    .score-label { display: block; font-size: 12px; color: rgba(255, 255, 255, 0.6); margin-bottom: 5px; }
+    .score-value {
+      display: block;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 24px;
+      color: #00E5FF;
+      text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    }
+    .controls-panel { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
+    .game-btn {
+      display: flex; align-items: center; gap: 10px; padding: 15px 30px;
+      font-family: 'Orbitron', sans-serif; font-size: 16px; font-weight: bold;
+      border: none; border-radius: 10px; cursor: pointer; transition: all 0.3s ease;
+    }
+    .game-btn svg { width: 20px; height: 20px; fill: currentColor; }
+    .start-btn {
+      background: linear-gradient(135deg, #00E5FF, #00B8D4);
+      color: #000; box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
+    }
+    .start-btn:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(0, 229, 255, 0.6); }
+    .pause-btn {
+      background: linear-gradient(135deg, #FFA000, #FF6F00);
+      color: #000; box-shadow: 0 0 20px rgba(255, 160, 0, 0.4);
+    }
+    .pause-btn:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(255, 160, 0, 0.6); }
+    .restart-btn {
+      background: linear-gradient(135deg, #00E5FF, #00B8D4);
+      color: #000; width: 100%; justify-content: center; margin-top: 20px;
+    }
+    .instructions {
+      background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 10px; border-left: 4px solid #00E5FF;
+    }
+    .instructions p { margin: 5px 0; font-size: 14px; color: rgba(255, 255, 255, 0.8); }
+    .modal {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.85); display: flex; align-items: center; justify-content: center;
+      z-index: 100; border-radius: 10px;
+    }
+    .modal-content {
+      background: linear-gradient(135deg, #1a1a3a, #0a0a2a);
+      border: 2px solid #00E5FF; padding: 40px; border-radius: 20px;
+      text-align: center; max-width: 400px; box-shadow: 0 0 50px rgba(0, 229, 255, 0.4);
+    }
+    .modal-title { font-family: 'Orbitron', sans-serif; font-size: 24px; color: #FF1744; margin-bottom: 10px; }
+    .modal-text { color: rgba(255, 255, 255, 0.8); margin-bottom: 20px; }
+    .modal-stats { background: rgba(0, 0, 0, 0.3); padding: 20px; border-radius: 10px; margin: 20px 0; }
+    .stat-row {
+      display: flex; justify-content: space-between; padding: 10px 0;
+      border-bottom: 1px solid rgba(0, 229, 255, 0.2);
+    }
+    .stat-row:last-child { border-bottom: none; }
+    .stat-row span:first-child { color: rgba(255, 255, 255, 0.6); }
+    .stat-row span:last-child { font-family: 'Orbitron', sans-serif; color: #00E5FF; font-weight: bold; }
+    @media (max-width: 768px) {
+      .game-section { padding: 20px; }
+      .game-title { font-size: 24px; }
+      #raceCanvas { height: 350px; }
+      .score-panel { flex-direction: column; gap: 10px; }
+      .controls-panel { flex-direction: column; }
+      .game-btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <div class="page-container">
+    <a href="index.html" class="back-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Voltar ao Painel
+    </a>
+
+    <div class="page-icon-wrap">
+      <img src="kryon.webp" alt="KRYON" class="page-icon">
+      <div class="page-header" style="margin-bottom:0;border-left:4px solid #00E5FF;padding-left:20px;">
+        <span class="category-label">⚙️ KRYON — DEVOPS & INFRA</span>
+        <h1 class="page-title">DevOps & Infra</h1>
+        <p class="gatilho-mental">"Se não escala — não serve."</p>
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <div class="content-card">
+        <h2 class="card-title">
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+          Ferramentas Core
+        </h2>
+        <div class="card-body">
+          <p><strong>Docker:</strong> Containerização de aplicações e ambientes isolados.</p>
+          <p><strong>Terraform:</strong> Infraestrutura como código — provisionamento na nuvem.</p>
+          <p><strong>NGINX:</strong> Proxy reverso, load balancer e servidor web de alta performance.</p>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <h2 class="card-title">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          Monitoramento & IAs
+        </h2>
+        <div class="card-body">
+          <p><strong>Datadog:</strong> Observabilidade completa — logs, métricas e traces.</p>
+          <p><strong>New Relic:</strong> APM e análise de performance em produção.</p>
+          <p><strong>GitHub Actions:</strong> CI/CD pipelines automatizados.</p>
+        </div>
+      </div>
+
+      <div class="content-card" style="grid-column:1/-1;">
+        <h2 class="card-title">
+          <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          Mentalidade DevOps
+        </h2>
+        <div class="card-body">
+          <p><strong>💡 DICA:</strong> Aprenda isso cedo: deploy manual em VPS. Depois automatiza.</p>
+          <p>👉 Sequência: <strong>VPS manual → Docker Compose → CI/CD → Kubernetes</strong></p>
+          <p><strong>ComfyUI / Ollama:</strong> LLMs locais para automação com IA sem depender de APIs externas.</p>
+          <p><strong>n8n:</strong> Mais potente que o Make para automações com perfil dev.</p>
+          <p><strong>CrewAI / AutoGen:</strong> Agentes que trabalham em equipe (pesquisa, escreve, posta).</p>
+        </div>
+      </div>
+
+      <div class="workflow-section">
+        <div class="workflow-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        </div>
+        <div class="workflow-text">
+          <h3>Workflow Oficial</h3>
+          <p>Documente todos os seus prompts e fluxos no <strong>Notion</strong> ou <strong>Obsidian</strong>. Use <strong>API REST</strong> para conectar sistemas sem intermediários.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="portfolio-section">
+      <div class="portfolio-header">
+        <span class="portfolio-label">PORTFÓLIO</span>
+        <h2 class="portfolio-title">Documentação & Estruturas</h2>
+        <p class="portfolio-subtitle">Diagramas de arquitetura, pipelines CI/CD, configurações de infra e automações.</p>
+      </div>
+      <div class="portfolio-tabs" id="kryon-tabs">
+        <button class="tab-btn active" data-tab="kryon-arch">Arquitetura</button>
+        <button class="tab-btn" data-tab="kryon-ci">CI/CD & Pipelines</button>
+        <button class="tab-btn" data-tab="kryon-auto">Automações</button>
+      </div>
+      <div class="portfolio-grid tab-content active" id="kryon-arch">
+        <div class="portfolio-card placeholder-card"><div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg><span>Diagrama de Arquitetura</span><small>Adicione imagem ou PDF</small></div></div>
+        <div class="portfolio-card placeholder-card"><div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg><span>Setup Docker / VPS</span><small>Adicione documentação</small></div></div>
+        <div class="portfolio-card placeholder-card"><div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg><span>Infraestrutura Cloud</span><small>Adicione diagrama aqui</small></div></div>
+      </div>
+      <div class="portfolio-grid tab-content" id="kryon-ci" style="display:none;">
+        <div class="portfolio-card placeholder-card"><div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg><span>GitHub Actions Pipeline</span><small>Adicione screenshot</small></div></div>
+        <div class="portfolio-card placeholder-card"><div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg><span>Deploy Automatizado</span><small>Adicione documentação</small></div></div>
+      </div>
+      <div class="portfolio-grid tab-content" id="kryon-auto" style="display:none;">
+        <div class="portfolio-card placeholder-card"><div class="placeholder-inner"><svg viewBox="0 0 24 24" class="placeholder-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg><span>Fluxo n8n / Automação</span><small>Adicione screenshot do fluxo</small></div></div>
+      </div>
+    </div>
+
+    <!-- 🚀 JOGO DE CORRIDA DE NAVES - CYBER RACE -->
+    <div class="game-section">
+      <div class="game-header">
+        <span class="game-label">🎮 GAME ZONE</span>
+        <h2 class="game-title">CYBER RACE — KRYON EDITION</h2>
+        <p class="game-subtitle">Corrida infinita através do ciberespaço. Desvie dos asteroides e recorde a maior distância!</p>
+      </div>
+      
+      <div class="game-container">
+        <canvas id="raceCanvas"></canvas>
+        
+        <div class="game-ui">
+          <div class="score-panel">
+            <div class="score-item">
+              <span class="score-label">DISTÂNCIA</span>
+              <span class="score-value" id="distanceValue">0m</span>
+            </div>
+            <div class="score-item">
+              <span class="score-label">VELOCIDADE</span>
+              <span class="score-value" id="speedValue">0 km/h</span>
+            </div>
+            <div class="score-item">
+              <span class="score-label">RECORDE</span>
+              <span class="score-value" id="highScoreValue">0m</span>
+            </div>
+          </div>
+          
+          <div class="controls-panel">
+            <button id="startBtn" class="game-btn start-btn">
+              <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              INICIAR CORRIDA
+            </button>
+            <button id="pauseBtn" class="game-btn pause-btn" style="display:none;">
+              <svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+              PAUSAR
+            </button>
+          </div>
+          
+          <div class="instructions">
+            <p><strong>CONTROLES:</strong> ← → ou A/D para mover | Espaço para pausa</p>
+            <p>Desvie dos asteroides vermelhos e colete os orbs ciano para bônus!</p>
+          </div>
+        </div>
+        
+        <div id="gameOverModal" class="modal" style="display:none;">
+          <div class="modal-content">
+            <h3 class="modal-title">⚠️ COLISÃO DETECTADA</h3>
+            <p class="modal-text">Sua nave foi danificada!</p>
+            <div class="modal-stats">
+              <div class="stat-row">
+                <span>Distância Percorrida:</span>
+                <span id="finalDistance">0m</span>
+              </div>
+              <div class="stat-row">
+                <span>Recorde Anterior:</span>
+                <span id="previousHighScore">0m</span>
+              </div>
+            </div>
+            <button id="restartBtn" class="game-btn restart-btn">
+              <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+              TENTAR NOVAMENTE
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="bg-canvas.js"></script>
+  <script>
+    document.querySelectorAll('#kryon-tabs .tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#kryon-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+        document.getElementById(btn.dataset.tab).style.display = 'grid';
+      });
+    });
+
+    // 🎮 CYBER RACE GAME LOGIC
+    (function() {
+      const canvas = document.getElementById('raceCanvas');
+      if (!canvas) return; // Prevent errors if not loaded
+      const ctx = canvas.getContext('2d');
+      
+      function resizeCanvas() {
+        const rect = canvas.parentElement.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = canvas.clientHeight || 500; 
+      }
+      
+      setTimeout(resizeCanvas, 100);
+      window.addEventListener('resize', resizeCanvas);
+
+      let gameRunning = false;
+      let gamePaused = false;
+      let distance = 0;
+      let speed = 0;
+      let highScore = localStorage.getItem('cyberRaceHighScore') || 0;
+      let animationId = null;
+      let lastTime = 0;
+
+      const player = {
+        x: 0,
+        y: 0,
+        width: 60,
+        height: 80,
+        speed: 0,
+        maxSpeed: 8,
+        image: null
+      };
+
+      const shipImg = new Image();
+      shipImg.src = 'kryon.webp'; 
+      shipImg.onload = () => { player.image = shipImg; };
+      
+      const asteroideImg = new Image();
+      asteroideImg.src = 'asteroide.webp';
+
+      let obstacles = [];
+      let collectibles = [];
+      let stars = [];
+      let roadLines = [];
+
+      for (let i = 0; i < 100; i++) {
+        stars.push({
+          x: Math.random() * 2000, 
+          y: Math.random() * 1000,
+          size: Math.random() * 2 + 1,
+          speed: Math.random() * 3 + 2
+        });
+      }
+
+      for (let i = 0; i < 10; i++) {
+        roadLines.push({
+          y: i * 100
+        });
+      }
+
+      const keys = { left: false, right: false };
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') keys.left = true;
+        if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') keys.right = true;
+        if (e.key === ' ' && gameRunning) {
+          e.preventDefault(); 
+          togglePause();
+        }
+      });
+
+      document.addEventListener('keyup', (e) => {
+        if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') keys.left = false;
+        if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') keys.right = false;
+      });
+
+      function spawnObstacle() {
+        obstacles.push({
+          x: Math.random() * (canvas.width - 50),
+          y: -100,
+          width: 50,
+          height: 50,
+          speed: speed * 0.5 + 3
+        });
+      }
+
+      function spawnCollectible() {
+        collectibles.push({
+          x: Math.random() * (canvas.width - 30),
+          y: -100,
+          width: 30,
+          height: 30,
+          collected: false
+        });
+      }
+
+      function update(deltaTime) {
+        if (!gameRunning || gamePaused) return;
+
+        if (deltaTime > 0.1) deltaTime = 0.1;
+
+        speed = Math.min(speed + 0.01, 15);
+        distance += speed * deltaTime * 10; 
+
+        if (keys.left) player.x -= player.maxSpeed * (deltaTime * 60);
+        if (keys.right) player.x += player.maxSpeed * (deltaTime * 60);
+
+        player.x = Math.max(0, Math.min(canvas.width - player.width, player.x));
+
+        stars.forEach(star => {
+          star.y += star.speed * (speed / 5) * (deltaTime * 60);
+          if (star.y > canvas.height) {
+            star.y = 0;
+            star.x = Math.random() * canvas.width;
+          }
+        });
+
+        roadLines.forEach(line => {
+          line.y += speed * 2 * (deltaTime * 60);
+          if (line.y > canvas.height) {
+            line.y = -100;
+          }
+        });
+
+        obstacles.forEach((obs, index) => {
+          obs.y += (obs.speed + speed) * (deltaTime * 60);
+          if (obs.y > canvas.height) {
+            obstacles.splice(index, 1);
+          }
+
+          const hitPadding = 10;
+          if (
+            player.x + hitPadding < obs.x + obs.width - hitPadding &&
+            player.x + player.width - hitPadding > obs.x + hitPadding &&
+            player.y + hitPadding < obs.y + obs.height - hitPadding &&
+            player.y + player.height - hitPadding > obs.y + hitPadding
+          ) {
+            gameOver();
+          }
+        });
+
+        collectibles.forEach((col, index) => {
+          col.y += speed * 1.5 * (deltaTime * 60);
+          if (col.y > canvas.height) {
+            collectibles.splice(index, 1);
+          }
+
+          if (
+            !col.collected &&
+            player.x < col.x + col.width &&
+            player.x + player.width > col.x &&
+            player.y < col.y + col.height &&
+            player.y + player.height > col.y
+          ) {
+            col.collected = true;
+            distance += 100;
+            collectibles.splice(index, 1);
+          }
+        });
+
+        if (Math.random() < 0.02 * (deltaTime * 60)) spawnObstacle();
+        if (Math.random() < 0.01 * (deltaTime * 60)) spawnCollectible();
+
+        document.getElementById('distanceValue').textContent = Math.floor(distance) + 'm';
+        document.getElementById('speedValue').textContent = Math.floor(speed * 20) + ' km/h';
+      }
+
+      function draw() {
+        ctx.fillStyle = '#0a0a1a';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = '#ffffff';
+        stars.forEach(star => {
+          if (star.x <= canvas.width) {
+            ctx.beginPath();
+            ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        });
+
+        ctx.strokeStyle = 'rgba(0, 229, 255, 0.3)';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([20, 20]);
+        roadLines.forEach(line => {
+          ctx.beginPath();
+          ctx.moveTo(canvas.width / 3, line.y);
+          ctx.lineTo(canvas.width / 3, line.y + 50);
+          ctx.stroke();
+          
+          ctx.beginPath();
+          ctx.moveTo(canvas.width * 2 / 3, line.y);
+          ctx.lineTo(canvas.width * 2 / 3, line.y + 50);
+          ctx.stroke();
+        });
+        ctx.setLineDash([]);
+
+        if (player.image && player.image.complete && player.image.naturalWidth !== 0) {
+          ctx.drawImage(player.image, player.x, player.y, player.width, player.height);
+        } else {
+          ctx.fillStyle = '#00E5FF';
+          ctx.beginPath();
+          ctx.moveTo(player.x + player.width / 2, player.y);
+          ctx.lineTo(player.x + player.width, player.y + player.height);
+          ctx.lineTo(player.x + player.width / 2, player.y + player.height - 20);
+          ctx.lineTo(player.x, player.y + player.height);
+          ctx.closePath();
+          ctx.fill();
+        }
+
+        obstacles.forEach(obs => {
+          if (asteroideImg.complete && asteroideImg.naturalWidth !== 0) {
+            ctx.drawImage(asteroideImg, obs.x, obs.y, obs.width, obs.height);
+          } else {
+            ctx.fillStyle = '#FF1744';
+            ctx.beginPath();
+            ctx.arc(obs.x + obs.width / 2, obs.y + obs.height / 2, obs.width / 2, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.shadowColor = '#FF1744';
+            ctx.shadowBlur = 20;
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+          }
+        });
+
+        collectibles.forEach(col => {
+          if (!col.collected) {
+            ctx.fillStyle = '#00E5FF';
+            ctx.beginPath();
+            ctx.arc(col.x + col.width / 2, col.y + col.height / 2, col.width / 2, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.shadowColor = '#00E5FF';
+            ctx.shadowBlur = 15;
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+          }
+        });
+      }
+
+      function gameLoop(timestamp) {
+        if (!lastTime) lastTime = timestamp;
+        const deltaTime = (timestamp - lastTime) / 1000;
+        lastTime = timestamp;
+
+        update(deltaTime);
+        draw();
+
+        if (gameRunning) {
+          animationId = requestAnimationFrame(gameLoop);
+        }
+      }
+
+      function startGame() {
+        resizeCanvas();
+        gameRunning = true;
+        gamePaused = false;
+        distance = 0;
+        speed = 2; 
+        obstacles = [];
+        collectibles = [];
+        player.x = canvas.width / 2 - player.width / 2;
+        player.y = canvas.height - player.height - 20;
+        
+        document.getElementById('startBtn').style.display = 'none';
+        document.getElementById('pauseBtn').style.display = 'flex';
+        document.getElementById('gameOverModal').style.display = 'none';
+        document.getElementById('highScoreValue').textContent = Math.floor(highScore) + 'm';
+        
+        lastTime = performance.now();
+        gameLoop(lastTime);
+        
+        canvas.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      function togglePause() {
+        gamePaused = !gamePaused;
+        const pauseBtn = document.getElementById('pauseBtn');
+        if (gamePaused) {
+          pauseBtn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg> CONTINUAR';
+        } else {
+          pauseBtn.innerHTML = '<svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg> PAUSAR';
+          lastTime = performance.now();
+          gameLoop(lastTime);
+        }
+      }
+
+      function gameOver() {
+        gameRunning = false;
+        cancelAnimationFrame(animationId);
+        
+        const finalDistance = Math.floor(distance);
+        
+        if (finalDistance > highScore) {
+          highScore = finalDistance;
+          localStorage.setItem('cyberRaceHighScore', highScore);
+        }
+        
+        document.getElementById('finalDistance').textContent = finalDistance + 'm';
+        document.getElementById('previousHighScore').textContent = Math.floor(highScore) + 'm';
+        document.getElementById('gameOverModal').style.display = 'flex';
+        document.getElementById('startBtn').style.display = 'flex';
+        document.getElementById('pauseBtn').style.display = 'none';
+        document.getElementById('startBtn').innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg> NOVA CORRIDA';
+      }
+
+      document.getElementById('startBtn').addEventListener('click', startGame);
+      document.getElementById('pauseBtn').addEventListener('click', togglePause);
+      document.getElementById('restartBtn').addEventListener('click', startGame);
+
+      document.getElementById('highScoreValue').textContent = Math.floor(highScore) + 'm';
+      
+      setTimeout(() => {
+        resizeCanvas();
+        player.x = canvas.width / 2 - player.width / 2;
+        player.y = canvas.height - player.height - 20;
+        draw();
+      }, 200);
+      
+    })();
+  </script>
+</body>
+</html>

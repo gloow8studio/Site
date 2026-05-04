@@ -70,7 +70,7 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
       padding: 20px;
       box-sizing: border-box;
       opacity: 0;
@@ -96,26 +96,50 @@
       letter-spacing: 1px;
     }
 
-    .lb-image-container:fullscreen { background-color: #000 !important; border-radius: 0 !important; }
-    .lb-image-container:-webkit-full-screen { background-color: #000 !important; border-radius: 0 !important; }
+    .lb-image-container:fullscreen {
+      background-color: #000 !important;
+      border-radius: 0 !important;
+    }
+
+    .lb-image-container:-webkit-full-screen {
+      background-color: #000 !important;
+      border-radius: 0 !important;
+    }
 
     #sylar-gallery-section .filter-btn.active {
       background: #00C853 !important;
       color: #000 !important;
       box-shadow: 0 0 15px rgba(0, 200, 83, 0.5);
     }
+
     #sylar-gallery-section .filter-btn:hover:not(.active) {
       border-color: #00C853 !important;
       color: #00C853 !important;
     }
 
     @media (max-width: 1024px) {
-      .lightbox-content { flex-direction: column; overflow-y: scroll; }
-      .lb-image-container { flex: none; height: 50vh; }
-      .lb-info-panel { flex: none; height: auto; border-left: none; border-top: 2px solid #00C853; }
+      .lightbox-content {
+        flex-direction: column;
+        overflow-y: scroll;
+      }
+
+      .lb-image-container {
+        flex: none;
+        height: 50vh;
+      }
+
+      .lb-info-panel {
+        flex: none;
+        height: auto;
+        border-left: none;
+        border-top: 2px solid #00C853;
+      }
     }
+
     @media (max-width: 600px) {
-      .lb-info-panel { padding: 20px; }
+      .lb-info-panel {
+        padding: 20px;
+      }
     }
 
     /* DASHBOARD CARDS */
@@ -320,7 +344,7 @@
       flex-direction: column;
       gap: 20px;
       scrollbar-width: thin;
-      scrollbar-color: #00C853 rgba(0,0,0,0.2);
+      scrollbar-color: #00C853 rgba(0, 0, 0, 0.2);
     }
 
     .message {
@@ -335,8 +359,15 @@
     }
 
     @keyframes fadeInChat {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .user-msg {
@@ -422,12 +453,25 @@
       animation: blinkChat 1.4s infinite both;
     }
 
-    .dot-chat:nth-child(2) { animation-delay: 0.2s; }
-    .dot-chat:nth-child(3) { animation-delay: 0.4s; }
+    .dot-chat:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .dot-chat:nth-child(3) {
+      animation-delay: 0.4s;
+    }
 
     @keyframes blinkChat {
-      0%, 80%, 100% { opacity: 0; }
-      40% { opacity: 1; }
+
+      0%,
+      80%,
+      100% {
+        opacity: 0;
+      }
+
+      40% {
+        opacity: 1;
+      }
     }
   </style>
 </head>
@@ -528,7 +572,8 @@
       </div>
 
       <!-- Filtros de Categoria -->
-      <div class="gallery-filters" style="margin-bottom: 40px; display: flex; justify-content: flex-start; gap: 10px; flex-wrap: wrap;">
+      <div class="gallery-filters"
+        style="margin-bottom: 40px; display: flex; justify-content: flex-start; gap: 10px; flex-wrap: wrap;">
         <button class="filter-btn active" data-filter="all">TODOS</button>
         <button class="filter-btn" data-filter="dashboard">DASHBOARDS</button>
         <button class="filter-btn" data-filter="report">RELATÓRIOS</button>
@@ -543,12 +588,16 @@
       <!-- Botão de Upload Simulado -->
       <div style="text-align: center; margin-top: 60px;">
         <label for="sylar-upload" class="upload-btn-wrapper" style="cursor: pointer;">
-          <button style="background: linear-gradient(45deg, #00C853, #00E676); border: none; padding: 15px 40px; color: #000; font-family: 'Orbitron'; font-weight: bold; font-size: 1rem; clip-path: polygon(5% 0, 100% 0, 95% 100%, 0% 100%); box-shadow: 0 0 15px rgba(0, 200, 83, 0.4); transition: transform 0.2s;" onclick="document.getElementById('sylar-upload').click()">
+          <button
+            style="background: linear-gradient(45deg, #00C853, #00E676); border: none; padding: 15px 40px; color: #000; font-family: 'Orbitron'; font-weight: bold; font-size: 1rem; clip-path: polygon(5% 0, 100% 0, 95% 100%, 0% 100%); box-shadow: 0 0 15px rgba(0, 200, 83, 0.4); transition: transform 0.2s;"
+            onclick="document.getElementById('sylar-upload').click()">
             + ENVIAR ARQUIVO (SIMULADO)
           </button>
-          <input type="file" id="sylar-upload" name="myfile" style="display:none;" accept="image/*" onchange="simulateUploadSylar(this)" />
+          <input type="file" id="sylar-upload" name="myfile" style="display:none;" accept="image/*"
+            onchange="simulateUploadSylar(this)" />
         </label>
-        <p style="color: #666; font-size: 0.8rem; margin-top: 10px; font-family: 'Rajdhani'">O upload é apenas visual no frontend.</p>
+        <p style="color: #666; font-size: 0.8rem; margin-top: 10px; font-family: 'Rajdhani'">O upload é apenas visual no
+          frontend.</p>
       </div>
     </div>
 
@@ -560,8 +609,10 @@
       <div class="lightbox-content"
         style="display: flex; height: 100%; width: 100%; max-width: 1600px; margin: 0 auto; padding: 20px; box-sizing: border-box;">
         <!-- Área da Imagem -->
-        <div class="lb-image-container" id="sylar-img-container" style="flex: 2; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; border-radius: 8px;">
-          <img id="lb-img-sylar" src="" alt="Full View" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transition: transform 0.2s ease; cursor: zoom-in; box-shadow: 0 0 30px rgba(0, 200, 83, 0.2);" />
+        <div class="lb-image-container" id="sylar-img-container"
+          style="flex: 2; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; border-radius: 8px;">
+          <img id="lb-img-sylar" src="" alt="Full View"
+            style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transition: transform 0.2s ease; cursor: zoom-in; box-shadow: 0 0 30px rgba(0, 200, 83, 0.2);" />
           <div class="lb-controls">
             <button id="lb-zoom-in-sylar" title="Zoom In">+</button>
             <button id="lb-zoom-out-sylar" title="Zoom Out">-</button>
@@ -575,7 +626,7 @@
         <div class="lb-info-panel">
           <h3 id="lb-title-sylar">Título do Projeto</h3>
           <span id="lb-category-sylar">Categoria</span>
-          
+
           <div class="info-block">
             <h4>CONCEITO & INSIGHTS</h4>
             <p id="lb-desc-sylar">Descrição detalhada do projeto...</p>
@@ -608,9 +659,10 @@
         padding: 10px 25px;
         border-radius: 40px;
         border: 1px solid #00C853;
-        box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
         z-index: 10;
       }
+
       .lb-controls button {
         background: none;
         border: none;
@@ -623,10 +675,12 @@
         display: flex;
         align-items: center;
       }
+
       .lb-controls button:hover {
         color: #fff;
         text-shadow: 0 0 10px #00C853;
       }
+
       .lb-info-panel {
         flex: 1;
         background: rgba(5, 12, 15, 0.95);
@@ -638,6 +692,7 @@
         overflow-y: auto;
         min-width: 340px;
       }
+
       .lb-info-panel h3 {
         font-family: 'Orbitron';
         color: #00C853;
@@ -646,6 +701,7 @@
         text-transform: uppercase;
         line-height: 1.1;
       }
+
       .lb-info-panel span {
         color: #888;
         font-family: 'Rajdhani';
@@ -654,7 +710,11 @@
         margin-bottom: 35px;
         font-size: 0.85rem;
       }
-      .info-block { margin-bottom: 30px; }
+
+      .info-block {
+        margin-bottom: 30px;
+      }
+
       .info-block h4 {
         color: #fff;
         font-family: 'Orbitron';
@@ -664,11 +724,39 @@
         margin-bottom: 15px;
         letter-spacing: 1px;
       }
-      .info-block p { font-family: 'Rajdhani'; color: #ccc; line-height: 1.6; font-size: 1.05rem; }
-      .info-block ul { padding: 0; list-style: none; }
-      .info-block li { color: #888; font-family: 'Rajdhani'; margin-bottom: 5px; font-size: 0.95rem; }
-      .lb-footer { margin-top: auto; padding-top: 25px; border-top: 1px solid #1a2a2a; }
-      .lb-footer p { font-family: 'Orbitron'; font-size: 0.75rem; color: #00C853; opacity: 0.7; letter-spacing: 2px; }
+
+      .info-block p {
+        font-family: 'Rajdhani';
+        color: #ccc;
+        line-height: 1.6;
+        font-size: 1.05rem;
+      }
+
+      .info-block ul {
+        padding: 0;
+        list-style: none;
+      }
+
+      .info-block li {
+        color: #888;
+        font-family: 'Rajdhani';
+        margin-bottom: 5px;
+        font-size: 0.95rem;
+      }
+
+      .lb-footer {
+        margin-top: auto;
+        padding-top: 25px;
+        border-top: 1px solid #1a2a2a;
+      }
+
+      .lb-footer p {
+        font-family: 'Orbitron';
+        font-size: 0.75rem;
+        color: #00C853;
+        opacity: 0.7;
+        letter-spacing: 2px;
+      }
     </style>
 
     <!-- ========================================== -->
@@ -729,7 +817,8 @@
         <div class="section-header" style="text-align: center; margin-bottom: 40px;">
           <h2 style="font-family: 'Orbitron', sans-serif; font-size: 2.2rem; color: #fff;">SYLAR <span
               style="color: #00C853;">ASSISTANT</span></h2>
-          <p style="color: #aaa; font-family: 'Rajdhani'">Assistente comercial inteligente treinado em nossa Tabela de Preços Abril 2026.</p>
+          <p style="color: #aaa; font-family: 'Rajdhani'">Assistente comercial inteligente treinado em nossa Tabela de
+            Preços Abril 2026.</p>
         </div>
 
         <div id="sylar-chat-container">
@@ -739,13 +828,15 @@
             </div>
             <div>
               <h4 style="color: #fff; margin: 0; font-family: 'Orbitron'; font-size: 1rem;">SYLAR AI</h4>
-              <p style="color: #00C853; margin: 0; font-size: 0.75rem; font-family: 'Rajdhani'; letter-spacing: 1px;">ONLINE • CONSULTOR COMERCIAL</p>
+              <p style="color: #00C853; margin: 0; font-size: 0.75rem; font-family: 'Rajdhani'; letter-spacing: 1px;">
+                ONLINE • CONSULTOR COMERCIAL</p>
             </div>
           </div>
-          
+
           <div id="chat-box">
             <div class="message ai-msg">
-              Olá! Sou o SYLAR, seu assistente comercial na Site3D AnimaMotion. Como posso te ajudar com nossos produtos e preços hoje?
+              Olá! Sou o SYLAR, seu assistente comercial na Site3D AnimaMotion. Como posso te ajudar com nossos produtos
+              e preços hoje?
             </div>
           </div>
 
@@ -756,7 +847,8 @@
           </div>
 
           <div class="chat-input-area">
-            <input type="text" id="user-input-chat" placeholder="Digite sua dúvida sobre preços ou produtos..." onkeypress="if(event.key === 'Enter') enviarMensagemChat()">
+            <input type="text" id="user-input-chat" placeholder="Digite sua dúvida sobre preços ou produtos..."
+              onkeypress="if(event.key === 'Enter') enviarMensagemChat()">
             <button class="send-btn-chat" onclick="enviarMensagemChat()">
               <i class="fas fa-paper-plane"></i>
             </button>
@@ -1002,24 +1094,24 @@
       document.getElementById('dash-modal').addEventListener('click', e => { if (e.target.id === 'dash-modal') closeDashModal(); });
 
       // Simulação de Upload
-      window.simulateUploadSylar = function(input) {
+      window.simulateUploadSylar = function (input) {
         if (input.files && input.files[0]) {
           const reader = new FileReader();
-          reader.onload = function(e) {
+          reader.onload = function (e) {
             alert("✅ Arquivo recebido pelo sistema SYLAR! (Simulação visual apenas)");
-            const newProject = { 
-              id: Date.now(), 
-              file: e.target.result, 
-              title: input.files[0].name, 
-              category: "dashboard", 
-              desc: "Arquivo enviado pelo usuário para análise.", 
-              tech: ["Upload Local"] 
+            const newProject = {
+              id: Date.now(),
+              file: e.target.result,
+              title: input.files[0].name,
+              category: "dashboard",
+              desc: "Arquivo enviado pelo usuário para análise.",
+              tech: ["Upload Local"]
             };
-            
+
             const item = document.createElement('div');
             item.className = 'gallery-item-2';
             item.onclick = () => openLightbox(newProject);
-            
+
             item.innerHTML = `
               <img src="${e.target.result}" alt="${newProject.title}">
               <div class="item-overlay-2">
@@ -1051,9 +1143,9 @@
   <script type="module">
     import { GoogleGenerativeAI } from "@google/generative-ai";
 
-    const API_KEY = "AIzaSyDUTMKTut06SXZ0X_8_XcXqEhsCjDikAOI"; 
+    const API_KEY = "AIzaSyDUTMKTut06SXZ0X_8_XcXqEhsCjDikAOI";
     const genAI = new GoogleGenerativeAI(API_KEY);
-    
+
     const SYSTEM_PROMPT = `Você é o SYLAR, um assistente comercial especializado e altamente profissional da Site3D AnimaMotion / Uniportas.
 Seu objetivo é ajudar clientes a entenderem nossos produtos, orçamentos e especificações técnicas baseando-se RIGOROSAMENTE nas tabelas de preços abaixo.
 
@@ -1080,12 +1172,12 @@ CONTEXTO DE PRODUTOS E PREÇOS:
 
 Use estas informações para responder com precisão.`;
 
-    const model = genAI.getGenerativeModel({ 
+    const model = genAI.getGenerativeModel({
       model: "gemini-1.5-flash",
       systemInstruction: SYSTEM_PROMPT
     });
 
-    window.enviarMensagemChat = async function() {
+    window.enviarMensagemChat = async function () {
       const input = document.getElementById("user-input-chat");
       const chatBox = document.getElementById("chat-box");
       const typing = document.getElementById("typing-chat");
@@ -1096,7 +1188,7 @@ Use estas informações para responder com precisão.`;
       // User message
       appendMessage("user", mensagem);
       input.value = "";
-      
+
       // Show typing
       typing.style.display = "flex";
       chatBox.scrollTop = chatBox.scrollHeight;
@@ -1105,7 +1197,7 @@ Use estas informações para responder com precisão.`;
         const result = await model.generateContent(mensagem);
         const response = await result.response;
         const textoIA = response.text();
-        
+
         typing.style.display = "none";
         appendMessage("ai", textoIA);
       } catch (error) {
