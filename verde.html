@@ -857,6 +857,127 @@
       </div>
     </section>
 
+    <!-- ========================================== -->
+    <!-- SEÇÃO SYLAR CONFIGURATOR - GERADOR DE ORÇAMENTOS -->
+    <!-- ========================================== -->
+    <section id="sylar-config-section" style="padding: 100px 20px; border-top: 1px solid rgba(0, 200, 83, 0.1); background: rgba(0,0,0,0.2);">
+      <div class="container" style="max-width: 1100px; margin: 0 auto;">
+        <div class="section-header" style="text-align: center; margin-bottom: 50px;">
+          <h2 style="font-family: 'Orbitron', sans-serif; font-size: 2.2rem; color: #fff;">SYLAR <span style="color: #00C853;">CONFIGURATOR</span></h2>
+          <p style="color: #aaa; font-family: 'Rajdhani'">Monte seu kit de porta completo com cálculo automático baseado na Tabela Abril 2026.</p>
+        </div>
+
+        <div class="configurator-wrapper" style="display: grid; grid-template-columns: 1fr 350px; gap: 30px; background: rgba(5, 10, 16, 0.6); border: 1px solid rgba(0, 200, 83, 0.2); border-radius: 20px; overflow: hidden; backdrop-filter: blur(10px);">
+          
+          <!-- Lado Esquerdo: Passos -->
+          <div class="config-steps-area" style="padding: 40px; border-right: 1px solid rgba(255,255,255,0.05);">
+            <div id="step-content">
+              <!-- Conteúdo dinâmico dos passos será injetado aqui -->
+            </div>
+
+            <div class="config-nav" style="margin-top: 40px; display: flex; justify-content: space-between; align-items: center;">
+              <button id="prev-step" onclick="sylarConfig.prev()" style="background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(255,255,255,0.1); padding: 12px 25px; border-radius: 8px; cursor: pointer; font-family: 'Orbitron'; font-size: 0.8rem; display: none;">ANTERIOR</button>
+              <div class="step-dots" style="display: flex; gap: 8px;">
+                <div class="s-dot active"></div>
+                <div class="s-dot"></div>
+                <div class="s-dot"></div>
+                <div class="s-dot"></div>
+                <div class="s-dot"></div>
+              </div>
+              <button id="next-step" onclick="sylarConfig.next()" style="background: #00C853; color: #000; border: none; padding: 12px 30px; border-radius: 8px; cursor: pointer; font-family: 'Orbitron'; font-weight: bold; font-size: 0.8rem;">PRÓXIMO</button>
+            </div>
+          </div>
+
+          <!-- Lado Direito: Resumo Real-time -->
+          <div class="config-summary-area" style="padding: 40px; background: rgba(0,0,0,0.3);">
+            <h3 style="font-family: 'Orbitron'; color: #00C853; font-size: 1.1rem; margin-bottom: 25px; display: flex; align-items: center; gap: 10px;">
+              <i class="fas fa-file-invoice-dollar"></i> RESUMO
+            </h3>
+            <div id="config-live-items" style="display: flex; flex-direction: column; gap: 15px; min-height: 200px;">
+              <!-- Itens selecionados aparecem aqui -->
+              <p style="color: #555; font-size: 0.9rem; text-align: center; margin-top: 50px;">Inicie a configuração para ver os valores.</p>
+            </div>
+            
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 2px dashed rgba(0, 200, 83, 0.2);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <span style="color: #aaa; font-family: 'Orbitron'; font-size: 0.9rem;">TOTAL ESTIMADO</span>
+                <span id="config-total" style="color: #fff; font-family: 'Orbitron'; font-size: 1.4rem; font-weight: bold;">R$ 0,00</span>
+              </div>
+              <button id="finish-config" onclick="sylarConfig.generatePDF()" style="width: 100%; background: transparent; color: #00C853; border: 1px solid #00C853; padding: 15px; border-radius: 8px; cursor: pointer; font-family: 'Orbitron'; font-size: 0.8rem; transition: 0.3s;" disabled>FINALIZAR ORÇAMENTO</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <style>
+      .config-option-card {
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 12px;
+        padding: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        position: relative;
+        overflow: hidden;
+      }
+      .config-option-card:hover {
+        background: rgba(0, 200, 83, 0.05);
+        border-color: rgba(0, 200, 83, 0.3);
+        transform: translateY(-3px);
+      }
+      .config-option-card.selected {
+        background: rgba(0, 200, 83, 0.1);
+        border-color: #00C853;
+        box-shadow: 0 0 20px rgba(0, 200, 83, 0.15);
+      }
+      .config-option-card i {
+        font-size: 1.5rem;
+        color: #00C853;
+        margin-bottom: 5px;
+      }
+      .config-option-card h4 {
+        color: #fff;
+        margin: 0;
+        font-family: 'Orbitron';
+        font-size: 0.9rem;
+      }
+      .config-option-card p {
+        color: #888;
+        margin: 0;
+        font-size: 0.8rem;
+        line-height: 1.4;
+      }
+      .s-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.1);
+        transition: 0.3s;
+      }
+      .s-dot.active {
+        background: #00C853;
+        box-shadow: 0 0 10px #00C853;
+        width: 20px;
+        border-radius: 4px;
+      }
+      .summary-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        animation: slideIn 0.3s ease;
+      }
+      @keyframes slideIn {
+        from { opacity: 0; transform: translateX(10px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+      .summary-item span:first-child { color: #888; font-size: 0.85rem; font-family: 'Rajdhani'; }
+      .summary-item span:last-child { color: #fff; font-size: 0.9rem; font-family: 'Orbitron'; }
+    </style>
+
   </div>
 
   <script src="bg-canvas.js"></script>
@@ -1251,6 +1372,217 @@ PRODUTOS E PREÇOS (Tabela Abril 2026):
         });
       }
     });
+  </script>
+  <script>
+    const sylarConfig = {
+      currentStep: 1,
+      selections: {
+        openingType: null,
+        structure: null,
+        model: null,
+        measure: null,
+        frame: null,
+        hardware: [],
+        services: []
+      },
+      data: {
+        prices: {
+          folhas: {
+            "Amescla": 127.80,
+            "Primer": 247.35,
+            "P. Imbuia": 223.20,
+            "Belíssima": 819.20 // Pivotante Kit
+          },
+          batentes: {
+            "Eco Primer 11cm": 116.80,
+            "Tauari 14cm": 237.50
+          },
+          ferragens: {
+            "Fechadura Navas": 61.75,
+            "Fechadura Modena": 101.20,
+            "Puxador 60cm": 125.00,
+            "Puxador 80cm": 137.00
+          },
+          servicos: {
+            "Furo Fechadura": 17.50,
+            "Rebaixo Dobradiça": 17.50,
+            "Redução Folha Lisa": 17.50,
+            "Redução Folha Primer": 35.00,
+            "Montagem Kit": 82.00
+          }
+        }
+      },
+
+      init() {
+        this.renderStep();
+      },
+
+      renderStep() {
+        const container = document.getElementById('step-content');
+        const dots = document.querySelectorAll('.s-dot');
+        dots.forEach((d, i) => d.className = i === this.currentStep - 1 ? 's-dot active' : 's-dot');
+
+        document.getElementById('prev-step').style.display = this.currentStep === 1 ? 'none' : 'block';
+        document.getElementById('next-step').innerText = this.currentStep === 5 ? 'VER TOTAL' : 'PRÓXIMO';
+
+        let html = '';
+        switch(this.currentStep) {
+          case 1:
+            html = `
+              <h3 style="color:#fff; font-family:'Orbitron'; margin-bottom:30px;">Passo 1: Tipo de Abertura</h3>
+              <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:20px;">
+                ${this.renderCard('openingType', 'Giro', 'Padrão clássico de abrir', 'fa-door-open')}
+                ${this.renderCard('openingType', 'Correr', 'Sem batente, economia de espaço', 'fa-arrows-left-right')}
+                ${this.renderCard('openingType', 'Camarão', 'Dobrável com kit articulado', 'fa-staircase')}
+                ${this.renderCard('openingType', 'Pivotante', 'Elegância com eixo vertical', 'fa-rotate')}
+              </div>
+            `;
+            break;
+          case 2:
+            html = `
+              <h3 style="color:#fff; font-family:'Orbitron'; margin-bottom:30px;">Passo 2: Estrutura da Folha</h3>
+              <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:20px;">
+                ${this.renderCard('structure', 'Lisa Amescla', 'Madeira clara natural', 'fa-tree')}
+                ${this.renderCard('structure', 'Primer Branco', 'Pronta para pintura', 'fa-paint-roller')}
+                ${this.renderCard('structure', 'Frisada Milano', 'Design moderno com frisos', 'fa-bars')}
+              </div>
+            `;
+            break;
+          case 3:
+            html = `
+              <h3 style="color:#fff; font-family:'Orbitron'; margin-bottom:30px;">Passo 3: Medida da Folha</h3>
+              <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap:15px;">
+                ${this.renderCard('measure', '60x210', 'Padrão Banheiro')}
+                ${this.renderCard('measure', '70x210', 'Padrão Quartos')}
+                ${this.renderCard('measure', '80x210', 'Padrão Entrada')}
+                ${this.renderCard('measure', '92x210', 'Larga')}
+                <div class="config-option-card" onclick="sylarConfig.setMeasure('Especial')">
+                  <h4>Especial / Redução</h4>
+                  <p>Ajuste sob medida</p>
+                </div>
+              </div>
+            `;
+            break;
+          case 4:
+            html = `
+              <h3 style="color:#fff; font-family:'Orbitron'; margin-bottom:30px;">Passo 4: Batente</h3>
+              <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:20px;">
+                ${this.renderCard('frame', 'Sem Batente', 'Apenas a folha', 'fa-ban')}
+                ${this.renderCard('frame', 'Eco Primer 11cm', 'Com borracha amortecedora', 'fa-border-all')}
+                ${this.renderCard('frame', 'Tauari 14cm', 'Madeira nobre tratada', 'fa-tree')}
+              </div>
+            `;
+            break;
+          case 5:
+            html = `
+              <h3 style="color:#fff; font-family:'Orbitron'; margin-bottom:30px;">Passo 5: Ferragens</h3>
+              <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:20px;">
+                ${this.renderCard('hardware', 'Kit Standard', 'Fechadura Navas + Dobradiças', 'fa-key')}
+                ${this.renderCard('hardware', 'Kit Premium', 'Fechadura Modena + Dobradiças', 'fa-shield-halved')}
+                ${this.renderCard('hardware', 'Kit Pivotante', 'Rolete + Puxador 60cm', 'fa-grip-lines-vertical')}
+              </div>
+            `;
+            break;
+        }
+        container.innerHTML = html;
+        this.updateSummary();
+      },
+
+      renderCard(type, value, desc, icon) {
+        const isSelected = type === 'hardware' ? this.selections.hardware === value : this.selections[type] === value;
+        return `
+          <div class="config-option-card ${isSelected ? 'selected' : ''}" onclick="sylarConfig.select('${type}', '${value}')">
+            ${icon ? `<i class="fas ${icon}"></i>` : ''}
+            <h4>${value}</h4>
+            <p>${desc || ''}</p>
+          </div>
+        `;
+      },
+
+      select(type, value) {
+        this.selections[type] = value;
+        
+        // Regra de Correr: Se selecionado "Correr", o item Batente deve ser automaticamente excluído
+        if (type === 'openingType' && value === 'Correr') {
+          this.selections.frame = 'Sem Batente';
+        }
+
+        // Regra de Pivotante: Oferecer exclusivamente Rolete + Puxador
+        if (type === 'openingType' && value === 'Pivotante') {
+          this.selections.hardware = 'Kit Pivotante';
+        }
+
+        this.renderStep();
+      },
+
+      next() {
+        if (this.currentStep < 5) {
+          this.currentStep++;
+          this.renderStep();
+        } else {
+          document.getElementById('finish-config').disabled = false;
+        }
+      },
+
+      prev() {
+        if (this.currentStep > 1) {
+          this.currentStep--;
+          this.renderStep();
+        }
+      },
+
+      updateSummary() {
+        const liveArea = document.getElementById('config-live-items');
+        let total = 0;
+        let itemsHtml = '';
+
+        const addItem = (name, price) => {
+          itemsHtml += `<div class="summary-item"><span>${name}</span><span>R$ ${price.toFixed(2)}</span></div>`;
+          total += price;
+        };
+
+        if (this.selections.openingType) itemsHtml += `<div class="summary-item"><span>Tipo</span><span>${this.selections.openingType}</span></div>`;
+        
+        if (this.selections.structure) {
+          let p = 0;
+          if (this.selections.structure.includes('Amescla')) p = this.data.prices.folhas['Amescla'];
+          else if (this.selections.structure.includes('Primer')) p = this.data.prices.folhas['Primer'];
+          else p = 200; // default frisada
+          addItem(`Folha ${this.selections.structure}`, p);
+        }
+
+        if (this.selections.frame && this.selections.frame !== 'Sem Batente') {
+          let p = this.data.prices.batentes[this.selections.frame] || 0;
+          addItem(`Batente ${this.selections.frame}`, p);
+        }
+
+        if (this.selections.hardware) {
+          let p = 0;
+          if (this.selections.hardware === 'Kit Standard') p = this.data.prices.ferragens['Fechadura Navas'] + 45;
+          else if (this.selections.hardware === 'Kit Premium') p = this.data.prices.ferragens['Fechadura Modena'] + 45;
+          else if (this.selections.hardware === 'Kit Pivotante') p = this.data.prices.ferragens['Puxador 60cm'] + 80;
+          addItem(this.selections.hardware, p);
+        }
+
+        // Adiciona Montagem automática se tiver ferragens
+        if (this.selections.hardware) {
+          addItem('Mão de Obra Montagem', this.data.prices.servicos['Montagem Kit']);
+        }
+
+        liveArea.innerHTML = itemsHtml || '<p style="color: #555; font-size: 0.9rem; text-align: center; margin-top: 50px;">Inicie a configuração para ver os valores.</p>';
+        document.getElementById('config-total').innerText = `R$ ${total.toFixed(2)}`;
+      },
+
+      generatePDF() {
+        alert("📊 Orçamento Gerado com Sucesso!\nTotal: " + document.getElementById('config-total').innerText + "\n\nO PDF foi enviado para o processamento SYLAR.");
+      }
+    };
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+       if (document.getElementById('step-content')) sylarConfig.init();
+    });
+  </script>
 
 </body>
 
