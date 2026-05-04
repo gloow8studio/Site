@@ -1123,94 +1123,126 @@
           }
           reader.readAsDataURL(input.files[0]);
         }
-      };
+       <script>
+    // SYLAR AI Chat — Direct REST API (no SDK dependency issues)
+    const SYLAR_API_KEY = "AIzaSyDUTMKTut06SXZ0X_8_XcXqEhsCjDikAOI";
+    const SYLAR_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${SYLAR_API_KEY}`;
 
-      document.addEventListener('DOMContentLoaded', () => {
-        renderGallery();
-        renderAnalytics();
-      });
-    })();
-  </script>
-
-  <script type="importmap">
-    {
-      "imports": {
-        "@google/generative-ai": "https://esm.run/@google/generative-ai"
-      }
-    }
-  </script>
-
-  <script type="module">
-    import { GoogleGenerativeAI } from "@google/generative-ai";
-
-    const API_KEY = "AIzaSyDUTMKTut06SXZ0X_8_XcXqEhsCjDikAOI";
-    const genAI = new GoogleGenerativeAI(API_KEY);
-
-    const SYSTEM_PROMPT = `Você é o SYLAR, um assistente comercial especializado e altamente profissional da Site3D AnimaMotion / Uniportas.
-Seu objetivo é ajudar clientes a entenderem nossos produtos, orçamentos e especificações técnicas baseando-se RIGOROSAMENTE nas tabelas de preços abaixo.
+    const SYLAR_SYSTEM_CONTEXT = `Você é o SYLAR, um assistente comercial especializado e altamente profissional da Site3D AnimaMotion / Uniportas. Seu objetivo é ajudar clientes com produtos, orçamentos e especificações técnicas. Responda SEMPRE em português do Brasil.
 
 DIRETRIZES:
-1. Seja educado, eficiente e use uma linguagem técnica porém acessível.
+1. Seja educado, eficiente e use linguagem técnica porém acessível.
 2. Sempre mencione que os preços são da Tabela de Abril 2026.
-3. Se o cliente pedir um orçamento, calcule o valor total se possível (Folha + Batente + Ferragens).
-4. Informe sobre prazos (garantia de 90 dias) e condições de pagamento (parcelamento em até 4x dependendo do valor).
-5. Se não souber algo, peça para o cliente entrar em contato com o WhatsApp (11) 99685-6549.
+3. Se pedirem orçamento, calcule total (Folha + Batente + Ferragens).
+4. Informe prazos (garantia 90 dias) e condições (até 4x dependendo do valor).
+5. Se não souber, indique WhatsApp (11) 99685-6549.
 
-CONTEXTO DE PRODUTOS E PREÇOS:
-- Lisas: Amescla (R$ 127,80), P. Imbuia (R$ 223,20), Curupixá, Angelim.
-- HDF Primer: Cristal, Milano, Belíssima (Folha R$ 247,35).
-- Frisadas: Atenas, Quartzo, Florença, Milano, Viena, Beli 4.
-- Pivotantes: Belíssima Imbuia Verniz 210x102 (R$ 819,20 montada com batente 14cm).
-- Camarão: Kit completo com fecho (aprox R$ 179,75 adicional).
-- Batentes: Eco Primer 11cm c/ borracha (R$ 116,80), Tauari 14cm (R$ 237,50).
-- Ferragens: Fechaduras Navas (R$ 61,75), Modena (R$ 101,20), Puxadores 60cm/80cm (R$ 125/137).
+PRODUTOS E PREÇOS (Tabela Abril 2026):
+- Portas Lisas: Amescla R$127,80 | P. Imbuia R$223,20 | Curupixá e Angelim (consultar).
+- HDF Primer: Cristal, Milano, Belíssima — Folha R$247,35.
+- Portas Frisadas: Atenas, Quartzo, Florença, Milano, Viena, Beli 4 (consultar preços).
+- Pivotante Belíssima Imbuia Verniz 210x102cm: R$819,20 montada c/ batente 14cm.
+- Kit Camarão completo c/ fecho: aprox. R$179,75 adicional.
+- Batente Eco Primer 11cm c/ borracha: R$116,80.
+- Batente Tauari 14cm: R$237,50.
+- Fechadura Navas: R$61,75 | Modena: R$101,20.
+- Puxadores 60cm: R$125,00 | 80cm: R$137,00.
+- Faturamento mínimo para entrega: R$1.300,00. Frete não incluso.
+- Parcelamento: até 4x (28/42/56/70 dias) para pedidos acima de R$6.000.`;
 
-[DADOS ADICIONAIS]:
-- Faturamento mínimo para entrega: R$ 1.300,00.
-- Frete não incluso.
-- Condições: Até 4x (28/42/56/70 dias) para pedidos acima de R$ 6.000.
-Use estas informações para responder com precisão.`;
-
-    const model = genAI.getGenerativeModel(
-      {
-        model: "gemini-1.5-flash",
-        systemInstruction: SYSTEM_PROMPT
-      },
-      { apiVersion: "v1" }
-    );
+    // Conversation history for context
+    const sylarHistory = [];
 
     window.enviarMensagemChat = async function () {
       const input = document.getElementById("user-input-chat");
       const chatBox = document.getElementById("chat-box");
       const typing = document.getElementById("typing-chat");
+      const sendBtn = document.querySelector(".send-btn-chat");
       const mensagem = input.value.trim();
 
       if (!mensagem) return;
 
-      // User message
-      appendMessage("user", mensagem);
+      // Disable input during request
+      input.disabled = true;
+      sendBtn.disabled = true;
+
+      // Show user message
+      appendMessageSylar("user", mensagem);
       input.value = "";
 
-      // Show typing
+      // Show typing indicator
       typing.style.display = "flex";
       chatBox.scrollTop = chatBox.scrollHeight;
 
+      // Add to history
+      sylarHistory.push({ role: "user", parts: [{ text: mensagem }] });
+
       try {
-        const result = await model.generateContent(mensagem);
-        const response = await result.response;
-        const textoIA = response.text();
+        const requestBody = {
+          system_instruction: {
+            parts: [{ text: SYLAR_SYSTEM_CONTEXT }]
+          },
+          contents: sylarHistory,
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 1024
+          }
+        };
+
+        const response = await fetch(SYLAR_API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(requestBody)
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error?.message || `HTTP ${response.status}`);
+        }
+
+        const textoIA = data.candidates?.[0]?.content?.parts?.[0]?.text || "Sem resposta.";
+
+        // Add AI response to history
+        sylarHistory.push({ role: "model", parts: [{ text: textoIA }] });
 
         typing.style.display = "none";
-        appendMessage("ai", textoIA);
+        appendMessageSylar("ai", textoIA);
+
       } catch (error) {
         typing.style.display = "none";
-        appendMessage("ai", "Desculpe, tive um problema na conexão. Pode tentar novamente? Erro: " + error.message);
+        appendMessageSylar("ai", "⚠️ Erro de conexão: " + error.message + ". Por favor, tente novamente ou entre em contato via WhatsApp (11) 99685-6549.");
+        // Remove the failed message from history
+        sylarHistory.pop();
+      } finally {
+        input.disabled = false;
+        sendBtn.disabled = false;
+        input.focus();
       }
-    }
+    };
 
-    function appendMessage(sender, text) {
+    function appendMessageSylar(sender, text) {
       const chatBox = document.getElementById("chat-box");
       const msgDiv = document.createElement("div");
+      msgDiv.className = `message ${sender}-msg`;
+      msgDiv.innerText = text;
+      chatBox.appendChild(msgDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    // Enter key support
+    document.addEventListener("DOMContentLoaded", function () {
+      const input = document.getElementById("user-input-chat");
+      if (input) {
+        input.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            window.enviarMensagemChat();
+          }
+        });
+      }
+    });
+  </script>div");
       msgDiv.className = `message ${sender}-msg`;
       msgDiv.innerText = text;
       chatBox.appendChild(msgDiv);
