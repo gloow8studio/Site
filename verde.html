@@ -1123,11 +1123,20 @@
           }
           reader.readAsDataURL(input.files[0]);
         }
-       <script>
-    // SYLAR AI Chat — Direct REST API (no SDK dependency issues)
-    const SYLAR_API_KEY = "AIzaSyDUTMKTut06SXZ0X_8_XcXqEhsCjDikAOI";
-    const SYLAR_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${SYLAR_API_KEY}`;
+      };
 
+      document.addEventListener('DOMContentLoaded', () => {
+        renderGallery();
+        renderAnalytics();
+      });
+    })();
+  </script>
+
+  <script src="js/api-config.js"></script>
+  <script>
+    // SYLAR AI Chat — Direct REST API (no SDK dependency issues)
+    const SYLAR_API_KEY = window.SYLAR_CONFIG ? window.SYLAR_CONFIG.apiKey : "";
+    const SYLAR_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${SYLAR_API_KEY}`;
     const SYLAR_SYSTEM_CONTEXT = `Você é o SYLAR, um assistente comercial especializado e altamente profissional da Site3D AnimaMotion / Uniportas. Seu objetivo é ajudar clientes com produtos, orçamentos e especificações técnicas. Responda SEMPRE em português do Brasil.
 
 DIRETRIZES:
