@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SYLAR — Dados & Inteligência · Hex Agency</title>
   <link rel="stylesheet" href="page.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     :root {
       --theme-color: #00C853;
@@ -368,6 +369,7 @@
       </div>
     </div>
 
+    <!-- ========== SYLAR GALLERY ========== -->
     <div class="portfolio-section">
       <div class="portfolio-header">
         <span class="portfolio-label">SYLAR ARCHIVES</span>
@@ -376,7 +378,7 @@
       </div>
 
       <!-- Filtros de Categoria -->
-      <div class="gallery-filters" style="margin-bottom: 40px; display: flex; justify-content: flex-start; gap: 10px; flex-wrap: wrap;">
+      <div id="sylar-gallery-section" class="gallery-filters" style="margin-bottom: 40px; display: flex; justify-content: flex-start; gap: 10px; flex-wrap: wrap;">
         <button class="filter-btn active" data-filter="all">TODOS</button>
         <button class="filter-btn" data-filter="dashboard">DASHBOARDS</button>
         <button class="filter-btn" data-filter="report">RELATÓRIOS</button>
@@ -402,40 +404,56 @@
 
     <!-- LIGHTBOX MODAL (VISUALIZADOR DE DOCUMENTOS) -->
     <div id="sylar-lightbox" class="lightbox-overlay"
-      style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; backdrop-filter: blur(10px); transition: opacity 0.3s;">
-      <button id="lb-close-sylar"
-        style="position: absolute; top: 20px; right: 40px; background: none; border: none; color: #00C853; font-size: 5rem; cursor: pointer; z-index: 999999; transition: color 0.3s; text-shadow: 0 0 20px rgba(0,0,0,0.8);">&times;</button>
+      style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.97); z-index:9999; backdrop-filter:blur(12px);">
+
+      <!-- Fechar -->
+      <button id="lb-close-sylar" title="Fechar"
+        style="position:absolute; top:18px; right:32px; background:none; border:none; color:#00C853; font-size:4rem; cursor:pointer; z-index:99999; line-height:1; transition:0.2s;">&times;</button>
+
+      <!-- Contador -->
+      <div id="lb-counter-sylar"
+        style="position:absolute; top:28px; left:50%; transform:translateX(-50%); font-family:'Orbitron'; font-size:0.85rem; color:#00C853; background:rgba(0,0,0,0.6); padding:6px 20px; border-radius:20px; border:1px solid rgba(0,200,83,0.3); z-index:99999;">1 / 8</div>
+
+      <!-- Seta Anterior -->
+      <button id="lb-prev-sylar" title="Anterior"
+        style="position:absolute; left:20px; top:50%; transform:translateY(-50%); background:rgba(0,200,83,0.12); border:1px solid #00C853; color:#00C853; font-size:2.5rem; width:56px; height:56px; border-radius:50%; cursor:pointer; z-index:99999; display:flex; align-items:center; justify-content:center; transition:0.2s;">&lsaquo;</button>
+
+      <!-- Seta Próxima -->
+      <button id="lb-next-sylar" title="Próxima"
+        style="position:absolute; right:20px; top:50%; transform:translateY(-50%); background:rgba(0,200,83,0.12); border:1px solid #00C853; color:#00C853; font-size:2.5rem; width:56px; height:56px; border-radius:50%; cursor:pointer; z-index:99999; display:flex; align-items:center; justify-content:center; transition:0.2s;">&rsaquo;</button>
+
       <div class="lightbox-content"
-        style="display: flex; height: 100%; width: 100%; max-width: 1600px; margin: 0 auto; padding: 20px; box-sizing: border-box;">
+        style="display:flex; height:100%; width:100%; max-width:1600px; margin:0 auto; padding:20px; box-sizing:border-box;">
+
         <!-- Área da Imagem -->
-        <div class="lb-image-container" id="sylar-img-container" style="flex: 2; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; border-radius: 8px;">
-          <img id="lb-img-sylar" src="" alt="Full View" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transition: transform 0.2s ease; cursor: zoom-in; box-shadow: 0 0 30px rgba(0, 200, 83, 0.2);" />
+        <div class="lb-image-container" id="sylar-img-container"
+          style="flex:2; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; border-radius:8px;">
+          <img id="lb-img-sylar" src="" alt="Full View"
+            style="max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; transition:transform 0.25s ease, opacity 0.2s; cursor:zoom-in; box-shadow:0 0 40px rgba(0,200,83,0.15);" />
+
+          <!-- Barra de Controles -->
           <div class="lb-controls">
-            <button id="lb-zoom-in-sylar" title="Zoom In">+</button>
-            <button id="lb-zoom-out-sylar" title="Zoom Out">-</button>
-            <button id="lb-reset-sylar" title="Reset Zoom">RESET</button>
-            <div style="width: 1px; height: 16px; background: rgba(255,255,255,0.2); margin: 0 5px;"></div>
+            <button id="lb-zoom-in-sylar" title="Zoom In"><i class="fas fa-search-plus"></i></button>
+            <button id="lb-zoom-out-sylar" title="Zoom Out"><i class="fas fa-search-minus"></i></button>
+            <button id="lb-reset-sylar" title="Reset Zoom"><i class="fas fa-compress-alt"></i> RESET</button>
+            <div style="width:1px; height:16px; background:rgba(255,255,255,0.2); margin:0 4px;"></div>
             <button id="lb-download-sylar" title="Download"><i class="fas fa-download"></i></button>
-            <button id="lb-fullscreen-sylar" title="Fullscreen"><i class="fas fa-expand"></i></button>
+            <button id="lb-fullscreen-sylar" title="Tela Cheia"><i class="fas fa-expand"></i></button>
           </div>
         </div>
-        <!-- Painel de Informações -->
+
+        <!-- Painel Lateral -->
         <div class="lb-info-panel">
           <h3 id="lb-title-sylar">Título do Projeto</h3>
           <span id="lb-category-sylar">Categoria</span>
-          
           <div class="info-block">
-            <h4>CONCEITO & INSIGHTS</h4>
+            <h4>CONCEITO &amp; INSIGHTS</h4>
             <p id="lb-desc-sylar">Descrição detalhada do projeto...</p>
           </div>
-
           <div class="info-block">
             <h4>STACK TECNOLÓGICA</h4>
-            <ul id="lb-tech-sylar">
-              <!-- Injetado via JS -->
-            </ul>
+            <ul id="lb-tech-sylar"></ul>
           </div>
-
           <div class="lb-footer">
             <p>SYLAR DATA INTELLIGENCE SYSTEM</p>
           </div>
@@ -444,79 +462,59 @@
     </div>
 
     <style>
+      /* ===== LIGHTBOX CONTROLS ===== */
+      #lb-prev-sylar:hover, #lb-next-sylar:hover {
+        background: rgba(0,200,83,0.3) !important;
+        box-shadow: 0 0 20px rgba(0,200,83,0.4);
+      }
+      #lb-close-sylar:hover { color:#fff !important; text-shadow: 0 0 15px #00C853; }
       .lb-controls {
-        position: absolute;
-        bottom: 25px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        background: rgba(0, 15, 10, 0.9);
-        padding: 10px 25px;
-        border-radius: 40px;
-        border: 1px solid #00C853;
-        box-shadow: 0 5px 25px rgba(0,0,0,0.5);
-        z-index: 10;
+        position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%);
+        display: flex; align-items: center; gap: 12px;
+        background: rgba(0,15,10,0.92); padding: 10px 25px;
+        border-radius: 40px; border: 1px solid #00C853;
+        box-shadow: 0 5px 25px rgba(0,0,0,0.6); z-index: 10;
+        white-space: nowrap;
       }
       .lb-controls button {
-        background: none;
-        border: none;
-        color: #00C853;
-        font-family: 'Orbitron';
-        font-size: 1.1rem;
-        cursor: pointer;
-        transition: 0.3s;
-        padding: 5px;
-        display: flex;
-        align-items: center;
+        background: none; border: none; color: #00C853;
+        font-family: 'Orbitron'; font-size: 1rem; cursor: pointer;
+        transition: 0.25s; padding: 5px 8px; display: flex; align-items: center; gap: 5px;
       }
-      .lb-controls button:hover {
-        color: #fff;
-        text-shadow: 0 0 10px #00C853;
-      }
+      .lb-controls button:hover { color: #fff; text-shadow: 0 0 10px #00C853; transform: scale(1.15); }
+      /* ===== LIGHTBOX PANEL ===== */
       .lb-info-panel {
-        flex: 1;
-        background: rgba(5, 12, 15, 0.95);
-        border-left: 2px solid #00C853;
-        padding: 45px;
-        display: flex;
-        flex-direction: column;
-        color: #fff;
-        overflow-y: auto;
-        min-width: 340px;
+        flex: 1; background: rgba(5,12,15,0.98); border-left: 2px solid #00C853;
+        padding: 45px; display: flex; flex-direction: column;
+        color: #fff; overflow-y: auto; min-width: 320px; max-width: 380px;
       }
-      .lb-info-panel h3 {
-        font-family: 'Orbitron';
-        color: #00C853;
-        font-size: 1.8rem;
-        margin-bottom: 8px;
-        text-transform: uppercase;
-        line-height: 1.1;
+      .lb-info-panel h3 { font-family:'Orbitron'; color:#00C853; font-size:1.6rem; margin-bottom:8px; text-transform:uppercase; line-height:1.15; }
+      .lb-info-panel > span { color:#666; font-family:'Rajdhani'; letter-spacing:3px; text-transform:uppercase; margin-bottom:30px; font-size:0.8rem; display:block; }
+      .info-block { margin-bottom: 28px; }
+      .info-block h4 { color:#fff; font-family:'Orbitron'; font-size:0.85rem; border-bottom:1px solid rgba(0,200,83,0.25); padding-bottom:8px; margin-bottom:12px; letter-spacing:1px; }
+      .info-block p { font-family:'Rajdhani'; color:#bbb; line-height:1.7; font-size:1rem; }
+      .info-block ul { padding:0; list-style:none; }
+      .info-block li { color:#777; font-family:'Rajdhani'; margin-bottom:6px; font-size:0.95rem; }
+      .lb-footer { margin-top: auto; padding-top:20px; border-top:1px solid #111; }
+      .lb-footer p { font-family:'Orbitron'; font-size:0.7rem; color:#00C853; opacity:0.6; letter-spacing:2px; }
+      /* ===== GALLERY ITEM ANIMATION ===== */
+      .gallery-item-2 { animation: fadeInUp 0.4s ease both; }
+      @keyframes fadeInUp {
+        from { opacity:0; transform: translateY(20px); }
+        to   { opacity:1; transform: translateY(0); }
       }
-      .lb-info-panel span {
-        color: #888;
-        font-family: 'Rajdhani';
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        margin-bottom: 35px;
-        font-size: 0.85rem;
+      /* ===== LIGHTBOX FADE ===== */
+      #sylar-lightbox.lb-active { animation: lbFadeIn 0.25s ease both; }
+      @keyframes lbFadeIn { from { opacity:0; } to { opacity:1; } }
+      /* ===== IMG SLIDE ===== */
+      #lb-img-sylar.lb-slide { animation: imgSlide 0.2s ease both; }
+      @keyframes imgSlide { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
+      @media (max-width: 900px) {
+        .lightbox-content { flex-direction: column !important; overflow-y: scroll; }
+        .lb-info-panel { min-width: unset; max-width: 100%; border-left: none !important; border-top: 2px solid #00C853; padding: 25px; }
+        #lb-prev-sylar { left: 5px !important; }
+        #lb-next-sylar { right: 5px !important; }
       }
-      .info-block { margin-bottom: 30px; }
-      .info-block h4 {
-        color: #fff;
-        font-family: 'Orbitron';
-        font-size: 0.9rem;
-        border-bottom: 1px solid rgba(0, 200, 83, 0.3);
-        padding-bottom: 8px;
-        margin-bottom: 15px;
-        letter-spacing: 1px;
-      }
-      .info-block p { font-family: 'Rajdhani'; color: #ccc; line-height: 1.6; font-size: 1.05rem; }
-      .info-block ul { padding: 0; list-style: none; }
-      .info-block li { color: #888; font-family: 'Rajdhani'; margin-bottom: 5px; font-size: 0.95rem; }
-      .lb-footer { margin-top: auto; padding-top: 25px; border-top: 1px solid #1a2a2a; }
-      .lb-footer p { font-family: 'Orbitron'; font-size: 0.75rem; color: #00C853; opacity: 0.7; letter-spacing: 2px; }
     </style>
 
     <!-- ========================================== -->
@@ -572,7 +570,6 @@
   </div>
 
   <script src="bg-canvas.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
   <script>
@@ -596,14 +593,22 @@
       const lbTech = document.getElementById('lb-tech-sylar');
       const lbImg = document.getElementById('lb-img-sylar');
       let currentZoom = 1;
+      let currentFilter = 'all';
+      let currentIndex = 0;
+
+      function getFiltered() {
+        return currentFilter === 'all' ? sylarProjects : sylarProjects.filter(p => p.category === currentFilter);
+      }
 
       function renderGallery(filter = 'all') {
+        currentFilter = filter;
         if (!galleryGrid) return;
         galleryGrid.innerHTML = '';
-        const filtered = filter === 'all' ? sylarProjects : sylarProjects.filter(p => p.category === filter);
-        filtered.forEach(p => {
+        const filtered = getFiltered();
+        filtered.forEach((p, idx) => {
           const item = document.createElement('div');
           item.className = 'gallery-item-2';
+          item.style.animationDelay = (idx * 0.06) + 's';
           item.onclick = () => openLightbox(p);
           const imgPath = `planilhas silar/${p.file}`;
           item.innerHTML = `
@@ -617,38 +622,67 @@
         });
       }
 
-      function openLightbox(p) {
-        lbImg.src = `planilhas silar/${p.file}`;
+      function slideImg(p) {
+        lbImg.classList.remove('lb-slide');
+        void lbImg.offsetWidth;
+        const src = p.file.startsWith('data:') ? p.file : `planilhas silar/${p.file}`;
+        lbImg.src = src;
+        lbImg.classList.add('lb-slide');
         lbTitle.innerText = p.title;
         lbCat.innerText = p.category;
         lbDesc.innerText = p.desc;
         lbTech.innerHTML = '';
         p.tech.forEach(t => {
           const li = document.createElement('li');
-          li.innerText = '• ' + t;
+          li.innerText = '\u2022 ' + t;
           lbTech.appendChild(li);
         });
-        lb.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
         currentZoom = 1;
-        lbImg.style.transform = `scale(${currentZoom})`;
+        lbImg.style.transform = 'scale(1)';
+        lbImg.style.cursor = 'zoom-in';
       }
 
-      document.getElementById('lb-close-sylar').onclick = () => {
+      function updateCounter() {
+        const list = getFiltered();
+        const el = document.getElementById('lb-counter-sylar');
+        if (el) el.textContent = (currentIndex + 1) + ' / ' + list.length;
+      }
+
+      function openLightbox(p) {
+        const list = getFiltered();
+        currentIndex = list.findIndex(x => x.id === p.id);
+        if (currentIndex < 0) currentIndex = 0;
+        slideImg(p);
+        updateCounter();
+        lb.style.display = 'flex';
+        lb.classList.add('lb-active');
+        document.body.style.overflow = 'hidden';
+      }
+      window._sylarOpenLightbox = openLightbox;
+
+      function closeLightbox() {
         lb.style.display = 'none';
+        lb.classList.remove('lb-active');
         document.body.style.overflow = 'auto';
         lbImg.src = '';
-      };
+      }
+
+      function navLightbox(dir) {
+        const list = getFiltered();
+        currentIndex = (currentIndex + dir + list.length) % list.length;
+        slideImg(list[currentIndex]);
+        updateCounter();
+      }
+
+      document.getElementById('lb-close-sylar').onclick = closeLightbox;
+      document.getElementById('lb-prev-sylar').onclick = () => navLightbox(-1);
+      document.getElementById('lb-next-sylar').onclick = () => navLightbox(1);
 
       lb.onclick = (e) => {
-        if (e.target === lb || e.target.classList.contains('lb-image-container')) {
-          lb.style.display = 'none';
-          document.body.style.overflow = 'auto';
-          lbImg.src = '';
-        }
+        if (e.target.id === 'sylar-lightbox') closeLightbox();
       };
 
-      // Zoom Controls
+      // Zoom
       document.getElementById('lb-zoom-in-sylar').onclick = () => {
         if (currentZoom < 3) { currentZoom += 0.5; updateZoomSylar(); }
       };
@@ -658,7 +692,6 @@
       document.getElementById('lb-reset-sylar').onclick = () => {
         currentZoom = 1; updateZoomSylar();
       };
-
       function updateZoomSylar() {
         lbImg.style.transform = `scale(${currentZoom})`;
         lbImg.style.cursor = currentZoom > 1 ? 'grab' : 'zoom-in';
@@ -666,32 +699,33 @@
 
       // Download
       document.getElementById('lb-download-sylar').onclick = () => {
-        const link = document.createElement('a');
-        link.href = lbImg.src;
-        link.download = lbTitle.innerText.replace(/\s+/g, '_') + '.jpg';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        const a = document.createElement('a');
+        a.href = lbImg.src;
+        a.download = lbTitle.innerText.replace(/\s+/g, '_') + '.jpg';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
       };
 
       // Fullscreen
       document.getElementById('lb-fullscreen-sylar').onclick = () => {
-        const imgContainer = document.getElementById('sylar-img-container');
+        const c = document.getElementById('sylar-img-container');
         if (!document.fullscreenElement) {
-          if (imgContainer.requestFullscreen) {
-            imgContainer.requestFullscreen().catch(err => {
-              console.error(`Erro ao tentar tela cheia: ${err.message}`);
-            });
-          } else if (imgContainer.webkitRequestFullscreen) {
-            imgContainer.webkitRequestFullscreen();
-          }
+          (c.requestFullscreen || c.webkitRequestFullscreen).call(c).catch(e => console.warn(e));
         } else {
-          if (document.exitFullscreen) document.exitFullscreen();
-          else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+          (document.exitFullscreen || document.webkitExitFullscreen).call(document);
         }
       };
 
-      // Filters
+      // Teclado
+      document.addEventListener('keydown', (e) => {
+        if (lb.style.display !== 'flex') return;
+        if (e.key === 'ArrowRight') navLightbox(1);
+        else if (e.key === 'ArrowLeft') navLightbox(-1);
+        else if (e.key === 'Escape') closeLightbox();
+        else if (e.key === '+') { if (currentZoom < 3) { currentZoom += 0.5; updateZoomSylar(); } }
+        else if (e.key === '-') { if (currentZoom > 0.5) { currentZoom -= 0.5; updateZoomSylar(); } }
+      });
+
+      // Filtros
       document.querySelectorAll('#sylar-gallery-section .filter-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           document.querySelectorAll('#sylar-gallery-section .filter-btn').forEach(b => b.classList.remove('active'));
@@ -699,6 +733,10 @@
           renderGallery(btn.dataset.filter);
         });
       });
+
+      // Inicializar galeria imediatamente (DOMContentLoaded pode já ter disparado)
+      renderGallery();
+      renderAnalytics();
 
       const analyticsGrid = document.getElementById('analytics-grid');
       let mainChartInstance = null;
@@ -833,15 +871,11 @@
               </div>
             `;
             galleryGrid.prepend(item);
-          }
+          };
           reader.readAsDataURL(input.files[0]);
         }
       };
 
-      document.addEventListener('DOMContentLoaded', () => {
-        renderGallery();
-        renderAnalytics();
-      });
     })();
   </script>
 

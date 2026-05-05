@@ -283,6 +283,160 @@
     </div>
   </div>
 
+  <!-- 🤖 KRYON AI — Chat Section -->
+  <style>
+    #kryon-chat-section {
+      margin-top: 60px;
+      padding: 40px;
+      background: rgba(0, 229, 255, 0.03);
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      border-radius: 20px;
+    }
+    .chat-header { text-align: center; margin-bottom: 30px; }
+    .chat-label {
+      display: inline-block;
+      padding: 8px 16px;
+      background: linear-gradient(135deg, #00E5FF, #00B8D4);
+      color: #000;
+      font-weight: bold;
+      border-radius: 20px;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+    .chat-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 28px;
+      color: #00E5FF;
+      text-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
+      margin: 10px 0 6px;
+    }
+    .chat-subtitle {
+      color: rgba(255,255,255,0.6);
+      font-size: 15px;
+    }
+    #kryon-chat-window {
+      height: 420px;
+      overflow-y: auto;
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(0,229,255,0.18);
+      border-radius: 14px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 18px;
+      scroll-behavior: smooth;
+    }
+    #kryon-chat-window::-webkit-scrollbar { width: 6px; }
+    #kryon-chat-window::-webkit-scrollbar-track { background: transparent; }
+    #kryon-chat-window::-webkit-scrollbar-thumb { background: rgba(0,229,255,0.3); border-radius: 3px; }
+    .chat-msg {
+      padding: 12px 16px;
+      border-radius: 14px;
+      max-width: 82%;
+      line-height: 1.55;
+      font-size: 14px;
+      word-break: break-word;
+      animation: msgIn 0.25s ease;
+    }
+    @keyframes msgIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .chat-msg.user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, #00E5FF, #00B8D4);
+      color: #000;
+      font-weight: 500;
+    }
+    .chat-msg.bot {
+      align-self: flex-start;
+      background: rgba(0,229,255,0.07);
+      border: 1px solid rgba(0,229,255,0.25);
+      color: rgba(255,255,255,0.9);
+    }
+    .chat-msg.error {
+      align-self: flex-start;
+      background: rgba(255,23,68,0.12);
+      border: 1px solid rgba(255,23,68,0.3);
+      color: #ff6090;
+    }
+    /* Typing indicator */
+    .typing-indicator {
+      align-self: flex-start;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 12px 16px;
+      background: rgba(0,229,255,0.07);
+      border: 1px solid rgba(0,229,255,0.2);
+      border-radius: 14px;
+      animation: msgIn 0.2s ease;
+    }
+    .typing-dot {
+      width: 7px; height: 7px;
+      background: #00E5FF;
+      border-radius: 50%;
+      animation: typingBounce 1.2s infinite ease-in-out;
+    }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typingBounce {
+      0%,60%,100% { transform: translateY(0); opacity: 0.4; }
+      30%          { transform: translateY(-6px); opacity: 1; }
+    }
+    /* Input row */
+    .chat-input-row {
+      display: flex;
+      gap: 10px;
+    }
+    #kryon-user-input {
+      flex-grow: 1;
+      padding: 13px 16px;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba(0,229,255,0.3);
+      border-radius: 10px;
+      color: #e0f7fa;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.25s;
+      font-family: inherit;
+    }
+    #kryon-user-input:focus { border-color: #00E5FF; box-shadow: 0 0 12px rgba(0,229,255,0.2); }
+    #kryon-user-input::placeholder { color: rgba(255,255,255,0.35); }
+    #kryon-send-btn {
+      padding: 13px 26px;
+      background: linear-gradient(135deg, #00E5FF, #00B8D4);
+      border: none;
+      border-radius: 10px;
+      color: #000;
+      font-weight: bold;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.25s;
+      white-space: nowrap;
+    }
+    #kryon-send-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 0 22px rgba(0,229,255,0.5);
+    }
+    #kryon-send-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+    .chat-footer-note {
+      text-align: center;
+      margin-top: 14px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+    }
+    @media (max-width: 768px) {
+      #kryon-chat-section { padding: 20px; }
+      .chat-title { font-size: 20px; }
+      #kryon-chat-window { height: 320px; }
+      .chat-input-row { flex-direction: column; }
+      #kryon-send-btn { width: 100%; }
+    }
+  </style>
+
   <script src="bg-canvas.js"></script>
   <script>
     document.querySelectorAll('#kryon-tabs .tab-btn').forEach(btn => {
@@ -611,6 +765,124 @@
         draw();
       }, 200);
       
+    })();
+  </script>
+
+  <!-- 🤖 KRYON AI — Assistente Virtual -->
+  <div id="kryon-chat-section" style="max-width:900px;margin:0 auto 80px;">
+    <div class="chat-header">
+      <span class="chat-label">🤖 KRYON AI</span>
+      <h2 class="chat-title">ASSISTENTE VIRTUAL</h2>
+      <p class="chat-subtitle">Powered by Gemini 1.5 Flash · Pergunte sobre DevOps, Infra, IA e automação</p>
+    </div>
+
+    <div id="kryon-chat-window">
+      <div class="chat-msg bot">
+        Olá! Sou o assistente KRYON, especializado em DevOps, infraestrutura cloud e automação com IA. Como posso ajudar você hoje?
+      </div>
+    </div>
+
+    <div class="chat-input-row">
+      <input
+        type="text"
+        id="kryon-user-input"
+        placeholder="Pergunte sobre Docker, CI/CD, Terraform, IA..."
+        autocomplete="off"
+      />
+      <button id="kryon-send-btn" onclick="kryonSendMessage()">ENVIAR</button>
+    </div>
+    <p class="chat-footer-note">Pressione Enter para enviar · Histórico de conversa ativo</p>
+  </div>
+
+  <script>
+    (function() {
+      const API_KEY = "AIzaSyAZtaJKN4AI7XF_NY3z2MhFAFRjkBuGOMk";
+      const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+
+      // Conversation history for context
+      const conversationHistory = [
+        {
+          role: "user",
+          parts: [{ text: "Você é o assistente KRYON, especialista em DevOps, infraestrutura cloud, automação com IA, Docker, Terraform, Kubernetes, CI/CD e ferramentas como n8n, ComfyUI e Ollama. Responda sempre em português de forma clara, técnica e objetiva." }]
+        },
+        {
+          role: "model",
+          parts: [{ text: "Entendido! Sou o assistente KRYON, pronto para ajudar com DevOps, cloud e automação com IA. Como posso ajudar?" }]
+        }
+      ];
+
+      const chatWindow = document.getElementById('kryon-chat-window');
+      const input = document.getElementById('kryon-user-input');
+      const sendBtn = document.getElementById('kryon-send-btn');
+
+      // Enter key support
+      input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          kryonSendMessage();
+        }
+      });
+
+      window.kryonSendMessage = async function() {
+        const message = input.value.trim();
+        if (!message || sendBtn.disabled) return;
+
+        // Append user message
+        appendMsg('user', message);
+        input.value = '';
+        sendBtn.disabled = true;
+
+        // Add to history
+        conversationHistory.push({ role: "user", parts: [{ text: message }] });
+
+        // Show typing indicator
+        const typingEl = document.createElement('div');
+        typingEl.className = 'typing-indicator';
+        typingEl.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+        chatWindow.appendChild(typingEl);
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+
+        try {
+          const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ contents: conversationHistory })
+          });
+
+          if (!response.ok) {
+            const errData = await response.json().catch(() => ({}));
+            throw new Error(errData.error?.message || `HTTP ${response.status}`);
+          }
+
+          const data = await response.json();
+          const botText = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Não obtive resposta. Tente novamente.';
+
+          // Add bot reply to history
+          conversationHistory.push({ role: "model", parts: [{ text: botText }] });
+
+          typingEl.remove();
+          appendMsg('bot', botText);
+
+        } catch (error) {
+          typingEl.remove();
+          appendMsg('error', `⚠️ Erro: ${error.message}. Verifique sua conexão ou chave API.`);
+          console.error('[KRYON AI]', error);
+          // Remove the failed user message from history
+          conversationHistory.pop();
+        } finally {
+          sendBtn.disabled = false;
+          input.focus();
+        }
+      };
+
+      function appendMsg(type, text) {
+        const div = document.createElement('div');
+        div.className = `chat-msg ${type}`;
+        // Render line breaks
+        div.innerText = text;
+        chatWindow.appendChild(div);
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+      }
     })();
   </script>
 </body>
