@@ -799,25 +799,23 @@
   <script>
     (function() {
       const API_KEY = "AIzaSyAZtaJKN4AI7XF_NY3z2MhFAFRjkBuGOMk";
-      const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+      // gemini-2.0-flash: modelo atual estável na v1beta
+      const MODEL   = "gemini-2.0-flash";
+      const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${API_KEY}`;
 
-      // Conversation history for context
-      const conversationHistory = [
-        {
-          role: "user",
-          parts: [{ text: "Você é o assistente KRYON, especialista em DevOps, infraestrutura cloud, automação com IA, Docker, Terraform, Kubernetes, CI/CD e ferramentas como n8n, ComfyUI e Ollama. Responda sempre em português de forma clara, técnica e objetiva." }]
-        },
-        {
-          role: "model",
-          parts: [{ text: "Entendido! Sou o assistente KRYON, pronto para ajudar com DevOps, cloud e automação com IA. Como posso ajudar?" }]
-        }
-      ];
+      // Histório real de conversa (apenas turnos user/model)
+      const conversationHistory = [];
+
+      // System instruction enviada separadamente (campo correto da API)
+      const SYSTEM_INSTRUCTION = {
+        parts: [{ text: "Você é o assistente KRYON, especialista em DevOps, infraestrutura cloud, automação com IA, Docker, Terraform, Kubernetes, CI/CD e ferramentas como n8n, ComfyUI e Ollama. Responda sempre em português de forma clara, técnica e objetiva." }]
+      };
 
       const chatWindow = document.getElementById('kryon-chat-window');
-      const input = document.getElementById('kryon-user-input');
-      const sendBtn = document.getElementById('kryon-send-btn');
+      const input      = document.getElementById('kryon-user-input');
+      const sendBtn    = document.getElementById('kryon-send-btn');
 
-      // Enter key support
+      // Enter para enviar
       input.addEventListener('keydown', function(e) {
         if (e.key === 'Enter' && !e.shiftKey) {
           e.preventDefault();
@@ -829,15 +827,14 @@
         const message = input.value.trim();
         if (!message || sendBtn.disabled) return;
 
-        // Append user message
         appendMsg('user', message);
         input.value = '';
         sendBtn.disabled = true;
 
-        // Add to history
+        // Adiciona ao histórico real
         conversationHistory.push({ role: "user", parts: [{ text: message }] });
 
-        // Show typing indicator
+        // Indicador de digitação
         const typingEl = document.createElement('div');
         typingEl.className = 'typing-indicator';
         typingEl.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
@@ -848,7 +845,14 @@
           const response = await fetch(API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ contents: conversationHistory })
+            body: JSON.stringify({
+              system_instruction: SYSTEM_INSTRUCTION,
+              contents: conversationHistory,
+              generationConfig: {
+                temperature: 0.7,
+                maxOutputTokens: 1024
+              }
+            })
           });
 
           if (!response.ok) {
@@ -856,10 +860,11 @@
             throw new Error(errData.error?.message || `HTTP ${response.status}`);
           }
 
-          const data = await response.json();
-          const botText = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Não obtive resposta. Tente novamente.';
+          const data    = await response.json();
+          const botText = data.candidates?.[0]?.content?.parts?.[0]?.text
+                          || 'Não obtive resposta. Tente novamente.';
 
-          // Add bot reply to history
+          // Salva resposta no histórico
           conversationHistory.push({ role: "model", parts: [{ text: botText }] });
 
           typingEl.remove();
@@ -867,10 +872,9 @@
 
         } catch (error) {
           typingEl.remove();
-          appendMsg('error', `⚠️ Erro: ${error.message}. Verifique sua conexão ou chave API.`);
+          appendMsg('error', `⚠️ Erro: ${error.message}`);
           console.error('[KRYON AI]', error);
-          // Remove the failed user message from history
-          conversationHistory.pop();
+          conversationHistory.pop(); // reverte mensagem falha
         } finally {
           sendBtn.disabled = false;
           input.focus();
@@ -880,7 +884,6 @@
       function appendMsg(type, text) {
         const div = document.createElement('div');
         div.className = `chat-msg ${type}`;
-        // Render line breaks
         div.innerText = text;
         chatWindow.appendChild(div);
         chatWindow.scrollTop = chatWindow.scrollHeight;
