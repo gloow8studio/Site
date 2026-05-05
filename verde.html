@@ -71,7 +71,7 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
       padding: 20px;
       box-sizing: border-box;
       opacity: 0;
@@ -97,26 +97,50 @@
       letter-spacing: 1px;
     }
 
-    .lb-image-container:fullscreen { background-color: #000 !important; border-radius: 0 !important; }
-    .lb-image-container:-webkit-full-screen { background-color: #000 !important; border-radius: 0 !important; }
+    .lb-image-container:fullscreen {
+      background-color: #000 !important;
+      border-radius: 0 !important;
+    }
+
+    .lb-image-container:-webkit-full-screen {
+      background-color: #000 !important;
+      border-radius: 0 !important;
+    }
 
     #sylar-gallery-section .filter-btn.active {
       background: #00C853 !important;
       color: #000 !important;
       box-shadow: 0 0 15px rgba(0, 200, 83, 0.5);
     }
+
     #sylar-gallery-section .filter-btn:hover:not(.active) {
       border-color: #00C853 !important;
       color: #00C853 !important;
     }
 
     @media (max-width: 1024px) {
-      .lightbox-content { flex-direction: column; overflow-y: scroll; }
-      .lb-image-container { flex: none; height: 50vh; }
-      .lb-info-panel { flex: none; height: auto; border-left: none; border-top: 2px solid #00C853; }
+      .lightbox-content {
+        flex-direction: column;
+        overflow-y: scroll;
+      }
+
+      .lb-image-container {
+        flex: none;
+        height: 50vh;
+      }
+
+      .lb-info-panel {
+        flex: none;
+        height: auto;
+        border-left: none;
+        border-top: 2px solid #00C853;
+      }
     }
+
     @media (max-width: 600px) {
-      .lb-info-panel { padding: 20px; }
+      .lb-info-panel {
+        padding: 20px;
+      }
     }
 
     /* DASHBOARD CARDS */
@@ -278,6 +302,178 @@
       color: #00C853;
       font-family: 'Orbitron';
     }
+
+    /* SYLAR AI CHAT PREMIUM STYLES */
+    #sylar-chat-container {
+      margin: 60px auto;
+      max-width: 900px;
+      background: rgba(10, 25, 20, 0.6);
+      border: 1px solid rgba(0, 200, 83, 0.3);
+      border-radius: 24px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(15px);
+    }
+
+    #chat-header {
+      padding: 20px 30px;
+      background: linear-gradient(90deg, rgba(0, 200, 83, 0.1), transparent);
+      border-bottom: 1px solid rgba(0, 200, 83, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .ai-avatar {
+      width: 40px;
+      height: 40px;
+      background: #00C853;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px rgba(0, 200, 83, 0.5);
+    }
+
+    #chat-box {
+      height: 500px;
+      overflow-y: auto;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      scrollbar-width: thin;
+      scrollbar-color: #00C853 rgba(0, 0, 0, 0.2);
+    }
+
+    .message {
+      max-width: 80%;
+      padding: 15px 20px;
+      border-radius: 18px;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.1rem;
+      line-height: 1.5;
+      position: relative;
+      animation: fadeInChat 0.3s ease;
+    }
+
+    @keyframes fadeInChat {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .user-msg {
+      align-self: flex-end;
+      background: rgba(0, 200, 83, 0.1);
+      border: 1px solid rgba(0, 200, 83, 0.3);
+      color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+
+    .ai-msg {
+      align-self: flex-start;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #ccc;
+      border-bottom-left-radius: 4px;
+    }
+
+    .chat-input-area {
+      padding: 20px 30px;
+      background: rgba(0, 0, 0, 0.3);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    #user-input-chat {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 15px 20px;
+      color: #fff;
+      font-family: 'Rajdhani';
+      font-size: 1rem;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    #user-input-chat:focus {
+      border-color: #00C853;
+      background: rgba(0, 200, 83, 0.05);
+      box-shadow: 0 0 15px rgba(0, 200, 83, 0.1);
+    }
+
+    .send-btn-chat {
+      background: #00C853;
+      color: #000;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: 0.3s;
+    }
+
+    .send-btn-chat:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0, 200, 83, 0.4);
+    }
+
+    .typing-indicator-chat {
+      display: none;
+      align-self: flex-start;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 10px 20px;
+      border-radius: 18px;
+      gap: 5px;
+      margin-left: 30px;
+      margin-bottom: 20px;
+    }
+
+    .dot-chat {
+      width: 8px;
+      height: 8px;
+      background: #00C853;
+      border-radius: 50%;
+      animation: blinkChat 1.4s infinite both;
+    }
+
+    .dot-chat:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .dot-chat:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes blinkChat {
+
+      0%,
+      80%,
+      100% {
+        opacity: 0;
+      }
+
+      40% {
+        opacity: 1;
+      }
+    }
   </style>
 </head>
 
@@ -378,7 +574,8 @@
       </div>
 
       <!-- Filtros de Categoria -->
-      <div id="sylar-gallery-section" class="gallery-filters" style="margin-bottom: 40px; display: flex; justify-content: flex-start; gap: 10px; flex-wrap: wrap;">
+      <div class="gallery-filters"
+        style="margin-bottom: 40px; display: flex; justify-content: flex-start; gap: 10px; flex-wrap: wrap;">
         <button class="filter-btn active" data-filter="all">TODOS</button>
         <button class="filter-btn" data-filter="dashboard">DASHBOARDS</button>
         <button class="filter-btn" data-filter="report">RELATÓRIOS</button>
@@ -393,12 +590,16 @@
       <!-- Botão de Upload Simulado -->
       <div style="text-align: center; margin-top: 60px;">
         <label for="sylar-upload" class="upload-btn-wrapper" style="cursor: pointer;">
-          <button style="background: linear-gradient(45deg, #00C853, #00E676); border: none; padding: 15px 40px; color: #000; font-family: 'Orbitron'; font-weight: bold; font-size: 1rem; clip-path: polygon(5% 0, 100% 0, 95% 100%, 0% 100%); box-shadow: 0 0 15px rgba(0, 200, 83, 0.4); transition: transform 0.2s;" onclick="document.getElementById('sylar-upload').click()">
+          <button
+            style="background: linear-gradient(45deg, #00C853, #00E676); border: none; padding: 15px 40px; color: #000; font-family: 'Orbitron'; font-weight: bold; font-size: 1rem; clip-path: polygon(5% 0, 100% 0, 95% 100%, 0% 100%); box-shadow: 0 0 15px rgba(0, 200, 83, 0.4); transition: transform 0.2s;"
+            onclick="document.getElementById('sylar-upload').click()">
             + ENVIAR ARQUIVO (SIMULADO)
           </button>
-          <input type="file" id="sylar-upload" name="myfile" style="display:none;" accept="image/*" onchange="simulateUploadSylar(this)" />
+          <input type="file" id="sylar-upload" name="myfile" style="display:none;" accept="image/*"
+            onchange="simulateUploadSylar(this)" />
         </label>
-        <p style="color: #666; font-size: 0.8rem; margin-top: 10px; font-family: 'Rajdhani'">O upload é apenas visual no frontend.</p>
+        <p style="color: #666; font-size: 0.8rem; margin-top: 10px; font-family: 'Rajdhani'">O upload é apenas visual no
+          frontend.</p>
       </div>
     </div>
 
@@ -412,7 +613,8 @@
 
       <!-- Contador -->
       <div id="lb-counter-sylar"
-        style="position:absolute; top:28px; left:50%; transform:translateX(-50%); font-family:'Orbitron'; font-size:0.85rem; color:#00C853; background:rgba(0,0,0,0.6); padding:6px 20px; border-radius:20px; border:1px solid rgba(0,200,83,0.3); z-index:99999;">1 / 8</div>
+        style="position:absolute; top:28px; left:50%; transform:translateX(-50%); font-family:'Orbitron'; font-size:0.85rem; color:#00C853; background:rgba(0,0,0,0.6); padding:6px 20px; border-radius:20px; border:1px solid rgba(0,200,83,0.3); z-index:99999;">
+        1 / 8</div>
 
       <!-- Seta Anterior -->
       <button id="lb-prev-sylar" title="Anterior"
@@ -427,11 +629,9 @@
 
         <!-- Área da Imagem -->
         <div class="lb-image-container" id="sylar-img-container"
-          style="flex:2; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; border-radius:8px;">
+          style="flex: 2; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; border-radius: 8px;">
           <img id="lb-img-sylar" src="" alt="Full View"
-            style="max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; transition:transform 0.25s ease, opacity 0.2s; cursor:zoom-in; box-shadow:0 0 40px rgba(0,200,83,0.15);" />
-
-          <!-- Barra de Controles -->
+            style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; transition: transform 0.2s ease; cursor: zoom-in; box-shadow: 0 0 30px rgba(0, 200, 83, 0.2);" />
           <div class="lb-controls">
             <button id="lb-zoom-in-sylar" title="Zoom In"><i class="fas fa-search-plus"></i></button>
             <button id="lb-zoom-out-sylar" title="Zoom Out"><i class="fas fa-search-minus"></i></button>
@@ -446,6 +646,7 @@
         <div class="lb-info-panel">
           <h3 id="lb-title-sylar">Título do Projeto</h3>
           <span id="lb-category-sylar">Categoria</span>
+
           <div class="info-block">
             <h4>CONCEITO &amp; INSIGHTS</h4>
             <p id="lb-desc-sylar">Descrição detalhada do projeto...</p>
@@ -463,57 +664,128 @@
 
     <style>
       /* ===== LIGHTBOX CONTROLS ===== */
-      #lb-prev-sylar:hover, #lb-next-sylar:hover {
-        background: rgba(0,200,83,0.3) !important;
-        box-shadow: 0 0 20px rgba(0,200,83,0.4);
+      #lb-prev-sylar:hover,
+      #lb-next-sylar:hover {
+        background: rgba(0, 200, 83, 0.3) !important;
+        box-shadow: 0 0 20px rgba(0, 200, 83, 0.4);
       }
-      #lb-close-sylar:hover { color:#fff !important; text-shadow: 0 0 15px #00C853; }
+
+      #lb-close-sylar:hover {
+        color: #fff !important;
+        text-shadow: 0 0 15px #00C853;
+      }
+
       .lb-controls {
-        position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%);
-        display: flex; align-items: center; gap: 12px;
-        background: rgba(0,15,10,0.92); padding: 10px 25px;
-        border-radius: 40px; border: 1px solid #00C853;
-        box-shadow: 0 5px 25px rgba(0,0,0,0.6); z-index: 10;
-        white-space: nowrap;
+        position: absolute;
+        bottom: 25px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: rgba(0, 15, 10, 0.9);
+        padding: 10px 25px;
+        border-radius: 40px;
+        border: 1px solid #00C853;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+        z-index: 10;
       }
+
       .lb-controls button {
-        background: none; border: none; color: #00C853;
-        font-family: 'Orbitron'; font-size: 1rem; cursor: pointer;
-        transition: 0.25s; padding: 5px 8px; display: flex; align-items: center; gap: 5px;
+        background: none;
+        border: none;
+        color: #00C853;
+        font-family: 'Orbitron';
+        font-size: 1rem;
+        cursor: pointer;
+        transition: 0.25s;
+        padding: 5px 8px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
       }
-      .lb-controls button:hover { color: #fff; text-shadow: 0 0 10px #00C853; transform: scale(1.15); }
-      /* ===== LIGHTBOX PANEL ===== */
+
+      .lb-controls button:hover {
+        color: #fff;
+        text-shadow: 0 0 10px #00C853;
+      }
+
       .lb-info-panel {
-        flex: 1; background: rgba(5,12,15,0.98); border-left: 2px solid #00C853;
-        padding: 45px; display: flex; flex-direction: column;
-        color: #fff; overflow-y: auto; min-width: 320px; max-width: 380px;
+        flex: 1;
+        background: rgba(5, 12, 15, 0.98);
+        border-left: 2px solid #00C853;
+        padding: 45px;
+        display: flex;
+        flex-direction: column;
+        color: #fff;
+        overflow-y: auto;
+        min-width: 320px;
+        max-width: 380px;
       }
-      .lb-info-panel h3 { font-family:'Orbitron'; color:#00C853; font-size:1.6rem; margin-bottom:8px; text-transform:uppercase; line-height:1.15; }
-      .lb-info-panel > span { color:#666; font-family:'Rajdhani'; letter-spacing:3px; text-transform:uppercase; margin-bottom:30px; font-size:0.8rem; display:block; }
-      .info-block { margin-bottom: 28px; }
-      .info-block h4 { color:#fff; font-family:'Orbitron'; font-size:0.85rem; border-bottom:1px solid rgba(0,200,83,0.25); padding-bottom:8px; margin-bottom:12px; letter-spacing:1px; }
-      .info-block p { font-family:'Rajdhani'; color:#bbb; line-height:1.7; font-size:1rem; }
-      .info-block ul { padding:0; list-style:none; }
-      .info-block li { color:#777; font-family:'Rajdhani'; margin-bottom:6px; font-size:0.95rem; }
-      .lb-footer { margin-top: auto; padding-top:20px; border-top:1px solid #111; }
-      .lb-footer p { font-family:'Orbitron'; font-size:0.7rem; color:#00C853; opacity:0.6; letter-spacing:2px; }
-      /* ===== GALLERY ITEM ANIMATION ===== */
-      .gallery-item-2 { animation: fadeInUp 0.4s ease both; }
-      @keyframes fadeInUp {
-        from { opacity:0; transform: translateY(20px); }
-        to   { opacity:1; transform: translateY(0); }
+
+      .lb-info-panel h3 {
+        font-family: 'Orbitron';
+        color: #00C853;
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        line-height: 1.1;
       }
-      /* ===== LIGHTBOX FADE ===== */
-      #sylar-lightbox.lb-active { animation: lbFadeIn 0.25s ease both; }
-      @keyframes lbFadeIn { from { opacity:0; } to { opacity:1; } }
-      /* ===== IMG SLIDE ===== */
-      #lb-img-sylar.lb-slide { animation: imgSlide 0.2s ease both; }
-      @keyframes imgSlide { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
-      @media (max-width: 900px) {
-        .lightbox-content { flex-direction: column !important; overflow-y: scroll; }
-        .lb-info-panel { min-width: unset; max-width: 100%; border-left: none !important; border-top: 2px solid #00C853; padding: 25px; }
-        #lb-prev-sylar { left: 5px !important; }
-        #lb-next-sylar { right: 5px !important; }
+
+      .lb-info-panel span {
+        color: #888;
+        font-family: 'Rajdhani';
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 35px;
+        font-size: 0.85rem;
+      }
+
+      .info-block {
+        margin-bottom: 30px;
+      }
+
+      .info-block h4 {
+        color: #fff;
+        font-family: 'Orbitron';
+        font-size: 0.9rem;
+        border-bottom: 1px solid rgba(0, 200, 83, 0.3);
+        padding-bottom: 8px;
+        margin-bottom: 15px;
+        letter-spacing: 1px;
+      }
+
+      .info-block p {
+        font-family: 'Rajdhani';
+        color: #ccc;
+        line-height: 1.6;
+        font-size: 1.05rem;
+      }
+
+      .info-block ul {
+        padding: 0;
+        list-style: none;
+      }
+
+      .info-block li {
+        color: #888;
+        font-family: 'Rajdhani';
+        margin-bottom: 5px;
+        font-size: 0.95rem;
+      }
+
+      .lb-footer {
+        margin-top: auto;
+        padding-top: 25px;
+        border-top: 1px solid #1a2a2a;
+      }
+
+      .lb-footer p {
+        font-family: 'Orbitron';
+        font-size: 0.75rem;
+        color: #00C853;
+        opacity: 0.7;
+        letter-spacing: 2px;
       }
     </style>
 
@@ -566,6 +838,213 @@
         </div>
       </div>
     </div>
+
+    <!-- ========================================== -->
+    <!-- SEÇÃO SYLAR AI - CHAT INTELIGENTE -->
+    <!-- ========================================== -->
+    <section id="sylar-chat-section" style="padding: 100px 20px; border-top: 1px solid rgba(0, 200, 83, 0.1);">
+      <div class="container" style="max-width: 1200px; margin: 0 auto;">
+        <div class="section-header" style="text-align: center; margin-bottom: 40px;">
+          <h2 style="font-family: 'Orbitron', sans-serif; font-size: 2.2rem; color: #fff;">SYLAR <span
+              style="color: #00C853;">ASSISTANT</span></h2>
+          <p style="color: #aaa; font-family: 'Rajdhani'">Assistente comercial inteligente treinado em nossa Tabela de
+            Preços Abril 2026.</p>
+        </div>
+
+        <div id="sylar-chat-container">
+          <div id="chat-header">
+            <div class="ai-avatar">
+              <i class="fas fa-robot" style="color: #000;"></i>
+            </div>
+            <div>
+              <h4 style="color: #fff; margin: 0; font-family: 'Orbitron'; font-size: 1rem;">SYLAR AI</h4>
+              <p style="color: #00C853; margin: 0; font-size: 0.75rem; font-family: 'Rajdhani'; letter-spacing: 1px;">
+                ONLINE • CONSULTOR COMERCIAL</p>
+            </div>
+          </div>
+
+          <div id="chat-box">
+            <div class="message ai-msg">
+              Olá! Sou o SYLAR, seu assistente comercial na Site3D AnimaMotion. Como posso te ajudar com nossos produtos
+              e preços hoje?
+            </div>
+          </div>
+
+          <div class="typing-indicator-chat" id="typing-chat">
+            <div class="dot-chat"></div>
+            <div class="dot-chat"></div>
+            <div class="dot-chat"></div>
+          </div>
+
+          <div class="chat-input-area">
+            <input type="text" id="user-input-chat" placeholder="Digite sua dúvida sobre preços ou produtos..."
+              onkeypress="if(event.key === 'Enter') enviarMensagemChat()">
+            <button class="send-btn-chat" onclick="enviarMensagemChat()">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SEÇÃO SYLAR CONFIGURATOR - GERADOR DE ORÇAMENTOS -->
+    <!-- ========================================== -->
+    <section id="sylar-config-section"
+      style="padding: 100px 20px; border-top: 1px solid rgba(0, 200, 83, 0.1); background: rgba(0,0,0,0.2);">
+      <div class="container" style="max-width: 1100px; margin: 0 auto;">
+        <div class="section-header" style="text-align: center; margin-bottom: 50px;">
+          <h2 style="font-family: 'Orbitron', sans-serif; font-size: 2.2rem; color: #fff;">SYLAR <span
+              style="color: #00C853;">CONFIGURATOR</span></h2>
+          <p style="color: #aaa; font-family: 'Rajdhani'">Monte seu kit de porta completo com cálculo automático baseado
+            na Tabela Abril 2026.</p>
+        </div>
+
+        <div class="configurator-wrapper"
+          style="display: grid; grid-template-columns: 1fr 350px; gap: 30px; background: rgba(5, 10, 16, 0.6); border: 1px solid rgba(0, 200, 83, 0.2); border-radius: 20px; overflow: hidden; backdrop-filter: blur(10px);">
+
+          <!-- Lado Esquerdo: Passos -->
+          <div class="config-steps-area" style="padding: 40px; border-right: 1px solid rgba(255,255,255,0.05);">
+            <div id="step-content">
+              <!-- Conteúdo dinâmico dos passos será injetado aqui -->
+            </div>
+
+            <div class="config-nav"
+              style="margin-top: 40px; display: flex; justify-content: space-between; align-items: center;">
+              <button id="prev-step" onclick="sylarConfig.prev()"
+                style="background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(255,255,255,0.1); padding: 12px 25px; border-radius: 8px; cursor: pointer; font-family: 'Orbitron'; font-size: 0.8rem; display: none;">ANTERIOR</button>
+              <div class="step-dots" style="display: flex; gap: 8px;">
+                <div class="s-dot active"></div>
+                <div class="s-dot"></div>
+                <div class="s-dot"></div>
+                <div class="s-dot"></div>
+                <div class="s-dot"></div>
+              </div>
+              <button id="next-step" onclick="sylarConfig.next()"
+                style="background: #00C853; color: #000; border: none; padding: 12px 30px; border-radius: 8px; cursor: pointer; font-family: 'Orbitron'; font-weight: bold; font-size: 0.8rem;">PRÓXIMO</button>
+            </div>
+          </div>
+
+          <!-- Lado Direito: Resumo Real-time -->
+          <div class="config-summary-area" style="padding: 40px; background: rgba(0,0,0,0.3);">
+            <h3
+              style="font-family: 'Orbitron'; color: #00C853; font-size: 1.1rem; margin-bottom: 25px; display: flex; align-items: center; gap: 10px;">
+              <i class="fas fa-file-invoice-dollar"></i> RESUMO
+            </h3>
+            <div id="config-live-items" style="display: flex; flex-direction: column; gap: 15px; min-height: 200px;">
+              <!-- Itens selecionados aparecem aqui -->
+              <p style="color: #555; font-size: 0.9rem; text-align: center; margin-top: 50px;">Inicie a configuração
+                para ver os valores.</p>
+            </div>
+
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 2px dashed rgba(0, 200, 83, 0.2);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <span style="color: #aaa; font-family: 'Orbitron'; font-size: 0.9rem;">TOTAL ESTIMADO</span>
+                <span id="config-total"
+                  style="color: #fff; font-family: 'Orbitron'; font-size: 1.4rem; font-weight: bold;">R$ 0,00</span>
+              </div>
+              <button id="finish-config" onclick="sylarConfig.generatePDF()"
+                style="width: 100%; background: transparent; color: #00C853; border: 1px solid #00C853; padding: 15px; border-radius: 8px; cursor: pointer; font-family: 'Orbitron'; font-size: 0.8rem; transition: 0.3s;"
+                disabled>FINALIZAR ORÇAMENTO</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <style>
+      .config-option-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .config-option-card:hover {
+        background: rgba(0, 200, 83, 0.05);
+        border-color: rgba(0, 200, 83, 0.3);
+        transform: translateY(-3px);
+      }
+
+      .config-option-card.selected {
+        background: rgba(0, 200, 83, 0.1);
+        border-color: #00C853;
+        box-shadow: 0 0 20px rgba(0, 200, 83, 0.15);
+      }
+
+      .config-option-card i {
+        font-size: 1.5rem;
+        color: #00C853;
+        margin-bottom: 5px;
+      }
+
+      .config-option-card h4 {
+        color: #fff;
+        margin: 0;
+        font-family: 'Orbitron';
+        font-size: 0.9rem;
+      }
+
+      .config-option-card p {
+        color: #888;
+        margin: 0;
+        font-size: 0.8rem;
+        line-height: 1.4;
+      }
+
+      .s-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        transition: 0.3s;
+      }
+
+      .s-dot.active {
+        background: #00C853;
+        box-shadow: 0 0 10px #00C853;
+        width: 20px;
+        border-radius: 4px;
+      }
+
+      .summary-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        animation: slideIn 0.3s ease;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(10px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .summary-item span:first-child {
+        color: #888;
+        font-size: 0.85rem;
+        font-family: 'Rajdhani';
+      }
+
+      .summary-item span:last-child {
+        color: #fff;
+        font-size: 0.9rem;
+        font-family: 'Orbitron';
+      }
+    </style>
 
   </div>
 
@@ -845,24 +1324,24 @@
       document.getElementById('dash-modal').addEventListener('click', e => { if (e.target.id === 'dash-modal') closeDashModal(); });
 
       // Simulação de Upload
-      window.simulateUploadSylar = function(input) {
+      window.simulateUploadSylar = function (input) {
         if (input.files && input.files[0]) {
           const reader = new FileReader();
-          reader.onload = function(e) {
+          reader.onload = function (e) {
             alert("✅ Arquivo recebido pelo sistema SYLAR! (Simulação visual apenas)");
-            const newProject = { 
-              id: Date.now(), 
-              file: e.target.result, 
-              title: input.files[0].name, 
-              category: "dashboard", 
-              desc: "Arquivo enviado pelo usuário para análise.", 
-              tech: ["Upload Local"] 
+            const newProject = {
+              id: Date.now(),
+              file: e.target.result,
+              title: input.files[0].name,
+              category: "dashboard",
+              desc: "Arquivo enviado pelo usuário para análise.",
+              tech: ["Upload Local"]
             };
-            
+
             const item = document.createElement('div');
             item.className = 'gallery-item-2';
             item.onclick = () => openLightbox(newProject);
-            
+
             item.innerHTML = `
               <img src="${e.target.result}" alt="${newProject.title}">
               <div class="item-overlay-2">
@@ -877,6 +1356,337 @@
       };
 
     })();
+  </script>
+
+  <script src="js/api-config.js"></script>
+  <script>
+    // SYLAR AI Chat — Direct REST API (no SDK dependency issues)
+    const SYLAR_API_KEY = window.SYLAR_CONFIG ? window.SYLAR_CONFIG.apiKey : "";
+    const SYLAR_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${SYLAR_API_KEY}`;
+    const SYLAR_SYSTEM_CONTEXT = `Você é o SYLAR, um assistente comercial especializado e altamente profissional da Site3D AnimaMotion / Uniportas. Seu objetivo é ajudar clientes com produtos, orçamentos e especificações técnicas. Responda SEMPRE em português do Brasil.
+
+DIRETRIZES:
+1. Seja educado, eficiente e use linguagem técnica porém acessível.
+2. Sempre mencione que os preços são da Tabela de Abril 2026.
+3. Se pedirem orçamento, calcule total (Folha + Batente + Ferragens).
+4. Informe prazos (garantia 90 dias) e condições (até 4x dependendo do valor).
+5. Se não souber, indique WhatsApp (11) 99685-6549.
+
+PRODUTOS E PREÇOS (Tabela Abril 2026):
+- Portas Lisas: Amescla R$127,80 | P. Imbuia R$223,20 | Curupixá e Angelim (consultar).
+- HDF Primer: Cristal, Milano, Belíssima — Folha R$247,35.
+- Portas Frisadas: Atenas, Quartzo, Florença, Milano, Viena, Beli 4 (consultar preços).
+- Pivotante Belíssima Imbuia Verniz 210x102cm: R$819,20 montada c/ batente 14cm.
+- Kit Camarão completo c/ fecho: aprox. R$179,75 adicional.
+- Batente Eco Primer 11cm c/ borracha: R$116,80.
+- Batente Tauari 14cm: R$237,50.
+- Fechadura Navas: R$61,75 | Modena: R$101,20.
+- Puxadores 60cm: R$125,00 | 80cm: R$137,00.
+- Faturamento mínimo para entrega: R$1.300,00. Frete não incluso.
+- Parcelamento: até 4x (28/42/56/70 dias) para pedidos acima de R$6.000.`;
+
+    // Conversation history for context
+    const sylarHistory = [];
+
+    window.enviarMensagemChat = async function () {
+      const input = document.getElementById("user-input-chat");
+      const chatBox = document.getElementById("chat-box");
+      const typing = document.getElementById("typing-chat");
+      const sendBtn = document.querySelector(".send-btn-chat");
+      const mensagem = input.value.trim();
+
+      if (!mensagem) return;
+
+      // Disable input during request
+      input.disabled = true;
+      sendBtn.disabled = true;
+
+      // Show user message
+      appendMessageSylar("user", mensagem);
+      input.value = "";
+
+      // Show typing indicator
+      typing.style.display = "flex";
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      // Add to history
+      sylarHistory.push({ role: "user", parts: [{ text: mensagem }] });
+
+      try {
+        const requestBody = {
+          system_instruction: {
+            parts: [{ text: SYLAR_SYSTEM_CONTEXT }]
+          },
+          contents: sylarHistory,
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 1024
+          }
+        };
+
+        const response = await fetch(SYLAR_API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(requestBody)
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error?.message || `HTTP ${response.status}`);
+        }
+
+        const textoIA = data.candidates?.[0]?.content?.parts?.[0]?.text || "Sem resposta.";
+
+        // Add AI response to history
+        sylarHistory.push({ role: "model", parts: [{ text: textoIA }] });
+
+        typing.style.display = "none";
+        appendMessageSylar("ai", textoIA);
+
+      } catch (error) {
+        typing.style.display = "none";
+        appendMessageSylar("ai", "⚠️ Erro de conexão: " + error.message + ". Por favor, tente novamente ou entre em contato via WhatsApp (11) 99685-6549.");
+        // Remove the failed message from history
+        sylarHistory.pop();
+      } finally {
+        input.disabled = false;
+        sendBtn.disabled = false;
+        input.focus();
+      }
+    };
+
+    function appendMessageSylar(sender, text) {
+      const chatBox = document.getElementById("chat-box");
+      const msgDiv = document.createElement("div");
+      msgDiv.className = `message ${sender}-msg`;
+      msgDiv.innerText = text;
+      chatBox.appendChild(msgDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    // Enter key support
+    document.addEventListener("DOMContentLoaded", function () {
+      const input = document.getElementById("user-input-chat");
+      if (input) {
+        input.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            window.enviarMensagemChat();
+          }
+        });
+      }
+    });
+  </script>
+  <script>
+    const sylarConfig = {
+      currentStep: 1,
+      selections: {
+        openingType: null,
+        structure: null,
+        model: null,
+        measure: null,
+        frame: null,
+        hardware: [],
+        services: []
+      },
+      data: {
+        prices: {
+          folhas: {
+            "Amescla": 127.80,
+            "Primer": 247.35,
+            "P. Imbuia": 223.20,
+            "Belíssima": 819.20 // Pivotante Kit
+          },
+          batentes: {
+            "Eco Primer 11cm": 116.80,
+            "Tauari 14cm": 237.50
+          },
+          ferragens: {
+            "Fechadura Navas": 61.75,
+            "Fechadura Modena": 101.20,
+            "Puxador 60cm": 125.00,
+            "Puxador 80cm": 137.00
+          },
+          servicos: {
+            "Furo Fechadura": 17.50,
+            "Rebaixo Dobradiça": 17.50,
+            "Redução Folha Lisa": 17.50,
+            "Redução Folha Primer": 35.00,
+            "Montagem Kit": 82.00
+          }
+        }
+      },
+
+      init() {
+        this.renderStep();
+      },
+
+      renderStep() {
+        const container = document.getElementById('step-content');
+        const dots = document.querySelectorAll('.s-dot');
+        dots.forEach((d, i) => d.className = i === this.currentStep - 1 ? 's-dot active' : 's-dot');
+
+        document.getElementById('prev-step').style.display = this.currentStep === 1 ? 'none' : 'block';
+        document.getElementById('next-step').innerText = this.currentStep === 5 ? 'VER TOTAL' : 'PRÓXIMO';
+
+        let html = '';
+        switch (this.currentStep) {
+          case 1:
+            html = `
+              <h3 style="color:#fff; font-family:'Orbitron'; margin-bottom:30px;">Passo 1: Tipo de Abertura</h3>
+              <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:20px;">
+                ${this.renderCard('openingType', 'Giro', 'Padrão clássico de abrir', 'fa-door-open')}
+                ${this.renderCard('openingType', 'Correr', 'Sem batente, economia de espaço', 'fa-arrows-left-right')}
+                ${this.renderCard('openingType', 'Camarão', 'Dobrável com kit articulado', 'fa-staircase')}
+                ${this.renderCard('openingType', 'Pivotante', 'Elegância com eixo vertical', 'fa-rotate')}
+              </div>
+            `;
+            break;
+          case 2:
+            html = `
+              <h3 style="color:#fff; font-family:'Orbitron'; margin-bottom:30px;">Passo 2: Estrutura da Folha</h3>
+              <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:20px;">
+                ${this.renderCard('structure', 'Lisa Amescla', 'Madeira clara natural', 'fa-tree')}
+                ${this.renderCard('structure', 'Primer Branco', 'Pronta para pintura', 'fa-paint-roller')}
+                ${this.renderCard('structure', 'Frisada Milano', 'Design moderno com frisos', 'fa-bars')}
+              </div>
+            `;
+            break;
+          case 3:
+            html = `
+              <h3 style="color:#fff; font-family:'Orbitron'; margin-bottom:30px;">Passo 3: Medida da Folha</h3>
+              <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap:15px;">
+                ${this.renderCard('measure', '60x210', 'Padrão Banheiro')}
+                ${this.renderCard('measure', '70x210', 'Padrão Quartos')}
+                ${this.renderCard('measure', '80x210', 'Padrão Entrada')}
+                ${this.renderCard('measure', '92x210', 'Larga')}
+                <div class="config-option-card" onclick="sylarConfig.setMeasure('Especial')">
+                  <h4>Especial / Redução</h4>
+                  <p>Ajuste sob medida</p>
+                </div>
+              </div>
+            `;
+            break;
+          case 4:
+            html = `
+              <h3 style="color:#fff; font-family:'Orbitron'; margin-bottom:30px;">Passo 4: Batente</h3>
+              <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:20px;">
+                ${this.renderCard('frame', 'Sem Batente', 'Apenas a folha', 'fa-ban')}
+                ${this.renderCard('frame', 'Eco Primer 11cm', 'Com borracha amortecedora', 'fa-border-all')}
+                ${this.renderCard('frame', 'Tauari 14cm', 'Madeira nobre tratada', 'fa-tree')}
+              </div>
+            `;
+            break;
+          case 5:
+            html = `
+              <h3 style="color:#fff; font-family:'Orbitron'; margin-bottom:30px;">Passo 5: Ferragens</h3>
+              <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:20px;">
+                ${this.renderCard('hardware', 'Kit Standard', 'Fechadura Navas + Dobradiças', 'fa-key')}
+                ${this.renderCard('hardware', 'Kit Premium', 'Fechadura Modena + Dobradiças', 'fa-shield-halved')}
+                ${this.renderCard('hardware', 'Kit Pivotante', 'Rolete + Puxador 60cm', 'fa-grip-lines-vertical')}
+              </div>
+            `;
+            break;
+        }
+        container.innerHTML = html;
+        this.updateSummary();
+      },
+
+      renderCard(type, value, desc, icon) {
+        const isSelected = type === 'hardware' ? this.selections.hardware === value : this.selections[type] === value;
+        return `
+          <div class="config-option-card ${isSelected ? 'selected' : ''}" onclick="sylarConfig.select('${type}', '${value}')">
+            ${icon ? `<i class="fas ${icon}"></i>` : ''}
+            <h4>${value}</h4>
+            <p>${desc || ''}</p>
+          </div>
+        `;
+      },
+
+      select(type, value) {
+        this.selections[type] = value;
+
+        // Regra de Correr: Se selecionado "Correr", o item Batente deve ser automaticamente excluído
+        if (type === 'openingType' && value === 'Correr') {
+          this.selections.frame = 'Sem Batente';
+        }
+
+        // Regra de Pivotante: Oferecer exclusivamente Rolete + Puxador
+        if (type === 'openingType' && value === 'Pivotante') {
+          this.selections.hardware = 'Kit Pivotante';
+        }
+
+        this.renderStep();
+      },
+
+      next() {
+        if (this.currentStep < 5) {
+          this.currentStep++;
+          this.renderStep();
+        } else {
+          document.getElementById('finish-config').disabled = false;
+        }
+      },
+
+      prev() {
+        if (this.currentStep > 1) {
+          this.currentStep--;
+          this.renderStep();
+        }
+      },
+
+      updateSummary() {
+        const liveArea = document.getElementById('config-live-items');
+        let total = 0;
+        let itemsHtml = '';
+
+        const addItem = (name, price) => {
+          itemsHtml += `<div class="summary-item"><span>${name}</span><span>R$ ${price.toFixed(2)}</span></div>`;
+          total += price;
+        };
+
+        if (this.selections.openingType) itemsHtml += `<div class="summary-item"><span>Tipo</span><span>${this.selections.openingType}</span></div>`;
+
+        if (this.selections.structure) {
+          let p = 0;
+          if (this.selections.structure.includes('Amescla')) p = this.data.prices.folhas['Amescla'];
+          else if (this.selections.structure.includes('Primer')) p = this.data.prices.folhas['Primer'];
+          else p = 200; // default frisada
+          addItem(`Folha ${this.selections.structure}`, p);
+        }
+
+        if (this.selections.frame && this.selections.frame !== 'Sem Batente') {
+          let p = this.data.prices.batentes[this.selections.frame] || 0;
+          addItem(`Batente ${this.selections.frame}`, p);
+        }
+
+        if (this.selections.hardware) {
+          let p = 0;
+          if (this.selections.hardware === 'Kit Standard') p = this.data.prices.ferragens['Fechadura Navas'] + 45;
+          else if (this.selections.hardware === 'Kit Premium') p = this.data.prices.ferragens['Fechadura Modena'] + 45;
+          else if (this.selections.hardware === 'Kit Pivotante') p = this.data.prices.ferragens['Puxador 60cm'] + 80;
+          addItem(this.selections.hardware, p);
+        }
+
+        // Adiciona Montagem automática se tiver ferragens
+        if (this.selections.hardware) {
+          addItem('Mão de Obra Montagem', this.data.prices.servicos['Montagem Kit']);
+        }
+
+        liveArea.innerHTML = itemsHtml || '<p style="color: #555; font-size: 0.9rem; text-align: center; margin-top: 50px;">Inicie a configuração para ver os valores.</p>';
+        document.getElementById('config-total').innerText = `R$ ${total.toFixed(2)}`;
+      },
+
+      generatePDF() {
+        alert("📊 Orçamento Gerado com Sucesso!\nTotal: " + document.getElementById('config-total').innerText + "\n\nO PDF foi enviado para o processamento SYLAR.");
+      }
+    };
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+      if (document.getElementById('step-content')) sylarConfig.init();
+    });
   </script>
 
 </body>

@@ -1,0 +1,9 @@
+# Configurações de API e Chaves
+js/api-config.js
+
+# Arquivos temporários e de log
+scratch/
+extracted_prices.txt
+*.log
+node_modules/
+.DS_Store
