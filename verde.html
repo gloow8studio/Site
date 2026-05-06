@@ -1044,7 +1044,6 @@
         font-size: 0.9rem;
         font-family: 'Orbitron';
       }
-      }
     </style>
 
   </div>
@@ -1361,9 +1360,7 @@
 
   <script src="js/api-config.js"></script>
   <script>
-    // SYLAR AI Chat — Direct REST API (no SDK dependency issues)
-    const SYLAR_API_KEY = window.SYLAR_CONFIG ? window.SYLAR_CONFIG.apiKey : "";
-    const SYLAR_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${SYLAR_API_KEY}`;
+    // SYLAR AI Chat — Direct REST API
     const SYLAR_SYSTEM_CONTEXT = `Você é o SYLAR, um assistente comercial especializado e altamente profissional da Site3D AnimaMotion / Uniportas. Seu objetivo é ajudar clientes com produtos, orçamentos e especificações técnicas. Responda SEMPRE em português do Brasil.
 
 DIRETRIZES:
@@ -1397,6 +1394,14 @@ PRODUTOS E PREÇOS (Tabela Abril 2026):
       const mensagem = input.value.trim();
 
       if (!mensagem) return;
+      
+      // Get API Key dynamically
+      const SYLAR_API_KEY = window.SYLAR_CONFIG ? window.SYLAR_CONFIG.apiKey : "";
+      if (!SYLAR_API_KEY || SYLAR_API_KEY === "") {
+        appendMessageSylar("ai", "⚠️ Erro: Chave de API não encontrada. Verifique o arquivo js/api-config.js.");
+        return;
+      }
+      const SYLAR_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${SYLAR_API_KEY}`;
 
       // Disable input during request
       input.disabled = true;
