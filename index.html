@@ -708,7 +708,173 @@
     <img src="7icons_braco.jpg" alt="Informacoes Adicionais - 7 icons braco" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 0 30px rgba(0, 229, 255, 0.15);">
   </div>
 
+  <!-- ===== SECAO CAPA1 - ABAIXO DO CONTEUDO ===== -->
+  <style>
+    .capa1-section {
+      position: relative;
+      z-index: 2;
+      width: 90%;
+      max-width: 1200px;
+      margin: 80px auto 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+    }
+
+    /* Separador HUD */
+    .capa1-divider {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      width: 100%;
+    }
+    .capa1-divider::before,
+    .capa1-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,229,255,.45), transparent);
+    }
+    .capa1-divider span {
+      font-family: 'Orbitron', monospace;
+      font-size: 10px;
+      letter-spacing: .45em;
+      color: rgba(0,229,255,.6);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* Frame da imagem */
+    .capa1-frame {
+      position: relative;
+      width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(0,229,255,.25),
+        0 0 40px rgba(0,229,255,.12),
+        0 0 90px rgba(0,229,255,.06),
+        0 30px 80px rgba(0,0,0,.6);
+      cursor: pointer;
+      /* scroll reveal — começa invisivel */
+      opacity: 0;
+      transform: translateY(48px) scale(.98);
+      transition:
+        opacity .9s cubic-bezier(.16,1,.3,1),
+        transform .9s cubic-bezier(.16,1,.3,1),
+        box-shadow .4s ease;
+    }
+
+    .capa1-frame.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .capa1-frame:hover {
+      box-shadow:
+        0 0 0 1px rgba(0,229,255,.5),
+        0 0 60px rgba(0,229,255,.28),
+        0 0 120px rgba(0,229,255,.12),
+        0 40px 100px rgba(0,0,0,.7);
+    }
+
+    .capa1-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      filter: brightness(.95) saturate(1.1) contrast(1.04);
+      transition: filter .5s ease, transform .6s cubic-bezier(.16,1,.3,1);
+      transform-origin: center center;
+    }
+
+    .capa1-frame:hover img {
+      filter: brightness(1.05) saturate(1.2) contrast(1.06);
+      transform: scale(1.015);
+    }
+
+    /* Overlay com label no canto */
+    .capa1-badge {
+      position: absolute;
+      bottom: 20px;
+      right: 24px;
+      background: rgba(0,0,0,.62);
+      border: 1px solid rgba(0,229,255,.35);
+      border-radius: 6px;
+      padding: 8px 18px;
+      font-family: 'Orbitron', monospace;
+      font-size: 10px;
+      letter-spacing: .35em;
+      color: rgba(0,229,255,.9);
+      text-transform: uppercase;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      text-shadow: 0 0 12px rgba(0,229,255,.7);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .4s ease;
+    }
+
+    .capa1-frame:hover .capa1-badge {
+      opacity: 1;
+    }
+
+    /* Borda top que pisca */
+    .capa1-frame::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(0,229,255,.8) 30%,
+        rgba(170,0,255,.6) 70%,
+        transparent 100%);
+      z-index: 3;
+      animation: scanTop 4s ease-in-out infinite;
+    }
+
+    @keyframes scanTop {
+      0%,100% { opacity: .5; }
+      50%      { opacity: 1; box-shadow: 0 0 18px rgba(0,229,255,.6); }
+    }
+
+    @media (max-width: 768px) {
+      .capa1-section { width: 95%; margin-top: 60px; }
+    }
+  </style>
+
+  <section class="capa1-section">
+    <div class="capa1-divider">
+      <span>&#9670; AnimaMotion &mdash; Identidade Visual &#9670;</span>
+    </div>
+
+    <div class="capa1-frame" id="capa1Frame">
+      <img src="capa1.png" alt="AnimaMotion - Identidade Visual Capa">
+      <div class="capa1-badge">AnimaMotion &nbsp;&#183;&nbsp; Studio</div>
+    </div>
+  </section>
+  <!-- ============================================== -->
+
   <div class="bottom-rule"></div>
+
+  <script>
+    /* Scroll reveal para capa1 */
+    (function() {
+      const frame = document.getElementById('capa1Frame');
+      if (!frame) return;
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            frame.classList.add('visible');
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.12 });
+      observer.observe(frame);
+    })();
+  </script>
 
   <script src="bg-canvas.js"></script>
   <script>
