@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting to ZYNTH Module...</title>
+    <meta http-equiv="refresh" content="0;url=../roxo.html">
+    <style>
+        body {
+            background-color: #000;
+            color: #AA00FF;
+            font-family: 'Orbitron', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            overflow: hidden;
+        }
+        .loader {
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            border: 4px solid rgba(170, 0, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: #AA00FF;
+            animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        h1 {
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            text-shadow: 0 0 10px #AA00FF;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="loader"></div>
+        <h1>REDIRECIONANDO PARA O MÓDULO ZYNTH...</h1>
+    </div>
+    <script>
+        window.location.href = "../roxo.html";
+    </script>
+</body>
+</html>
