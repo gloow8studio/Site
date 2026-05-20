@@ -373,3 +373,77 @@ body {
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .12), transparent);
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVO — max-width: 768px
+   IMPORTANTE: Este bloco fica DEPOIS de todos os estilos desktop
+   para garantir que as regras móveis prevaleçam corretamente.
+═══════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* ── Body ── */
+  body {
+    padding-top: 100px;
+    padding-bottom: 40px;
+  }
+
+  /* ── Painel principal ── */
+  .panel {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 40px !important;
+    padding: 0 16px !important;
+    margin-top: 80px !important;
+    width: 100% !important;
+  }
+
+  /* ── Hex cards — sem animação de float para evitar sobreposição ── */
+  .hex-card {
+    animation: none !important;
+    width: 100% !important;
+    max-width: 180px !important;
+  }
+
+  /* ── Title bar — posição relativa no mobile ── */
+  .title-bar {
+    position: absolute !important;
+    top: 30px !important;
+  }
+
+  /* ── Bottom rule — corrige overflow horizontal ── */
+  .bottom-rule {
+    position: relative !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: none !important;
+    width: 90% !important;
+    margin: 40px auto 20px !important;
+    display: block !important;
+  }
+
+  /* ── Botão ecosistema ── */
+  .btn-ecosystem {
+    padding: 12px 20px !important;
+    font-size: 10px !important;
+    letter-spacing: .16em !important;
+    margin: 40px auto 0 !important;
+    width: 90% !important;
+    justify-content: center !important;
+  }
+
+  /* ── Suporte para .container-agencias e .item-marca ── */
+  .container-agencias {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    align-items: center !important;
+    gap: 20px !important;
+  }
+
+  .item-marca {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 20px !important;
+    position: relative !important;
+  }
+}

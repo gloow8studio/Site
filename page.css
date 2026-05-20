@@ -394,104 +394,7 @@ body {
   background: rgba(var(--theme-rgb), 0.06);
 }
 
-@media (max-width: 768px) {
-  .content-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
 
-  .page-container {
-    padding: 30px 16px;
-    margin-top: 15px;
-    border-radius: 12px;
-  }
-
-  .page-icon-wrap {
-    flex-direction: column !important;
-    text-align: center !important;
-    gap: 16px !important;
-    margin-bottom: 30px !important;
-  }
-
-  .page-icon-hex {
-    width: 80px !important;
-    height: 92px !important;
-  }
-
-  .hex-img-wrap {
-    width: 53px !important;
-    height: 61px !important;
-  }
-
-  .page-header {
-    border-left: none !important;
-    border-top: 3px solid var(--theme-color) !important;
-    padding-left: 0 !important;
-    padding-top: 15px !important;
-    width: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-  }
-
-  .page-title {
-    font-size: 26px !important;
-    line-height: 1.2 !important;
-    text-align: center !important;
-  }
-
-  .gatilho-mental {
-    font-size: 15px !important;
-    text-align: center !important;
-  }
-
-  .content-card {
-    padding: 20px !important;
-  }
-
-  .card-body p {
-    font-size: 15px !important;
-  }
-
-  .workflow-section {
-    flex-direction: column !important;
-    text-align: center !important;
-    align-items: center !important;
-    gap: 16px !important;
-    padding: 20px !important;
-  }
-
-  .portfolio-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .portfolio-tabs {
-    flex-wrap: wrap;
-    justify-content: center !important;
-    gap: 6px !important;
-  }
-
-  .tab-btn {
-    padding: 6px 12px !important;
-    font-size: 10px !important;
-  }
-
-  /* Support for .container-agencias and .item-marca as requested by the user */
-  .container-agencias {
-    display: flex !important;
-    flex-direction: column !important;
-    width: 100% !important;
-    align-items: center !important;
-    gap: 20px !important;
-  }
-
-  .item-marca {
-    width: 100% !important;
-    max-width: 320px !important;
-    margin-bottom: 20px !important;
-  }
-}
 
 /* ═══════════════════════════════════════════
    PORTFOLIO SECTION
@@ -674,4 +577,157 @@ body {
 /* ── Video placeholder (taller aspect ratio) ── */
 .video-placeholder {
   aspect-ratio: 16/9;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVO — max-width: 768px
+   IMPORTANTE: Este bloco fica DEPOIS de todos os estilos desktop
+   para garantir que as regras móveis prevaleçam corretamente.
+   Corrige o bug de sobreposição dos cards de portfólio (câmera).
+═══════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* ── Layout principal ── */
+  body {
+    padding: 20px 12px;
+  }
+
+  .page-container {
+    padding: 30px 16px;
+    margin-top: 15px;
+    border-radius: 12px;
+  }
+
+  /* ── Cabeçalho da página ── */
+  .page-icon-wrap {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 16px !important;
+    margin-bottom: 30px !important;
+  }
+
+  .page-icon-hex {
+    width: 80px !important;
+    height: 92px !important;
+  }
+
+  .hex-img-wrap {
+    width: 53px !important;
+    height: 61px !important;
+  }
+
+  .page-header {
+    border-left: none !important;
+    border-top: 3px solid var(--theme-color) !important;
+    padding-left: 0 !important;
+    padding-top: 15px !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .page-title {
+    font-size: 26px !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+  }
+
+  .gatilho-mental {
+    font-size: 15px !important;
+    text-align: center !important;
+  }
+
+  /* ── Grid de conteúdo ── */
+  .content-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .content-card {
+    padding: 20px !important;
+  }
+
+  .card-body p {
+    font-size: 15px !important;
+  }
+
+  .workflow-section {
+    flex-direction: column !important;
+    text-align: center !important;
+    align-items: center !important;
+    gap: 16px !important;
+    padding: 20px !important;
+  }
+
+  /* ── Portfolio grid — CORREÇÃO PRINCIPAL ──────────────────────
+     Os cards de câmera (.portfolio-card / .placeholder-card /
+     .video-placeholder) estavam lado a lado porque o grid de 3
+     colunas vinha DEPOIS do antigo @media e o sobrescrevia.
+     Agora forçamos empilhamento vertical aqui, após os estilos
+     desktop, para que a regra realmente seja aplicada no mobile.
+  ──────────────────────────────────────────────────────────────── */
+  .portfolio-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    gap: 0 !important;
+    grid-template-columns: unset !important;
+  }
+
+  /* Cada card ocupa 100% da largura — sem position absolute ── */
+  .portfolio-card,
+  .placeholder-card,
+  .video-placeholder {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 20px !important;
+    position: relative !important;
+    box-sizing: border-box !important;
+    aspect-ratio: unset !important;
+    min-height: 160px !important;
+  }
+
+  /* ── Tabs do portfolio ── */
+  .portfolio-tabs {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 6px !important;
+  }
+
+  .tab-btn {
+    padding: 6px 12px !important;
+    font-size: 10px !important;
+  }
+
+  /* ── Seção de portfólio ── */
+  .portfolio-section {
+    margin-top: 40px !important;
+    padding-top: 30px !important;
+  }
+
+  .portfolio-title {
+    font-size: 18px !important;
+  }
+
+  .portfolio-img {
+    height: 160px !important;
+  }
+
+  /* ── Suporte para .container-agencias e .item-marca ── */
+  .container-agencias {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    align-items: center !important;
+    gap: 20px !important;
+  }
+
+  .item-marca {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 20px !important;
+    position: relative !important;
+  }
 }

@@ -427,6 +427,45 @@
       }
     }
 
+    /* Empilhamento vertical em telas muito pequenas */
+    @media(max-width: 768px) {
+      #hero-wrap {
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 80px;
+        gap: 30px;
+      }
+
+      #left-panel {
+        max-width: 95vw;
+        padding: 20px 16px;
+        text-align: center;
+        order: 1;
+      }
+
+      #stage {
+        order: 2;
+        margin: 0 auto;
+        width: 95vw;
+        height: 760px; /* altura para acomodar 7 nodes empilhados */
+        position: relative;
+      }
+
+      /* Esconde o nucleus no modo empilhado — ocupa espaco desnecessario */
+      #nucleus {
+        display: none;
+      }
+
+      .hex-node {
+        width: 80px;
+        height: 92px;
+      }
+
+      #lightning-canvas {
+        display: none; /* Desativa o raio no mobile */
+      }
+    }
+
     /* ── BACK BUTTON ── */
     #btn-back {
       position: fixed;
@@ -581,20 +620,38 @@
 
     // Position loop
     function updateOrbit() {
-      const R = ORBIT_R();
-      const cx = stage.offsetWidth / 2, cy = stage.offsetHeight / 2;
-      if (!orbitPaused) orbitAngle += orbitSpeed;
-      nodes.forEach(n => {
-        const a = orbitAngle + n.offset;
-        const x = cx + Math.cos(a) * R;
-        const y = cy + Math.sin(a) * R * .55; // ellipse
-        n.el.style.left = x + 'px';
-        n.el.style.top = y + 'px';
-        // depth scale
-        const depth = .8 + .25 * ((Math.sin(a) + 1) / 2);
-        n.el.style.transform = `translate(-50%,-50%) scale(${depth})`;
-        n.el.style.zIndex = Math.round(10 + depth * 10);
-      });
+      const isMobile = window.innerWidth <= 768;
+
+      if (isMobile) {
+        // ── MOBILE: empilhamento vertical ──
+        // Distribui os 7 nodes em coluna centrada no stage
+        const cx = stage.offsetWidth / 2;
+        const nodeSpacing = 100; // espaco entre centros dos nodes
+        const startY = 60;       // distancia do topo do stage
+        nodes.forEach((n, i) => {
+          n.el.style.left = cx + 'px';
+          n.el.style.top  = (startY + i * nodeSpacing) + 'px';
+          n.el.style.transform = 'translate(-50%, -50%) scale(0.95)';
+          n.el.style.zIndex = '10';
+        });
+      } else {
+        // ── DESKTOP: orbita eliptica original ──
+        const R = ORBIT_R();
+        const cx = stage.offsetWidth / 2, cy = stage.offsetHeight / 2;
+        if (!orbitPaused) orbitAngle += orbitSpeed;
+        nodes.forEach(n => {
+          const a = orbitAngle + n.offset;
+          const x = cx + Math.cos(a) * R;
+          const y = cy + Math.sin(a) * R * .55; // elipse
+          n.el.style.left = x + 'px';
+          n.el.style.top  = y + 'px';
+          // escala de profundidade
+          const depth = .8 + .25 * ((Math.sin(a) + 1) / 2);
+          n.el.style.transform = `translate(-50%,-50%) scale(${depth})`;
+          n.el.style.zIndex = Math.round(10 + depth * 10);
+        });
+      }
+
       requestAnimationFrame(updateOrbit);
     }
     updateOrbit();
@@ -623,6 +680,12 @@
 
     let ltFrame = 0;
     function drawLightning() {
+      // Desativa o raio no mobile — economiza CPU e evita anomalias visuais
+      if (window.innerWidth <= 768) {
+        lctx.clearRect(0, 0, LC.width, LC.height);
+        requestAnimationFrame(drawLightning);
+        return;
+      }
       lctx.clearRect(0, 0, LC.width, LC.height);
       ltFrame++;
       const ox = LC.width / 2, oy = LC.height / 2;
