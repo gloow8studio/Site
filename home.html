@@ -432,13 +432,16 @@
       #hero-wrap {
         flex-direction: column;
         justify-content: flex-start;
-        padding-top: 80px;
-        gap: 30px;
+        padding-top: 70px;
+        gap: 20px;
+        /* Impede o hero-wrap de causar overflow horizontal */
+        width: 100%;
+        overflow-x: hidden;
       }
 
       #left-panel {
         max-width: 95vw;
-        padding: 20px 16px;
+        padding: 16px 14px;
         text-align: center;
         order: 1;
       }
@@ -447,8 +450,11 @@
         order: 2;
         margin: 0 auto;
         width: 95vw;
-        height: 760px; /* altura para acomodar 7 nodes empilhados */
+        /* 7 nodes × 100px gap + 60px start + 80px label space */
+        height: 820px;
         position: relative;
+        /* Permite que os labels (bottom: -38px) fiquem visiveis */
+        overflow: visible;
       }
 
       /* Esconde o nucleus no modo empilhado — ocupa espaco desnecessario */
@@ -461,8 +467,21 @@
         height: 92px;
       }
 
+      .hex-node .hex-label {
+        /* Garante que os labels nao se sobreponham ao node seguinte */
+        bottom: -32px;
+      }
+
       #lightning-canvas {
         display: none; /* Desativa o raio no mobile */
+      }
+
+      /* Botao explorar: cabe em telas pequenas */
+      #btn-explore {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 20px;
+        box-sizing: border-box;
       }
     }
 
@@ -1091,6 +1110,43 @@
 
     #gb-restart:hover {
       background: rgba(0, 229, 255, .2);
+    }
+
+    /* ── Battle game: responsivo mobile ── */
+    @media (max-width: 768px) {
+      #game-section {
+        padding: 40px 12px 60px;
+      }
+
+      #gb-controls {
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+        width: 100%;
+      }
+
+      .gb-joy {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .gb-power-wrap {
+        width: 100%;
+        min-width: unset;
+      }
+
+      #gb-power-track {
+        width: 100%;
+      }
+
+      .gb-power-vals {
+        width: 100%;
+      }
+
+      #gb-fire-btn {
+        width: 80px;
+        height: 80px;
+      }
     }
   </style>
 

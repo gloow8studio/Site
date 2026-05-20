@@ -589,13 +589,16 @@ body {
 
   /* ── Layout principal ── */
   body {
-    padding: 20px 12px;
+    padding: 16px 12px;
+    overflow-x: hidden;
   }
 
   .page-container {
-    padding: 30px 16px;
-    margin-top: 15px;
+    padding: 24px 14px;
+    margin-top: 10px;
     border-radius: 12px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   /* ── Cabeçalho da página ── */
@@ -603,7 +606,8 @@ body {
     flex-direction: column !important;
     text-align: center !important;
     gap: 16px !important;
-    margin-bottom: 30px !important;
+    margin-bottom: 28px !important;
+    align-items: center !important;
   }
 
   .page-icon-hex {
@@ -625,55 +629,74 @@ body {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
+    text-align: center !important;
   }
 
   .page-title {
-    font-size: 26px !important;
+    font-size: 24px !important;
     line-height: 1.2 !important;
     text-align: center !important;
   }
 
   .gatilho-mental {
-    font-size: 15px !important;
+    font-size: 14px !important;
     text-align: center !important;
+  }
+
+  .back-btn {
+    margin-bottom: 24px !important;
+    font-size: 9px !important;
   }
 
   /* ── Grid de conteúdo ── */
   .content-grid {
-    grid-template-columns: 1fr !important;
-    gap: 16px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+    grid-template-columns: unset !important;
   }
 
   .content-card {
-    padding: 20px !important;
+    padding: 18px 14px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    /* Remove qualquer grid-column que possa causar overflow */
+    grid-column: unset !important;
+  }
+
+  /* Span full-width cards também precisam de reset no flex */
+  .content-card[style*="grid-column"] {
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   .card-body p {
-    font-size: 15px !important;
+    font-size: 14px !important;
   }
 
   .workflow-section {
     flex-direction: column !important;
     text-align: center !important;
     align-items: center !important;
-    gap: 16px !important;
-    padding: 20px !important;
+    gap: 14px !important;
+    padding: 18px 14px !important;
   }
 
-  /* ── Portfolio grid — CORREÇÃO PRINCIPAL ──────────────────────
+  /* ── Portfolio grid — CORREÇÃO PRINCIPAL ──────────────────────────────────────────────
      Os cards de câmera (.portfolio-card / .placeholder-card /
      .video-placeholder) estavam lado a lado porque o grid de 3
      colunas vinha DEPOIS do antigo @media e o sobrescrevia.
      Agora forçamos empilhamento vertical aqui, após os estilos
      desktop, para que a regra realmente seja aplicada no mobile.
-  ──────────────────────────────────────────────────────────────── */
+  ──────────────────────────────────────────────────────────────────────── */
   .portfolio-grid {
     display: flex !important;
     flex-direction: column !important;
     align-items: stretch !important;
     width: 100% !important;
-    gap: 0 !important;
+    gap: 16px !important;
     grid-template-columns: unset !important;
+    box-sizing: border-box !important;
   }
 
   /* Cada card ocupa 100% da largura — sem position absolute ── */
@@ -682,11 +705,11 @@ body {
   .video-placeholder {
     width: 100% !important;
     max-width: 100% !important;
-    margin-bottom: 20px !important;
+    margin-bottom: 0 !important;
     position: relative !important;
     box-sizing: border-box !important;
     aspect-ratio: unset !important;
-    min-height: 160px !important;
+    min-height: 140px !important;
   }
 
   /* ── Tabs do portfolio ── */
@@ -697,14 +720,15 @@ body {
   }
 
   .tab-btn {
-    padding: 6px 12px !important;
-    font-size: 10px !important;
+    padding: 6px 10px !important;
+    font-size: 9px !important;
+    letter-spacing: .08em !important;
   }
 
   /* ── Seção de portfólio ── */
   .portfolio-section {
-    margin-top: 40px !important;
-    padding-top: 30px !important;
+    margin-top: 36px !important;
+    padding-top: 24px !important;
   }
 
   .portfolio-title {
@@ -729,5 +753,20 @@ body {
     max-width: 100% !important;
     margin-bottom: 20px !important;
     position: relative !important;
+  }
+}
+
+/* ── Extra pequeno: telas até 400px ── */
+@media (max-width: 400px) {
+  .page-container {
+    padding: 18px 10px !important;
+  }
+
+  .page-title {
+    font-size: 20px !important;
+  }
+
+  .card-body p {
+    font-size: 13px !important;
   }
 }
