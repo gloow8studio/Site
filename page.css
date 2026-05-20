@@ -397,24 +397,99 @@ body {
 @media (max-width: 768px) {
   .content-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   .page-container {
-    padding: 30px 20px;
-    margin-top: 20px;
+    padding: 30px 16px;
+    margin-top: 15px;
+    border-radius: 12px;
   }
 
-  .page-icon {
-    width: 60px;
-    height: 60px;
+  .page-icon-wrap {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 16px !important;
+    margin-bottom: 30px !important;
+  }
+
+  .page-icon-hex {
+    width: 80px !important;
+    height: 92px !important;
+  }
+
+  .hex-img-wrap {
+    width: 53px !important;
+    height: 61px !important;
+  }
+
+  .page-header {
+    border-left: none !important;
+    border-top: 3px solid var(--theme-color) !important;
+    padding-left: 0 !important;
+    padding-top: 15px !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .page-title {
+    font-size: 26px !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+  }
+
+  .gatilho-mental {
+    font-size: 15px !important;
+    text-align: center !important;
+  }
+
+  .content-card {
+    padding: 20px !important;
+  }
+
+  .card-body p {
+    font-size: 15px !important;
+  }
+
+  .workflow-section {
+    flex-direction: column !important;
+    text-align: center !important;
+    align-items: center !important;
+    gap: 16px !important;
+    padding: 20px !important;
   }
 
   .portfolio-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   .portfolio-tabs {
     flex-wrap: wrap;
+    justify-content: center !important;
+    gap: 6px !important;
+  }
+
+  .tab-btn {
+    padding: 6px 12px !important;
+    font-size: 10px !important;
+  }
+
+  /* Support for .container-agencias and .item-marca as requested by the user */
+  .container-agencias {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    align-items: center !important;
+    gap: 20px !important;
+  }
+
+  .item-marca {
+    width: 100% !important;
+    max-width: 320px !important;
+    margin-bottom: 20px !important;
   }
 }
 
