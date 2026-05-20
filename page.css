@@ -38,14 +38,13 @@ body {
   z-index: 2;
   width: 100%;
   max-width: 900px;
-  background: rgba(10, 10, 15, 0.4);
+  background: rgba(10, 10, 15, 0.75);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-top: 1px solid var(--theme-color);
+  border: 1px solid rgba(var(--theme-rgb), 0.25);
   border-radius: 16px;
   padding: 50px 60px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 100px rgba(var(--theme-rgb), 0.1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 50px rgba(var(--theme-rgb), 0.12), inset 0 0 20px rgba(var(--theme-rgb), 0.05);
   animation: fadeIn 0.8s ease-out;
 }
 
@@ -65,25 +64,28 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.6);
   text-decoration: none;
-  font-family: 'Orbitron', monospace;
-  font-size: 12px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   margin-bottom: 40px;
   transition: all 0.3s ease;
-  padding: 8px 16px;
+  padding: 10px 18px;
   border-radius: 4px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(10, 10, 15, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
 .back-btn:hover {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
-  transform: translateX(-5px);
+  color: var(--theme-color);
+  background: rgba(var(--theme-rgb), 0.05);
+  border-color: rgba(var(--theme-rgb), 0.3);
+  box-shadow: 0 0 15px rgba(var(--theme-rgb), 0.15);
+  transform: translateX(-4px);
 }
 
 .page-header {
@@ -108,7 +110,7 @@ body {
   font-weight: 900;
   letter-spacing: 0.05em;
   margin-bottom: 15px;
-  text-shadow: 0 0 20px rgba(var(--theme-rgb), 0.5);
+  text-shadow: 0 0 20px rgba(var(--theme-rgb), 0.6), 0 0 40px rgba(var(--theme-rgb), 0.3);
 }
 
 .gatilho-mental {
@@ -125,13 +127,14 @@ body {
 }
 
 .content-card {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(var(--theme-rgb), 0.15);
+  border-radius: 14px;
   padding: 30px;
-  transition: all 0.4s ease;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .content-card::before {
@@ -142,18 +145,19 @@ body {
   width: 100%;
   height: 2px;
   background: linear-gradient(90deg, transparent, var(--theme-color), transparent);
-  opacity: 0;
+  opacity: 0.15;
   transition: opacity 0.4s ease;
 }
 
 .content-card:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(var(--theme-rgb), 0.02);
+  border-color: rgba(var(--theme-rgb), 0.4);
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4), 0 0 25px rgba(var(--theme-rgb), 0.12);
 }
 
 .content-card:hover::before {
-  opacity: 1;
+  opacity: 0.8;
 }
 
 .card-title {
@@ -192,14 +196,21 @@ body {
 
 .workflow-section {
   grid-column: 1 / -1;
-  background: linear-gradient(135deg, rgba(var(--theme-rgb), 0.1), rgba(0, 0, 0, 0.2));
+  background: linear-gradient(135deg, rgba(var(--theme-rgb), 0.06), rgba(0, 0, 0, 0.45));
   border: 1px solid rgba(var(--theme-rgb), 0.2);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 35px;
   margin-top: 20px;
   display: flex;
   align-items: center;
   gap: 20px;
+  transition: all 0.4s ease;
+}
+
+.workflow-section:hover {
+  border-color: rgba(var(--theme-rgb), 0.45);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(var(--theme-rgb), 0.1);
+  background: linear-gradient(135deg, rgba(var(--theme-rgb), 0.1), rgba(0, 0, 0, 0.35));
 }
 
 .workflow-icon {
@@ -239,7 +250,7 @@ body {
   line-height: 1.5;
 }
 
-/* ── PAGE ICON (ícone WebP de referência) ── */
+/* ── PAGE ICON (ícone WebP de referência em formato Hexágono HUD) ── */
 .page-icon-wrap {
   display: flex;
   align-items: center;
@@ -247,23 +258,105 @@ body {
   margin-bottom: 50px;
 }
 
-.page-icon {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  filter: drop-shadow(0 0 10px var(--theme-color)) drop-shadow(0 0 24px var(--theme-color));
-  animation: iconBreathe 3s ease-in-out infinite;
+.page-icon-hex {
+  position: relative;
+  width: 100px;
+  height: 115px;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hex-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.hex-inner svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.hex-glow {
+  fill: none;
+  stroke: var(--theme-color);
+  stroke-width: 6;
+  opacity: 0.35;
+  filter: blur(8px);
+  animation: hexGlowPulse 3s ease-in-out infinite;
+}
+
+.hex-rim {
+  fill: none;
+  stroke: var(--theme-color);
+  stroke-width: 1.5;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 4px var(--theme-color));
+}
+
+.hex-rim2 {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 1;
+  stroke-dasharray: 4, 12;
+  transform-origin: center;
+  animation: hexRotate 20s linear infinite;
+}
+
+.hex-img-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 66px;
+  height: 76px;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background: rgba(10, 10, 15, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  border: 1px solid rgba(var(--theme-rgb), 0.3);
+}
+
+.hex-img-wrap img {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(var(--theme-rgb), 0.5));
+  animation: iconBreathe 3s ease-in-out infinite;
+}
+
+@keyframes hexGlowPulse {
+  0%, 100% {
+    opacity: 0.3;
+    filter: blur(6px);
+  }
+  50% {
+    opacity: 0.65;
+    filter: blur(10px) drop-shadow(0 0 4px var(--theme-color));
+  }
+}
+
+@keyframes hexRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 @keyframes iconBreathe {
   0%, 100% {
-    filter: drop-shadow(0 0 10px var(--theme-color)) drop-shadow(0 0 24px var(--theme-color));
     transform: scale(1);
+    filter: drop-shadow(0 0 4px rgba(var(--theme-rgb), 0.4));
   }
   50% {
-    filter: drop-shadow(0 0 18px var(--theme-color)) drop-shadow(0 0 44px var(--theme-color));
     transform: scale(1.06);
+    filter: drop-shadow(0 0 10px rgba(var(--theme-rgb), 0.8));
   }
 }
 
