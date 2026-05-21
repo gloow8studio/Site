@@ -108,6 +108,8 @@
 
     .content-block.blue-accent::before { background: linear-gradient(to bottom, #00d2ff, transparent); }
     .content-block.red-accent::before { background: linear-gradient(to bottom, #ff1744, transparent); }
+    .content-block.nitra-accent::before { background: linear-gradient(to bottom, #cf0e0e, transparent); }
+    .content-block.phos-accent::before { background: linear-gradient(to bottom, #f98e10, transparent); }
 
     .content-block h3 {
       font-family: 'Cinzel', serif;
@@ -129,6 +131,8 @@
 
     .content-block.blue-accent h3 { color: #00d2ff; }
     .content-block.red-accent h3 { color: #ff1744; }
+    .content-block.nitra-accent h3 { color: #cf0e0e; }
+    .content-block.phos-accent h3 { color: #f98e10; }
 
     .content-block p {
       font-size: 1.15rem;
@@ -188,6 +192,8 @@
 
     .cinematic-shot.red-shot { border-color: rgba(255, 23, 68, 0.3); color: #ff1744; }
     .cinematic-shot.blue-shot { border-color: rgba(0, 210, 255, 0.3); color: #00d2ff; }
+    .cinematic-shot.nitra-shot { border-color: rgba(207, 14, 14, 0.3); color: #cf0e0e; }
+    .cinematic-shot.phos-shot { border-color: rgba(249, 142, 16, 0.3); color: #f98e10; }
 
     .cinematic-shot::after {
       content: '';
@@ -238,6 +244,7 @@
       font-size: 1.5rem;
       color: #fff;
       margin-bottom: 5px;
+      text-transform: uppercase;
     }
 
     .nation-element {
@@ -474,7 +481,7 @@
 
     <!-- Nations (Original Overview) -->
     <div class="content-block">
-      <h3><i class="fas fa-chess-knight"></i> As 8 Nações de NOA</h3>
+      <h3 style="text-transform: uppercase;"><i class="fas fa-chess-knight"></i> As 8 Nações de NOA</h3>
       
       <div class="nations-grid">
         <div class="nation-card" style="border-color: rgba(0,48,255,0.3);">
@@ -529,19 +536,19 @@
     </div>
 
     <!-- Extreme South -->
-    <div class="content-block red-accent">
+    <div class="content-block phos-accent">
       <h3><i class="fas fa-fire"></i> O Extremo Sul: Phósphora</h3>
       <p>No extremo sul, a atmosfera bloqueia ondas curtas devido à densa poeira de óxido de ferro erguida por ciclones hipervelozes. O céu é perpetuamente vermelho e laranja escuro, criando um ambiente opressor e incandescente.</p>
       <p><strong>Titã Colossal: Ignisdraco Typhon</strong><br>
       Uma máquina biológica de combustão. Suas escamas são placas de fósforo branco e queratina. Ele possui um <em>Saco Incendiário</em> que metaboliza depósitos de ferro e fósforo. Ao expelir o gás pressurizado na atmosfera rica em óxido de ferro, gera um jato de plasma térmico carmesim. Suas asas operam como turbinas térmicas nos ciclones de poeira.</p>
     </div>
 
-    <div class="cinematic-shot red-shot" style="background-image: url('https://images.unsplash.com/photo-1542281286-9e0a16bb7366?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center;">
+    <div class="cinematic-shot phos-shot" style="background-image: url('https://images.unsplash.com/photo-1542281286-9e0a16bb7366?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center;">
       [ Visual do Ignisdraco Typhon ]
     </div>
 
     <!-- Extreme North -->
-    <div class="content-block blue-accent">
+    <div class="content-block nitra-accent">
       <h3><i class="fas fa-snowflake"></i> O Extremo Norte: Nitrogênia</h3>
       <p>Sob o brilho da estrela azul <strong>Nerak</strong>, o céu do norte é tingido por um azul elétrico constante. No coração de Nitrogênia repousa uma cadeia de montanhas geradas pela queda de um meteoro de energia puríssima, cultuado como um fragmento da própria estrela Nerak.</p>
       <ul>
@@ -550,7 +557,7 @@
       </ul>
     </div>
 
-    <div class="cinematic-shot blue-shot" style="background-image: url('https://images.unsplash.com/photo-1518182170546-076616fdcbdd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center;">
+    <div class="cinematic-shot nitra-shot" style="background-image: url('https://images.unsplash.com/photo-1518182170546-076616fdcbdd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center;">
       [ Visual de Nitrogênia / Meteoro de Nerak ]
     </div>
 
