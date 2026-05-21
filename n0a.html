@@ -120,6 +120,12 @@
       align-items: center;
       gap: 15px;
     }
+    
+    .center-title {
+      justify-content: center;
+      font-size: 3rem !important;
+      text-align: center;
+    }
 
     .content-block.blue-accent h3 { color: #00d2ff; }
     .content-block.red-accent h3 { color: #ff1744; }
@@ -191,7 +197,7 @@
       pointer-events: none;
     }
 
-    /* Nations Grid */
+    /* Original Nations Grid */
     .nations-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -248,6 +254,155 @@
       font-size: 0.95rem;
       line-height: 1.6;
       color: #a0a5ac;
+    }
+
+    /* Encyclopedia Block Styling */
+    .nation-block {
+      background: linear-gradient(90deg, rgba(var(--nat-rgb), 0.15) 0%, rgba(var(--nat-rgb), 0.02) 100%);
+      border-left: 6px solid var(--nat-color);
+      border-radius: 0 20px 20px 0;
+      padding: 40px;
+      margin-bottom: 60px;
+      position: relative;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    }
+
+    .nation-block::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+      border: 1px solid rgba(var(--nat-rgb), 0.2);
+      border-left: none;
+      border-radius: 0 20px 20px 0;
+      pointer-events: none;
+    }
+
+    .nation-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(var(--nat-rgb), 0.3);
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+    }
+
+    .nation-block-title {
+      font-family: 'Cinzel', serif;
+      font-size: 3.5rem;
+      color: var(--nat-color);
+      margin: 0;
+      line-height: 1;
+      text-shadow: 0 0 20px rgba(var(--nat-rgb), 0.5);
+    }
+
+    .nation-subtitle {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.2rem;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-top: 10px;
+      opacity: 0.8;
+    }
+
+    .nation-element-box {
+      text-align: right;
+    }
+
+    .nation-element-box .sym {
+      font-family: 'Cinzel', serif;
+      font-size: 3rem;
+      color: rgba(var(--nat-rgb), 0.5);
+      line-height: 1;
+    }
+
+    .nation-element-box .name {
+      font-family: 'Rajdhani', sans-serif;
+      color: var(--nat-color);
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    @media (max-width: 768px) {
+      .info-grid { grid-template-columns: 1fr; }
+    }
+
+    .info-section h5 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      color: #fff;
+      margin-top: 0;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .info-section h5 i {
+      color: var(--nat-color);
+    }
+
+    .info-section ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    .info-section ul li {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #a0a5ac;
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .info-section ul li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      color: var(--nat-color);
+      font-size: 0.8rem;
+      top: 4px;
+    }
+
+    .info-section p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #a0a5ac;
+      margin-bottom: 15px;
+    }
+
+    .council-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 40px;
+      background: rgba(15, 20, 25, 0.8);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .council-table th, .council-table td {
+      padding: 15px 20px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .council-table th {
+      background: rgba(0,0,0,0.5);
+      font-family: 'Cinzel', serif;
+      color: #ffd700;
+      letter-spacing: 2px;
+    }
+
+    .council-table td {
+      font-size: 1.1rem;
     }
 
     .back-btn {
@@ -322,7 +477,7 @@
       [ Visual do Sistema Trino e Nohak ]
     </div>
 
-    <!-- Nations -->
+    <!-- Nations (Original Overview) -->
     <div class="content-block">
       <h3><i class="fas fa-chess-knight"></i> A Geopolítica Elemental</h3>
       <p>O cenário social de NOA é dividido em oito nações principais que coexistem em estado de equilíbrio tenso. Cada uma domina uma ramificação científica própria, como <em>Engenharia Molecular</em>, <em>Bioarquitetura</em> ou <em>Manipulação de Energia Estelar</em>.</p>
@@ -410,10 +565,440 @@
       <p>A fauna não é apenas cenário; ela altera a geografia e a história. Monstros colossais travam combates territoriais devastadores que remodelam o relevo, abrem crateras e forçam as oito nações a adaptarem sua arquitetura e táticas militares para sobreviver às forças da natureza.</p>
     </div>
 
+    <div style="width: 100%; height: 2px; background: rgba(255,215,0,0.3); margin: 100px 0;"></div>
+
+    <!-- ENCYCLOPEDIA ADDITION -->
+    <div class="content-block" style="margin-bottom: 60px;">
+      <h3 class="center-title">Enciclopédia de Elementum: As 8 Nações</h3>
+      <p style="text-align: center; max-width: 800px; margin: 0 auto;">
+        Um aprofundamento na cultura, religião, estrutura social e economia das nações, organizado pelas cores do espectro da luz estelar.
+      </p>
+    </div>
+
+    <!-- 1. POTA -->
+    <div class="nation-block" style="--nat-color: #ff0ff0; --nat-rgb: 255, 15, 240;">
+      <div class="nation-header">
+        <div>
+          <h4 class="nation-block-title">Pota</h4>
+          <div class="nation-subtitle">O Reino Rosa da Eletricidade</div>
+        </div>
+        <div class="nation-element-box">
+          <div class="sym">K</div>
+          <div class="name">Potássio · Energia</div>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div class="info-col">
+          <div class="info-section">
+            <h5><i class="fas fa-bolt"></i> Cultura: "A Corrente da Vida"</h5>
+            <p>Os Potianos vivem em um estado de constante movimento e conexão. Para eles, a eletricidade não é apenas energia — é a força vital que conecta todos os seres. Cultura veloz, vibrante e interconectada.</p>
+            <ul>
+              <li><strong>Arte:</strong> Música eletrônica criada por descargas controladas, esculturas de plasma.</li>
+              <li><strong>Culinária:</strong> Alimentos que brilham ao serem consumidos.</li>
+              <li><strong>Arquitetura:</strong> Cidades flutuantes sobre campos magnéticos.</li>
+            </ul>
+          </div>
+          <div class="info-section" style="margin-top: 30px;">
+            <h5><i class="fas fa-sitemap"></i> Estrutura Social & Economia</h5>
+            <p><strong>Sistema:</strong> Meritocracia elétrica (seu "voltagem" social = sua capacidade de gerar/armazenar energia). Líder: Grão-Condutor.</p>
+            <p><strong>Classes:</strong> Alta Voltagem, Média Tensão, Baixa Tensão e Isolantes.</p>
+            <p><strong>Moeda:</strong> "Watts" (energia armazenada em cristais). Exportam baterias e tecnologia elétrica.</p>
+          </div>
+        </div>
+        <div class="info-col">
+          <div class="info-section">
+            <h5><i class="fas fa-praying-hands"></i> Religião / Espiritualidade</h5>
+            <ul>
+              <li><strong>Eletroteísmo:</strong> Crença em uma inteligência cósmica de pura energia.</li>
+              <li><strong>Ancestrais de Plasma:</strong> Culto aos antepassados "carregados" em cristais.</li>
+              <li><strong>Ciclo da Carga:</strong> A alma é uma bateria que precisa ser recarregada.</li>
+              <li><strong>Culto ao Raio:</strong> Adoram tempestades como manifestações divinas.</li>
+              <li><strong>Budismo Elétrico:</strong> Meditação através de correntes controladas.</li>
+              <li><strong>Agnosticismo Pulsante:</strong> "Talvez haja algo, mas a corrente continua".</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center; padding: 20px; border-top: 1px solid rgba(255,255,255,0.05);">
+        <a href="pota.html" style="display:inline-flex; align-items:center; gap:10px; padding:15px 40px; background:rgba(0,0,0,0.5); border:1px solid var(--nat-color); color:var(--nat-color); text-decoration:none; font-family:'Rajdhani', sans-serif; font-weight:700; font-size:1.1rem; text-transform:uppercase; letter-spacing:2px; border-radius:50px; transition:all 0.3s ease;" onmouseover="this.style.background='var(--nat-color)'; this.style.color='#000'; this.style.boxShadow='0 0 20px var(--nat-color)';" onmouseout="this.style.background='rgba(0,0,0,0.5)'; this.style.color='var(--nat-color)'; this.style.boxShadow='none';"><i class="fas fa-satellite-dish"></i> Acessar Datalog da Nação</a>
+      </div>
+    </div>
+
+    <!-- 2. SULFI -->
+    <div class="nation-block" style="--nat-color: #fd1e08; --nat-rgb: 253, 30, 8;">
+      <div class="nation-header">
+        <div>
+          <h4 class="nation-block-title">Sulfi</h4>
+          <div class="nation-subtitle">O Reino Vermelho das Toxinas</div>
+        </div>
+        <div class="nation-element-box">
+          <div class="sym">S</div>
+          <div class="name">Enxofre · Toxinas</div>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div class="info-col">
+          <div class="info-section">
+            <h5><i class="fas fa-biohazard"></i> Cultura: "A Beleza do Veneno"</h5>
+            <p>Os Sulfianos enxergam beleza onde outros veem perigo. Seus pântanos fumegantes são jardins cultivados, e suas toxinas são ferramentas sagradas.</p>
+            <ul>
+              <li><strong>Arte:</strong> Pinturas com pigmentos ácidos que mudam com o tempo.</li>
+              <li><strong>Culinária:</strong> Pratos fermentados em toxinas controladas.</li>
+              <li><strong>Arquitetura:</strong> Torres de cristais tóxicos que "crescem" da terra ácida.</li>
+            </ul>
+          </div>
+          <div class="info-section" style="margin-top: 30px;">
+            <h5><i class="fas fa-sitemap"></i> Estrutura Social & Economia</h5>
+            <p><strong>Sistema:</strong> Hierarquia da imunidade. Líder: Primeiro Imune.</p>
+            <p><strong>Classes:</strong> Imunes Natos (1%), Imunes Adaptados, Vulneráveis e Alquimistas.</p>
+            <p><strong>Moeda:</strong> "Doses" de antídotos raros. Exportam venenos, antídotos e biotecnologia de resistência.</p>
+          </div>
+        </div>
+        <div class="info-col">
+          <div class="info-section">
+            <h5><i class="fas fa-praying-hands"></i> Religião / Espiritualidade</h5>
+            <ul>
+              <li><strong>Alquimia Sagrada:</strong> Veneno e cura são a mesma coisa.</li>
+              <li><strong>Culto à Decomposição:</strong> A morte é o começo de um novo ciclo.</li>
+              <li><strong>Imanência do Caos:</strong> O universo é intrinsecamente tóxico.</li>
+              <li><strong>Medicina Sagrada:</strong> Cura através de toxinas controladas é ritual religioso.</li>
+              <li><strong>Ceticismo Imune:</strong> "Se não me matou, talvez seja real".</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center; padding: 20px; border-top: 1px solid rgba(255,255,255,0.05);">
+        <a href="sulfi.html" style="display:inline-flex; align-items:center; gap:10px; padding:15px 40px; background:rgba(0,0,0,0.5); border:1px solid var(--nat-color); color:var(--nat-color); text-decoration:none; font-family:'Rajdhani', sans-serif; font-weight:700; font-size:1.1rem; text-transform:uppercase; letter-spacing:2px; border-radius:50px; transition:all 0.3s ease;" onmouseover="this.style.background='var(--nat-color)'; this.style.color='#000'; this.style.boxShadow='0 0 20px var(--nat-color)';" onmouseout="this.style.background='rgba(0,0,0,0.5)'; this.style.color='var(--nat-color)'; this.style.boxShadow='none';"><i class="fas fa-satellite-dish"></i> Acessar Datalog da Nação</a>
+      </div>
+    </div>
+
+    <!-- 3. PHOS -->
+    <div class="nation-block" style="--nat-color: #f98e10; --nat-rgb: 249, 142, 16;">
+      <div class="nation-header">
+        <div>
+          <h4 class="nation-block-title">Phos</h4>
+          <div class="nation-subtitle">O Reino Laranja do Fogo</div>
+        </div>
+        <div class="nation-element-box">
+          <div class="sym">P</div>
+          <div class="name">Fósforo · Fogo</div>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div class="info-col">
+          <div class="info-section">
+            <h5><i class="fas fa-fire"></i> Cultura: "A Chama que Transforma"</h5>
+            <p>Passionais, intensos e criativos. O fogo não é destrutivo, é purificador e transformador.</p>
+            <ul>
+              <li><strong>Arte:</strong> Esculturas em metal líquido, pintura com lava.</li>
+              <li><strong>Culinária:</strong> Alimentos grelhados em chamas rituais.</li>
+              <li><strong>Arquitetura:</strong> Cidades dentro de vulcões, forjas colossais.</li>
+            </ul>
+          </div>
+          <div class="info-section" style="margin-top: 30px;">
+            <h5><i class="fas fa-sitemap"></i> Estrutura Social & Economia</h5>
+            <p><strong>Sistema:</strong> Corporações de ofício. Líder: Grão-Mestre da Forja.</p>
+            <p><strong>Classes:</strong> Mestres da Forja, Artesãos, Aprendizes e Mineradores.</p>
+            <p><strong>Moeda:</strong> Barras de metal forjado. Exportam armas, ligas metálicas e joias.</p>
+          </div>
+        </div>
+        <div class="info-col">
+          <div class="info-section">
+            <h5><i class="fas fa-praying-hands"></i> Religião / Espiritualidade</h5>
+            <ul>
+              <li><strong>Primeira Chama:</strong> Um fogo primordial que criou o universo.</li>
+              <li><strong>Culto à Forja:</strong> Deus como ferreiro cósmico.</li>
+              <li><strong>Dualismo Cinzas-Chamas:</strong> Destruição e criação são a mesma coisa.</li>
+              <li><strong>Ciclo da Combustão:</strong> Reencarnação como novo começo ardente.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center; padding: 20px; border-top: 1px solid rgba(255,255,255,0.05);">
+        <a href="phos.html" style="display:inline-flex; align-items:center; gap:10px; padding:15px 40px; background:rgba(0,0,0,0.5); border:1px solid var(--nat-color); color:var(--nat-color); text-decoration:none; font-family:'Rajdhani', sans-serif; font-weight:700; font-size:1.1rem; text-transform:uppercase; letter-spacing:2px; border-radius:50px; transition:all 0.3s ease;" onmouseover="this.style.background='var(--nat-color)'; this.style.color='#000'; this.style.boxShadow='0 0 20px var(--nat-color)';" onmouseout="this.style.background='rgba(0,0,0,0.5)'; this.style.color='var(--nat-color)'; this.style.boxShadow='none';"><i class="fas fa-satellite-dish"></i> Acessar Datalog da Nação</a>
+      </div>
+    </div>
+
+    <!-- 4. CARBO -->
+    <div class="nation-block" style="--nat-color: #0dc70a; --nat-rgb: 13, 199, 10;">
+      <div class="nation-header">
+        <div>
+          <h4 class="nation-block-title">Carbo</h4>
+          <div class="nation-subtitle">O Reino Verde da Vida</div>
+        </div>
+        <div class="nation-element-box">
+          <div class="sym">C</div>
+          <div class="name">Carbono · Vida</div>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div class="info-col">
+          <div class="info-section">
+            <h5><i class="fas fa-leaf"></i> Cultura: "A Teia Verde"</h5>
+            <p>Os jardineiros de Elementum. Toda vida está conectada em uma grande teia orgânica.</p>
+            <ul>
+              <li><strong>Arte:</strong> Esculturas vivas de árvores moldadas.</li>
+              <li><strong>Culinária:</strong> Alimentos frescos, fermentados com rituais.</li>
+              <li><strong>Arquitetura:</strong> Edifícios-árvore que crescem com a cidade.</li>
+            </ul>
+          </div>
+          <div class="info-section" style="margin-top: 30px;">
+            <h5><i class="fas fa-sitemap"></i> Estrutura Social & Economia</h5>
+            <p><strong>Sistema:</strong> Democracia direta por biomas. Líder: Conselho dos Biomas.</p>
+            <p><strong>Classes:</strong> Guardiões da Semente, Cultivadores, Colhedores e Sintetizadores.</p>
+            <p><strong>Moeda:</strong> Trocas de safras ou "sementes". Exportam alimentos e biotecnologia.</p>
+          </div>
+        </div>
+        <div class="info-col">
+          <div class="info-section">
+            <h5><i class="fas fa-praying-hands"></i> Religião / Espiritualidade</h5>
+            <ul>
+              <li><strong>A Grande Árvore:</strong> O universo é uma árvore cósmica.</li>
+              <li><strong>Ancestrais na Seiva:</strong> Espíritos vivem nas plantas.</li>
+              <li><strong>Culto à Fotossíntese:</strong> Meditação através da absorção de luz.</li>
+              <li><strong>Panteísmo Orgânico:</strong> Deus é o ecossistema total.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center; padding: 20px; border-top: 1px solid rgba(255,255,255,0.05);">
+        <a href="carbo.html" style="display:inline-flex; align-items:center; gap:10px; padding:15px 40px; background:rgba(0,0,0,0.5); border:1px solid var(--nat-color); color:var(--nat-color); text-decoration:none; font-family:'Rajdhani', sans-serif; font-weight:700; font-size:1.1rem; text-transform:uppercase; letter-spacing:2px; border-radius:50px; transition:all 0.3s ease;" onmouseover="this.style.background='var(--nat-color)'; this.style.color='#000'; this.style.boxShadow='0 0 20px var(--nat-color)';" onmouseout="this.style.background='rgba(0,0,0,0.5)'; this.style.color='var(--nat-color)'; this.style.boxShadow='none';"><i class="fas fa-satellite-dish"></i> Acessar Datalog da Nação</a>
+      </div>
+    </div>
+
+    <!-- 5. HYDRO -->
+    <div class="nation-block" style="--nat-color: #0030ff; --nat-rgb: 0, 48, 255;">
+      <div class="nation-header">
+        <div>
+          <h4 class="nation-block-title">Hydro</h4>
+          <div class="nation-subtitle">O Reino Azul Profundo da Água</div>
+        </div>
+        <div class="nation-element-box">
+          <div class="sym">H</div>
+          <div class="name">Hidrogênio · Água</div>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div class="info-col">
+          <div class="info-section">
+            <h5><i class="fas fa-water"></i> Cultura: "A Profundidade do Ser"</h5>
+            <p>Introspectivos e pacientes. O tempo flui diferente para eles.</p>
+            <ul>
+              <li><strong>Arte:</strong> Música das baleias, esculturas de coral.</li>
+              <li><strong>Culinária:</strong> Alimentos marinhos, água em todas as formas.</li>
+              <li><strong>Arquitetura:</strong> Cúpulas submersas, palácios de bolhas.</li>
+            </ul>
+          </div>
+          <div class="info-section" style="margin-top: 30px;">
+            <h5><i class="fas fa-sitemap"></i> Estrutura Social & Economia</h5>
+            <p><strong>Sistema:</strong> Monarquia eletiva. Líder: Imperador das Marés.</p>
+            <p><strong>Classes:</strong> Nobres da Superfície, Mestres das Profundezas, Trabalhadores, Abissais.</p>
+            <p><strong>Moeda:</strong> "Pérolas" cultivadas. Exportam água pura e energia das marés.</p>
+          </div>
+        </div>
+        <div class="info-col">
+          <div class="info-section">
+            <h5><i class="fas fa-praying-hands"></i> Religião / Espiritualidade</h5>
+            <ul>
+              <li><strong>O Grande Oceano:</strong> Deus é um oceano infinito de consciência.</li>
+              <li><strong>Ciclo da Água:</strong> Evaporação e precipitação como ciclo da alma.</li>
+              <li><strong>Culto à Maré:</strong> O ritmo do universo é como as marés.</li>
+              <li><strong>Budismo Líquido:</strong> Adapte-se como a água, sempre flua.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center; padding: 20px; border-top: 1px solid rgba(255,255,255,0.05);">
+        <a href="hydro.html" style="display:inline-flex; align-items:center; gap:10px; padding:15px 40px; background:rgba(0,0,0,0.5); border:1px solid var(--nat-color); color:var(--nat-color); text-decoration:none; font-family:'Rajdhani', sans-serif; font-weight:700; font-size:1.1rem; text-transform:uppercase; letter-spacing:2px; border-radius:50px; transition:all 0.3s ease;" onmouseover="this.style.background='var(--nat-color)'; this.style.color='#000'; this.style.boxShadow='0 0 20px var(--nat-color)';" onmouseout="this.style.background='rgba(0,0,0,0.5)'; this.style.color='var(--nat-color)'; this.style.boxShadow='none';"><i class="fas fa-satellite-dish"></i> Acessar Datalog da Nação</a>
+      </div>
+    </div>
+
+    <!-- 6. OXYN -->
+    <div class="nation-block" style="--nat-color: #38b6ff; --nat-rgb: 56, 182, 255;">
+      <div class="nation-header">
+        <div>
+          <h4 class="nation-block-title">Oxyn</h4>
+          <div class="nation-subtitle">O Reino Ciano do Ar</div>
+        </div>
+        <div class="nation-element-box">
+          <div class="sym">O</div>
+          <div class="name">Oxigênio · Ar</div>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div class="info-col">
+          <div class="info-section">
+            <h5><i class="fas fa-wind"></i> Cultura: "A Leveza do Ser"</h5>
+            <p>Livres, ágeis e adaptáveis. Vivem nas alturas e raramente tocam o solo.</p>
+            <ul>
+              <li><strong>Arte:</strong> Dança aérea com asas, nuvens esculpidas.</li>
+              <li><strong>Vestimenta:</strong> Asas ornamentais, tecidos ultra-leves.</li>
+              <li><strong>Arquitetura:</strong> Cidades flutuantes, pontes de vento congelado.</li>
+            </ul>
+          </div>
+          <div class="info-section" style="margin-top: 30px;">
+            <h5><i class="fas fa-sitemap"></i> Estrutura Social & Economia</h5>
+            <p><strong>Sistema:</strong> Confederação de cidades-estado. Líder: Conselho dos Ventos.</p>
+            <p><strong>Classes:</strong> Asas Altas, Mestres do Clima, Fixos e Nômades.</p>
+            <p><strong>Moeda:</strong> "Correntes" (créditos aéreos). Exportam energia eólica e aviação.</p>
+          </div>
+        </div>
+        <div class="info-col">
+          <div class="info-section">
+            <h5><i class="fas fa-praying-hands"></i> Religião / Espiritualidade</h5>
+            <ul>
+              <li><strong>O Grande Sopro:</strong> Deus é a respiração do cosmos.</li>
+              <li><strong>Ancestrais nas Brisas:</strong> Espíritos sussurram no vento.</li>
+              <li><strong>Culto à Altitude:</strong> Quanto mais alto, mais perto do divino.</li>
+              <li><strong>Budismo do Ar:</strong> Vazio não é ausência, é potencial.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center; padding: 20px; border-top: 1px solid rgba(255,255,255,0.05);">
+        <a href="oxyn.html" style="display:inline-flex; align-items:center; gap:10px; padding:15px 40px; background:rgba(0,0,0,0.5); border:1px solid var(--nat-color); color:var(--nat-color); text-decoration:none; font-family:'Rajdhani', sans-serif; font-weight:700; font-size:1.1rem; text-transform:uppercase; letter-spacing:2px; border-radius:50px; transition:all 0.3s ease;" onmouseover="this.style.background='var(--nat-color)'; this.style.color='#000'; this.style.boxShadow='0 0 20px var(--nat-color)';" onmouseout="this.style.background='rgba(0,0,0,0.5)'; this.style.color='var(--nat-color)'; this.style.boxShadow='none';"><i class="fas fa-satellite-dish"></i> Acessar Datalog da Nação</a>
+      </div>
+    </div>
+
+    <!-- 7. YTTRA -->
+    <div class="nation-block" style="--nat-color: #8a2be2; --nat-rgb: 138, 43, 226;">
+      <div class="nation-header">
+        <div>
+          <h4 class="nation-block-title">Yttra</h4>
+          <div class="nation-subtitle">O Reino Violeta da Luz</div>
+        </div>
+        <div class="nation-element-box">
+          <div class="sym">Y</div>
+          <div class="name">Ítrio · Luz</div>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div class="info-col">
+          <div class="info-section">
+            <h5><i class="fas fa-lightbulb"></i> Cultura: "O Espectro da Consciência"</h5>
+            <p>Visionários, frios e precisos. A luz é sua linguagem e sua ferramenta.</p>
+            <ul>
+              <li><strong>Arte:</strong> Holografia, esculturas de luz sólida.</li>
+              <li><strong>Vestimenta:</strong> Tecidos que mudam de cor, joias que projetam luz.</li>
+              <li><strong>Arquitetura:</strong> Edifícios de luz sólida, cidades luminescentes.</li>
+            </ul>
+          </div>
+          <div class="info-section" style="margin-top: 30px;">
+            <h5><i class="fas fa-sitemap"></i> Estrutura Social & Economia</h5>
+            <p><strong>Sistema:</strong> Tecnocracia. Líder: Primeiro Fóton.</p>
+            <p><strong>Classes:</strong> Espectro Superior, Refratores, Prismas e Sombras.</p>
+            <p><strong>Moeda:</strong> Créditos quânticos. Exportam lasers, holografia e pesquisa.</p>
+          </div>
+        </div>
+        <div class="info-col">
+          <div class="info-section">
+            <h5><i class="fas fa-praying-hands"></i> Religião / Espiritualidade</h5>
+            <ul>
+              <li><strong>A Luz Primeira:</strong> Deus existia antes das trevas.</li>
+              <li><strong>Ateísmo Quântico:</strong> A realidade é apenas observação.</li>
+              <li><strong>Culto ao Laser:</strong> Foco e precisão são virtudes divinas.</li>
+              <li><strong>Budismo da Iluminação:</strong> Iluminação é literalmente luz.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center; padding: 20px; border-top: 1px solid rgba(255,255,255,0.05);">
+        <a href="yttra.html" style="display:inline-flex; align-items:center; gap:10px; padding:15px 40px; background:rgba(0,0,0,0.5); border:1px solid var(--nat-color); color:var(--nat-color); text-decoration:none; font-family:'Rajdhani', sans-serif; font-weight:700; font-size:1.1rem; text-transform:uppercase; letter-spacing:2px; border-radius:50px; transition:all 0.3s ease;" onmouseover="this.style.background='var(--nat-color)'; this.style.color='#000'; this.style.boxShadow='0 0 20px var(--nat-color)';" onmouseout="this.style.background='rgba(0,0,0,0.5)'; this.style.color='var(--nat-color)'; this.style.boxShadow='none';"><i class="fas fa-satellite-dish"></i> Acessar Datalog da Nação</a>
+      </div>
+    </div>
+
+    <!-- 8. NITRA -->
+    <div class="nation-block" style="--nat-color: #cf0e0e; --nat-rgb: 207, 14, 14;">
+      <div class="nation-header">
+        <div>
+          <h4 class="nation-block-title">Nitra</h4>
+          <div class="nation-subtitle">O Reino Vermelho-Escuro do Gelo</div>
+        </div>
+        <div class="nation-element-box">
+          <div class="sym">N</div>
+          <div class="name">Nitrogênio · Gelo</div>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div class="info-col">
+          <div class="info-section">
+            <h5><i class="fas fa-snowflake"></i> Cultura: "A Memória Congelada"</h5>
+            <p>Lentos, pacientes e profundamente memoriais. No gelo, tudo se preserva.</p>
+            <ul>
+              <li><strong>Arte:</strong> Esculturas de gelo milenares, música de cristais.</li>
+              <li><strong>Vestimenta:</strong> Peles glaciais, joias de gelo eterno.</li>
+              <li><strong>Arquitetura:</strong> Cidades esculpidas em geleiras, túneis criogênicos.</li>
+            </ul>
+          </div>
+          <div class="info-section" style="margin-top: 30px;">
+            <h5><i class="fas fa-sitemap"></i> Estrutura Social & Economia</h5>
+            <p><strong>Sistema:</strong> Gerontocracia. Líder: O Eterno (preservado criogenicamente).</p>
+            <p><strong>Classes:</strong> Os Preservados, Guardiões da Memória, Caçadores e Despertos.</p>
+            <p><strong>Moeda:</strong> "Memórias" (dados históricos). Exportam criotecnologia e turismo.</p>
+          </div>
+        </div>
+        <div class="info-col">
+          <div class="info-section">
+            <h5><i class="fas fa-praying-hands"></i> Religião / Espiritualidade</h5>
+            <ul>
+              <li><strong>O Grande Congelamento:</strong> Tudo será preservado no gelo cósmico.</li>
+              <li><strong>Ciclo do Degelo:</strong> Almas descongelam e reencarnam.</li>
+              <li><strong>Culto à Aurora Boreal:</strong> Luzes divinas no céu gelado.</li>
+              <li><strong>Budismo da Paciência:</strong> Como o gelo, espere o tempo necessário.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center; padding: 20px; border-top: 1px solid rgba(255,255,255,0.05);">
+        <a href="nitra.html" style="display:inline-flex; align-items:center; gap:10px; padding:15px 40px; background:rgba(0,0,0,0.5); border:1px solid var(--nat-color); color:var(--nat-color); text-decoration:none; font-family:'Rajdhani', sans-serif; font-weight:700; font-size:1.1rem; text-transform:uppercase; letter-spacing:2px; border-radius:50px; transition:all 0.3s ease;" onmouseover="this.style.background='var(--nat-color)'; this.style.color='#000'; this.style.boxShadow='0 0 20px var(--nat-color)';" onmouseout="this.style.background='rgba(0,0,0,0.5)'; this.style.color='var(--nat-color)'; this.style.boxShadow='none';"><i class="fas fa-satellite-dish"></i> Acessar Datalog da Nação</a>
+      </div>
+    </div>
+
+    <!-- O Equilíbrio de Elementum -->
+    <div class="content-block" style="margin-top: 100px;">
+      <h3 style="color: #fff; justify-content: center;"><i class="fas fa-balance-scale"></i> O Equilíbrio de Elementum</h3>
+      <p style="text-align: center;">O delicado balanço entre forças extremas cria um tabuleiro político complexo.</p>
+
+      <table class="council-table">
+        <thead>
+          <tr>
+            <th>Instituição / Conflito</th>
+            <th>Detalhes e Envolvidos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong><span style="color:#ffd700;">Conselho das Oito Cores</span></strong></td>
+            <td>Reúne-se apenas em crises. Ordem: Pota 💗, Sulfi 🔴, Phos 🟠, Carbo 🟢, Hydro 🔵, Oxyn 💙, Yttra 🟣, Nitra ❤️.</td>
+          </tr>
+          <tr>
+            <td><strong>Guerra Fria</strong></td>
+            <td>Nitra vs. Phos (Gelo Absoluto vs. Fogo Primordial)</td>
+          </tr>
+          <tr>
+            <td><strong>Disputa Comercial</strong></td>
+            <td>Carbo vs. Sulfi (Orgânico vs. Químico/Tóxico)</td>
+          </tr>
+          <tr>
+            <td><strong>Corrida Tecnológica</strong></td>
+            <td>Pota vs. Yttra (Eletricidade vs. Luz/Quântica)</td>
+          </tr>
+          <tr>
+            <td><strong>Aliança Natural</strong></td>
+            <td>Hydro + Carbo + Oxyn (Água, Vida e Ar colaborando para sustento ecológico)</td>
+          </tr>
+          <tr>
+            <td><strong>Rivalidade Histórica</strong></td>
+            <td>Yttra vs. Sulfi (Pureza Luminosa vs. Toxinas e Caos)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
   </div>
 
   <div class="footer">
-    N0A &copy; 2026 GLOW8 STUDIO · ORIGINAL TRANSMEDIA IP
+    N0A &copy; 2026 GLOW8 STUDIO · TRANSMEDIA IP
   </div>
 
 </body>
