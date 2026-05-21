@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>N0A — Universo Transmídia · Glow8 Studio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@300;400;600&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     body, html {
@@ -86,7 +86,7 @@
 
     /* Content Area */
     .content-section {
-      max-width: 900px;
+      max-width: 1000px;
       margin: 0 auto;
       padding: 100px 20px;
     }
@@ -106,6 +106,9 @@
       background: linear-gradient(to bottom, #ffd700, transparent);
     }
 
+    .content-block.blue-accent::before { background: linear-gradient(to bottom, #00d2ff, transparent); }
+    .content-block.red-accent::before { background: linear-gradient(to bottom, #ff1744, transparent); }
+
     .content-block h3 {
       font-family: 'Cinzel', serif;
       font-size: 2.5rem;
@@ -113,19 +116,138 @@
       margin-top: 0;
       margin-bottom: 30px;
       letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
     }
 
+    .content-block.blue-accent h3 { color: #00d2ff; }
+    .content-block.red-accent h3 { color: #ff1744; }
+
     .content-block p {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       line-height: 1.8;
       color: #b0b5bc;
       font-weight: 300;
       margin-bottom: 25px;
     }
 
+    .content-block ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .content-block ul li {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: #b0b5bc;
+      font-weight: 300;
+      margin-bottom: 15px;
+      position: relative;
+      padding-left: 25px;
+    }
+    .content-block ul li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      color: #ffd700;
+    }
+    .content-block.blue-accent ul li::before { color: #00d2ff; }
+
     .content-block strong {
       color: #fff;
       font-weight: 600;
+    }
+
+    /* Cinematic image placeholder */
+    .cinematic-shot {
+      width: 100%;
+      height: 450px;
+      background: #111;
+      margin: 60px 0;
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffd700;
+      font-family: 'Cinzel';
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+      position: relative;
+      overflow: hidden;
+      text-transform: uppercase;
+    }
+
+    .cinematic-shot.red-shot { border-color: rgba(255, 23, 68, 0.3); color: #ff1744; }
+    .cinematic-shot.blue-shot { border-color: rgba(0, 210, 255, 0.3); color: #00d2ff; }
+
+    .cinematic-shot::after {
+      content: '';
+      position: absolute;
+      top:0; left:0; width:100%; height:100%;
+      box-shadow: inset 0 0 80px rgba(0,0,0,0.9);
+      pointer-events: none;
+    }
+
+    /* Nations Grid */
+    .nations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .nation-card {
+      background: rgba(15, 20, 25, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 25px;
+      transition: 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .nation-card:hover {
+      background: rgba(25, 30, 35, 0.9);
+      border-color: #ffd700;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .nation-symbol {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: rgba(255, 215, 0, 0.2);
+      position: absolute;
+      top: -10px;
+      right: 10px;
+      pointer-events: none;
+    }
+
+    .nation-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.5rem;
+      color: #fff;
+      margin-bottom: 5px;
+    }
+
+    .nation-element {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.9rem;
+      color: #ffd700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .nation-desc {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #a0a5ac;
     }
 
     .back-btn {
@@ -155,35 +277,6 @@
       border-color: #ffd700;
     }
 
-    /* Cinematic image placeholder */
-    .cinematic-shot {
-      width: 100%;
-      height: 400px;
-      background: #111;
-      margin-bottom: 80px;
-      border: 1px solid rgba(255, 215, 0, 0.3);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #ffd700;
-      font-family: 'Cinzel';
-      font-size: 1.2rem;
-      letter-spacing: 2px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-      position: relative;
-      overflow: hidden;
-      text-transform: uppercase;
-    }
-
-    .cinematic-shot::after {
-      content: '';
-      position: absolute;
-      top:0; left:0; width:100%; height:100%;
-      box-shadow: inset 0 0 50px rgba(0,0,0,0.9);
-      pointer-events: none;
-    }
-
     .footer {
       text-align: center;
       padding: 50px 20px;
@@ -205,41 +298,122 @@
   </div>
 
   <div class="content-section">
+    <!-- Intro -->
     <div class="content-block">
-      <h3>O Projeto N0A</h3>
-      <p>O <strong>projeto NOA</strong> é uma ambiciosa iniciativa transmídia de ficção científica estruturada como uma série de livros e conceitos cinematográficos.</p>
+      <h3><i class="fas fa-globe"></i> O Universo de N0A</h3>
+      <p>O <strong>projeto NOA</strong> é uma ambiciosa iniciativa transmídia de ficção científica estruturada como uma série de livros e conceitos cinematográficos. A ciência em NOA foge dos clichês tradicionais e possui regras muito claras.</p>
+      <p>Toda a tecnologia, veículos e trajes são pensados para ter uma identidade visual forte e futurista, conversando diretamente com a estética de ponta do portfólio de design da <strong>Glow8 Studio</strong>.</p>
+    </div>
+
+    <!-- Stars -->
+    <div class="content-block">
+      <h3><i class="fas fa-sun"></i> A Trindade Estelar</h3>
+      <p>O universo de NOA é governado por um sistema trino (três estrelas), o que dita toda a física, o clima, a contagem de tempo e a biologia dos planetas. A rigor, NOA é um satélite natural calçado na órbita de um corpo celeste colossal:</p>
+      <ul>
+        <li><strong>Nohak, o Gigante Gasoso:</strong> Um planeta massivo adornado com anéis majestosos. Engole o horizonte, uma presença titânica que reflete a luz das estrelas e domina o céu diurno e noturno.</li>
+        <li><strong>Nerak (A Estrela Azul):</strong> Incidência visual proeminente no norte. Emite radiação de alta energia e ondas curtas.</li>
+        <li><strong>Silhak (A Estrela Vermelha):</strong> Estrela de baixa frequência cujas ondas longas influenciam o sul, alimentando as nações quentes e instáveis.</li>
+        <li><strong>Mehak (A Estrela Amarela):</strong> O equilíbrio térmico central que mantém a zona habitável estável.</li>
+      </ul>
+      <p>A combinação da luz dessas três estrelas fornece fontes de energia exóticas e gera estações climáticas extremas devido à complexa dinâmica gravitacional.</p>
+    </div>
+
+    <div class="cinematic-shot" style="background-image: url('https://images.unsplash.com/photo-1464802686167-b939a6910659?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center;">
+      [ Visual do Sistema Trino e Nohak ]
+    </div>
+
+    <!-- Nations -->
+    <div class="content-block">
+      <h3><i class="fas fa-chess-knight"></i> A Geopolítica Elemental</h3>
+      <p>O cenário social de NOA é dividido em oito nações principais que coexistem em estado de equilíbrio tenso. Cada uma domina uma ramificação científica própria, como <em>Engenharia Molecular</em>, <em>Bioarquitetura</em> ou <em>Manipulação de Energia Estelar</em>.</p>
       
-      <p>Destacando-se por um complexo sistema solar de três estrelas, este universo possui um equilíbrio gravitacional e uma radiação única que sustentam a vida e a ciência de <strong>oito nações soberanas</strong>.</p>
+      <div class="nations-grid">
+        <div class="nation-card">
+          <div class="nation-symbol">O</div>
+          <div class="nation-title">Oxigênia</div>
+          <div class="nation-element">Oxigênio · Nação do Ar</div>
+          <div class="nation-desc">Cidades flutuantes construídas com ligas leves de polímeros transparentes e velas solares brancas.</div>
+        </div>
+        <div class="nation-card">
+          <div class="nation-symbol">H</div>
+          <div class="nation-title">Hidrogênia</div>
+          <div class="nation-element">Hidrogênio · Nação dos Mares</div>
+          <div class="nation-desc">Metrópoles subaquáticas hidrodinâmicas, iluminadas por fusão fria de deutério, em tons de azul-turquesa.</div>
+        </div>
+        <div class="nation-card" style="border-color: rgba(255,23,68,0.3);">
+          <div class="nation-symbol" style="color: rgba(255,23,68,0.2);">P</div>
+          <div class="nation-title" style="color: #ff1744;">Phósphora</div>
+          <div class="nation-element">Fósforo · Nação do Fogo</div>
+          <div class="nation-desc">Cidades-fortalezas encravadas em rochas pretas, com grandes forjas e estandartes dourados e rubros.</div>
+        </div>
+        <div class="nation-card" style="border-color: rgba(0,210,255,0.3);">
+          <div class="nation-symbol" style="color: rgba(0,210,255,0.2);">N</div>
+          <div class="nation-title" style="color: #00d2ff;">Nitrogênia</div>
+          <div class="nation-element">Nitrogênio · Nação do Gelo</div>
+          <div class="nation-desc">Torres de cristal e gelo denso integradas com tecnologia biofotônica azul que nunca derrete.</div>
+        </div>
+        <div class="nation-card">
+          <div class="nation-symbol">C</div>
+          <div class="nation-title">Carbônia</div>
+          <div class="nation-element">Carbono · Indústria</div>
+          <div class="nation-desc">Arquitetura brutalista feita de grafeno e nanotubos pretos foscos; o coração industrial de NOA.</div>
+        </div>
+        <div class="nation-card">
+          <div class="nation-symbol">Si</div>
+          <div class="nation-title">Silícia</div>
+          <div class="nation-element">Silício · Redes</div>
+          <div class="nation-desc">Cidades piramidais espelhadas, repletas de circuitos integrados expostos e areia vítrea flutuante.</div>
+        </div>
+        <div class="nation-card">
+          <div class="nation-symbol">S</div>
+          <div class="nation-title">Sulfúria</div>
+          <div class="nation-element">Enxofre · Terras Vulcânicas</div>
+          <div class="nation-desc">Domos geodésicos resistentes a ácidos, cercados por rios amarelos e fumaça densa de compostos voláteis.</div>
+        </div>
+        <div class="nation-card">
+          <div class="nation-symbol">Fe</div>
+          <div class="nation-title">Férria</div>
+          <div class="nation-element">Ferro · Metalurgia</div>
+          <div class="nation-desc">Cidadelas fortificadas de ferro fundido e ligas magnéticas pesadas que mudam de forma com correntes.</div>
+        </div>
+      </div>
     </div>
 
-    <div class="cinematic-shot" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center;">
-      [ Espaço para a Arte Conceitual N0A ]
+    <!-- Extreme South -->
+    <div class="content-block red-accent">
+      <h3><i class="fas fa-fire"></i> O Extremo Sul: Phósphora</h3>
+      <p>No extremo sul, a atmosfera bloqueia ondas curtas devido à densa poeira de óxido de ferro erguida por ciclones hipervelozes. O céu é perpetuamente vermelho e laranja escuro, criando um ambiente opressor e incandescente.</p>
+      <p><strong>Titã Colossal: Ignisdraco Typhon</strong><br>
+      Uma máquina biológica de combustão. Suas escamas são placas de fósforo branco e queratina. Ele possui um <em>Saco Incendiário</em> que metaboliza depósitos de ferro e fósforo. Ao expelir o gás pressurizado na atmosfera rica em óxido de ferro, gera um jato de plasma térmico carmesim. Suas asas operam como turbinas térmicas nos ciclones de poeira.</p>
+    </div>
+
+    <div class="cinematic-shot red-shot" style="background-image: url('https://images.unsplash.com/photo-1542281286-9e0a16bb7366?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center;">
+      [ Visual do Ignisdraco Typhon ]
+    </div>
+
+    <!-- Extreme North -->
+    <div class="content-block blue-accent">
+      <h3><i class="fas fa-snowflake"></i> O Extremo Norte: Nitrogênia</h3>
+      <p>Sob o brilho da estrela azul <strong>Nerak</strong>, o céu do norte é tingido por um azul elétrico constante. No coração de Nitrogênia repousa uma cadeia de montanhas geradas pela queda de um meteoro de energia puríssima, cultuado como um fragmento da própria estrela Nerak.</p>
+      <ul>
+        <li><strong>O Soro do Norte:</strong> Líquido luminescente azul-escuro extraído do núcleo radioativo desse meteoro.</li>
+        <li><strong>Sobrevivência:</strong> Injetado na corrente sanguínea, gera uma reação endotérmica constante. O sangue amplifica o calor molecular e repele o congelamento, concedendo aos nativos imunidade ao frio extremo, gerando uma vantagem evolutiva brutal sobre o sul.</li>
+      </ul>
+    </div>
+
+    <div class="cinematic-shot blue-shot" style="background-image: url('https://images.unsplash.com/photo-1518182170546-076616fdcbdd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center;">
+      [ Visual de Nitrogênia / Meteoro de Nerak ]
     </div>
 
     <div class="content-block">
-      <h3>Civilizações & Tecnologia</h3>
-      <p>Essas civilizações se desenvolveram sob leis científicas e físicas próprias, criadas exclusivamente para este universo. Aqui, a <strong>engenharia molecular</strong>, a manipulação de energia estelar e a <strong>bioarquitetura</strong> moldam cidades espetaculares e tecnologias avançadas.</p>
-      <p>As nações coexistem de forma frágil e frequentemente entram em conflito em um cenário de escala massiva.</p>
-    </div>
-
-    <div class="content-block">
-      <h3>Colossos & Combates Territoriais</h3>
-      <p>O delicado equilíbrio deste sistema é periodicamente abalado pelo confronto direto de <strong>grandes animais e monstros colossais</strong>. Eles se enfrentam em combates territoriais devastadores, redefinindo as paisagens e as fronteiras políticas das nações soberanas.</p>
-    </div>
-
-    <div class="cinematic-shot" style="background-image: url('https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center;">
-      [ Espaço para a Arte de Combate / Monstro ]
-    </div>
-
-    <div class="content-block">
-      <h3>Worldbuilding e Glow8 Studio</h3>
-      <p>Toda essa rica narrativa visual, densidade de <em>worldbuilding</em> e design de criaturas encontra-se perfeitamente integrada ao portfólio de design e desenvolvimento da <strong>Glow8 Studio</strong>, demonstrando a capacidade da agência de criar mundos inteiros a partir do zero.</p>
+      <h3><i class="fas fa-meteor"></i> A Ecologia de Titãs</h3>
+      <p>A fauna não é apenas cenário; ela altera a geografia e a história. Monstros colossais travam combates territoriais devastadores que remodelam o relevo, abrem crateras e forçam as oito nações a adaptarem sua arquitetura e táticas militares para sobreviver às forças da natureza.</p>
     </div>
 
   </div>
 
   <div class="footer">
-    N0A &copy; 2026 GLOW8 STUDIO
+    N0A &copy; 2026 GLOW8 STUDIO · ORIGINAL TRANSMEDIA IP
   </div>
 
 </body>
