@@ -227,6 +227,47 @@
       .monster-image { height: 300px; }
       h1 { font-size: 4rem; }
     }
+
+    /* Encyclopedia & Scroll Reveal */
+    .wiki-section {
+      background: rgba(10, 10, 15, 0.6);
+      border: 1px solid rgba(var(--nat-rgb), 0.2);
+      border-radius: 15px;
+      padding: 40px;
+      margin-bottom: 40px;
+      backdrop-filter: blur(10px);
+    }
+    
+    .wiki-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      color: var(--nat-color);
+      margin-top: 0;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      text-shadow: 0 0 10px rgba(var(--nat-rgb), 0.5);
+    }
+    
+    .wiki-text {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: #b0b5bc;
+      margin: 0;
+    }
+
+    /* Scroll Reveal Classes */
+    .reveal-3d {
+      opacity: 0;
+      transform: translateY(50px) rotateX(-10deg);
+      transition: all 1s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .reveal-3d.active {
+      opacity: 1;
+      transform: translateY(0) rotateX(0);
+    }
   </style>
 </head>
 <body>
@@ -237,45 +278,98 @@
   <a href="n0a.html" class="back-btn"><i class="fas fa-arrow-left"></i> Retornar ao N0A</a>
 
   <div class="container">
-    <div class="header-3d">
+    <div class="header-3d reveal-3d">
       <h1>YTTRA</h1>
       <h2>O Reino Violeta da Luz</h2>
     </div>
 
-    <div class="monster-profile">
-      <div class="monster-image">
-        <div class="tag">CLASSE TITÃ ESPECTRAL</div>
-      </div>
-      <div class="monster-info">
-        <h3>Lux-Moth</h3>
-        <h4>A Mariposa Fotônica</h4>
-        <p>
-          Rara e quase mítica, a <strong>Lux-Moth</strong> é uma entidade gigantesca que habita o espectro não-visível do sistema trino. Seu corpo parece ser feito de luz sólida refratada.
-        </p>
-        <p>
-          Quando suas asas fotônicas vibram, a Mariposa cria miragens holográficas e distorções quânticas no espaço ao redor. Diz-se que olhar diretamente para suas asas em movimento pode causar sobrecarga neural, iluminando a mente da vítima num transe quase-religioso.
-        </p>
-        <div class="stats">
-          <div class="stat-box">
-            <span>Elemento Core</span>
-            <div>Ítrio / Fótons</div>
-          </div>
-          <div class="stat-box">
-            <span>Habilidade Assinatura</span>
-            <div>Ilusão Quântica / Cegueira</div>
-          </div>
-          <div class="stat-box">
-            <span>Nível de Ameaça</span>
-            <div>Desconhecido (Encontros Raros)</div>
-          </div>
-          <div class="stat-box">
-            <span>Habitat</span>
-            <div>Zonas de Alta Radiação Estelar</div>
+    <!-- Intro -->
+    <div class="wiki-section reveal-3d">
+      <h3 class="wiki-title"><i class="fas fa-globe"></i> Visão Geral</h3>
+      <p class="wiki-text">Situada em regiões montanhosas de alta concentração de cristais de ítrio que refratam a luz das estrelas do sistema, a Nação Yttrium é o epicentro do conhecimento arcano-tecnológico em NOA. Eles utilizam a luz não apenas como iluminação, mas como energia tátil e matriz de processamento de dados quânticos, vivendo em cidades de vidro reluzente iluminadas em tons violetas deslumbrantes.</p>
+    </div>
+
+    <!-- Geography -->
+    <div class="wiki-section reveal-3d">
+      <h3 class="wiki-title"><i class="fas fa-mountain"></i> Geografia e Relevo</h3>
+      <p class="wiki-text">Conteúdo enciclopédico sobre a geografia será adicionado aqui.</p>
+    </div>
+
+    <!-- Cities -->
+    <div class="wiki-section reveal-3d">
+      <h3 class="wiki-title"><i class="fas fa-city"></i> Cidades e Arquitetura</h3>
+      <p class="wiki-text">Conteúdo enciclopédico sobre as metrópoles será adicionado aqui.</p>
+    </div>
+
+    <!-- Inhabitants -->
+    <div class="wiki-section reveal-3d">
+      <h3 class="wiki-title"><i class="fas fa-users"></i> Habitantes e Sociedade</h3>
+      <p class="wiki-text">Conteúdo enciclopédico sobre a sociedade será adicionado aqui.</p>
+    </div>
+
+    <!-- Technology -->
+    <div class="wiki-section reveal-3d">
+      <h3 class="wiki-title"><i class="fas fa-microchip"></i> Tecnologia e Ciência</h3>
+      <p class="wiki-text">Conteúdo enciclopédico sobre os avanços tecnológicos será adicionado aqui.</p>
+    </div>
+
+    <!-- Culture -->
+    <div class="wiki-section reveal-3d">
+      <h3 class="wiki-title"><i class="fas fa-praying-hands"></i> Cultura e Religião</h3>
+      <p class="wiki-text">Conteúdo enciclopédico sobre cultura, fé e rituais será adicionado aqui.</p>
+    </div>
+
+    <!-- Fauna -->
+    <div class="wiki-section reveal-3d">
+      <h3 class="wiki-title"><i class="fas fa-dragon"></i> Fauna Colossal</h3>
+      <div class="monster-profile">
+        <div class="monster-image">
+          <div class="tag">CLASSE TITÃ ESPECTRAL</div>
+        </div>
+        <div class="monster-info">
+          <h3>Lux-Moth</h3>
+          <h4>A Mariposa Fotônica</h4>
+          <p>
+            Rara e quase mítica, a <strong>Lux-Moth</strong> é uma entidade gigantesca que habita o espectro não-visível do sistema trino. Seu corpo parece ser feito de luz sólida refratada.
+          </p>
+          <p>
+            Quando suas asas fotônicas vibram, a Mariposa cria miragens holográficas e distorções quânticas no espaço ao redor. Diz-se que olhar diretamente para suas asas em movimento pode causar sobrecarga neural, iluminando a mente da vítima num transe quase-religioso.
+          </p>
+          <div class="stats">
+            <div class="stat-box">
+              <span>Elemento Core</span>
+              <div>Ítrio / Fótons</div>
+            </div>
+            <div class="stat-box">
+              <span>Habilidade Assinatura</span>
+              <div>Ilusão Quântica / Cegueira</div>
+            </div>
+            <div class="stat-box">
+              <span>Nível de Ameaça</span>
+              <div>Desconhecido (Encontros Raros)</div>
+            </div>
+            <div class="stat-box">
+              <span>Habitat</span>
+              <div>Zonas de Alta Radiação Estelar</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting) {
+            entry.target.classList.add('active');
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      document.querySelectorAll('.reveal-3d').forEach(el => observer.observe(el));
+    });
+  </script>
 </body>
 </html>
