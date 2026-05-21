@@ -1064,6 +1064,82 @@
       }
     </style>
 
+    <!-- ========================================== -->
+    <!-- SEÇÃO DEMONSTRAÇÃO DE SERVIÇOS -->
+    <!-- ========================================== -->
+    <section id="sylar-services-presentation" style="padding: 100px 20px; border-top: 1px solid rgba(0, 200, 83, 0.1);">
+      <div class="container" style="max-width: 960px; margin: 0 auto; text-align: center;">
+        <div class="section-header" style="margin-bottom: 50px;">
+          <h2 style="font-family: 'Orbitron', sans-serif; font-size: 2.2rem; color: #fff;">DEMONSTRAÇÃO DE <span style="color: #00C853;">SERVIÇOS</span></h2>
+          <p style="color: #aaa; font-family: 'Rajdhani'">Apresentação interativa dos nossos serviços e soluções.</p>
+        </div>
+
+        <div style="background: rgba(0,0,0,0.3); padding: 20px; border: 1px solid rgba(0, 200, 83, 0.2); border-radius: 20px; display: inline-block; width: 100%; max-width: 740px;">
+          <div id="presentation-container" style="position: relative; overflow: hidden; border-radius: 12px; box-shadow: 0 0 20px rgba(0, 200, 83, 0.2);">
+            <iframe id="services-iframe" src="https://gamma.app/embed/y2k59isq606fh33" style="width: 100%; max-width: 100%; height: 450px; border: none;" allow="fullscreen" title="UNIPORTAS no Madeira Madeira"></iframe>
+          </div>
+          
+          <div style="margin-top: 30px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+            <button onclick="toggleFullscreenPresentation()" class="btn-presentation-full" style="background: #00C853; color: #000; border: none; padding: 12px 30px; border-radius: 8px; cursor: pointer; font-family: 'Orbitron'; font-weight: bold; font-size: 0.9rem; transition: 0.3s; box-shadow: 0 0 15px rgba(0, 200, 83, 0.4); display: flex; align-items: center; gap: 8px;">
+              <i class="fas fa-expand"></i> TELA CHEIA
+            </button>
+            <button onclick="reloadPresentation()" class="btn-presentation-reload" style="background: transparent; color: #00C853; border: 1px solid #00C853; padding: 12px 30px; border-radius: 8px; cursor: pointer; font-family: 'Orbitron'; font-size: 0.9rem; transition: 0.3s; display: flex; align-items: center; gap: 8px;">
+              <i class="fas fa-rotate-left"></i> REINICIAR / RETORNAR
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <style>
+      .btn-presentation-full:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0 25px rgba(0, 200, 83, 0.6) !important;
+      }
+      .btn-presentation-reload:hover {
+        background: rgba(0, 200, 83, 0.1) !important;
+        transform: translateY(-3px);
+        box-shadow: 0 0 15px rgba(0, 200, 83, 0.3);
+      }
+    </style>
+
+    <script>
+      function toggleFullscreenPresentation() {
+        const iframe = document.getElementById('services-iframe');
+        if (!document.fullscreenElement) {
+          if (iframe.requestFullscreen) {
+            iframe.requestFullscreen();
+          } else if (iframe.webkitRequestFullscreen) {
+            iframe.webkitRequestFullscreen();
+          } else if (iframe.msRequestFullscreen) {
+            iframe.msRequestFullscreen();
+          }
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+          }
+        }
+      }
+
+      function reloadPresentation() {
+        const iframe = document.getElementById('services-iframe');
+        iframe.src = iframe.src;
+        if (document.fullscreenElement) {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+          }
+        }
+      }
+    </script>
+
   </div>
 
   <script src="bg-canvas.js"></script>
